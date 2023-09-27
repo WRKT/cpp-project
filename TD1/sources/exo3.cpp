@@ -4,16 +4,16 @@
 #include "headers/exo3.h"
 
 
-int exo3(){
+int Exo3(){
     int choixSousMenu;
-    std::cout << "-----------------------" << std::endl;
-    std::cout << "       EXERCICE 3      " << std::endl;
-    std::cout << "-----------------------" << std::endl;
+    std::cout << "-------------------------------------------------------" << std::endl;
+    std::cout << "       INSCRIPTION CONSOLE ET RECUPERATION SAISIE      " << std::endl;
+    std::cout << "-------------------------------------------------------" << std::endl;
     do
     {
         SautLigne();
         std::cout << "Quelle programme voulez-vous lancer : " << std::endl;
-        std::cout << "1. Salutations" << std::endl;
+        std::cout << "1. Saisie chaine de caractères" << std::endl;
         std::cout << "2. Jeu du nombre gagnant" << std::endl;
         std::cout << "0. Menu Principal" << std::endl;
         SautLigne();
@@ -60,17 +60,15 @@ void Salutations()
     SautLigne();
 }
 
-void DevinerNombre()
+void JoueurDevineNombre()
 {
-    std::cout << "*** Jeu du nombre GAGNANT ***" << std::endl;
-
     srand(time(NULL));
     int nombreGagnant = rand()%1000;
 
-    bool deviner = true;
+    bool gameOver = false;
     int nombreEssai = 0;
     
-    while(deviner) {
+    while(!gameOver) {
         int nombreUser;
         std::cout << std::endl;
         std::cout << "Saisissez votre nombre: ";
@@ -90,7 +88,98 @@ void DevinerNombre()
             std::cout << std::endl;
             std::cout << "Félicitations ! Vous avez deviné le nombre ! Vous avez effectué " << nombreEssai;
             std::cout << " essais." << std::endl;
-            deviner = false;
+            gameOver = true;
         }
     }
 }
+
+void OrdinateurDevineNombre()
+{
+    int nombreGagnant;
+    bool gameOver = false;
+    int nombreEssai = 0;
+    int nombreMin = 0;
+    int nombreOrdinateur = 0;
+    int nombreMax = 1000;
+    char reponseUtilisateur;
+
+    SautLigne();
+    std::cout << "Choisissez un nombre entre 0 et 1000 : ";
+    std::cin >> nombreGagnant;
+
+    while(!gameOver) {
+
+        nombreOrdinateur = (nombreMin + nombreMax)/2;    
+
+        std::cout<< "L'ordinateur devine ... " << nombreOrdinateur << std::endl;
+        SautLigne();
+        std::cout<< "Ai-je deviné le nombre ? (o/N) ==> ";
+        std::cin >> reponseUtilisateur;
+
+        if ((reponseUtilisateur == 'o' || reponseUtilisateur == 'O') && (nombreOrdinateur == nombreGagnant))
+        {
+            nombreEssai++;
+            std::cout << "Félications à vous jeune ordinateur ! Vous avez deviné " << nombreEssai << " fois"<< std::endl;
+            gameOver = true;
+        }
+        else if ((reponseUtilisateur == 'o' || reponseUtilisateur == 'O') && (nombreOrdinateur != nombreGagnant))
+        {
+            std::cout << "Ne trichez pas s'il vous plait..." <<std::endl;
+        }
+        else if ((reponseUtilisateur == 'n' || reponseUtilisateur == 'N'))
+        {
+            nombreEssai++;
+            std::cout << "Zut ! Le nombre est-il plus grand ou plus petit ? (G: grand / p: petit) ==> ";
+            std::cin >> reponseUtilisateur;
+            if (reponseUtilisateur == 'G' || reponseUtilisateur == 'g')
+            {
+                std::cout << "D'accord, le nombre est donc plus grand (Calcul en cours ...)" << std::endl;
+                nombreMin = nombreOrdinateur + 1;
+            }
+            else if(reponseUtilisateur == 'p' || reponseUtilisateur == 'P')
+            {
+                std::cout << "D'accord, le nombre est donc plus petit (Calcul en cours ...)" << std::endl;
+                nombreMax = nombreOrdinateur - 1;
+            }
+            else
+            {
+                std::cout << "Reponse invalide. Choisissez entre G et p." << std::endl; 
+            }
+        }
+        else{
+            std::cout << "Reponse invalide. Choisissez entre o pour Oui et N pour Non" << std::endl;
+        }
+    }
+
+}
+
+void DevinerNombre()
+{
+    int optionJeu;
+
+    std::cout << "*** Jeu du nombre GAGNANT ***" << std::endl;
+    SautLigne();
+
+    std::cout << "Choisissez le mode de jeu que vous souhaitez : " << std::endl;
+    std::cout << "1. Joueur devine" << std::endl;
+    std::cout << "2. Ordinateur devine" << std::endl;
+    SautLigne();
+
+    std::cout << "Choix option : ";
+    std::cin >> optionJeu;
+
+    switch (optionJeu)
+    {
+    case 1: 
+        JoueurDevineNombre();
+        break;
+    case 2: 
+        OrdinateurDevineNombre();
+        break;
+    default: 
+        DevinerNombre();
+        break;
+    }
+
+}
+

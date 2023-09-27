@@ -2,18 +2,18 @@
 #include <string>
 #include "headers/exo1.h"
 
-int exo1()
+int Exo1()
 {
     int choixSousMenu;
-    std::cout << "-----------------------" << std::endl;
-    std::cout << "       EXERCICE 1      " << std::endl;
-    std::cout << "-----------------------" << std::endl;
+    std::cout << "-------------------------------------" << std::endl;
+    std::cout << "       MANIPULATION DES NOMBRES      " << std::endl;
+    std::cout << "-------------------------------------" << std::endl;
 
     do
     {
         SautLigne();
         std::cout << "Quelle programme voulez-vous lancer : " << std::endl;
-        std::cout << "1. Manipulation des nombres" << std::endl;
+        std::cout << "1. Somme des nombres" << std::endl;
         std::cout << "2. Manipulation des tableaux" << std::endl;
         std::cout << "0. Menu Principal" << std::endl;
         SautLigne();
@@ -77,13 +77,13 @@ void TriCroissant(int table[], int taille){
     int tmp;
     for (int i = 0; i < taille - 1; i++)
     {
-        for (int j = i; j < taille; j++)
+        for (int j = 0; j < taille - i - 1; j++)
         {
             // Croissant
-            if (table[j] < table[i]){
+            if (table[j] > table[j+1]){
                 tmp = table[j];
-                table[j] = table[i];
-                table[i] = tmp;
+                table[j] = table[j+1];
+                table[j+1] = tmp;
             }
         }
     }
@@ -93,13 +93,13 @@ void TriDecroissant(int table[], int taille){
     int tmp;
     for (int i = 0; i < taille - 1; i++)
     {
-        for (int j = i; j < taille; j++)
+        for (int j = 0; j < taille - i - 1; j++)
         {
             // Decroissant
-            if (table[j] > table[i]){
+            if (table[j] < table[j+1]){
                 tmp = table[j];
-                table[j] = table[i];
-                table[i] = tmp;
+                table[j] = table[j+1];
+                table[j+1] = tmp;
             }
         }
     }
@@ -114,6 +114,10 @@ void AfficherTable(int table[], int taille)
     std::cout << "]" << std::endl;
 }
 
+// void TriInverse()
+// {
+    
+// }
 void ExoSomme()
 {
     std::cout << "*** Manipulation des nombres ***" << std::endl;

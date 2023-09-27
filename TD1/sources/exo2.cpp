@@ -3,11 +3,11 @@
 #include "headers/exo1.h"
 #include "headers/exo2.h"
 
-int exo2()
+int Exo2()
 {
     int choixSousMenu;
     std::cout << "-----------------------" << std::endl;
-    std::cout << "       EXERCICE 2      " << std::endl;
+    std::cout << "      JEU DE TENNIS    " << std::endl;
     std::cout << "-----------------------" << std::endl;
     std::cout << std::endl;
     do

@@ -1,7 +1,7 @@
 #ifndef EXO1_H
 #define EXO1_H
 
-int exo1();
+int Exo1();
 void SautLigne();
 int Somme(int a, int b);
 int SommeReference(int &a, int &b, int &c);

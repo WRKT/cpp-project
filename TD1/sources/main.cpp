@@ -9,9 +9,9 @@ int main() {
     do {
         std::cout << std::endl;
         std::cout << "Quelle exercice voulez-vous lancer : " << std::endl;
-        std::cout << "1. Exercice 1" << std::endl;
-        std::cout << "2. Exercice 2" << std::endl;
-        std::cout << "3. Exercice 3" << std::endl;
+        std::cout << "1. Manipulation des nombres" << std::endl;
+        std::cout << "2. Jeu de tennis" << std::endl;
+        std::cout << "3. Inscription console et récupération saisie" << std::endl;
         std::cout << "0. Quitter" << std::endl;
         SautLigne();
         std::cout << "Choisissez une option: ";
@@ -21,15 +21,15 @@ int main() {
         {
             case 1:
                 system("clear");
-                exo1();
+                Exo1();
                 break;
             case 2:
                 system("clear");
-                exo2();
+                Exo2();
                 break;
             case 3:
                 system("clear");
-                exo3();
+                Exo3();
                 break;
             case 0:
                 std::cout << "Merci d'avoir utilisé le programme. Au revoir !" << std::endl;

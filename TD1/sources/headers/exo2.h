@@ -1,7 +1,7 @@
 #ifndef EXO2_H
 #define EXO2_H
 
-int exo2();
+int Exo2();
 void JeuTennis();
 
 #endif

@@ -5,7 +5,7 @@ C++FLAGS = -std=c++11 -Wall
 # Dossier source
 SRC_DIR = sources
 
-# Fichiers sources
+# Tous les fichiers sources dans src_dir
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 
 # Nom de l'exécutable
