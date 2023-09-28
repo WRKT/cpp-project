@@ -81,7 +81,8 @@ void TableAleatoire(int table[], int taille)
     }
 }
 
-void TriCroissant(int table[], int taille){
+void TriCroissant(int table[], int taille)
+{
     int tmp;
     for (int i = 0; i < taille - 1; i++)
     {
@@ -96,7 +97,8 @@ void TriCroissant(int table[], int taille){
     }
 }
 
-void TriDecroissant(int table[], int taille){
+void TriDecroissant(int table[], int taille)
+{
     int tmp;
     for (int i = 0; i < taille - 1; i++)
     {

@@ -56,6 +56,8 @@ void Salutations()
     std::cin >> prenom;
     std::cin >> nom;
 
+    Majuscule(nom);
+    premiereLettreMajuscule(prenom);
     nomComplet = prenom + " " + nom;
     std::cout << std::endl;
     std::cout << "==> Hello, " << nomComplet;
@@ -189,4 +191,21 @@ void DevinerNombre()
 
 }
 
+char toUpper(char c)
+{
+    if (c >= 'a' && c <= 'z') {
+        return c + ('A' - 'a');
+    }
+    return c;
+}
+void premiereLettreMajuscule(std::string& str)
+{
+    str[0] = toUpper(str[0]);
 
+}
+void Majuscule(std::string& str)
+{
+    for (char& c : str) {
+        c = toUpper(c);
+    }
+}
