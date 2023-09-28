@@ -3,9 +3,9 @@
 
 int Exo3();
 void Salutations();
-void DevinerNombre();
 void JoueurDevineNombre();
 void OrdinateurDevineNombre();
+void DevinerNombre();
 
 #endif
 

@@ -6,6 +6,8 @@
 
 int Exo3(){
     int choixSousMenu;
+    bool retourMenuPrincipal = false;
+
     std::cout << "-------------------------------------------------------" << std::endl;
     std::cout << "       INSCRIPTION CONSOLE ET RECUPERATION SAISIE      " << std::endl;
     std::cout << "-------------------------------------------------------" << std::endl;
@@ -32,15 +34,15 @@ int Exo3(){
             break;
         case 0:
             SautLigne();
-            std::cout << "<< Retour au menu principal" <<std::endl;
+            retourMenuPrincipal = true;
             break;
         default:
             std::cout << ">> Erreur : Saisie invalide. Veuillez réessayer." <<std::endl;
             break;
         }
-    } while (choixSousMenu != 0);
+    } while (!retourMenuPrincipal);
 
-    system("clear");
+    ClearTerminal();
     return 0;
     
 }
@@ -56,7 +58,7 @@ void Salutations()
 
     nomComplet = prenom + " " + nom;
     std::cout << std::endl;
-    std::cout << "Hello, " << nomComplet;
+    std::cout << "==> Hello, " << nomComplet;
     SautLigne();
 }
 
@@ -119,12 +121,16 @@ void OrdinateurDevineNombre()
         if ((reponseUtilisateur == 'o' || reponseUtilisateur == 'O') && (nombreOrdinateur == nombreGagnant))
         {
             nombreEssai++;
-            std::cout << "Félications à vous jeune ordinateur ! Vous avez deviné " << nombreEssai << " fois"<< std::endl;
+            std::cout << "Super! Ordinateur a deviné " << nombreEssai << " fois"<< std::endl;
             gameOver = true;
         }
         else if ((reponseUtilisateur == 'o' || reponseUtilisateur == 'O') && (nombreOrdinateur != nombreGagnant))
         {
             std::cout << "Ne trichez pas s'il vous plait..." <<std::endl;
+        }
+        else if ((reponseUtilisateur == 'n' || reponseUtilisateur == 'N') && (nombreOrdinateur == nombreGagnant))
+        {
+            std::cout << "Ne soyez pas mauvais perdant, êtes-vous sur ? " <<std::endl;
         }
         else if ((reponseUtilisateur == 'n' || reponseUtilisateur == 'N'))
         {
@@ -182,4 +188,5 @@ void DevinerNombre()
     }
 
 }
+
 

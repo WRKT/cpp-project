@@ -3,6 +3,7 @@
 
 int Exo1();
 void SautLigne();
+void ClearTerminal();
 int Somme(int a, int b);
 int SommeReference(int &a, int &b, int &c);
 int SommePointer(int *a, int *b, int *c);

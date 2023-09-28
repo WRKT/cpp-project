@@ -5,6 +5,7 @@
 int Exo1()
 {
     int choixSousMenu;
+    bool stopSousMenu = false;
     std::cout << "-------------------------------------" << std::endl;
     std::cout << "       MANIPULATION DES NOMBRES      " << std::endl;
     std::cout << "-------------------------------------" << std::endl;
@@ -32,14 +33,14 @@ int Exo1()
             break;
         case 0:
             SautLigne();
-            std::cout << "<< Retour au menu principal" << std::endl;
+            stopSousMenu = true;
         default:
             std::cout << ">> Erreur : Saisie invalide. Veuillez réessayer." << std::endl;
             break;
         }
-    } while (choixSousMenu != 0);
+    } while (!stopSousMenu);
     
-    system("clear");
+    ClearTerminal();
     return 0;
 }
 
@@ -62,6 +63,13 @@ void SautLigne()
     std::cout<< std::endl;
 }
 
+void ClearTerminal()
+{
+    if (system("clear"))
+    {
+        system("cls");
+    }
+}
 void TableAleatoire(int table[], int taille)
 {
     srand(time(NULL));
@@ -77,13 +85,12 @@ void TriCroissant(int table[], int taille){
     int tmp;
     for (int i = 0; i < taille - 1; i++)
     {
-        for (int j = 0; j < taille - i - 1; j++)
+        for (int j = i; j < taille; j++)
         {
-            // Croissant
-            if (table[j] > table[j+1]){
+            if (table[j] < table[i]){
                 tmp = table[j];
-                table[j] = table[j+1];
-                table[j+1] = tmp;
+                table[j] = table[i];
+                table[i] = tmp;
             }
         }
     }
@@ -93,13 +100,12 @@ void TriDecroissant(int table[], int taille){
     int tmp;
     for (int i = 0; i < taille - 1; i++)
     {
-        for (int j = 0; j < taille - i - 1; j++)
+        for (int j = i; j < taille; j++)
         {
-            // Decroissant
-            if (table[j] < table[j+1]){
+            if (table[j] > table[i]){
                 tmp = table[j];
-                table[j] = table[j+1];
-                table[j+1] = tmp;
+                table[j] = table[i];
+                table[i] = tmp;
             }
         }
     }
@@ -114,10 +120,6 @@ void AfficherTable(int table[], int taille)
     std::cout << "]" << std::endl;
 }
 
-// void TriInverse()
-// {
-    
-// }
 void ExoSomme()
 {
     std::cout << "*** Manipulation des nombres ***" << std::endl;
@@ -194,3 +196,4 @@ void ExoTable()
     }
     SautLigne();
 }
+

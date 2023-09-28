@@ -4,10 +4,14 @@
 #include "headers/exo3.h"
 
 int main() {
+    ClearTerminal();
     int choixMenu;
-    
+    bool arretProgramme = false;
     do {
-        std::cout << std::endl;
+        std::cout << "---------------------------" << std::endl;
+        std::cout << "       MENU PRINCIPAL      " << std::endl;
+        std::cout << "---------------------------" << std::endl;
+        SautLigne();
         std::cout << "Quelle exercice voulez-vous lancer : " << std::endl;
         std::cout << "1. Manipulation des nombres" << std::endl;
         std::cout << "2. Jeu de tennis" << std::endl;
@@ -20,18 +24,19 @@ int main() {
         switch (choixMenu)
         {
             case 1:
-                system("clear");
+                ClearTerminal();
                 Exo1();
                 break;
             case 2:
-                system("clear");
+                ClearTerminal();
                 Exo2();
                 break;
             case 3:
-                system("clear");
+                ClearTerminal();
                 Exo3();
                 break;
             case 0:
+                arretProgramme = true;
                 std::cout << "Merci d'avoir utilisé le programme. Au revoir !" << std::endl;
                 break;
             default:
@@ -39,11 +44,7 @@ int main() {
                 break;
         }
 
-        if (sizeof(choixMenu) != sizeof(int))
-        {
-            return 0;
-        }
-    } while (choixMenu != 0);
+    } while (!arretProgramme);
 
     return 0;
 }

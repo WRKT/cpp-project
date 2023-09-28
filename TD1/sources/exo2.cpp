@@ -6,15 +6,15 @@
 int Exo2()
 {
     int choixSousMenu;
-    std::cout << "-----------------------" << std::endl;
-    std::cout << "      JEU DE TENNIS    " << std::endl;
-    std::cout << "-----------------------" << std::endl;
+    bool stopSousMenu = false;
+    std::cout << "--------------------------" << std::endl;
+    std::cout << "       JEU DE TENNIS      " << std::endl;
+    std::cout << "--------------------------" << std::endl;
     std::cout << std::endl;
     do
     {
-        SautLigne();
         std::cout << "Quelle programme voulez-vous lancer : " << std::endl;
-        std::cout << "1. Jeu de tennis" << std::endl;
+        std::cout << "1. Lancer le jeu" << std::endl;
         std::cout << "0. Menu Principal" << std::endl;
         SautLigne();
         std::cout << "Choisissez une option: ";
@@ -28,14 +28,15 @@ int Exo2()
             break;
         case 0:
             SautLigne();
-            std::cout << "<< Retour au menu principal" <<std::endl;
+            stopSousMenu = true;
             break;
         default:
             std::cout << ">> Erreur : Saisie invalide. Veuillez réessayer." <<std::endl;
             break;
         }
-    } while (choixSousMenu != 0);
+    } while (!stopSousMenu);
 
+    ClearTerminal();
     return 0;
 }
 
@@ -145,4 +146,5 @@ void JeuTennis()
             std::cout << "Saisie invalide" << std::endl;
         }
     }
+    SautLigne();
 }
