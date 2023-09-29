@@ -193,8 +193,9 @@ void DevinerNombre()
 
 char toUpper(char c)
 {
-    if (c >= 'a' && c <= 'z') {
-        return c + ('A' - 'a');
+    // Reference table ASCII
+    if (c >= 97 && c <= 122) {
+        return c - 32;
     }
     return c;
 }
