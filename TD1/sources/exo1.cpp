@@ -113,6 +113,16 @@ void TriDecroissant(int table[], int taille)
     }
 }
 
+void InverserTable(int table[], int taille)
+{
+    for (int i = 0, j = taille - 1; i < j; i++, j--)
+    {
+        int temp = table[i];
+        table[i] = table[j];
+        table[j] = temp;
+    }   
+}
+
 void AfficherTable(int table[], int taille)
 {
     std::cout << "[ ";
@@ -145,6 +155,7 @@ void ExoTable()
 {
     int taille, ordreTri;
     std::string choixTri;
+    std::string choixTriInverse;
 
     std::cout << "*** Manipulation tableaux ***" << std::endl;
     SautLigne();
@@ -189,6 +200,26 @@ void ExoTable()
         }
     }
     else if (choixTri == "n" || choixTri == "N")
+    {
+        std::cout << "Merci d'avoir utiliser le programme. Opération terminée." << std::endl;
+    }
+    else 
+    {
+        std::cout << "Valeur non pris en charge. Opération annulée." << std::endl;
+    }
+    SautLigne();
+
+    std::cout << "Voulez-vous inverser le tableau ? (y/N) ";
+    std::cin >> choixTriInverse;
+    SautLigne();
+
+    if ((choixTriInverse == "y" || choixTriInverse == "Y" || choixTriInverse == "o" || choixTriInverse == "O"))
+    {
+        InverserTable(table, taille);
+        std::cout << "==> Tableau trié inversé : ";
+        AfficherTable(table, taille);
+    }
+    else if (choixTriInverse == "n" || choixTriInverse == "N")
     {
         std::cout << "Merci d'avoir utiliser le programme. Opération terminée." << std::endl;
     }

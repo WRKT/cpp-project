@@ -11,6 +11,7 @@ void ExoSomme();
 void TableAleatoire(int table[], int taille);
 void TriCroissant(int table[], int taille);
 void TriDecroissant(int table[], int taille);
+void InverserTable(int table[], int taille);
 void AfficherTable(int table[], int taille);
 void ExoTable();
 
