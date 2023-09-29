@@ -128,7 +128,7 @@ void OrdinateurDevineNombre()
         }
         else if ((reponseUtilisateur == 'o' || reponseUtilisateur == 'O') && (nombreOrdinateur != nombreGagnant))
         {
-            std::cout << "Ne trichez pas s'il vous plait..." <<std::endl;
+            std::cout << "J'aimerai bien gagner, mais pas en trichant ..." <<std::endl;
         }
         else if ((reponseUtilisateur == 'n' || reponseUtilisateur == 'N') && (nombreOrdinateur == nombreGagnant))
         {
@@ -139,26 +139,35 @@ void OrdinateurDevineNombre()
             nombreEssai++;
             std::cout << "Zut ! Le nombre est-il plus grand ou plus petit ? (G: grand / p: petit) ==> ";
             std::cin >> reponseUtilisateur;
-            if (reponseUtilisateur == 'G' || reponseUtilisateur == 'g')
+            if ((reponseUtilisateur == 'G' || reponseUtilisateur == 'g') && (nombreOrdinateur < nombreGagnant))
             {
                 std::cout << "D'accord, le nombre est donc plus grand (Calcul en cours ...)" << std::endl;
                 nombreMin = nombreOrdinateur + 1;
             }
-            else if(reponseUtilisateur == 'p' || reponseUtilisateur == 'P')
+            else if ((reponseUtilisateur == 'G' || reponseUtilisateur == 'g') && (nombreOrdinateur >= nombreGagnant))
+            {
+                std::cout << "Ne trichez pas s'il vous plait..." <<std::endl;
+            }
+            
+            else if((reponseUtilisateur == 'p' || reponseUtilisateur == 'P') && (nombreOrdinateur > nombreGagnant))
             {
                 std::cout << "D'accord, le nombre est donc plus petit (Calcul en cours ...)" << std::endl;
                 nombreMax = nombreOrdinateur - 1;
+            }
+            else if ((reponseUtilisateur == 'p' || reponseUtilisateur == 'P') && (nombreOrdinateur <= nombreGagnant))
+            {
+                std::cout << "Ne trichez pas s'il vous plait..." <<std::endl;
             }
             else
             {
                 std::cout << "Reponse invalide. Choisissez entre G et p." << std::endl; 
             }
         }
-        else{
+        else
+        {
             std::cout << "Reponse invalide. Choisissez entre o pour Oui et N pour Non" << std::endl;
         }
     }
-
 }
 
 void DevinerNombre()
