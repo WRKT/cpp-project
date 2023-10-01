@@ -56,7 +56,7 @@ void Salutations()
     std::cin >> prenom;
     std::cin >> nom;
 
-    Majuscule(nom);
+    MajusculeChaine(nom);
     premiereLettreMajuscule(prenom);
     nomComplet = prenom + " " + nom;
     std::cout << std::endl;
@@ -111,11 +111,11 @@ void OrdinateurDevineNombre()
     std::cout << "Choisissez un nombre entre 0 et 1000 : ";
     std::cin >> nombreGagnant;
 
-    while(!gameOver) {
-
+    do
+    {
         nombreOrdinateur = (nombreMin + nombreMax)/2;    
 
-        std::cout<< "L'ordinateur devine ... " << nombreOrdinateur << std::endl;
+        std::cout<< "==> L'ordinateur devine ... " << nombreOrdinateur << std::endl;
         SautLigne();
         std::cout<< "Ai-je deviné le nombre ? (o/N) ==> ";
         std::cin >> reponseUtilisateur;
@@ -123,7 +123,8 @@ void OrdinateurDevineNombre()
         if ((reponseUtilisateur == 'o' || reponseUtilisateur == 'O') && (nombreOrdinateur == nombreGagnant))
         {
             nombreEssai++;
-            std::cout << "Super! Ordinateur a deviné " << nombreEssai << " fois"<< std::endl;
+            SautLigne();
+            std::cout << ">> Super! Ordinateur a deviné " << nombreEssai << " fois"<< std::endl;
             gameOver = true;
         }
         else if ((reponseUtilisateur == 'o' || reponseUtilisateur == 'O') && (nombreOrdinateur != nombreGagnant))
@@ -141,6 +142,7 @@ void OrdinateurDevineNombre()
             std::cin >> reponseUtilisateur;
             if ((reponseUtilisateur == 'G' || reponseUtilisateur == 'g') && (nombreOrdinateur < nombreGagnant))
             {
+                SautLigne();
                 std::cout << "D'accord, le nombre est donc plus grand (Calcul en cours ...)" << std::endl;
                 nombreMin = nombreOrdinateur + 1;
             }
@@ -151,6 +153,7 @@ void OrdinateurDevineNombre()
             
             else if((reponseUtilisateur == 'p' || reponseUtilisateur == 'P') && (nombreOrdinateur > nombreGagnant))
             {
+                SautLigne();
                 std::cout << "D'accord, le nombre est donc plus petit (Calcul en cours ...)" << std::endl;
                 nombreMax = nombreOrdinateur - 1;
             }
@@ -167,8 +170,8 @@ void OrdinateurDevineNombre()
         {
             std::cout << "Reponse invalide. Choisissez entre o pour Oui et N pour Non" << std::endl;
         }
-    }
-}
+    } while (!gameOver);
+} 
 
 void DevinerNombre()
 {
@@ -200,7 +203,7 @@ void DevinerNombre()
 
 }
 
-char toUpper(char c)
+char MajusculeCaractere(char c)
 {
     // Reference table ASCII
     if (c >= 97 && c <= 122) {
@@ -210,12 +213,12 @@ char toUpper(char c)
 }
 void premiereLettreMajuscule(std::string& str)
 {
-    str[0] = toUpper(str[0]);
+    str[0] = MajusculeCaractere(str[0]);
 
 }
-void Majuscule(std::string& str)
+void MajusculeChaine(std::string& str)
 {
     for (char& c : str) {
-        c = toUpper(c);
+        c = MajusculeCaractere(c);
     }
 }
