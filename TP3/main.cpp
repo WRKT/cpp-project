@@ -3,7 +3,7 @@
 
 int main()
 {
-    Match test;
-    test.StartJeu();
+    Match JeuV1;
+    JeuV1.StartJeu();
 }
 

@@ -94,7 +94,9 @@ bool Grille::EstLigne(const char jeton) const
         }
 
         if (ligneGagnante)
+        {
             return true;
+        }
     }
     return false;
 }
@@ -115,21 +117,32 @@ bool Grille::EstColonne(const char jeton) const
         }
 
         if (colonneGagnante)
+        {
             return true;
+        }
     }
     return false;
 }
 
 bool Grille::EstDiagonale(const char jeton) const
 {
+    bool diagonale1 = true;
+    bool diagonale2 = true;
+
     for (int i = 0; i < nbLignes; i++)
     {
-        if (table[i][i] != jeton && table[i][nbColonnes - 1 - i] != jeton)
+        if (table[i][i] != jeton)
         {
-            return false;
+            diagonale1 = false;
+        }
+
+        if (table[i][nbColonnes - 1 - i] != jeton)
+        {
+            diagonale2 = false;
         }
     }
-    return true;
+
+    return diagonale1 || diagonale2;
 }
 
 bool Grille::EstGagnant(const char jeton) const

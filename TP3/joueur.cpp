@@ -30,6 +30,8 @@ void Ordinateur::JouerMorpion(Grille& grille, const char jeton)
     int nbLignes = grille.GetLignes();
     int nbColonnes = grille.GetColonnes();
 
+    srand(time(NULL));
+
     do
     {
         ligne = rand()%nbLignes + 1;
@@ -44,6 +46,8 @@ void Ordinateur::JouerPuissance4(GrillePuissance4& grille, const char jeton)
 {
     int colonne;
     int nbColonnes = grille.GetColonnes();
+
+    srand(static_cast<int>(time(NULL)));
 
     do {
         colonne = rand()%nbColonnes + 1;

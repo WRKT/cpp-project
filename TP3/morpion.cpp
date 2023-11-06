@@ -1,5 +1,4 @@
 #include "morpion.h"
-#include <iostream>
 
 JeuMorpion::JeuMorpion() { };
 
@@ -39,14 +38,14 @@ void JeuMorpion::JoueurContreJoueur()
         {
             grilleMorpion.AfficherGrille();
             std::cout << std::endl;
-            std::cout << "Felications ! " << joueurCourant->GetNom() << " a gagne ! Fin de la partie." << std::endl;
+            std::cout << "==> Felications ! " << joueurCourant->GetNom() << " a gagne ! Fin de la partie." << std::endl;
             gameOver = true;
         }
         else if (grilleMorpion.EstEgalite())
         {
             grilleMorpion.AfficherGrille();
             std::cout << std::endl;
-            std::cout << "Fin de la partie. Egalite !" << std::endl;
+            std::cout << "==> Fin de la partie. Egalite !" << std::endl;
             gameOver = true;
         }
 
@@ -70,7 +69,7 @@ void JeuMorpion::JoueurContreOrdinateur()
     while(!gameOver)
     {
         grilleMorpion.AfficherGrille();
-        std::cout << "Tour de " << joueurCourant->GetNom() << "(" << joueurCourant->GetJeton() << ")" << std::endl;
+        std::cout << "--> Tour de " << joueurCourant->GetNom() << "(" << joueurCourant->GetJeton() << ")" << std::endl;
         int ligne, colonne;
 
         if(joueurCourant == &joueur1)
@@ -80,6 +79,10 @@ void JeuMorpion::JoueurContreOrdinateur()
                 std::cin >> ligne;
                 std::cout << "Entrez la colonne (1 - " << grilleMorpion.GetColonnes() << ") : ";
                 std::cin >> colonne;
+
+                if(!grilleMorpion.CaseVide(ligne, colonne))
+                    std::cout << "Ce coup n'est pas valide. Reessayez." << std::endl;
+
             } while (!grilleMorpion.CaseVide(ligne, colonne));
 
             grilleMorpion.DeposerMorpion(ligne, colonne, joueurCourant->GetJeton());
