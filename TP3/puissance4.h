@@ -8,6 +8,7 @@ class JeuPuissance4 : public Jeu
 {
 public:
     JeuPuissance4();
+    void JouerTour();
     void JoueurContreJoueur();
     void JoueurContreOrdinateur();
 private:

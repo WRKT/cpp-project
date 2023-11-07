@@ -8,6 +8,7 @@ class JeuMorpion : public Jeu
 {
 public:
     JeuMorpion();
+    void JouerTour();
     void JoueurContreJoueur();
     void JoueurContreOrdinateur();
 private:

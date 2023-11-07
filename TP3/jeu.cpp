@@ -4,6 +4,14 @@ Jeu::Jeu(){ }
 
 void Jeu::InitialiserJcJ()
 {
+
+    if(system("clear"))
+    {
+        system("cls");
+    }
+
+    std::cout << "*** Joueur vs Joueur ***" << std::endl;
+
     std::string nomJoueur1, nomJoueur2;
     char jetonJoueur1, jetonJoueur2;
     do
@@ -35,6 +43,13 @@ void Jeu::InitialiserJcJ()
 
 void Jeu::InitialiserJcO()
 {
+    if(system("clear"))
+    {
+        system("cls");
+    }
+
+    std::cout << "*** Joueur vs Ordinateur ***" << std::endl;
+
     std::string nomJoueur;
     std::string nomOrdinateur = "Ordinateur";
 
@@ -46,6 +61,13 @@ void Jeu::InitialiserJcO()
 
         std::cout << "Choisissez le jeton du joueur (O ou X) : ";
         std::cin >> jetonJoueur;
+
+        if (!(std::cin))
+        {
+            std::cout << "Saisie invalide. Veuillez reessayer." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
 
     } while(jetonJoueur != 'O' && jetonJoueur != 'X');
 
@@ -73,6 +95,14 @@ void Jeu::Jouer()
         std::cout << "0. Menu Principal" << std::endl;
         std::cout << "Choix option : ";
         std::cin >> ChoixMode;
+
+        if (!(std::cin))
+        {
+            std::cout << "Saisie invalide. Veuillez reessayer." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+
     } while (ChoixMode != 1 && ChoixMode != 2 && ChoixMode != 0);
 
     switch(ChoixMode)
@@ -98,6 +128,14 @@ void Jeu::DemanderRejouer()
     {
         std::cout << "Voulez-vous rejouer (y/N) ? ";
         std::cin >> rejouer;
+
+        if (!(std::cin))
+        {
+            std::cout << "Saisie invalide. Veuillez reessayer." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+
     } while (rejouer != 'y' &&
              rejouer != 'n' &&
              rejouer != 'Y' &&

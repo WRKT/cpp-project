@@ -9,6 +9,7 @@ public:
     virtual void InitialiserJcJ();
     virtual void InitialiserJcO();
     virtual void Jouer();
+    virtual void JouerTour() = 0;
     virtual void DemanderRejouer();
     virtual void JoueurContreJoueur() = 0;
     virtual void JoueurContreOrdinateur() = 0;

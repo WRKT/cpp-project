@@ -8,7 +8,14 @@ Match::Match()
 
 void Match::StartJeu()
 {
-    std::cout << "*** Bienvenue sur le programme des jeux sur PLATEAU ***" << std::endl;
+    if(system("clear"))
+    {
+        system("cls");
+    }
+
+    std::cout << "*********************************" << std::endl;
+    std::cout << "*  PROGRAMME DE JEU DE PLATEAU  *" << std::endl;
+    std::cout << "*********************************" << std::endl;
     std::cout << std::endl;
 
     switch(ChoixJeu())
@@ -43,6 +50,13 @@ int Match::ChoixJeu()
         std::cout << std::endl;
         std::cout << "Choix option : ";
         std::cin >> choixUser;
+
+        if (!(std::cin))
+        {
+            std::cout << "Saisie invalide. Veuillez reessayer." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
 
     } while ((choixUser != 1) &&
              (choixUser != 2) &&

@@ -30,7 +30,7 @@ void Ordinateur::JouerMorpion(Grille& grille, const char jeton)
     int nbLignes = grille.GetLignes();
     int nbColonnes = grille.GetColonnes();
 
-    srand(time(NULL));
+    srand(static_cast<int>(time(NULL)));
 
     do
     {
