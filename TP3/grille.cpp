@@ -56,7 +56,7 @@ void Grille::AfficherGrille() const
     std::cout << std::endl;
 };
 
-bool Grille::CaseVide(const size_t ligne, const size_t colonne) const
+bool Grille::CaseVide(const int ligne, const int colonne) const
 {
     if(ligne > 0 && ligne <= nbLignes && colonne > 0 && colonne <= nbColonnes)
     {
@@ -68,7 +68,7 @@ bool Grille::CaseVide(const size_t ligne, const size_t colonne) const
     }
 }
 
-void Grille::DeposerMorpion(const size_t ligne, const size_t colonne, const char jeton)
+void Grille::DeposerMorpion(const int ligne, const int colonne, const char jeton)
 {
     if (CaseVide(ligne, colonne))
     {
@@ -162,9 +162,9 @@ bool Grille::EstEgalite() const
     return true;
 }
 
-bool GrillePuissance4::DeposerPuissance4(const size_t colonne, const char jeton)
+bool GrillePuissance4::DeposerPuissance4(const int colonne, const char jeton)
 {
-    size_t ligne = this->GetLignes() - 1;
+    int ligne = this->GetLignes() - 1;
 
     if(colonne > this->GetColonnes())
     {
@@ -197,11 +197,11 @@ bool GrillePuissance4::DeposerPuissance4(const size_t colonne, const char jeton)
 
 }
 
-int GrillePuissance4::CompteJeton(const size_t ligneDepart, const size_t colonneDepart, const int dirLigne, const int dirColonne) const
+int GrillePuissance4::CompteJeton(const int ligneDepart, const int colonneDepart, const int dirLigne, const int dirColonne) const
 {
     int compteur = 0;
-    size_t ligne = ligneDepart;
-    size_t colonne = colonneDepart;
+    int ligne = ligneDepart;
+    int colonne = colonneDepart;
     while(ligne < this->GetLignes() && colonne < this->GetColonnes() &&
         this->table[ligneDepart][colonneDepart] == this->table[ligne][colonne]
         )
