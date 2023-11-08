@@ -1,4 +1,5 @@
 #include "puissance4.h"
+#include <limits>
 
 JeuPuissance4::JeuPuissance4(){ };
 

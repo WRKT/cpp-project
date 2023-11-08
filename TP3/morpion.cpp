@@ -1,4 +1,5 @@
 #include "morpion.h"
+#include <limits>
 
 JeuMorpion::JeuMorpion() { };
 

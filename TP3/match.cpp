@@ -1,5 +1,6 @@
 #include "match.h"
 #include <iostream>
+#include <limits>
 
 Match::Match()
 {

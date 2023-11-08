@@ -1,4 +1,5 @@
 #include "jeu.h"
+#include <limits>
 
 Jeu::Jeu(){ }
 
