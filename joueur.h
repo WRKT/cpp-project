@@ -14,6 +14,10 @@ public:
 private:
     std::string nom;
     char jeton;
+
+
+
+
 };
 
 struct Ordinateur : Joueur
