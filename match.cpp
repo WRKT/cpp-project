@@ -19,6 +19,7 @@ void Match::StartJeu()
     std::cout << "*********************************" << std::endl;
     std::cout << std::endl;
 
+    // plutot utiliser une enumération ou une factory pour afficher tous les jeux locaux
     switch(ChoixJeu())
     {
     case 1:
