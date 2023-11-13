@@ -2,14 +2,10 @@
 ### 1. Single Responsability Unique
 - **Classe Board**
 Cette classe viole le principe dans le sens où elle s'occupe de vérifier la condition de victoire par la méthode `checkWin()`, ce qui devrait être une propriété de la classe Jeu.
-
 De plus, par extension, cette méthode pourrait être sectionnée en différentes méthodes comme : `checkRow()`, `checkColumns()`, `checkDiagonal()`.
-
 La méthode `placeMarker()` serait plus intéressante à implémenter dans la classe Joueur, qui dans une logique métier est responsable de placer les pions.
 Cependant, la classe Joueur appliquera une méthode `placeMarker()` qui fera appel à l'interface `iBoard`, qui ensuite procédera à la vérification et déposition du pion.
-
 Enfin, sectionner le mode fonctionnement de cette méthode car elle viole le principe de responsabilité unique dans le fait qu'elle s'occupe à la fois du placement du pion pour `Morpion` et `Puissance4`.
-
 Proposition d'optimisation : Une méthode placeMarkerMorpion + Une méthode placeMarkerPuissance4.
 
 --> A voir plus tard pour l'implémentation de l'interface `iBoard`.
