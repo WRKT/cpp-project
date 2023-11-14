@@ -6,12 +6,14 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(TP-Refacto main.cpp
-    jeu.h jeu.cpp
+
     grille.h grille.cpp
-    joueur.h joueur.cpp
-    morpion.h morpion.cpp
-    puissance4.h puissance4.cpp
-    match.h match.cpp
+    IJoueur.h
+    IInteractionJoueur.h
+    joueurhumain.h joueurhumain.cpp
+    joueurordinateur.h joueurordinateur.cpp
+    IGrille.h
+    Jeton.h
 )
 
 include(GNUInstallDirs)
