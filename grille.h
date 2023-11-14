@@ -1,39 +1,18 @@
 ﻿#ifndef GRILLE_H
 #define GRILLE_H
 
-class Grille
-{
-public:
-    Grille(){};
-    Grille(const int _nbLignes, const int _nbColonnes);
-    int GetLignes() const;
-    int GetColonnes() const;
-    void InitialiserGrille();
-    void AfficherGrille() const;
-    virtual bool CaseVide(const int ligne, const int colonne) const;
-    void DeposerMorpion(const int ligne, const int colonne, const char jeton);
-    virtual bool EstLigne(const char jeton) const;
-    virtual bool EstColonne(const char jeton) const;
-    virtual bool EstDiagonale(const char jeton) const;
-    bool EstGagnant(const char jeton) const;
-    bool EstEgalite() const;
+#include "IGrille.h"
+#include <vector>
 
-protected:
-    int nbLignes;
-    int nbColonnes;
-    char** table;
-};
+class Grille : public IGrille {
+private:
+    int nbLignes, nbColonnes;
+    std::vector<std::vector<char>> table;
 
-class GrillePuissance4 : public Grille
-{
 public:
-    GrillePuissance4(){};
-    GrillePuissance4(const int _nbLignes, const int _nbColonnes) : Grille(_nbLignes,_nbColonnes){};
-    bool DeposerPuissance4(const int colonne, const char jeton);
-    int CompteJeton(const int ligne, const int colonne, const int dirLigne, const int dirColonne) const;
-    bool EstLigne(const char jeton) const override;
-    bool EstColonne(const char jeton) const override;
-    bool EstDiagonale(const char jeton) const override;
+    Grille(int nbLignes, int nbColonnes);
+    virtual void InitialiserGrille() override;
+    virtual void AfficherGrille() const override;
 };
 
 #endif // GRILLE_H
