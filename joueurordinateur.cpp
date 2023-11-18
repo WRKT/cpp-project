@@ -17,7 +17,7 @@ void JoueurOrdinateur::jouerJeton(IGrille& grille) {
 }
 
 std::pair<int, int> JoueurOrdinateur::choisirCoup(IGrille& grille) {
-    std::uniform_int_distribution<int> distribution(0, grille.getTaille() - 1);
+    std::uniform_int_distribution<int> distribution(0, grille.GetTaille() - 1);
     int x, y;
 
     do {

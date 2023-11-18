@@ -31,6 +31,7 @@ int main() {
     int nbLignes = (typeDeJeu == TypesJeu::Morpion) ? tailleGrilleMorpion : tailleGrillePuissance4;
 
     auto grille = std::make_unique<Grille>(nbLignes, nbColonnes);
+
     auto jeu = JeuFactory::CreerJeu(typeDeJeu, *grille, *joueur1, *joueur2);
 
     jeu->jouer();

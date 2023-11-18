@@ -5,7 +5,8 @@ JeuMorpion::JeuMorpion(IGrille& g, IJoueur& j1, IJoueur& j2)
     : grille(g), joueur1(j1), joueur2(j2), joueurCourantPion(joueur1.getJeton()) {}
 
 void JeuMorpion::jouer() {
-    while (!estFinDuJeu()) {
+
+    while (!gameOver) {
         grille.AfficherGrille();
         std::cout << "Tour du joueur " << joueurCourantPion << std::endl;
 
@@ -27,12 +28,12 @@ void JeuMorpion::jouer() {
     std::cout << "Match nul !" << std::endl;
 }
 
-bool JeuMorpion::estFinDuJeu() const {
-    // Implémentez la logique pour vérifier si le jeu est fini
-    return false;
+bool JeuMorpion::aGagne(char pion) const {
+
+    return grille.estColonne(pion) || grille.estLigne(pion) || grille.estDiagonale(pion);
 }
 
-bool JeuMorpion::aGagne(char pion) const {
-    // Implémentez la logique pour vérifier si un joueur a gagné
+bool JeuMorpion::estEgalite() const
+{
     return false;
 }

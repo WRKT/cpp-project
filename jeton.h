@@ -4,9 +4,9 @@
 #include <iostream>
 
 enum class Jeton {
-    X = 'X',  // Premier joueur
-    O = 'O',   // Deuxième joueur
-    Vide = '-' // Case vide
+    X,
+    O,
+    VIDE
 };
 
 // Surcharge de l'opérateur <<

@@ -33,8 +33,9 @@ void Grille::AfficherGrille() const
 }
 
 bool Grille::placerPion(int x, int y, char jeton) {
-    if (x >= 0 && x < nbLignes && y >= 0 && y < nbColonnes && table[x][y] == '-') {
-        table[x][y] = 'X' ? 'X' : 'O';
+    if (GetCellule(x, y) == '-')
+    {
+        table[x][y] = jeton;
         return true;
     }
     return false;
@@ -44,20 +45,73 @@ bool Grille::estCoupValide(int x, int y, char jeton) const {
     if (x < 0 || x >= nbLignes || y < 0 || y >= nbColonnes) {
         return false;
     }
-
     return table[x][y] == '-';
 }
 
-bool Grille::estLigne() const
+int Grille::GetLignes() const
 {
-    for(int i = 0; i < this->GetLignes(); i++)
+    return nbLignes;
+}
+
+int Grille::GetColonnes() const
+{
+    return nbColonnes;
+}
+
+int Grille::GetTaille() const
+{
+    return nbLignes * nbColonnes;
+}
+
+char Grille::GetCellule(int ligne, int colonne) const
+{
+    return table[ligne][colonne];
+}
+
+int Grille::CompteJeton(const int ligneDepart, const int colonneDepart, const int dirLigne, const int dirColonne) const
+{
+    int compteur = 0;
+    int ligne = ligneDepart;
+    int colonne = colonneDepart;
+    while(ligne < this->GetLignes() && colonne < this->GetColonnes() &&
+           this->table[ligneDepart][colonneDepart] == this->table[ligne][colonne]
+           )
     {
-        for(int j = 0; j < this->GetColonnes(); j++)
+        compteur++;
+        ligne = ligne + dirLigne;
+        colonne = colonne + dirColonne;
+    }
+    return compteur;
+
+}
+
+bool Grille::estLigne(const char JETON) const
+{
+    for(int i = 0; i < nbLignes; i++)
+    {
+        for(int j = 0; j < nbColonnes; j++)
         {
-            char jetonCase = this->table[i][j];
-            if (jetonCase == jeton)
+            if (GetCellule(i,j) == JETON)
             {
-                if(CompteJeton(i, j, 0, +1) >= 4)
+                if(CompteJeton(i, j, 0, +1) >= nbLignes)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+bool Grille::estColonne(const char JETON) const
+{
+    for(int i = 0; i < nbLignes; i++)
+    {
+        for(int j = 0; j < nbColonnes; j++)
+        {
+            if (GetCellule(i,j) == JETON)
+            {
+                if(CompteJeton(i, j, +1, 0) >= nbLignes)
                 {
                     return true;
                 }
@@ -66,16 +120,28 @@ bool Grille::estLigne() const
     }
     return false;
 
-    return false;
 }
 
-bool Grille::estColonne() const
+bool Grille::estDiagonale(const char JETON) const
 {
-    return false;
-}
+    bool diagonale1 = true;
+    bool diagonale2 = true;
 
-bool Grille::estDiagonale() const
-{
+    for (int i = 0; i < nbLignes; i++)
+    {
+        if (table[i][i] != JETON)
+        {
+            diagonale1 = false;
+        }
+
+        if (table[i][nbColonnes - 1 - i] != JETON)
+        {
+            diagonale2 = false;
+        }
+    }
+
+    return diagonale1 || diagonale2;
+
     return false;
 }
 

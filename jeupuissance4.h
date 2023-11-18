@@ -11,15 +11,14 @@ private:
     IJoueur& joueur1;
     IJoueur& joueur2;
     char joueurCourantPion;
-
-    bool estFinDuJeu() const;
-    bool aGagne(char pion) const;
+    bool gameOver;
     bool colonneValide(int colonne) const;
 
 public:
     JeuPuissance4(IGrille& grille, IJoueur& j1, IJoueur& j2);
-
     void jouer() override;
+    bool aGagne(char jeton) const override;
+    bool estEgalite() const override;
     IGrille& getGrille() const { return grille; }
 };
 

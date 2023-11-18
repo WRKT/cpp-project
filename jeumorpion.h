@@ -11,14 +11,14 @@ private:
     IJoueur& joueur1;
     IJoueur& joueur2;
     char joueurCourantPion;
+    bool gameOver;
 
-    bool estFinDuJeu() const;
-    bool aGagne(char pion) const;
 
 public:
     JeuMorpion(IGrille& grille, IJoueur& j1, IJoueur& j2);
-
     void jouer() override;
+    bool aGagne(char jeton) const override;
+    bool estEgalite() const override;
 };
 
 #endif // JEUMORPION_H
