@@ -13,7 +13,7 @@ add_executable(TP-Refacto main.cpp
     joueurhumain.h joueurhumain.cpp
     joueurordinateur.h joueurordinateur.cpp
     IGrille.h
-    Jeton.h
+    jeton.h
     IJeu.h
     jeumorpion.h jeumorpion.cpp
     jeupuissance4.h jeupuissance4.cpp

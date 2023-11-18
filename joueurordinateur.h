@@ -2,9 +2,8 @@
 #define JOUEUR_ORDINATEUR_H
 
 #include "IJoueur.h"
-#include <string>
-#include "Jeton.h"
 #include "IGrille.h"
+#include <string>
 #include <random>
 
 class JoueurOrdinateur : public IJoueur {

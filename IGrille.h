@@ -2,7 +2,6 @@
 #define IGRILLE_H
 
 #include <iostream>
-#include "Jeton.h"
 
 class IGrille {
 public:
@@ -10,7 +9,12 @@ public:
     virtual bool placerPion(int x, int y, char jeton) = 0;
     virtual void AfficherGrille() const = 0;
     virtual bool estCoupValide(int x, int y, char jeton) const = 0;
-    virtual int getTaille() const = 0;
+    virtual int getNbLignes() const = 0;
+    virtual int getNbColonnes() const = 0;
+    virtual bool estLigne() const = 0;
+    virtual bool estColonne() const = 0;
+    virtual bool estDiagonale() const = 0;
+    virtual bool estRempli() const = 0;
     virtual ~IGrille() = default;
 };
 

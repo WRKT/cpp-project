@@ -4,7 +4,6 @@
 #include "IJeu.h"
 #include "IGrille.h"
 #include "IJoueur.h"
-#include "Jeton.h"
 
 class JeuPuissance4 : public IJeu {
 private:

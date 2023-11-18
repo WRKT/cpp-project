@@ -2,7 +2,6 @@
 #define JOUEUR_HUMAIN_H
 
 #include "IJoueur.h"
-#include "Jeton.h"
 #include <string>
 #include <memory>
 

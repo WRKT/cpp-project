@@ -1,4 +1,4 @@
-#include "JoueurHumain.h"
+#include "joueurhumain.h"
 #include <iostream>
 #include <memory>
 
@@ -20,6 +20,8 @@ void JoueurHumain::jouerJeton(IGrille& grille) {
     while (!coupValide) {
         std::cout << "Joueur " << (jeton == 'X' ? 'X' : 'O') << ", entrez votre coup (ligne et colonne): ";
         std::cin >> x >> y;
+        x--;
+        y--;
 
         if (grille.estCoupValide(x, y, jeton)) {
             grille.placerPion(x, y, jeton);

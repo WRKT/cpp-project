@@ -1,5 +1,4 @@
 #include "jeumorpion.h"
-#include "JeuMorpion.h"
 #include <iostream>
 
 JeuMorpion::JeuMorpion(IGrille& g, IJoueur& j1, IJoueur& j2)

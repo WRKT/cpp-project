@@ -10,35 +10,78 @@ void Grille::InitialiserGrille() {
     }
 }
 
-void Grille::AfficherGrille() const {
-    for (const auto& ligne : table) {
-        for (char cell : ligne) {
-            std::cout << cell << " ";
+void Grille::AfficherGrille() const
+{
+    std::cout << std::endl;
+    for (int i = 0; i < nbLignes; i++)
+    {
+        for(int j = 0; j < nbColonnes; j++)
+        {
+            if (j == 0)
+            {
+                std::cout << "| " << table[i][j] << " | ";
+            }
+            else
+            {
+                std::cout << table[i][j] << " | ";
+            }
         }
         std::cout << std::endl;
     }
+    std::cout << std::endl;
+
 }
 
 bool Grille::placerPion(int x, int y, char jeton) {
-    if (x >= 0 && x < nbLignes && y >= 0 && y < nbColonnes && table[x][y] == '.') {
+    if (x >= 0 && x < nbLignes && y >= 0 && y < nbColonnes && table[x][y] == '-') {
         table[x][y] = 'X' ? 'X' : 'O';
         return true;
     }
     return false;
 }
 
-int Grille::getTaille() const {
-    return nbLignes * nbColonnes;
-}
-
 bool Grille::estCoupValide(int x, int y, char jeton) const {
-    // Vérifier si les coordonnées sont dans les limites de la grille
     if (x < 0 || x >= nbLignes || y < 0 || y >= nbColonnes) {
         return false;
     }
 
-    // Vérifier si la case est déjà occupée
-    return table[x][y] == '.';
+    return table[x][y] == '-';
+}
+
+bool Grille::estLigne() const
+{
+    for(int i = 0; i < this->GetLignes(); i++)
+    {
+        for(int j = 0; j < this->GetColonnes(); j++)
+        {
+            char jetonCase = this->table[i][j];
+            if (jetonCase == jeton)
+            {
+                if(CompteJeton(i, j, 0, +1) >= 4)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+
+    return false;
+}
+
+bool Grille::estColonne() const
+{
+    return false;
+}
+
+bool Grille::estDiagonale() const
+{
+    return false;
+}
+
+bool Grille::estRempli() const
+{
+    return false;
 }
 
 

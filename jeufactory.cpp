@@ -1,6 +1,6 @@
 #include "jeufactory.h"
-#include "JeuMorpion.h"
-#include "JeuPuissance4.h"
+#include "jeumorpion.h"
+#include "jeupuissance4.h"
 // Inclure les autres fichiers de jeux si nécessaire
 
 std::unique_ptr<IJeu> JeuFactory::CreerJeu(TypesJeu typeDeJeu, IGrille& grille, IJoueur& joueur1, IJoueur& joueur2) {

@@ -1,6 +1,4 @@
 #include "jeupuissance4.h"
-
-#include "jeuPuissance4.h"
 #include <iostream>
 
 JeuPuissance4::JeuPuissance4(IGrille& g, IJoueur& j1, IJoueur& j2)

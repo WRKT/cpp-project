@@ -1,4 +1,4 @@
-#include "JoueurOrdinateur.h"
+#include "joueurordinateur.h"
 #include <chrono>
 
 JoueurOrdinateur::JoueurOrdinateur(char jeton) : jeton(jeton), generateur(std::chrono::system_clock::now().time_since_epoch().count()) {}

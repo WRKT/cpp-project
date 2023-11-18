@@ -3,7 +3,6 @@
 
 #include "IGrille.h"
 #include <vector>
-#include "Jeton.h"
 
 class Grille : public IGrille {
 private:
@@ -12,11 +11,16 @@ private:
 
 public:
     Grille(int nbLignes, int nbColonnes);
-    virtual void InitialiserGrille() override;
-    virtual void AfficherGrille() const override;
-    virtual bool placerPion(int x, int y, char jeton) override;
-    virtual int getTaille() const override;
+    void InitialiserGrille() override;
+    void AfficherGrille() const override;
+    bool placerPion(int x, int y, char jeton) override;
     bool estCoupValide(int x, int y, char jeton) const override;
+    int getNbLignes() const override;
+    int getNbColonnes() const override;
+    bool estLigne() const override;
+    bool estColonne() const override;
+    bool estDiagonale() const override;
+    bool estRempli() const override;
 };
 
 #endif // GRILLE_H

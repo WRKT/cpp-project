@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include "IGrille.h"
 #include "grille.h"
