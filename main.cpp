@@ -27,9 +27,11 @@ int main() {
 
     do {
         std::cout << "\nChoisissez un jeu:\n";
-        for (const auto& jeu : nomsDesJeux) {
+        for (const auto& jeu : nomsDesJeux)
+        {
             std::cout << static_cast<int>(jeu.first) << ". " << jeu.second << std::endl;
         }
+        std::cout << std::endl;
         std::cout << "Votre choix: ";
         std::cin >> choixJeu;
 
@@ -37,17 +39,14 @@ int main() {
 
         if (!choixValide) {
             std::cout << "Choix invalide. Veuillez réessayer.\n";
-                         std::cin.clear();
+            std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
     } while (!choixValide);
 
     TypesJeu typeDeJeu = static_cast<TypesJeu>(choixJeu);
+
     std::cout << "Vous avez choisi: " << nomsDesJeux[typeDeJeu] << std::endl;
-
-    std::shared_ptr<IJoueur> joueur1 = JoueurFactory::CreerJoueurHumain("Vader", Jeton::X);
-
-    std::shared_ptr<IJoueur> joueur2 = (modeJeu == 1) ? JoueurFactory::CreerJoueurHumain("Obi-Wan", Jeton::O) : JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
 
     std::cout << "\nChoisissez le mode de jeu:\n1. Joueur vs Joueur\n2. Joueur vs Ordinateur\nVotre choix: ";
     std::cin >> modeJeu;
@@ -61,6 +60,8 @@ int main() {
     int nbLignes = (typeDeJeu == TypesJeu::Morpion) ? tailleGrilleMorpion : ColonneGrillePuissance4;
 
     std::unique_ptr<IGrille> grille = std::make_unique<Grille>(nbLignes, nbColonnes);
+    std::shared_ptr<IJoueur> joueur1 = JoueurFactory::CreerJoueurHumain("Vader", Jeton::X);
+    std::shared_ptr<IJoueur> joueur2 = (modeJeu == 1) ? JoueurFactory::CreerJoueurHumain("Obi-Wan", Jeton::O) : JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
 
     std::unique_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, *grille, joueur1, joueur2);
 

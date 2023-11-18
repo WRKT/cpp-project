@@ -7,9 +7,9 @@ void JeuMorpion::TourHumain() {
     int x, y;
     bool coupValide = false;
     while (!coupValide) {
-        std::cout << joueurCourant->getNom()<< " entrez la ligne (1 - " << grille.getNbLigne() << ") : ";
+        std::cout << joueurCourant->getNom()<< ", entrez la ligne (1 - " << grille.getNbLigne() << ") : ";
         std::cin >> x;
-        std::cout << joueurCourant->getNom() << " Entrez la colonne (1 - " << grille.getNbColonne() << ") : ";
+        std::cout << joueurCourant->getNom() << ", entrez la colonne (1 - " << grille.getNbColonne() << ") : ";
         std::cin >> y;
 
         if (grille.ACaseVide(x-1, y-1)) {
@@ -50,11 +50,11 @@ void JeuMorpion::Jouer() {
         }
         if (joueurCourant->getJeton() == joueur1->getJeton()) {
             joueurCourant = joueur2;
-            std::cout << "Le joueur 2 " << std::endl;
+            std::cout << joueurCourant->getNom() << std::endl;
 
         } else {
-            joueurCourant = joueur1;
-            std::cout << "Le joueur 1 " << std::endl;
+           joueurCourant = joueur1;
+            std::cout << joueurCourant->getNom()<< std::endl;
 
         }
 
