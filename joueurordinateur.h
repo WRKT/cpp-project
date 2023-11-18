@@ -4,15 +4,21 @@
 #include "IJoueur.h"
 #include <string>
 #include "Jeton.h"
+#include "IGrille.h"
+#include <random>
 
 class JoueurOrdinateur : public IJoueur {
 private:
     std::string nom = "Ordinateur";
-    Jeton jeton;
+    char jeton;
+    std::mt19937 generateur;
+    std::pair<int, int> choisirCoup(IGrille& grille);
 
 public:
-    JoueurOrdinateur(Jeton jeton);
+    JoueurOrdinateur(char jeton);
+    virtual char getJeton() const override;
     virtual std::string ObtenirNom() const override;
+    virtual void jouerJeton(IGrille& grille) override;
 };
 
 #endif // JOUEUR_ORDINATEUR_H

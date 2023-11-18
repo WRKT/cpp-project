@@ -14,6 +14,12 @@ add_executable(TP-Refacto main.cpp
     joueurordinateur.h joueurordinateur.cpp
     IGrille.h
     Jeton.h
+    IJeu.h
+    jeumorpion.h jeumorpion.cpp
+    jeupuissance4.h jeupuissance4.cpp
+    TypesJeu.h
+    jeufactory.h jeufactory.cpp
+    joueurfactory.h joueurfactory.cpp
 )
 
 include(GNUInstallDirs)

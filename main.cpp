@@ -1,27 +1,40 @@
+
 #include <iostream>
-//#include "match.h"
+#include "IGrille.h"
 #include "grille.h"
-#include "joueurhumain.h"
-#include "joueurordinateur.h"
-
-//int main()
-//{
-//    Match JeuV1;
-//    JeuV1.StartJeu();
-//}
-
+#include "IJeu.h"
+#include "TypesJeu.h"
+#include "jeufactory.h"
+#include "joueurfactory.h"
 
 int main() {
-    std::cout << std::endl;
-    Grille grille(3, 3);
-    grille.InitialiserGrille();
+    int choixJeu, modeJeu;
+    std::cout << "Choisissez un jeu:\n1. Morpion\n2. Puissance 4\nVotre choix: ";
+    std::cin >> choixJeu;
 
-    JoueurHumain joueur("Alice", Jeton::X);
-    JoueurOrdinateur joueur2(Jeton::O);
+    std::cout << "Choisissez le mode de jeu:\n1. Joueur vs Joueur\n2. Joueur vs Ordinateur\nVotre choix: ";
+    std::cin >> modeJeu;
 
-    grille.AfficherGrille();
-    std::cout << "Bienvenue " + joueur.ObtenirNom() << std::endl;
+    TypesJeu typeDeJeu = (choixJeu == 1) ? TypesJeu::Morpion : TypesJeu::Puissance4;
 
+    auto joueur1 = JoueurFactory::CreerJoueurHumain("Alice", 'X');
+    std::unique_ptr<IJoueur> joueur2;
+
+    if (modeJeu == 1) {
+        joueur2 = JoueurFactory::CreerJoueurHumain("Bertrand", 'O');
+    } else {
+        joueur2 = JoueurFactory::CreerJoueurOrdinateur('O');
+    }
+
+    int tailleGrilleMorpion = 3;
+    int tailleGrillePuissance4 = 6;
+    int nbColonnes = (typeDeJeu == TypesJeu::Morpion) ? tailleGrilleMorpion : tailleGrillePuissance4;
+    int nbLignes = (typeDeJeu == TypesJeu::Morpion) ? tailleGrilleMorpion : tailleGrillePuissance4;
+
+    auto grille = std::make_unique<Grille>(nbLignes, nbColonnes);
+    auto jeu = JeuFactory::CreerJeu(typeDeJeu, *grille, *joueur1, *joueur2);
+
+    jeu->jouer();
 
     return 0;
 }
