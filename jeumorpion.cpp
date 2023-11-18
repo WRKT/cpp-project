@@ -12,7 +12,6 @@ void JeuMorpion::TourHumain() {
         std::cout << joueurCourant->getNom() << " Entrez la colonne (1 - " << grille.getNbColonne() << ") : ";
         std::cin >> y;
 
-        // Vérifier si le coup est valide (la case est libre)
         if (grille.ACaseVide(x-1, y-1)) {
             PlacerJeton(x, y, joueurCourant->getJeton());
             coupValide = true;
@@ -23,14 +22,12 @@ void JeuMorpion::TourHumain() {
 }
 
 void JeuMorpion::TourOrdi() {
-    // Logique pour gérer le tour de l'ordinateur
-    // Implémenter l'IA ou la logique de décision pour l'ordinateur
+
 }
 
 bool JeuMorpion::AGagne() const {
-    // Vérifie si l'un des joueurs a gagné
-    // Implémenter la logique pour vérifier les conditions de victoire
-    return false; // Retourner vrai si un joueur a gagné
+
+    return false;
 }
 
 bool JeuMorpion::PartieFinie() const {
@@ -42,6 +39,8 @@ void JeuMorpion::PlacerJeton(int x, int y, Jeton jeton) {
 };
 
 void JeuMorpion::Jouer() {
+
+    grille.AfficherGrille();
 
     while (!PartieFinie()) {
         if (joueurCourant->estHumain()) {

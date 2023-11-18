@@ -45,9 +45,9 @@ int main() {
     TypesJeu typeDeJeu = static_cast<TypesJeu>(choixJeu);
     std::cout << "Vous avez choisi: " << nomsDesJeux[typeDeJeu] << std::endl;
 
-    auto joueur1 = JoueurFactory::CreerJoueurHumain("Vader", Jeton::X);
+    std::shared_ptr<IJoueur> joueur1 = JoueurFactory::CreerJoueurHumain("Vader", Jeton::X);
 
-    auto joueur2 = (modeJeu == 1) ? JoueurFactory::CreerJoueurHumain("Obi-Wan", Jeton::O) : JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
+    std::shared_ptr<IJoueur> joueur2 = (modeJeu == 1) ? JoueurFactory::CreerJoueurHumain("Obi-Wan", Jeton::O) : JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
 
     std::cout << "\nChoisissez le mode de jeu:\n1. Joueur vs Joueur\n2. Joueur vs Ordinateur\nVotre choix: ";
     std::cin >> modeJeu;
@@ -60,9 +60,9 @@ int main() {
     int nbColonnes = (typeDeJeu == TypesJeu::Morpion) ? tailleGrilleMorpion : LigneGrillePuissance4;
     int nbLignes = (typeDeJeu == TypesJeu::Morpion) ? tailleGrilleMorpion : ColonneGrillePuissance4;
 
-    auto grille = std::make_unique<Grille>(nbLignes, nbColonnes);
+    std::unique_ptr<IGrille> grille = std::make_unique<Grille>(nbLignes, nbColonnes);
 
-    std::unique_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, *grille, *joueur1, *joueur2);
+    std::unique_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, *grille, joueur1, joueur2);
 
     jeu->Jouer();
 

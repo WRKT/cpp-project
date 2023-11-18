@@ -14,6 +14,11 @@ int Grille::getNbColonne() const {
     return nbColonnes;
 }
 
+Jeton Grille::GetCellule(int x, int y) const
+{
+    return table[x][y];
+}
+
 int Grille::getNbLigne() const {
     return nbLignes;
 }
