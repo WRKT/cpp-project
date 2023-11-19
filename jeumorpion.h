@@ -19,7 +19,10 @@ public:
     virtual void TourOrdi() override;
     virtual bool AGagne() const override;
     virtual bool PartieFinie() const override;
-    virtual void PlacerJeton(int ligne, int colonne, Jeton jeton) override;
+    void PlacerJeton(int ligne, int colonne, Jeton jeton);
+    bool VerifieLignes() const;
+    bool VerifieColonnes() const;
+    bool VerifieDiagonales() const;
     void Jouer() override;
 };
 
