@@ -19,9 +19,11 @@ public:
     void TourHumain() override;
     void TourOrdi() override;
     bool AGagne() const override;
-    void PlacerJeton(int ligne, int colonne, Jeton jeton) override;
+    void PlacerJeton(int colonne, Jeton jeton);
     bool PartieFinie() const override;
-    bool colonneValide(int colonne) const;
+    bool VerifieLignes() const;
+    bool VerifieDiagonales() const;
+    bool VerifieColonnes() const;
     IGrille& getGrille() const { return grille; }
 };
 
