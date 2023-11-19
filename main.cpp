@@ -53,8 +53,8 @@ int main() {
 
 
     int tailleGrilleMorpion = 3;
-    int LigneGrillePuissance4 = 4;
-    int ColonneGrillePuissance4 = 7;
+    int LigneGrillePuissance4 =7 ;
+    int ColonneGrillePuissance4 = 4;
 
     int nbColonnes = (typeDeJeu == TypesJeu::Morpion) ? tailleGrilleMorpion : LigneGrillePuissance4;
     int nbLignes = (typeDeJeu == TypesJeu::Morpion) ? tailleGrilleMorpion : ColonneGrillePuissance4;
