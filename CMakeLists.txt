@@ -9,7 +9,6 @@ add_executable(TP-Refacto main.cpp
 
     grille.h grille.cpp
     IJoueur.h
-    IInteractionJoueur.h
     joueurhumain.h joueurhumain.cpp
     joueurordinateur.h joueurordinateur.cpp
     IGrille.h
@@ -20,6 +19,8 @@ add_executable(TP-Refacto main.cpp
     TypesJeu.h
     jeufactory.h jeufactory.cpp
     joueurfactory.h joueurfactory.cpp
+    InterfaceUtilisateur.h InterfaceUtilisateur.cpp
+    configjeu.h configjeu.cpp
 )
 
 include(GNUInstallDirs)

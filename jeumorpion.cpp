@@ -3,6 +3,7 @@
 #include <vector>
 #include <random>
 #include <ctime>
+#include <limits>
 
 JeuMorpion::JeuMorpion(IGrille& grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2): grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1) {}
 
@@ -10,10 +11,19 @@ void JeuMorpion::TourHumain() {
     int x, y;
     bool coupValide = false;
     while (!coupValide) {
-        std::cout << joueurCourant->getNom()<< " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la ligne (1 - " << grille.getNbLigne() << ") : ";
-        std::cin >> x;
+        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la ligne (1 - " << grille.getNbLigne() << ") : ";
+        while (!(std::cin >> x) || x < 1 || x > grille.getNbLigne()) {
+            std::cout << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille.getNbLigne() << ": ";
+           std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+
         std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la colonne (1 - " << grille.getNbColonne() << ") : ";
-        std::cin >> y;
+        while (!(std::cin >> y) || y < 1 || y > grille.getNbColonne()) {
+            std::cout << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille.getNbColonne() << ": ";
+             std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
 
         if (grille.ACaseVide(x-1, y-1)) {
             PlacerJeton(x, y, joueurCourant->getJeton());

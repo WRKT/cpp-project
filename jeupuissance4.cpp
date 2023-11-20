@@ -42,6 +42,12 @@ void JeuPuissance4::TourHumain()
         std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton())
                   << "), choisissez une colonne (1 - " << grille.getNbColonne() << ") : ";
         std::cin >> colonne;
+        while (std::cin.fail() || colonne < 1 || colonne > grille.getNbColonne()) {
+            std::cout << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille.getNbColonne() << ": ";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cin >> colonne;
+        }
 
         if (colonne > 0 && colonne <= grille.getNbColonne() && grille.GetCellule(0, colonne - 1) == Jeton::Vide) {
             PlacerJeton(colonne - 1, joueurCourant->getJeton());
