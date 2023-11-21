@@ -3,16 +3,12 @@
 #include <map>
 #include <memory>
 #include <limits>
-
 #include "TypesJeu.h"
 #include "InterfaceUtilisateur.h"
-#include "configjeu.h"
-#include "IGrille.h"
 #include "IJeu.h"
 #include "IJoueur.h"
 #include "joueurfactory.h"
 #include "jeufactory.h"
-#include "grille.h"
 
 int main() {
     std::cout << "=========================================\n";
@@ -25,11 +21,6 @@ int main() {
             TypesJeu typeDeJeu = ui.demanderTypeDeJeu();
             int modeJeu = ui.demanderModeDeJeu();
 
-            ConfigJeu config;
-            auto dimensionsGrille = config.getDimensionsGrille(typeDeJeu);
-
-            std::unique_ptr<IGrille> grille = std::make_unique<Grille>(dimensionsGrille.first, dimensionsGrille.second);
-
             std::string prenomJoueur1 = ui.demanderPrenomJoueur("Entrez le prénom du premier joueur : ");
             std::shared_ptr<IJoueur> joueur1 = JoueurFactory::CreerJoueurHumain(prenomJoueur1, Jeton::X);
             std::shared_ptr<IJoueur> joueur2;
@@ -39,7 +30,7 @@ int main() {
             } else {
                 joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
             }
-            std::unique_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, *grille, joueur1, joueur2);
+            std::unique_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2);
             jeu->Jouer();
             rejouer = ui.demanderRejouer();
     } while (rejouer);

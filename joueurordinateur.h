@@ -12,7 +12,6 @@ private:
     std::string nom = "Ordinateur";
     Jeton jeton;
     std::mt19937 generateur;
-    std::pair<int, int> choisirCoup(IGrille& grille);
 
 public:
     JoueurOrdinateur(Jeton jeton);
