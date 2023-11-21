@@ -4,7 +4,6 @@
 #include "IJoueur.h"
 #include <string>
 #include "jeton.h"
-#include "IGrille.h"
 #include <random>
 
 class JoueurOrdinateur : public IJoueur {
@@ -12,7 +11,6 @@ private:
     std::string nom = "Ordinateur";
     Jeton jeton;
     std::mt19937 generateur;
-    std::pair<int, int> choisirCoup(IGrille& grille);
 
 public:
     JoueurOrdinateur(Jeton jeton);

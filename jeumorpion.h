@@ -8,13 +8,13 @@
 
 class JeuMorpion : public IJeu {
 private:
-    IGrille& grille;
+    std::shared_ptr<IGrille> grille;
     std::shared_ptr<IJoueur> joueur1;
     std::shared_ptr<IJoueur> joueur2;
     std::shared_ptr<IJoueur> joueurCourant;
 
 public:
-    JeuMorpion(IGrille& grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2);
+    JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2);
     virtual void TourHumain() override;
     virtual void TourOrdi() override;
     virtual bool AGagne() const override;

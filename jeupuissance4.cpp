@@ -4,11 +4,11 @@
 #include <random>
 #include <ctime>
 
-JeuPuissance4::JeuPuissance4(IGrille& grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2)
+JeuPuissance4::JeuPuissance4(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2)
     : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1) {}
 
 void JeuPuissance4::Jouer() {
-    grille.AfficherGrille();
+    grille->AfficherGrille();
 
     while (!PartieFinie()) {
         if (joueurCourant->estHumain()) {
@@ -18,7 +18,7 @@ void JeuPuissance4::Jouer() {
         }
 
         if (AGagne()) {
-            grille.AfficherGrille();
+            grille->AfficherGrille();
             std::cout << "Le joueur " << joueurCourant->getNom() << " a gagné !" << std::endl;
                 return;
         }
@@ -29,7 +29,7 @@ void JeuPuissance4::Jouer() {
             joueurCourant = joueur1;
         }
 
-        grille.AfficherGrille();
+        grille->AfficherGrille();
     }
     std::cout << "Match nul !" << std::endl;
 }
@@ -40,16 +40,16 @@ void JeuPuissance4::TourHumain()
     bool coupValide = false;
     while (!coupValide) {
         std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton())
-                  << "), choisissez une colonne (1 - " << grille.getNbColonne() << ") : ";
+                  << "), choisissez une colonne (1 - " << grille->getNbColonne() << ") : ";
         std::cin >> colonne;
-        while (std::cin.fail() || colonne < 1 || colonne > grille.getNbColonne()) {
-            std::cout << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille.getNbColonne() << ": ";
+        while (std::cin.fail() || colonne < 1 || colonne > grille->getNbColonne()) {
+            std::cout << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille->getNbColonne() << ": ";
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cin >> colonne;
         }
 
-        if (colonne > 0 && colonne <= grille.getNbColonne() && grille.GetCellule(0, colonne - 1) == Jeton::Vide) {
+        if (colonne > 0 && colonne <= grille->getNbColonne() && grille->GetCellule(0, colonne - 1) == Jeton::Vide) {
             PlacerJeton(colonne - 1, joueurCourant->getJeton());
             coupValide = true;
         } else {
@@ -61,8 +61,8 @@ void JeuPuissance4::TourHumain()
 void JeuPuissance4::TourOrdi()
 {
     std::vector<int> colonnesPossibles;
-    for (int i = 0; i < grille.getNbColonne(); ++i) {
-        if (grille.GetCellule(0, i) == Jeton::Vide) {
+    for (int i = 0; i < grille->getNbColonne(); ++i) {
+        if (grille->GetCellule(0, i) == Jeton::Vide) {
             colonnesPossibles.push_back(i);
         }
     }
@@ -78,7 +78,7 @@ void JeuPuissance4::TourOrdi()
 }
 
 bool JeuPuissance4::PartieFinie() const {
-    return AGagne() || grille.EstRemplie();
+    return AGagne() || grille->EstRemplie();
 }
 
 bool JeuPuissance4::AGagne() const {
@@ -87,25 +87,25 @@ bool JeuPuissance4::AGagne() const {
 
 void JeuPuissance4::PlacerJeton(int colonne, Jeton jeton)
 {
-    int ligneDisponible = grille.getNbLigne() - 1;
-    while (ligneDisponible >= 0 && grille.GetCellule(ligneDisponible, colonne) != Jeton::Vide) {
+    int ligneDisponible = grille->getNbLigne() - 1;
+    while (ligneDisponible >= 0 && grille->GetCellule(ligneDisponible, colonne) != Jeton::Vide) {
             ligneDisponible--;
     }
 
     if (ligneDisponible >= 0) {
-            grille.ChangeCellule(ligneDisponible, colonne, jeton);
+            grille->ChangeCellule(ligneDisponible, colonne, jeton);
     }
 
 }
 
 bool JeuPuissance4::VerifieLignes() const {
-    for (int i = 0; i < grille.getNbLigne(); ++i) {
+    for (int i = 0; i < grille->getNbLigne(); ++i) {
             for (int j = 0; j < 4; ++j) {
-            Jeton premierJeton = grille.GetCellule(i, j);
+            Jeton premierJeton = grille->GetCellule(i, j);
             if (premierJeton != Jeton::Vide &&
-                premierJeton == grille.GetCellule(i, j + 1) &&
-                premierJeton == grille.GetCellule(i, j + 2) &&
-                premierJeton == grille.GetCellule(i, j + 3)) {
+                premierJeton == grille->GetCellule(i, j + 1) &&
+                premierJeton == grille->GetCellule(i, j + 2) &&
+                premierJeton == grille->GetCellule(i, j + 3)) {
                 return true;
             }
             }
@@ -114,13 +114,13 @@ bool JeuPuissance4::VerifieLignes() const {
 }
 
 bool JeuPuissance4::VerifieColonnes() const {
-    for (int j = 0; j < grille.getNbColonne(); ++j) {
-            for (int i = 0; i < grille.getNbLigne() - 3; ++i) {
-            Jeton premierJeton = grille.GetCellule(i, j);
+    for (int j = 0; j < grille->getNbColonne(); ++j) {
+            for (int i = 0; i < grille->getNbLigne() - 3; ++i) {
+            Jeton premierJeton = grille->GetCellule(i, j);
             if (premierJeton != Jeton::Vide &&
-                premierJeton == grille.GetCellule(i + 1, j) &&
-                premierJeton == grille.GetCellule(i + 2, j) &&
-                premierJeton == grille.GetCellule(i + 3, j)) {
+                premierJeton == grille->GetCellule(i + 1, j) &&
+                premierJeton == grille->GetCellule(i + 2, j) &&
+                premierJeton == grille->GetCellule(i + 3, j)) {
                 return true;
             }
         }
@@ -129,24 +129,24 @@ bool JeuPuissance4::VerifieColonnes() const {
 }
 
 bool JeuPuissance4::VerifieDiagonales() const {
-    for (int i = 0; i < grille.getNbLigne() - 3; ++i) {
+    for (int i = 0; i < grille->getNbLigne() - 3; ++i) {
             for (int j = 0; j < 4; ++j) {
-            Jeton premierJeton = grille.GetCellule(i, j);
+            Jeton premierJeton = grille->GetCellule(i, j);
             if (premierJeton != Jeton::Vide &&
-                premierJeton == grille.GetCellule(i + 1, j + 1) &&
-                premierJeton == grille.GetCellule(i + 2, j + 2) &&
-                premierJeton == grille.GetCellule(i + 3, j + 3)) {
+                premierJeton == grille->GetCellule(i + 1, j + 1) &&
+                premierJeton == grille->GetCellule(i + 2, j + 2) &&
+                premierJeton == grille->GetCellule(i + 3, j + 3)) {
                 return true;
             }
             }
     }
-    for (int i = 3; i < grille.getNbLigne(); ++i) {
+    for (int i = 3; i < grille->getNbLigne(); ++i) {
             for (int j = 0; j < 4; ++j) {
-            Jeton premierJeton = grille.GetCellule(i, j);
+            Jeton premierJeton = grille->GetCellule(i, j);
             if (premierJeton != Jeton::Vide &&
-                premierJeton == grille.GetCellule(i - 1, j + 1) &&
-                premierJeton == grille.GetCellule(i - 2, j + 2) &&
-                premierJeton == grille.GetCellule(i - 3, j + 3)) {
+                premierJeton == grille->GetCellule(i - 1, j + 1) &&
+                premierJeton == grille->GetCellule(i - 2, j + 2) &&
+                premierJeton == grille->GetCellule(i - 3, j + 3)) {
                 return true;
             }
             }
