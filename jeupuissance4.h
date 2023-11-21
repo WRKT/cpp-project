@@ -8,13 +8,13 @@
 
 class JeuPuissance4 : public IJeu {
 private:
-    IGrille& grille;
+    std::shared_ptr<IGrille> grille;
     std::shared_ptr<IJoueur> joueur1;
     std::shared_ptr<IJoueur> joueur2;
     std::shared_ptr<IJoueur> joueurCourant;
 
 public:
-    JeuPuissance4(IGrille& grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2);
+    JeuPuissance4(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2);
     void Jouer() override;
     void TourHumain() override;
     void TourOrdi() override;
@@ -24,7 +24,6 @@ public:
     bool VerifieLignes() const;
     bool VerifieDiagonales() const;
     bool VerifieColonnes() const;
-    IGrille& getGrille() const { return grille; }
 };
 
 #endif // JEUPUISSANCE4_H

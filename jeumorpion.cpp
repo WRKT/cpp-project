@@ -5,27 +5,27 @@
 #include <ctime>
 #include <limits>
 
-JeuMorpion::JeuMorpion(IGrille& grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2): grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1) {}
+JeuMorpion::JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2): grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1) {}
 
 void JeuMorpion::TourHumain() {
     int x, y;
     bool coupValide = false;
     while (!coupValide) {
-        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la ligne (1 - " << grille.getNbLigne() << ") : ";
-        while (!(std::cin >> x) || x < 1 || x > grille.getNbLigne()) {
-            std::cout << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille.getNbLigne() << ": ";
+        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la ligne (1 - " << grille->getNbLigne() << ") : ";
+        while (!(std::cin >> x) || x < 1 || x > grille->getNbLigne()) {
+            std::cout << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille->getNbLigne() << ": ";
            std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
 
-        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la colonne (1 - " << grille.getNbColonne() << ") : ";
-        while (!(std::cin >> y) || y < 1 || y > grille.getNbColonne()) {
-            std::cout << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille.getNbColonne() << ": ";
+        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la colonne (1 - " << grille->getNbColonne() << ") : ";
+        while (!(std::cin >> y) || y < 1 || y > grille->getNbColonne()) {
+            std::cout << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille->getNbColonne() << ": ";
              std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
 
-        if (grille.ACaseVide(x-1, y-1)) {
+        if (grille->ACaseVide(x-1, y-1)) {
             PlacerJeton(x, y, joueurCourant->getJeton());
             coupValide = true;
         } else {
@@ -36,9 +36,9 @@ void JeuMorpion::TourHumain() {
 
 void JeuMorpion::TourOrdi() {
     std::vector<std::pair<int, int>> coupsPossibles;
-    for (int i = 0; i < grille.getNbLigne(); ++i) {
-        for (int j = 0; j < grille.getNbColonne(); ++j) {
-            if (grille.ACaseVide(i, j)) {
+    for (int i = 0; i < grille->getNbLigne(); ++i) {
+        for (int j = 0; j < grille->getNbColonne(); ++j) {
+            if (grille->ACaseVide(i, j)) {
                 coupsPossibles.emplace_back(i + 1, j + 1);
             }
         }
@@ -58,12 +58,12 @@ bool JeuMorpion::AGagne() const {
 }
 
 bool JeuMorpion::VerifieLignes() const {
-    for (int i = 0; i < grille.getNbLigne(); ++i) {
-        Jeton premierJeton = grille.GetCellule(i, 0);
+    for (int i = 0; i < grille->getNbLigne(); ++i) {
+        Jeton premierJeton = grille->GetCellule(i, 0);
         if (premierJeton != Jeton::Vide) {
             bool ligneGagnante = true;
-            for (int j = 1; j < grille.getNbColonne(); ++j) {
-                if (grille.GetCellule(i, j) != premierJeton) {
+            for (int j = 1; j < grille->getNbColonne(); ++j) {
+                if (grille->GetCellule(i, j) != premierJeton) {
                     ligneGagnante = false;
                     break;
                 }
@@ -75,12 +75,12 @@ bool JeuMorpion::VerifieLignes() const {
 }
 
 bool JeuMorpion::VerifieColonnes() const {
-    for (int j = 0; j < grille.getNbColonne(); ++j) {
-        Jeton premierJeton = grille.GetCellule(0, j);
+    for (int j = 0; j < grille->getNbColonne(); ++j) {
+        Jeton premierJeton = grille->GetCellule(0, j);
         if (premierJeton != Jeton::Vide) {
             bool colonneGagnante = true;
-            for (int i = 1; i < grille.getNbLigne(); ++i) {
-                if (grille.GetCellule(i, j) != premierJeton) {
+            for (int i = 1; i < grille->getNbLigne(); ++i) {
+                if (grille->GetCellule(i, j) != premierJeton) {
                     colonneGagnante = false;
                     break;
                 }
@@ -92,20 +92,20 @@ bool JeuMorpion::VerifieColonnes() const {
 }
 
 bool JeuMorpion::VerifieDiagonales() const {
-    Jeton premierJeton = grille.GetCellule(0, 0);
+    Jeton premierJeton = grille->GetCellule(0, 0);
     bool diagonaleGagnante = (premierJeton != Jeton::Vide);
-    for (int i = 1; i < grille.getNbLigne() && diagonaleGagnante; ++i) {
-        if (grille.GetCellule(i, i) != premierJeton) {
+    for (int i = 1; i < grille->getNbLigne() && diagonaleGagnante; ++i) {
+        if (grille->GetCellule(i, i) != premierJeton) {
             diagonaleGagnante = false;
         }
     }
 
     if (diagonaleGagnante) return true;
 
-    premierJeton = grille.GetCellule(0, grille.getNbColonne() - 1);
+    premierJeton = grille->GetCellule(0, grille->getNbColonne() - 1);
     diagonaleGagnante = (premierJeton != Jeton::Vide);
-    for (int i = 1; i < grille.getNbLigne() && diagonaleGagnante; ++i) {
-        if (grille.GetCellule(i, grille.getNbColonne() - 1 - i) != premierJeton) {
+    for (int i = 1; i < grille->getNbLigne() && diagonaleGagnante; ++i) {
+        if (grille->GetCellule(i, grille->getNbColonne() - 1 - i) != premierJeton) {
             diagonaleGagnante = false;
         }
     }
@@ -114,14 +114,14 @@ bool JeuMorpion::VerifieDiagonales() const {
 }
 
 bool JeuMorpion::PartieFinie() const {
-    return AGagne() || grille.EstRemplie();
+    return AGagne() || grille->EstRemplie();
 }
 
 void JeuMorpion::PlacerJeton(int x, int y, Jeton jeton) {
-    grille.ChangeCellule(x-1, y-1, jeton);
+    grille->ChangeCellule(x-1, y-1, jeton);
 };
 void JeuMorpion::Jouer() {
-    grille.AfficherGrille();
+    grille->AfficherGrille();
 
     while (!PartieFinie()) {
         if (joueurCourant->estHumain()) {
@@ -141,7 +141,7 @@ void JeuMorpion::Jouer() {
             joueurCourant = joueur1;
         }
 
-        grille.AfficherGrille();
+        grille->AfficherGrille();
     }
     std::cout << "Match nul !" << std::endl;
 }
