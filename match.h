@@ -13,7 +13,6 @@ private:
     int ChoixJeu();
     JeuMorpion morpion;
     JeuPuissance4 puissance4;
-    // Pouvoir avoir une liste de Jeux disponible comme ca pas de changement a l'ajout
 };
 
 #endif // MATCH_H

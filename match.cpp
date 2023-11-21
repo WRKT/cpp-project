@@ -45,7 +45,6 @@ int Match::ChoixJeu()
     do
     {
         std::cout << "Quelle jeu voulez-vous jouer : " << std::endl;
-        // boucle for pour recupérée chaque jeux dans la liste
         std::cout << "1. Morpion" << std::endl;
         std::cout << "2. Puissance4" << std::endl;
         std::cout << "99. Quittez le programme." << std::endl;
