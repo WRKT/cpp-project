@@ -85,7 +85,9 @@ Proposition d'amélioration :
 
 Nous avons décidé de gardé le projet de Winness car le **squelette de son application** a été le plus facile à remodéliser.
 Ainsi, nous avions pensé en terme de temps consacré pour la refactorisation, car son projet étant plus modulable, nous avions repris son squelette en y rajoutant les nouvelles interfaces.
+
 Au terme des réflexions, nous avions également décidé de reprendre quelques idées de design et de méthodes du projet d'Alizée (exemple : initialisation de tableau de vecteurs mais non de pointeurs), pour que le programme soit plus facile à maintenir et évoluer.
+
 Enfin, étant donné que chaque projet ne respectait pas en grande partie certains principes du principe SOLID, ce choix est surtout justifié par la manière dont le projet initial a été pensé mais ne remet pas en cause la qualité du programme de l'autre, et ainsi donné vie à un projet hybride : TP3-Refacto.
 
 #### Nouveaux squelettes
