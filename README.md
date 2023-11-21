@@ -3,36 +3,46 @@
 ### 1. Single Responsability Unique (SRP)
 
 1. **Classe Board:**
+
 **Violations du principe de responsabilité unique (SRP):**
  - La méthode `checkWin()` devrait être une propriété de la classe Jeu.
  - Proposition d'optimisation : Sectionner `checkWin()` en méthodes distinctes (`checkRow()`, `checkColumns()`, `checkDiagonal()`).
  - La méthode `placeMarker()` pourrait être déplacée vers la classe Joueur, qui, par logique métier, est responsable du placement des pions.
 3. **Classe Player:**
+
 **Violation potentielle du SRP:**
  - La classe ne gère actuellement qu'une seule fonctionnalité (créer un joueur).
  - Manque de fonctionnalités liées au placement des pions.
 5. **Classe ComputerPlayer:**
+
 **Violation du SRP:**
  - La méthode `makeMove()` gère le placement des pions pour tous les jeux (morpion et puissance4), ce qui devrait être sectionné par jeu.
  - Proposition d'optimisation : passer par une interface de jeu dont les classes héritées implémenteront la méthode `makeMove()` spécifique au règle de jeu.
 6. **Classe Game:**
+
 **Violation du SRP:**
  - Les méthodes `makeMove()` et `displayBoard()` ne devraient pas être implémentées dans Game, mais dans les classes Player et Board respectivement.
 7. **Classe TicTacToe et ConnectFour:**
+
 **Violation du SRP:**
  - Les méthodes `makeMove()` et `displayBoard()` devraient être déplacées vers les classes Player et Board respectivement.
 8. **Fonction `main`:**
+
 **Violation du SRP:**
  - La fonction `main()` devrait être refactorisée pour créer une classe gérant le déroulement du jeu, respectant ainsi le principe de responsabilité unique.
 ### 2. Principe Ouvert/Fermé (OCP)
 
 1. **Classe Board :**
+
 **Violation du principe OCP:** La méthode `placeMarker()` nécessite des paramètres supplémentaires pour s'adapter à différents jeux, violant le principe d'Ouvert/Fermé (OCP).
 2. **Classe Player et ComputerPlayer:**
+
 **Respect du principe OCP:** Les classes respectent le principe d'Ouvert/Fermé car elles sont ouvertes à l'extension (ajout de nouvelles fonctionnalités) mais fermées à la modification par leurs méthodes constantes.
 3. **Classe Game:**
+
 **Respect partiel du principe OCP:** En tant que classe abstraite, elle respecte le principe OCP, étant une classe virtuelle pure. Cependant, l'ajout de nouvelles méthodes est possible.
 4. **Classe TicTacToe et ConnectFour:**
+
 **Violation du principe OCP:** Le constructeur des classes ``TicTacToe`` et`` ConnectFour`` est fortement couplé à la classe ``Board``, entraînant une violation du principe d'Ouvert/Fermé. Des modifications à ``Board`` nécessiteraient des modifications dans ces classes.
 
 ### 3. Principe de Substitution de Liskov (LSP)
