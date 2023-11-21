@@ -7,6 +7,33 @@
 
 JeuMorpion::JeuMorpion(IGrille& grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2): grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1) {}
 
+void JeuMorpion::Jouer() {
+    grille.AfficherGrille();
+
+    while (!PartieFinie()) {
+        if (joueurCourant->estHumain()) {
+            TourHumain();
+        } else {
+            TourOrdi();
+        }
+
+        if (AGagne()) {
+            grille.AfficherGrille ();
+            std::cout << "Le joueur " << joueurCourant->getNom() << " a gagné !" << std::endl;
+                return;
+        }
+
+        if (joueurCourant->getJeton() == joueur1->getJeton()) {
+            joueurCourant = joueur2;
+        } else {
+            joueurCourant = joueur1;
+        }
+
+        grille.AfficherGrille();
+    }
+    std::cout << "Match nul !" << std::endl;
+}
+
 void JeuMorpion::TourHumain() {
     int x, y;
     bool coupValide = false;
@@ -119,29 +146,4 @@ bool JeuMorpion::PartieFinie() const {
 
 void JeuMorpion::PlacerJeton(int x, int y, Jeton jeton) {
     grille.ChangeCellule(x-1, y-1, jeton);
-};
-void JeuMorpion::Jouer() {
-    grille.AfficherGrille();
-
-    while (!PartieFinie()) {
-        if (joueurCourant->estHumain()) {
-            TourHumain();
-        } else {
-            TourOrdi();
-        }
-
-        if (AGagne()) {
-            std::cout << "Le joueur " << joueurCourant->getNom() << " a gagné !" << std::endl;
-                return;
-        }
-
-        if (joueurCourant->getJeton() == joueur1->getJeton()) {
-            joueurCourant = joueur2;
-        } else {
-            joueurCourant = joueur1;
-        }
-
-        grille.AfficherGrille();
-    }
-    std::cout << "Match nul !" << std::endl;
 }
