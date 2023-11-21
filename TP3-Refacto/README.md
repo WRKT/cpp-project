@@ -88,7 +88,7 @@ Ainsi, nous avions pensé en terme de temps consacré pour la refactorisation, c
 
 Au terme des réflexions, nous avions également décidé de reprendre quelques idées de design et de méthodes du projet d'Alizée (exemple : initialisation de tableau de vecteurs mais non de pointeurs), pour que le programme soit plus facile à maintenir et évoluer.
 
-Enfin, étant donné que chaque projet ne respectait pas en grande partie certains principes du principe SOLID, ce choix est surtout justifié par la manière dont le projet initial a été pensé mais ne remet pas en cause la qualité du programme de l'autre, et ainsi donné vie à un projet hybride : TP3-Refacto.
+Enfin, étant donné que chaque projet ne respectait pas en grande partie certains principes du principe SOLID, ce choix est surtout justifié par la manière dont le projet initial a été pensé mais ne remet pas en cause la qualité du programme de l'autre, et ainsi donné vie à un projet hybride : [TP3-Refacto](https://gitlab.com/WRKT1/td-cpp-winness-rakoto/-/tree/main/TP3-Refacto?ref_type=heads).
 
 #### Nouveaux squelettes
 
