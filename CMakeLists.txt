@@ -24,7 +24,7 @@ add_executable(TP-Refacto main.cpp
 )
 
 include(GNUInstallDirs)
-install(TARGETS TP3
+install(TARGETS TP-Refacto
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
