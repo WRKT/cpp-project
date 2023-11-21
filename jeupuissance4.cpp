@@ -20,7 +20,7 @@ void JeuPuissance4::Jouer() {
         if (AGagne()) {
             grille->AfficherGrille();
             std::cout << "Le joueur " << joueurCourant->getNom() << " a gagné !" << std::endl;
-            return;
+                return;
         }
 
         if (joueurCourant->getJeton() == joueur1->getJeton()) {

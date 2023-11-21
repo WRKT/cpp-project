@@ -13,22 +13,25 @@ TypesJeu InterfaceUtilisateur::demanderTypeDeJeu() {
     bool choixValide;
 
     do {
-        std::cout << "Choisissez un jeu:\n";
+        std::cout << "Choisissez un jeu: " << std::endl;
         for (const auto& jeu : nomsDesJeux) {
             std::cout << static_cast<int>(jeu.first) << ". " << jeu.second << std::endl;
         }
+        std::cout << std::endl;
         std::cout << "Votre choix: ";
         std::cin >> choixJeu;
 
         choixValide = std::cin.good() && nomsDesJeux.find(static_cast<TypesJeu>(choixJeu)) != nomsDesJeux.end();
 
         if (!choixValide) {
-            std::cout << "Choix invalide. Veuillez réessayer.\n";
-                         std::cin.clear();
+            std::cout << "Choix invalide. Veuillez réessayer." << std::endl;
+            std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
     } while (!choixValide);
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ajouter cette ligne
+
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
     return static_cast<TypesJeu>(choixJeu);
 }
 
@@ -37,25 +40,30 @@ int InterfaceUtilisateur::demanderModeDeJeu() {
     bool choixValide;
 
     do {
-        std::cout << "Choisissez le mode de jeu:\n1. Joueur vs Joueur\n2. Joueur vs Ordinateur\nVotre choix: ";
+        std::cout << std::endl;
+        std::cout << "Choisissez le mode de jeu:\n1. Joueur vs Joueur\n2. Joueur vs Ordinateur\n\nVotre choix: ";
         std::cin >> modeJeu;
 
         choixValide = std::cin.good() && (modeJeu == 1 || modeJeu == 2);
 
         if (!choixValide) {
             std::cout << "Choix invalide. Veuillez réessayer.\n";
-                         std::cin.clear();
+            std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
     } while (!choixValide);
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ajouter cette ligne
+
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << std::endl;
     return modeJeu;
 }
+
 bool InterfaceUtilisateur::demanderRejouer() {
     char choix;
     bool choixValide;
 
     do {
+        std::cout << std::endl;
         std::cout << "Voulez-vous rejouer? (o/n): ";
         std::cin >> choix;
 
@@ -67,7 +75,9 @@ bool InterfaceUtilisateur::demanderRejouer() {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
     } while (!choixValide);
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ajouter cette ligne
+
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
     return choix == 'o' || choix == 'O';
 }
 
@@ -79,7 +89,7 @@ std::string InterfaceUtilisateur::demanderPrenomJoueur(const std::string& prompt
         std::cout << prompt;
         std::cin >> prenom;
         if (!std::regex_match(prenom, regexPrenom)) {
-            std::cout << "Prénom invalide. Utilisez uniquement des lettres et une longueur maximale de 20 caractères.\n";
+            std::cout << "Prénom invalide. Utilisez uniquement des lettres et une longueur maximale de 20 caractères." << std::endl;
         }
     } while (!std::regex_match(prenom, regexPrenom));
 
