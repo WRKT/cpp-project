@@ -4,7 +4,6 @@
 #include "IJoueur.h"
 #include <string>
 #include "jeton.h"
-#include "IGrille.h"
 #include <random>
 
 class JoueurOrdinateur : public IJoueur {
