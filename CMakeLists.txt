@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(TP3 LANGUAGES CXX)
+project(TP3-Refacto LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(TP-Refacto main.cpp
+add_executable(TP3-Refacto main.cpp
 
     grille.h grille.cpp
     IJoueur.h
@@ -24,7 +24,7 @@ add_executable(TP-Refacto main.cpp
 )
 
 include(GNUInstallDirs)
-install(TARGETS TP-Refacto
+install(TARGETS TP3-Refacto
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
