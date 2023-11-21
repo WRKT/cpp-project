@@ -15,10 +15,11 @@
 #include "grille.h"
 
 int main() {
-    std::cout << "=========================================\n";
-    std::cout << " Bienvenue dans notre espace de jeux !\n";
-    std::cout << "=========================================\n\n";
+    std::cout << "=========================================" << std::endl;
+    std::cout << "  Bienvenue dans notre espace de jeux !  " << std::endl;
+    std::cout << "=========================================" << std::endl;
     InterfaceUtilisateur ui;
+
     bool rejouer;
 
     do {
@@ -48,6 +49,8 @@ int main() {
             rejouer = ui.demanderRejouer();
 
     } while (rejouer);
+
+    std::cout << "Merci d'avoir utilise le programme. Au revoir !" << std::endl;
 
     return 0;
 }
