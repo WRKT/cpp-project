@@ -1,23 +1,30 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(TP3 LANGUAGES CXX)
+project(TP3-Refacto LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(TP3 main.cpp
-    jeu.h jeu.cpp
+add_executable(TP3-Refacto main.cpp
+
     grille.h grille.cpp
-    joueur.h joueur.cpp
-    morpion.h morpion.cpp
-    puissance4.h puissance4.cpp
-    match.h match.cpp
-
-
+    IJoueur.h
+    joueurhumain.h joueurhumain.cpp
+    joueurordinateur.h joueurordinateur.cpp
+    IGrille.h
+    jeton.h
+    IJeu.h
+    jeumorpion.h jeumorpion.cpp
+    jeupuissance4.h jeupuissance4.cpp
+    TypesJeu.h
+    jeufactory.h jeufactory.cpp
+    joueurfactory.h joueurfactory.cpp
+    InterfaceUtilisateur.h InterfaceUtilisateur.cpp
+    configjeu.h configjeu.cpp
 )
 
 include(GNUInstallDirs)
-install(TARGETS TP3
+install(TARGETS TP3-Refacto
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
