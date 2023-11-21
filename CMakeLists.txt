@@ -20,7 +20,10 @@ add_executable(TP-Refacto main.cpp
     jeufactory.h jeufactory.cpp
     joueurfactory.h joueurfactory.cpp
     InterfaceUtilisateur.h InterfaceUtilisateur.cpp
-    configjeu.h configjeu.cpp
+    grillefactory.h grillefactory.cpp
+
+
+
 )
 
 include(GNUInstallDirs)
