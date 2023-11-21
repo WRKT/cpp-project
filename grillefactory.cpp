@@ -1,5 +1,5 @@
-#include "GrilleFactory.h"
-#include "Grille.h"
+#include "grillefactory.h"
+#include "grille.h"
 
 std::unique_ptr<IGrille> GrilleFactory::CreerGrille(TypesJeu typeDeJeu) {
     switch (typeDeJeu) {
