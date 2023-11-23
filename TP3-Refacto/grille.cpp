@@ -11,7 +11,7 @@ int Grille::getNbColonne() const {
     return nbColonnes;
 }
 
-Jeton Grille::GetCellule(int x, int y) const
+Jeton Grille::GetCellule(const int x, const int y) const
 {
     return table[x][y];
 }
@@ -41,11 +41,11 @@ void Grille::AfficherGrille() const {
 };
 
 
-bool Grille::ACaseVide(int x, int y) const {
+bool Grille::ACaseVide(const int x, const int y) const {
     return table[x][y] == Jeton::Vide;
 }
 
-void Grille::ChangeCellule(int x, int y, Jeton jeton) {
+void Grille::ChangeCellule(const int x, const int y, Jeton jeton) {
     table[x][y] = jeton;
 }
 
