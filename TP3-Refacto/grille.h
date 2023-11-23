@@ -6,11 +6,11 @@
 
 class Grille : public IGrille {
 private:
-    int nbLignes, nbColonnes;
+    const int nbLignes, nbColonnes;
     std::vector<std::vector<Jeton>> table;
 
 public:
-    Grille(int nbLignes, int nbColonnes);
+    Grille(const int nbLignes, const int nbColonnes) : nbLignes(nbLignes), nbColonnes(nbColonnes), table(nbLignes, std::vector<Jeton>(nbColonnes, Jeton::Vide)) {};
     void InitialiserGrille() override;
     void AfficherGrille() const override;
     bool EstRemplie() const override;

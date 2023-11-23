@@ -1,9 +1,6 @@
 #include "grille.h"
 #include <iostream>
 
-Grille::Grille(int nbLignes, int nbColonnes)
-    : nbLignes(nbLignes), nbColonnes(nbColonnes), table(nbLignes, std::vector<Jeton>(nbColonnes, Jeton::Vide)) {}
-
 void Grille::InitialiserGrille() {
     for (auto& ligne : table) {
         std::fill(ligne.begin(), ligne.end(), Jeton::Vide);
