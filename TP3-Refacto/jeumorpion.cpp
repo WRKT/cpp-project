@@ -9,6 +9,7 @@ JeuMorpion::JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur>
 
 void JeuMorpion::TourHumain()
 {
+    // TOUT CA, A NETTOYER !
     int x, y;
     bool coupValide = false;
     while (!coupValide)
