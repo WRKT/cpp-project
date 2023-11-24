@@ -5,17 +5,14 @@
 #include <string>
 #include "jeton.h"
 #include <random>
+#include <chrono>
 
 class JoueurOrdinateur : public IJoueur {
 private:
-    std::string nom = "Ordinateur";
-    Jeton jeton;
     std::mt19937 generateur;
 
 public:
-    JoueurOrdinateur(Jeton jeton);
-    Jeton getJeton() const override;
-    std::string getNom() const override;
+    JoueurOrdinateur(Jeton jeton) : IJoueur("Ordinateur", jeton), generateur(std::chrono::system_clock::now().time_since_epoch().count()) {};
     bool estHumain() const override { return false; }
 
 };

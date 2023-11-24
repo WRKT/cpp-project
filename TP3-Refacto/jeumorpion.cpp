@@ -9,7 +9,6 @@ JeuMorpion::JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur>
 
 void JeuMorpion::TourHumain()
 {
-    // TOUT CA, A NETTOYER !
     int x, y;
     bool coupValide = false;
     while (!coupValide)
@@ -45,6 +44,7 @@ void JeuMorpion::TourHumain()
 void JeuMorpion::TourOrdi()
 {
     std::vector<std::pair<int, int>> coupsPossibles;
+
     for (int i = 0; i < grille->getNbLigne(); ++i)
     {
         for (int j = 0; j < grille->getNbColonne(); ++j)
@@ -57,10 +57,11 @@ void JeuMorpion::TourOrdi()
     }
     if (!coupsPossibles.empty())
     {
-        std::mt19937 rng(static_cast<unsigned int>(time(nullptr))); // Générateur de nombres aléatoires
+        std::mt19937 rng(static_cast<unsigned int>(time(nullptr)));
         std::uniform_int_distribution<int> dist(0, coupsPossibles.size() - 1);
         auto [x, y] = coupsPossibles[dist(rng)];
-        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << ") a joué ! ";
+        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << ") a joué ! " << std::endl;
+
         PlacerJeton(x, y, joueurCourant->getJeton());
     }
 }
