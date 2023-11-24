@@ -6,13 +6,9 @@
 #include <memory>
 
 class JoueurHumain : public IJoueur {
-private:
-    std::string nom;
-    Jeton jeton;
 
 public:
-    JoueurHumain(const std::string& nom, Jeton jeton);
-    Jeton getJeton() const override;
+    JoueurHumain(const std::string& nom, Jeton jeton) : IJoueur(nom, jeton) {};
     bool estHumain() const override { return true; }
 };
 

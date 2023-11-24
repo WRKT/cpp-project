@@ -8,12 +8,15 @@
 class IJoueur{
 
 public:
-    std::string getNom() { return nom; }
-    virtual Jeton getJeton() const = 0;
+    IJoueur(const std::string& nom, const Jeton& jeton) : nom(nom), jeton(jeton) {}
+    std::string getNom() const { return nom; }
+    Jeton getJeton() const { return jeton; }
     virtual ~IJoueur() = default;
     virtual bool estHumain() const = 0;
-private:
+
+protected:
     const std::string nom;
+    const Jeton jeton;
 };
 
 

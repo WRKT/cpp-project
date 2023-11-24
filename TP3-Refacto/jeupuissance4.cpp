@@ -72,7 +72,7 @@ void JeuPuissance4::TourOrdi()
         std::uniform_int_distribution<int> dist(0, colonnesPossibles.size() - 1);
         int colonneChoisie = colonnesPossibles[dist(rng)];
 
-        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << ") a joué !\n";
+        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << ") a joué !" << std::endl;
             PlacerJeton(colonneChoisie, joueurCourant->getJeton());
     }
 }

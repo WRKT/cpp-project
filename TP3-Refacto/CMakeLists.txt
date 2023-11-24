@@ -9,8 +9,8 @@ add_executable(TP3-Refacto main.cpp
 
     grille.h grille.cpp
     IJoueur.h
-    joueurhumain.h joueurhumain.cpp
-    joueurordinateur.h joueurordinateur.cpp
+    joueurhumain.h
+    joueurordinateur.h
     IGrille.h
     jeton.h
     IJeu.h
@@ -21,11 +21,6 @@ add_executable(TP3-Refacto main.cpp
     joueurfactory.h joueurfactory.cpp
     InterfaceUtilisateur.h InterfaceUtilisateur.cpp
     grillefactory.h grillefactory.cpp
-    IAffichage.h
-    affichageconsole.h affichageconsole.cpp
-
-
-
 )
 
 include(GNUInstallDirs)
