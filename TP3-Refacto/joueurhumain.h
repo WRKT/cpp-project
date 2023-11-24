@@ -12,7 +12,6 @@ private:
 
 public:
     JoueurHumain(const std::string& nom, Jeton jeton);
-    std::string getNom() const override;
     Jeton getJeton() const override;
     bool estHumain() const override { return true; }
 };

@@ -3,13 +3,20 @@
 
 #include <iostream>
 #include "jeton.h"
+#include <string>
 
-class IJoueur {
+class IJoueur{
+
 public:
-    virtual std::string getNom() const = 0;
+    std::string getNom() { return nom; }
     virtual Jeton getJeton() const = 0;
     virtual ~IJoueur() = default;
     virtual bool estHumain() const = 0;
+private:
+    const std::string nom;
 };
 
+
+
 #endif // IJOUEUR_H
+

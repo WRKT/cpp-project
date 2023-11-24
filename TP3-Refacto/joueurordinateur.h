@@ -15,7 +15,6 @@ private:
 public:
     JoueurOrdinateur(Jeton jeton);
     Jeton getJeton() const override;
-    std::string getNom() const override;
     bool estHumain() const override { return false; }
 
 };
