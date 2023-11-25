@@ -14,9 +14,7 @@ public:
     bool AGagne() const override;
     bool PartieFinie() const override;
     void PlacerJeton(int colonne, Jeton jeton);
-    bool VerifieLignes() const;
-    bool VerifieDiagonales() const;
-    bool VerifieColonnes() const;
+    void voirCoupPossibles();
 
 private:
     std::shared_ptr<IGrille> grille;
