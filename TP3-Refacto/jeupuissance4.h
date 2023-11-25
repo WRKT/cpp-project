@@ -7,12 +7,6 @@
 #include <memory>
 
 class JeuPuissance4 : public IJeu {
-private:
-    std::shared_ptr<IGrille> grille;
-    std::shared_ptr<IJoueur> joueur1;
-    std::shared_ptr<IJoueur> joueur2;
-    std::shared_ptr<IJoueur> joueurCourant;
-
 public:
     JeuPuissance4(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2);
     void Jouer() override;
@@ -24,6 +18,12 @@ public:
     bool VerifieLignes() const;
     bool VerifieDiagonales() const;
     bool VerifieColonnes() const;
+
+private:
+    std::shared_ptr<IGrille> grille;
+    std::shared_ptr<IJoueur> joueur1;
+    std::shared_ptr<IJoueur> joueur2;
+    std::shared_ptr<IJoueur> joueurCourant;
 };
 
 #endif // JEUPUISSANCE4_H
