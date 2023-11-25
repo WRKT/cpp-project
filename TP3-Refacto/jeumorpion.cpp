@@ -1,4 +1,5 @@
 #include "jeumorpion.h"
+#include "affichageconsole.h"
 #include <iostream>
 #include <vector>
 #include <random>
@@ -16,7 +17,7 @@ void JeuMorpion::TourHumain()
         std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la ligne (1 - " << grille->getNbLigne() << ") : ";
         while (!(std::cin >> x) || x < 1 || x > grille->getNbLigne())
         {
-            std::cout << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille->getNbLigne() << ": ";
+            std::cerr << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille->getNbLigne() << ": ";
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
@@ -24,7 +25,7 @@ void JeuMorpion::TourHumain()
         std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la colonne (1 - " << grille->getNbColonne() << ") : ";
         while (!(std::cin >> y) || y < 1 || y > grille->getNbColonne())
         {
-            std::cout << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille->getNbColonne() << ": ";
+            std::cerr << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille->getNbColonne() << ": ";
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
@@ -36,7 +37,7 @@ void JeuMorpion::TourHumain()
         }
         else
         {
-            std::cout << "Coup invalide, réessayez.\n";
+            std::cerr << "Coup invalide, réessayez.\n";
         }
     }
 }
@@ -156,7 +157,8 @@ void JeuMorpion::PlacerJeton(int x, int y, Jeton jeton)
 };
 void JeuMorpion::Jouer()
 {
-    grille->AfficherGrille();
+    modeAffichage = std::make_shared<AffichageConsole>();
+    modeAffichage->AfficherGrille(grille);
 
     while (!PartieFinie())
     {
@@ -171,7 +173,10 @@ void JeuMorpion::Jouer()
 
         if (AGagne())
         {
-            std::cout << "Le joueur " << joueurCourant->getNom() << " a gagné !" << std::endl;
+            modeAffichage->AfficherGrille(grille);
+            modeAffichage->AfficherMessage("Le joueur ", 0);
+            modeAffichage->AfficherMessage(joueurCourant->getNom(), 0);
+            modeAffichage->AfficherMessage(" a gagné !");
             return;
         }
 
@@ -184,7 +189,7 @@ void JeuMorpion::Jouer()
             joueurCourant = joueur1;
         }
 
-        grille->AfficherGrille();
+        modeAffichage->AfficherGrille(grille);
     }
     std::cout << "Match nul !" << std::endl;
 }
