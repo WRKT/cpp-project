@@ -31,5 +31,5 @@ void AffichageConsole::AfficherMessage(const std::string message, const int nbSa
 
 void AffichageConsole::AfficherErreur(const std::string message)
 {
-    std::cerr << "Saisie invalide. Veuillez réessayez." << message << std::endl;
+    std::cerr << "Saisie invalide. Veuillez réessayez. " << message;
 }
