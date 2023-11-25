@@ -8,12 +8,6 @@
 #include <memory>
 
 class JeuMorpion : public IJeu {
-private:
-    std::shared_ptr<IGrille> grille;
-    std::shared_ptr<IJoueur> joueur1;
-    std::shared_ptr<IJoueur> joueur2;
-    std::shared_ptr<IJoueur> joueurCourant;
-    std::shared_ptr<IAffichage> modeAffichage;
 
 public:
     JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2, std::shared_ptr<IAffichage> modeAffichage);
@@ -26,6 +20,13 @@ public:
     bool VerifieColonnes() const;
     bool VerifieDiagonales() const;
     void Jouer() override;
+
+private:
+    std::shared_ptr<IGrille> grille;
+    std::shared_ptr<IJoueur> joueur1;
+    std::shared_ptr<IJoueur> joueur2;
+    std::shared_ptr<IJoueur> joueurCourant;
+    std::shared_ptr<IAffichage> modeAffichage;
 };
 
 #endif // JEUMORPION_H

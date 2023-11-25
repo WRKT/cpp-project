@@ -5,9 +5,6 @@
 #include <vector>
 
 class Grille : public IGrille {
-private:
-    const int nbLignes, nbColonnes;
-    std::vector<std::vector<Jeton>> table;
 
 public:
     Grille(const int nbLignes, const int nbColonnes) : nbLignes(nbLignes), nbColonnes(nbColonnes), table(nbLignes, std::vector<Jeton>(nbColonnes, Jeton::Vide)) {};
@@ -20,6 +17,9 @@ public:
     Jeton GetCellule(const int x, const int y) const override;
     void ChangeCellule(const int x, const int y, Jeton jeton) override;
 
+private:
+    const int nbLignes, nbColonnes;
+    std::vector<std::vector<Jeton>> table;
 };
 
 #endif // GRILLE_H
