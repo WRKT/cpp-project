@@ -5,26 +5,67 @@
 #include <ctime>
 #include <limits>
 
-JeuMorpion::JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2, std::shared_ptr<IAffichage> modeAffichage) : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
+JeuMorpion::JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
+    : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
+
+void JeuMorpion::Jouer()
+{
+    modeAffichage->AfficherGrille(grille);
+
+    while (!PartieFinie())
+    {
+        if (joueurCourant->estHumain())
+        {
+            TourHumain();
+        }
+        else
+        {
+            TourOrdi();
+        }
+
+        if (AGagne())
+        {
+            modeAffichage->AfficherGrille(grille);
+            modeAffichage->AfficherMessage("Le joueur " + joueurCourant->getNom() + " a gagné !");
+                return;
+        }
+
+        if (joueurCourant->getJeton() == joueur1->getJeton())
+        {
+            joueurCourant = joueur2;
+        }
+        else
+        {
+            joueurCourant = joueur1;
+        }
+
+        modeAffichage->AfficherGrille(grille);
+    }
+    modeAffichage->AfficherMessage("Match nul !");
+}
 
 void JeuMorpion::TourHumain()
 {
     int x, y;
     bool coupValide = false;
-    while (!coupValide) // methode
+
+    while (!coupValide) // coupValide sera une methode
     {
-        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la ligne (1 - " << grille->getNbLigne() << ") : ";
+        modeAffichage->AfficherMessage(joueurCourant->getNom() + " (" + static_cast<char>(joueurCourant->getJeton()) + "), entrez la ligne (1 - " + std::to_string (grille->getNbLigne()) + ") : ", 0);
+
         while (!(std::cin >> x) || x < 1 || x > grille->getNbLigne())
         {
-            std::cerr << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille->getNbLigne() << ": ";
+            modeAffichage->AfficherErreur("Entrer un nombre entre 1 et " + std::to_string(grille->getNbLigne()) + ": ");
+
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
 
-        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la colonne (1 - " << grille->getNbColonne() << ") : ";
+        modeAffichage->AfficherMessage(joueurCourant->getNom() + " (" + static_cast<char>(joueurCourant->getJeton()) + "), entrez la colonne (1 - " + std::to_string(grille->getNbColonne()) + ") : ", 0);
+
         while (!(std::cin >> y) || y < 1 || y > grille->getNbColonne())
         {
-            std::cerr << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille->getNbColonne() << ": ";
+            modeAffichage->AfficherErreur("Entrer un nombre entre 1 et " + std::to_string(grille->getNbColonne()) + ": ");
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
@@ -60,7 +101,8 @@ void JeuMorpion::TourOrdi()
         std::mt19937 rng(static_cast<unsigned int>(time(nullptr)));
         std::uniform_int_distribution<int> dist(0, coupsPossibles.size() - 1);
         auto [x, y] = coupsPossibles[dist(rng)];
-        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << ") a joué ! " << std::endl;
+
+        modeAffichage->AfficherMessage(joueurCourant->getNom() + " (" + static_cast<char>(joueurCourant->getJeton()) + ") a joué ! ");
 
         PlacerJeton(x, y, joueurCourant->getJeton());
     }
@@ -155,40 +197,3 @@ void JeuMorpion::PlacerJeton(int x, int y, Jeton jeton)
     grille->ChangeCellule(x - 1, y - 1, jeton);
 }
 
-void JeuMorpion::Jouer()
-{
-    modeAffichage->AfficherGrille(grille);
-
-    while (!PartieFinie())
-    {
-        if (joueurCourant->estHumain())
-        {
-            TourHumain();
-        }
-        else
-        {
-            TourOrdi();
-        }
-
-        if (AGagne())
-        {
-            modeAffichage->AfficherGrille(grille);
-            modeAffichage->AfficherMessage("Le joueur ", 0);
-            modeAffichage->AfficherMessage(joueurCourant->getNom(), 0);
-            modeAffichage->AfficherMessage(" a gagné !");
-            return;
-        }
-
-        if (joueurCourant->getJeton() == joueur1->getJeton())
-        {
-            joueurCourant = joueur2;
-        }
-        else
-        {
-            joueurCourant = joueur1;
-        }
-
-        modeAffichage->AfficherGrille(grille);
-    }
-    modeAffichage->AfficherMessage("Match nul !");
-}
