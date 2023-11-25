@@ -6,7 +6,9 @@
 TypesJeu InterfaceUtilisateur::demanderTypeDeJeu() {
     std::map<TypesJeu, std::string> nomsDesJeux = {
         {TypesJeu::Morpion, "Morpion"},
-        {TypesJeu::Puissance4, "Puissance 4"}
+        {TypesJeu::Puissance4, "Puissance 4"},
+        {TypesJeu::Othello, "Othello"}
+
     };
 
     int choixJeu;
@@ -40,6 +42,8 @@ int InterfaceUtilisateur::demanderModeDeJeu() {
     bool choixValide;
 
     do {
+        // To do : enlever tous les cout et cin remplacer par affichageconsole et interfaceUtilisateur(input)
+
         std::cout << std::endl;
         std::cout << "Choisissez le mode de jeu:\n1. Joueur vs Joueur\n2. Joueur vs Ordinateur\n\nVotre choix: ";
         std::cin >> modeJeu;

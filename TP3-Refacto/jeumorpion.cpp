@@ -1,18 +1,17 @@
 #include "jeumorpion.h"
-#include "affichageconsole.h"
 #include <iostream>
 #include <vector>
 #include <random>
 #include <ctime>
 #include <limits>
 
-JeuMorpion::JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2) : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1) {}
+JeuMorpion::JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2, std::shared_ptr<IAffichage> modeAffichage) : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
 
 void JeuMorpion::TourHumain()
 {
     int x, y;
     bool coupValide = false;
-    while (!coupValide)
+    while (!coupValide) // methode
     {
         std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la ligne (1 - " << grille->getNbLigne() << ") : ";
         while (!(std::cin >> x) || x < 1 || x > grille->getNbLigne())
@@ -154,10 +153,10 @@ bool JeuMorpion::PartieFinie() const
 void JeuMorpion::PlacerJeton(int x, int y, Jeton jeton)
 {
     grille->ChangeCellule(x - 1, y - 1, jeton);
-};
+}
+
 void JeuMorpion::Jouer()
 {
-    modeAffichage = std::make_shared<AffichageConsole>();
     modeAffichage->AfficherGrille(grille);
 
     while (!PartieFinie())
@@ -191,5 +190,5 @@ void JeuMorpion::Jouer()
 
         modeAffichage->AfficherGrille(grille);
     }
-    std::cout << "Match nul !" << std::endl;
+    modeAffichage->AfficherMessage("Match nul !");
 }

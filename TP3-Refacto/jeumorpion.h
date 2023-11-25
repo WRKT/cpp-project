@@ -16,7 +16,7 @@ private:
     std::shared_ptr<IAffichage> modeAffichage;
 
 public:
-    JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2);
+    JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2, std::shared_ptr<IAffichage> modeAffichage);
     virtual void TourHumain() override;
     virtual void TourOrdi() override;
     virtual bool AGagne() const override;

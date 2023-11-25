@@ -11,7 +11,6 @@ public:
     virtual void AfficherMessage(std::string, const int = 1) = 0;
     virtual void AfficherErreur(std::string) = 0;
 
-
     inline static bool enabled = true;
 };
 

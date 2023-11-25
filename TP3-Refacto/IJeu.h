@@ -4,8 +4,10 @@
 class IJeu {
 public:
     virtual void Jouer() = 0;
+    // à dégager
     virtual void TourHumain() = 0;
     virtual void TourOrdi() = 0;
+    //
     virtual bool AGagne() const = 0;
     virtual bool PartieFinie() const = 0;
     virtual ~IJeu() = default;

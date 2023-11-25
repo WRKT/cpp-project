@@ -9,6 +9,8 @@ public:
     TypesJeu demanderTypeDeJeu();
     int demanderModeDeJeu();
     bool demanderRejouer();
+    std::pair<int, int> choisirCoup(); // à voir pour intégrer une classe Position
+
     std::string demanderPrenomJoueur(const std::string& prompt);
 };
 
