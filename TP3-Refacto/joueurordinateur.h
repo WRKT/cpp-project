@@ -8,13 +8,13 @@
 #include <chrono>
 
 class JoueurOrdinateur : public IJoueur {
-private:
-    std::mt19937 generateur;
 
 public:
     JoueurOrdinateur(Jeton jeton) : IJoueur("Ordinateur", jeton), generateur(std::chrono::system_clock::now().time_since_epoch().count()) {};
     bool estHumain() const override { return false; }
 
+private:
+    std::mt19937 generateur;
 };
 
 #endif // JOUEUR_ORDINATEUR_H

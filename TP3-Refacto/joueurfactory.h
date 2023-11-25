@@ -8,6 +8,7 @@
 #include <string>
 
 class JoueurFactory {
+
 public:
     static std::unique_ptr<IJoueur> CreerJoueurHumain(std::string nom, Jeton jeton);
     static std::unique_ptr<IJoueur> CreerJoueurOrdinateur(Jeton jeton);
