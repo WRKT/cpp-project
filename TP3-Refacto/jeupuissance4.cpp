@@ -32,6 +32,7 @@ void JeuPuissance4::Jouer() {
 
         modeAffichage->AfficherGrille(grille);
     }
+
     modeAffichage->AfficherMessage("Match nul !");
 }
 
@@ -55,7 +56,7 @@ void JeuPuissance4::TourHumain()
             PlacerJeton(colonne - 1, joueurCourant->getJeton());
             coupValide = true;
         } else {
-            modeAffichage->AfficherErreur("");
+            modeAffichage->AfficherErreur("\n");
         }
     }
 }

@@ -77,7 +77,7 @@ void JeuMorpion::TourHumain()
         }
         else
         {
-            std::cerr << "Coup invalide, réessayez.\n";
+            modeAffichage->AfficherErreur("\n");
         }
     }
 }
