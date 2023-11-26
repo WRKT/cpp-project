@@ -97,7 +97,7 @@ void JeuOthello::TourOrdi()
 
 bool JeuOthello::AGagne() const
 {
-
+    return VerifiePions();
 }
 
 bool JeuOthello::PartieFinie() const
@@ -110,7 +110,7 @@ void JeuOthello::PlacerJeton(int x, int y, Jeton jeton)
 
 }
 
-Jeton JeuOthello::VerifiePions() const
+bool JeuOthello::VerifiePions() const
 {
     int countNoir = 0;
     int countBlanc = 0;
@@ -126,11 +126,11 @@ Jeton JeuOthello::VerifiePions() const
     }
 
     if (countNoir > countBlanc) {
-        return Jeton::X;
+        return true;
     } else if (countBlanc > countNoir) {
-        return Jeton::O;
+        return true;
     } else {
-        return Jeton::Vide;
+        return false;
     }
 }
 
