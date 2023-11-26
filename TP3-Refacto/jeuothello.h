@@ -18,6 +18,8 @@ public:
     bool VerifiePions() const;
     Jeton GetTypePion() const;
     int ComptePions(Jeton jeton) const;
+    bool EstCoupValide(int x, int y, Jeton jeton) const;
+    bool EstDirectionValide(int x, int y, int dx, int dy, Jeton jeton) const;
 
 private:
     std::shared_ptr<IGrille> grille;
