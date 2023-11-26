@@ -105,6 +105,27 @@ bool JeuOthello::PartieFinie() const
 
 }
 
+bool JeuOthello::EstDirectionValide(int x, int y, int dx, int dy, Jeton jeton) const {
+    int l = x + dx;
+    int c = y + dy;
+    bool trouveAdversaire = false;
+
+    while (l >= 0 && l < grille->getNbLigne() && c >= 0 && c < grille->getNbColonne()) {
+        if (grille->GetCellule(l, c) == Jeton::Vide) {
+            return false;
+        } else if (grille->GetCellule(l, c) == jeton) {
+            return trouveAdversaire;
+        } else {
+            trouveAdversaire = true;
+        }
+
+        l += dx;
+        c += dy;
+    }
+
+    return false;
+}
+
 void JeuOthello::PlacerJeton(int x, int y, Jeton jeton)
 {
 
