@@ -15,9 +15,9 @@ public:
     bool PartieFinie() const override;
     void PlacerJeton(int x, int y, Jeton jeton);
     void VoirCoupPossibles();
-    Jeton VerifiePions() const;
+    bool VerifiePions() const;
+    Jeton GetTypePion() const;
     int ComptePions(Jeton jeton) const;
-
 
 private:
     std::shared_ptr<IGrille> grille;
