@@ -1,7 +1,6 @@
 #ifndef IGRILLE_H
 #define IGRILLE_H
 
-#include <iostream>
 #include "jeton.h"
 
 class IGrille {
