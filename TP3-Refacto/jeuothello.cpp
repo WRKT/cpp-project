@@ -179,6 +179,25 @@ bool JeuOthello::VerifiePions() const
     }
 }
 
+bool JeuOthello::EstCoupValide(int x, int y, Jeton jeton) const {
+    if (x < 0 || x >= grille->getNbLigne() || y < 0 || y >= grille->getNbColonne() || grille->GetCellule(x, y) != Jeton::Vide) {
+        return false;
+    }
+
+    for (int dx = -1; dx <= 1; ++dx) {
+        for (int dy = -1; dy <= 1; ++dy) {
+            if (dx == 0 && dy == 0) {
+                continue;
+            }
+            if (EstDirectionValide(x, y, dx, dy, jeton)) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
 int JeuOthello::ComptePions(Jeton jeton) const
 {
     int count = 0;
