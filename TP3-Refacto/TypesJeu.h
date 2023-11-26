@@ -4,7 +4,8 @@
 
 enum class TypesJeu {
     Morpion = 1,
-    Puissance4,
+    Puissance4 = 2,
+    Othello,
     COUNT
 };
 
