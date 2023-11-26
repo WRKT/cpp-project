@@ -11,11 +11,10 @@ class JeuMorpion : public IJeu {
 
 public:
     JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2, std::shared_ptr<IAffichage> modeAffichage);
-    virtual void TourHumain() override;
-    virtual void TourOrdi() override;
-    virtual bool AGagne() const override;
-    virtual bool PartieFinie() const override;
-    void PlacerJeton(int ligne, int colonne, Jeton jeton);
+    void Tour() override;
+    bool AGagne() const override;
+    bool PartieFinie() const override;
+    std::vector<std::pair<int, int>> CoupsPossibles() override;
     bool VerifieLignes() const;
     bool VerifieColonnes() const;
     bool VerifieDiagonales() const;
