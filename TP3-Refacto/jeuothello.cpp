@@ -135,7 +135,24 @@ bool JeuOthello::EstDirectionValide(int x, int y, int dx, int dy, Jeton jeton) c
 
 void JeuOthello::PlacerJeton(int x, int y, Jeton jeton)
 {
+	grille->ChangeCellule(x - 1, y - 1, jeton);
 
+    /*
+    if (estCoupValide(x, y, jeton)) {
+        grille->GetCellule(x, y) = jeton;
+
+        for (int dx = -1; dx <= 1; ++dx) {
+            for (int dy = -1; dy <= 1; ++dy) {
+                if (dx == 0 && dy == 0) {
+                    continue;
+                }
+                if (estDirectionValide(x, y, dx, dy, jeton)) {
+                    retournerPions(x, y, dx, dy, jeton);
+                }
+            }
+        }
+    }
+    */
 }
 
 bool JeuOthello::VerifiePions() const
