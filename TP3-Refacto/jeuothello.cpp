@@ -175,7 +175,17 @@ int JeuOthello::ComptePions(Jeton jeton) const
     return count;
 }
 
-void JeuOthello::VoirCoupPossibles()
+void JeuOthello::VoirCoupsPossibles()
 {
+	    std::cout << "Coups possibles pour le Joueur " << ((joueurCourant->getJeton() == Jeton::X) ? "Noir" : "Blanc") << ":\n" << std::endl;
 
+    for (int i = 0; i < grille->getNbLigne(); ++i) {
+        for (int j = 0; j < grille->getNbColonne(); ++j) {
+            if (EstCoupValide(i, j, joueurCourant->getJeton())) {
+                std::cout << "(" << i << ", " << j << ") " << std::endl;
+            }
+        }
+    }
+
+    std::cout << "\n" << std::endl;
 }

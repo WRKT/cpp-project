@@ -14,7 +14,7 @@ public:
     bool AGagne() const override;
     bool PartieFinie() const override;
     void PlacerJeton(int x, int y, Jeton jeton);
-    void VoirCoupPossibles();
+    void VoirCoupsPossibles();
     bool VerifiePions() const;
     Jeton GetTypePion() const;
     int ComptePions(Jeton jeton) const;
