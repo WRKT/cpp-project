@@ -12,11 +12,10 @@ class JeuPuissance4 : public IJeu {
 public:
     JeuPuissance4(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2, std::shared_ptr<IAffichage> modeAffichage);
     void Jouer() override;
-    void TourHumain() override;
-    void TourOrdi() override;
+    void Tour() override;
     bool AGagne() const override;
-    void PlacerJeton(int colonne, Jeton jeton);
     bool PartieFinie() const override;
+    std::vector<std::pair<int, int>> CoupsPossibles() override;
     bool VerifieLignes() const;
     bool VerifieDiagonales() const;
     bool VerifieColonnes() const;
