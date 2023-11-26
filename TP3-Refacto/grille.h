@@ -18,6 +18,7 @@ public:
     int getNbLigne() const override;
     int getNbColonne() const override;
     Jeton GetCellule(const int x, const int y) const override;
+    void SetCellule(int x, int y, Jeton valeur) override;
     void ChangeCellule(const int x, const int y, Jeton jeton) override;
 
 };
