@@ -102,7 +102,14 @@ bool JeuOthello::AGagne() const
 
 bool JeuOthello::PartieFinie() const
 {
-
+  for (int i = 0; i < grille->getNbLigne(); ++i) {
+        for (int j = 0; j < grille->getNbColonne(); ++j) {
+            if (EstCoupValide(i, j, Jeton::X) || EstCoupValide(i, j, Jeton::O)) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 bool JeuOthello::EstDirectionValide(int x, int y, int dx, int dy, Jeton jeton) const {
