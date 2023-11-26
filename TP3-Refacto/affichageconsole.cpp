@@ -1,12 +1,12 @@
 #include "affichageconsole.h"
 #include <iostream>
 
-void AffichageConsole::AfficherGrille(const std::shared_ptr<IGrille> grille)
+void  AffichageConsole::AfficherGrille(const std::shared_ptr<IGrille> grille)
 {
     AfficherMessage("");
     for (int i = 0; i < grille->getNbLigne(); i++)
     {
-        for(int j = 0; j < grille->getNbLigne(); j++)
+        for(int j = 0; j < grille->getNbColonne(); j++)
         {
             if (j == 0)
             {
