@@ -13,8 +13,11 @@ public:
     void TourOrdi() override;
     bool AGagne() const override;
     bool PartieFinie() const override;
-    void PlacerJeton(int colonne, Jeton jeton);
-    void voirCoupPossibles();
+    void PlacerJeton(int x, int y, Jeton jeton);
+    void VoirCoupPossibles();
+    Jeton VerifiePions() const;
+    int ComptePions(Jeton jeton) const;
+
 
 private:
     std::shared_ptr<IGrille> grille;
