@@ -6,7 +6,8 @@
 TypesJeu InterfaceUtilisateur::demanderTypeDeJeu() {
     std::map<TypesJeu, std::string> nomsDesJeux = {
         {TypesJeu::Morpion, "Morpion"},
-        {TypesJeu::Puissance4, "Puissance 4"}
+        {TypesJeu::Puissance4, "Puissance 4"},
+        {TypesJeu::Othello, "Othello"}
     };
 
     int choixJeu;
