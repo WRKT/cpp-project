@@ -68,7 +68,7 @@ bool InterfaceUtilisateur::demanderRejouer() {
 
     do {
         std::cout << std::endl;
-        std::cout << "Voulez-vous rejouer? (o/n): ";
+        std::cout << "Retourner au menu principal? (o/n): ";
         std::cin >> choix;
 
         choixValide = (choix == 'o' || choix == 'O' || choix == 'n' || choix == 'N');
@@ -98,4 +98,47 @@ std::string InterfaceUtilisateur::demanderPrenomJoueur(const std::string& prompt
     } while (!std::regex_match(prenom, regexPrenom));
 
     return prenom;
+}
+
+std::pair<int, int> InterfaceUtilisateur::demanderCoupMorpion(int tailleGrille) {
+    int x, y;
+    while (true) {
+        std::cout << "Entrez la ligne (1 - " << tailleGrille << ") : ";
+        if (!(std::cin >> x) || x < 1 || x > tailleGrille) {
+            std::cout << "Entrée invalide, veuillez réessayer." << std::endl;
+                                                                       std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            continue;
+        }
+
+        std::cout << "Entrez la colonne (1 - " << tailleGrille << ") : ";
+        if (!(std::cin >> y) || y < 1 || y > tailleGrille) {
+            std::cout << "Entrée invalide, veuillez réessayer." << std::endl;
+                                                                       std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            continue;
+        }
+
+        return {x - 1, y - 1};
+    }
+}
+
+
+int InterfaceUtilisateur::demanderCoupPuissance4(int nbColonnes) {
+    int colonne;
+    bool coupValide = false;
+
+    while (!coupValide) {
+        std::cout << "Entrez le numéro de la colonne (1 - " << nbColonnes << ") : ";
+                std::cin >> colonne;
+
+        coupValide = (colonne >= 1 && colonne <= nbColonnes);
+        if (!coupValide) {
+            std::cout << "Coup invalide, veuillez réessayer." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+    }
+
+    return colonne - 1;
 }
