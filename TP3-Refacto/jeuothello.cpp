@@ -47,7 +47,28 @@ void JeuOthello::Jouer()
 void JeuOthello::TourHumain()
 {
     int x, y;
+    bool coupPossible = false;
     bool coupValide = false;
+    for (int i = 0; i < grille->getNbLigne(); ++i)
+    {
+        for (int j = 0; j < grille->getNbColonne(); ++j)
+        {
+            if (EstCoupValide(i, j, joueurCourant->getJeton()))
+            {
+                coupPossible = true;
+                break;
+            }
+        }
+        if (coupPossible)
+        {
+            break;
+        }
+    }
+    if (!coupPossible)
+    {
+        std::cout << "Aucun coup valide pour " << joueurCourant->getNom() << ", passage du tour." << std::endl;
+        return;
+    }
     while (!coupValide)
     {
         std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la ligne (1 - " << grille->getNbLigne() << ") : ";
