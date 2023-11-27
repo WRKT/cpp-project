@@ -1,11 +1,12 @@
 #ifndef JEUPUISSANCE4_H
 #define JEUPUISSANCE4_H
 
-#include "IAffichage.h"
 #include "IJeu.h"
 #include "IGrille.h"
 #include "IJoueur.h"
+#include "IAffichage.h"
 #include <memory>
+#include <string>
 
 class JeuPuissance4 : public IJeu {
 
@@ -26,6 +27,7 @@ private:
     std::shared_ptr<IJoueur> joueur2;
     std::shared_ptr<IJoueur> joueurCourant;
     std::shared_ptr<IAffichage> modeAffichage;
+
 };
 
 #endif // JEUPUISSANCE4_H
