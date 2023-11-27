@@ -15,6 +15,7 @@ int main()
     std::cout << "=========================================" << std::endl;
     std::cout << "  Bienvenue dans notre espace de jeux !  " << std::endl;
     std::cout << "=========================================" << std::endl;
+
     InterfaceUtilisateur ui;
 
     bool rejouer;
@@ -25,6 +26,7 @@ int main()
         int modeJeu = ui.demanderModeDeJeu();
 
         std::string prenomJoueur1 = ui.demanderPrenomJoueur("Entrez le prénom du premier joueur : ");
+
         std::shared_ptr<IJoueur> joueur1 = JoueurFactory::CreerJoueurHumain(prenomJoueur1, Jeton::X);
         std::shared_ptr<IJoueur> joueur2;
 

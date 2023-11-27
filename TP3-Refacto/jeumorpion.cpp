@@ -49,7 +49,7 @@ void JeuMorpion::TourHumain()
     int x, y;
     bool coupValide = false;
 
-    while (!coupValide) // coupValide sera une methode
+    while (!coupValide)
     {
         modeAffichage->AfficherMessage(joueurCourant->getNom() + " (" + static_cast<char>(joueurCourant->getJeton()) + "), entrez la ligne (1 - " + std::to_string (grille->getNbLigne()) + ") : ", 0);
 
