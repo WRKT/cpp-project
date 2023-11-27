@@ -122,6 +122,29 @@ std::pair<int, int> InterfaceUtilisateur::demanderCoupMorpion(int tailleGrille) 
     }
 }
 
+std::pair<int, int> InterfaceUtilisateur::demanderCoupOthello(int tailleGrille) {
+    int x, y;
+    while (true) {
+        std::cout << "Entrez la ligne (1 - " << tailleGrille << ") : ";
+        if (!(std::cin >> x) || x < 1 || x > tailleGrille) {
+            std::cout << "Entrée invalide, veuillez réessayer." << std::endl;
+                                                                       std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            continue;
+        }
+
+        std::cout << "Entrez la colonne (1 - " << tailleGrille << ") : ";
+        if (!(std::cin >> y) || y < 1 || y > tailleGrille) {
+            std::cout << "Entrée invalide, veuillez réessayer." << std::endl;
+                                                                       std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            continue;
+        }
+
+        return {x - 1, y - 1};
+    }
+}
+
 
 int InterfaceUtilisateur::demanderCoupPuissance4(int nbColonnes) {
     int colonne;
