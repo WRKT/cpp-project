@@ -1,4 +1,5 @@
 #include "InterfaceUtilisateur.h"
+#include "saisieconsole.h"
 #include <limits>
 #include <map>
 #include <regex>
@@ -10,59 +11,50 @@ TypesJeu InterfaceUtilisateur::demanderTypeDeJeu() {
         {TypesJeu::Othello, "Othello"}
 
     };
+    // Besoin d'avis sur comment implémenter le mode de saisie -> Tips : static ne pourra pas etre pris en compte en raison de l'interface
+    modeSaisie = std::make_unique<SaisieConsole>();
 
     int choixJeu;
     bool choixValide;
 
-    do {
+    do{
         std::cout << "Choisissez un jeu: " << std::endl;
-        for (const auto& jeu : nomsDesJeux) {
+
+        for (const auto& jeu : nomsDesJeux)
+        {
             std::cout << static_cast<int>(jeu.first) << ". " << jeu.second << std::endl;
         }
-        std::cout << std::endl;
-        std::cout << "Votre choix: ";
-        std::cin >> choixJeu;
 
-        choixValide = std::cin.good() && nomsDesJeux.find(static_cast<TypesJeu>(choixJeu)) != nomsDesJeux.end();
+        choixJeu = modeSaisie->getInt("Votre choix : ");
 
-        if (!choixValide) {
-            std::cout << "Choix invalide. Veuillez réessayer." << std::endl;
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
-    } while (!choixValide);
+        choixValide = nomsDesJeux.find(static_cast<TypesJeu>(choixJeu)) != nomsDesJeux.end();
 
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while(!choixValide);
+
 
     return static_cast<TypesJeu>(choixJeu);
 }
 
 int InterfaceUtilisateur::demanderModeDeJeu() {
+
     int modeJeu;
     bool choixValide;
 
     do {
-        // To do : enlever tous les cout et cin remplacer par affichageconsole et interfaceUtilisateur(input)
-
         std::cout << std::endl;
         std::cout << "Choisissez le mode de jeu:\n1. Joueur vs Joueur\n2. Joueur vs Ordinateur\n\nVotre choix: ";
-        std::cin >> modeJeu;
 
-        choixValide = std::cin.good() && (modeJeu == 1 || modeJeu == 2);
+        modeJeu = modeSaisie->getInt("Choix mode de jeu : ");
 
-        if (!choixValide) {
-            std::cout << "Choix invalide. Veuillez réessayer.\n";
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
+        choixValide = (modeJeu == 1 || modeJeu == 2);
+
     } while (!choixValide);
 
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::cout << std::endl;
     return modeJeu;
 }
 
 bool InterfaceUtilisateur::demanderRejouer() {
+
     char choix;
     bool choixValide;
 
