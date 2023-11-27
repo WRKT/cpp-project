@@ -86,10 +86,9 @@ void JeuOthello::TourHumain()
                                                                                                                std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
-
-        if (grille->ACaseVide(x - 1, y - 1))
+        if (x >= 0 && x < grille->getNbLigne() && y >= 0 && y < grille->getNbColonne() && EstCoupValide(x, y, joueurCourant->getJeton()))
         {
-            PlacerJeton(x, y, joueurCourant->getJeton());
+            grille->ChangeCellule(x, y, joueurCourant->getJeton());
             coupValide = true;
         }
         else
