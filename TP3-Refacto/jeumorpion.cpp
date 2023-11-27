@@ -4,67 +4,73 @@
 #include <random>
 #include <ctime>
 #include <limits>
+#include "InterfaceUtilisateur.h"
 
-JeuMorpion::JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2) : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1) {}
+JeuMorpion::JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
+    : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
 
-void JeuMorpion::TourHumain()
+void JeuMorpion::Jouer()
 {
-    int x, y;
-    bool coupValide = false;
-    while (!coupValide)
+    modeAffichage->AfficherGrille(grille);
+
+    while (!PartieFinie())
     {
-        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la ligne (1 - " << grille->getNbLigne() << ") : ";
-        while (!(std::cin >> x) || x < 1 || x > grille->getNbLigne())
+        Tour();
+
+        if (AGagne())
         {
-            std::cout << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille->getNbLigne() << ": ";
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            modeAffichage->AfficherGrille(grille);
+            modeAffichage->AfficherMessage("Le joueur " + joueurCourant->getNom() + " a gagné !");
+                return;
         }
 
-        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la colonne (1 - " << grille->getNbColonne() << ") : ";
-        while (!(std::cin >> y) || y < 1 || y > grille->getNbColonne())
-        {
-            std::cout << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille->getNbColonne() << ": ";
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
+        joueurCourant->getJeton() == joueur1->getJeton() ? joueurCourant = joueur2 : joueurCourant = joueur1;
 
-        if (grille->ACaseVide(x - 1, y - 1))
-        {
-            PlacerJeton(x, y, joueurCourant->getJeton());
-            coupValide = true;
+        modeAffichage->AfficherGrille(grille);
+    }
+    modeAffichage->AfficherMessage("Match nul !");
+}
+
+void JeuMorpion::Tour() {
+    auto coupsPossibles = CoupsPossibles();
+    if (joueurCourant->estHumain()){
+        bool coupValide = false;
+        std::pair<int, int> coup;
+        while (!coupValide) {
+            coup = InterfaceUtilisateur::demanderCoupMorpion(grille->getNbLigne());
+            if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end()) {
+                    grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
+                    coupValide = true;
+            } else {
+                    modeAffichage->AfficherErreur("Coups Impossible");
+            }
         }
-        else
-        {
-            std::cout << "Coup invalide, réessayez.\n";
-        }
+    } else {
+            std::random_device rd;
+            std::mt19937 gen(rd());
+            std::uniform_int_distribution<> distrib(0, coupsPossibles.size() - 1);
+            int indiceCoupChoisi = distrib(gen);
+            std::pair<int, int> coupChoisi = coupsPossibles[indiceCoupChoisi];
+            grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
+
+            modeAffichage->AfficherMessage(joueurCourant->getNom() + " a joué ");
+
     }
 }
 
-void JeuMorpion::TourOrdi()
-{
-    std::vector<std::pair<int, int>> coupsPossibles;
-
-    for (int i = 0; i < grille->getNbLigne(); ++i)
-    {
-        for (int j = 0; j < grille->getNbColonne(); ++j)
-        {
-            if (grille->ACaseVide(i, j))
-            {
-                coupsPossibles.emplace_back(i + 1, j + 1);
+std::vector<std::pair<int, int>> JeuMorpion::CoupsPossibles() {
+    std::vector<std::pair<int, int>> coups;
+    for (int i = 0; i < grille->getNbLigne(); ++i) {
+        for (int j = 0; j < grille->getNbColonne(); ++j) {
+            if (grille->ACaseVide(i, j)) {
+                coups.emplace_back(i, j);
             }
         }
     }
-    if (!coupsPossibles.empty())
-    {
-        std::mt19937 rng(static_cast<unsigned int>(time(nullptr)));
-        std::uniform_int_distribution<int> dist(0, coupsPossibles.size() - 1);
-        auto [x, y] = coupsPossibles[dist(rng)];
-        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << ") a joué ! " << std::endl;
-
-        PlacerJeton(x, y, joueurCourant->getJeton());
-    }
+    return coups;
 }
+
+
 
 bool JeuMorpion::AGagne() const
 {
@@ -148,43 +154,4 @@ bool JeuMorpion::VerifieDiagonales() const
 bool JeuMorpion::PartieFinie() const
 {
     return AGagne() || grille->EstRemplie();
-}
-
-void JeuMorpion::PlacerJeton(int x, int y, Jeton jeton)
-{
-    grille->ChangeCellule(x - 1, y - 1, jeton);
-};
-void JeuMorpion::Jouer()
-{
-    grille->AfficherGrille();
-
-    while (!PartieFinie())
-    {
-        if (joueurCourant->estHumain())
-        {
-            TourHumain();
-        }
-        else
-        {
-            TourOrdi();
-        }
-
-        if (AGagne())
-        {
-            std::cout << "Le joueur " << joueurCourant->getNom() << " a gagné !" << std::endl;
-            return;
-        }
-
-        if (joueurCourant->getJeton() == joueur1->getJeton())
-        {
-            joueurCourant = joueur2;
-        }
-        else
-        {
-            joueurCourant = joueur1;
-        }
-
-        grille->AfficherGrille();
-    }
-    std::cout << "Match nul !" << std::endl;
 }
