@@ -1,7 +1,7 @@
 #include "affichageconsole.h"
 #include <iostream>
 
-void AffichageConsole::AfficherGrille(const std::shared_ptr<IGrille> grille)
+void AffichageConsole::AfficherGrille(const std::shared_ptr<IGrille> grille) const
 {
     AfficherMessage("");
     for (int i = 0; i < grille->getNbLigne(); i++)
@@ -22,14 +22,14 @@ void AffichageConsole::AfficherGrille(const std::shared_ptr<IGrille> grille)
     AfficherMessage("");
 }
 
-void AffichageConsole::AfficherMessage(const std::string message, const int nbSautLigne)
+void AffichageConsole::AfficherMessage(const std::string message, const int nbSautLigne) const
 {
     std::cout << message;
     for(int i = 0; i < nbSautLigne; i++)
         std::cout << std::endl;
 }
 
-void AffichageConsole::AfficherErreur(const std::string message)
+void AffichageConsole::AfficherErreur(const std::string message) const
 {
     std::cerr << "Saisie invalide. Veuillez réessayez. " << message;
 }
