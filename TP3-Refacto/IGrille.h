@@ -1,7 +1,6 @@
 #ifndef IGRILLE_H
 #define IGRILLE_H
 
-#include <iostream>
 #include "jeton.h"
 
 class IGrille {
@@ -13,6 +12,7 @@ public:
     virtual bool ACaseVide(const int x, const int y) const = 0;
     virtual int getNbColonne() const = 0;
     virtual Jeton GetCellule(const int x, const int y) const = 0;
+    virtual void SetCellule(int x, int y, Jeton valeur) = 0;
     virtual void ChangeCellule(const int x, const int y, Jeton jeton) = 0;
     virtual ~IGrille() = default;
 };

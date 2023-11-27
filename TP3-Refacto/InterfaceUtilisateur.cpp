@@ -8,7 +8,6 @@ TypesJeu InterfaceUtilisateur::demanderTypeDeJeu() {
         {TypesJeu::Morpion, "Morpion"},
         {TypesJeu::Puissance4, "Puissance 4"},
         {TypesJeu::Othello, "Othello"}
-
     };
 
     int choixJeu;

@@ -1,5 +1,6 @@
 #include "jeufactory.h"
 #include "jeumorpion.h"
+#include "jeuothello.h"
 #include "jeupuissance4.h"
 #include "affichageconsole.h"
 #include "grillefactory.h"
