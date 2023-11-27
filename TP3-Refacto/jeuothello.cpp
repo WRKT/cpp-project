@@ -10,30 +10,38 @@ JeuOthello::JeuOthello(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur>
 
 void JeuOthello::Jouer()
 {
+    // a réfléchir ou foutre
+    int centreX = grille->getNbLigne() / 2 - 1;
+    int centreY = grille->getNbColonne() / 2 - 1;
+    grille->ChangeCellule(centreX, centreY, Jeton::X);
+    grille->ChangeCellule(centreX + 1, centreY, Jeton::O);
+    grille->ChangeCellule(centreX, centreY + 1, Jeton::O);
+    grille->ChangeCellule(centreX + 1, centreY + 1, Jeton::X);
     grille->AfficherGrille();
 
-    while (!PartieFinie()) {
-        if (joueurCourant->estHumain()) {
+    while (!PartieFinie())
+    {
+        if (joueurCourant->estHumain())
+        {
             TourHumain();
-        } else {
+        }
+        else
+        {
             TourOrdi();
         }
 
-        if (AGagne()) {
-            grille->AfficherGrille();
-            std::cout << "Le joueur " << joueurCourant->getNom() << " a gagné !" << std::endl;
-                return;
-        }
-
-        if (joueurCourant->getJeton() == joueur1->getJeton()) {
+        if (joueurCourant->getJeton() == joueur1->getJeton())
+        {
             joueurCourant = joueur2;
-        } else {
+        }
+        else
+        {
             joueurCourant = joueur1;
         }
 
         grille->AfficherGrille();
     }
-    std::cout << "Match nul !" << std::endl;
+    // std::cout << "Match nul !" << std::endl;
 }
 
 void JeuOthello::TourHumain()
