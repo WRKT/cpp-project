@@ -19,7 +19,7 @@ std::unique_ptr<IJeu> JeuFactory::CreerJeu(TypesJeu typeDeJeu, std::shared_ptr<I
     case TypesJeu::Puissance4:
         return std::make_unique<JeuPuissance4>(grille, joueur1, joueur2, modeAffichage);
     case TypesJeu::Othello:
-        break;
+        return std::make_unique<JeuOthello>(grille, joueur1, joueur2, modeAffichage);
     case TypesJeu::COUNT:
         break;
     };
