@@ -139,6 +139,30 @@ void JeuOthello::RetournerJetons(const int x, const int y, Jeton jeton) {
 }
 
 
+bool JeuOthello::PeutRetourner(int x, int y, int dx, int dy, Jeton jeton) const {
+    int l = x + dx;
+    int c = y + dy;
+    bool trouveAdversaire = false;
+
+    while (l >= 0 && l < grille->getNbLigne() && c >= 0 && c < grille->getNbColonne()) {
+        Jeton jetonActuel = grille->GetCellule(l, c);
+
+        if (jetonActuel == Jeton::Vide) {
+            return false;
+        } else if (jetonActuel == jeton) {
+            return trouveAdversaire;
+        } else {
+            trouveAdversaire = true;
+        }
+
+        l += dx;
+        c += dy;
+    }
+
+    return false;
+}
+
+
 
 bool JeuOthello::VerifiePions() const
 {
