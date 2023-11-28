@@ -223,6 +223,20 @@ bool JeuOthello::EstCoupValide(int x, int y, Jeton jeton) const
     return false;
 }
 
+
+Jeton JeuOthello::DetermineGagnant() const {
+    int countNoir = ComptePions(Jeton::X);
+    int countBlanc = ComptePions(Jeton::O);
+
+    if (countNoir > countBlanc) {
+        return Jeton::X;
+    } else if (countBlanc > countNoir) {
+        return Jeton::O;
+    } else {
+        return Jeton::Vide;
+    }
+}
+
 int JeuOthello::ComptePions(Jeton jeton) const
 {
     int count = 0;
