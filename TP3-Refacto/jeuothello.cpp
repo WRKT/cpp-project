@@ -47,7 +47,6 @@ void JeuOthello::Tour()
 
     if (joueurCourant->estHumain()) {
         while (!coupValide) {
-            std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << "), entrez la ligne (1 - " << grille->getNbLigne() << ") : ";
             std::pair<int, int> coup = InterfaceUtilisateur::demanderCoupOthello(grille->getNbLigne());
             if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end()) {
                 grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
@@ -121,6 +120,7 @@ bool JeuOthello::EstDirectionValide(int x, int y, int dx, int dy, Jeton jeton) c
 
     return false;
 }
+
 void JeuOthello::RetournerJetons(const int x, const int y, Jeton jeton) {
     for (int dx = -1; dx <= 1; ++dx) {
         for (int dy = -1; dy <= 1; ++dy) {
@@ -237,6 +237,7 @@ Jeton JeuOthello::DetermineGagnant() const {
     }
 }
 
+
 int JeuOthello::ComptePions(Jeton jeton) const
 {
     int count = 0;
@@ -252,4 +253,3 @@ int JeuOthello::ComptePions(Jeton jeton) const
     }
     return count;
 }
-
