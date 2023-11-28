@@ -51,6 +51,7 @@ void JeuOthello::Tour()
             std::pair<int, int> coup = InterfaceUtilisateur::demanderCoupOthello(grille->getNbLigne());
             if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end()) {
                 grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
+                RetournerJetons(coup.first, coup.second, joueurCourant->getJeton());
                 coupValide = true;
             } else {
                 modeAffichage->AfficherErreur("Coup impossible.");
