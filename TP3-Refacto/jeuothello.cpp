@@ -25,6 +25,13 @@ void JeuOthello::Jouer()
         joueurCourant->getJeton() == joueur1->getJeton() ? joueurCourant = joueur2 : joueurCourant = joueur1;
         grille->AfficherGrille();
     }
+
+    Jeton gagnant = DetermineGagnant();
+    if (gagnant != Jeton::Vide) {
+        std::cout << "Le gagnant est " << (gagnant == Jeton::X ? "Noir" : "Blanc") << "!" << std::endl;
+    } else {
+        std::cout << "La partie se termine par une égalité." << std::endl;
+    }
 }
 
 void JeuOthello::Tour()
