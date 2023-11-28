@@ -14,15 +14,17 @@ public:
     bool AGagne() const override;
     bool PartieFinie() const override;
     std::vector<std::pair<int, int>> CoupsPossibles() override;
-    void PlacerJeton(int x, int y, Jeton jeton);
     void VoirCoupsPossibles();
     bool VerifiePions() const;
     Jeton GetTypePion() const;
     int ComptePions(Jeton jeton) const;
     bool EstCoupValide(int x, int y, Jeton jeton) const;
+    void RetournerJetons(const int x, const int y, Jeton jeton);
+    Jeton DetermineGagnant() const;
+    bool PeutRetourner(int x, int y, int dx, int dy, Jeton jeton) const;
     bool EstDirectionValide(int x, int y, int dx, int dy, Jeton jeton) const;
 
-private:
+ private:
     std::shared_ptr<IGrille> grille;
     std::shared_ptr<IJoueur> joueur1;
     std::shared_ptr<IJoueur> joueur2;
