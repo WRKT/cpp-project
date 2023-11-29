@@ -1,5 +1,6 @@
 #include "jeumorpion.h"
 #include <iostream>
+#include <algorithm>
 #include <vector>
 #include <random>
 #include <ctime>
