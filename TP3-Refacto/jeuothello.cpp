@@ -63,6 +63,8 @@ void JeuOthello::Tour()
         int indiceCoupChoisi = distrib(gen);
         std::pair<int, int> coupChoisi = coupsPossibles[indiceCoupChoisi];
         grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
+        RetournerJetons(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
+
         modeAffichage->AfficherMessage(joueurCourant->getNom() + " a joué.");
     }
 }
