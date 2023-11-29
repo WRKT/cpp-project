@@ -4,11 +4,12 @@
 #include <random>
 #include <ctime>
 
-JeuPuissance4::JeuPuissance4(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2)
-    : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1) {}
+JeuPuissance4::JeuPuissance4(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
+    : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
 
 void JeuPuissance4::Jouer() {
-    grille->AfficherGrille();
+
+    modeAffichage->AfficherGrille(grille);
 
     while (!PartieFinie()) {
         if (joueurCourant->estHumain()) {
@@ -18,8 +19,8 @@ void JeuPuissance4::Jouer() {
         }
 
         if (AGagne()) {
-            grille->AfficherGrille();
-            std::cout << "Le joueur " << joueurCourant->getNom() << " a gagné !" << std::endl;
+            modeAffichage->AfficherGrille(grille);
+            modeAffichage->AfficherMessage ("Le joueur " + joueurCourant->getNom() + " a gagné !");
                 return;
         }
 
@@ -29,21 +30,23 @@ void JeuPuissance4::Jouer() {
             joueurCourant = joueur1;
         }
 
-        grille->AfficherGrille();
+        modeAffichage->AfficherGrille(grille);
     }
-    std::cout << "Match nul !" << std::endl;
+
+    modeAffichage->AfficherMessage("Match nul !");
 }
 
 void JeuPuissance4::TourHumain()
 {
     int colonne;
     bool coupValide = false;
+
     while (!coupValide) {
-        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton())
-                  << "), choisissez une colonne (1 - " << grille->getNbColonne() << ") : ";
+        modeAffichage->AfficherMessage (joueurCourant->getNom() + " (" + static_cast<char>(joueurCourant->getJeton()) + "), choisissez une colonne (1 - " + std::to_string(grille->getNbColonne()) + ") : ", 0);
         std::cin >> colonne;
+
         while (std::cin.fail() || colonne < 1 || colonne > grille->getNbColonne()) {
-            std::cout << "Entrée invalide. Veuillez entrer un nombre entre 1 et " << grille->getNbColonne() << ": ";
+            modeAffichage->AfficherErreur ("Entrer un nombre entre 1 et " + std::to_string(grille->getNbColonne()) + ": ");
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cin >> colonne;
@@ -53,7 +56,7 @@ void JeuPuissance4::TourHumain()
             PlacerJeton(colonne - 1, joueurCourant->getJeton());
             coupValide = true;
         } else {
-            std::cout << "Coup invalide, réessayez.\n";
+            modeAffichage->AfficherErreur("\n");
         }
     }
 }
@@ -72,8 +75,9 @@ void JeuPuissance4::TourOrdi()
         std::uniform_int_distribution<int> dist(0, colonnesPossibles.size() - 1);
         int colonneChoisie = colonnesPossibles[dist(rng)];
 
-        std::cout << joueurCourant->getNom() << " (" << static_cast<char>(joueurCourant->getJeton()) << ") a joué !" << std::endl;
-            PlacerJeton(colonneChoisie, joueurCourant->getJeton());
+        modeAffichage->AfficherMessage(joueurCourant->getNom() + " (" + static_cast<char>(joueurCourant->getJeton()) + ") a joué ! ");
+
+        PlacerJeton(colonneChoisie, joueurCourant->getJeton());
     }
 }
 
@@ -88,12 +92,15 @@ bool JeuPuissance4::AGagne() const {
 void JeuPuissance4::PlacerJeton(int colonne, Jeton jeton)
 {
     int ligneDisponible = grille->getNbLigne() - 1;
-    while (ligneDisponible >= 0 && grille->GetCellule(ligneDisponible, colonne) != Jeton::Vide) {
-            ligneDisponible--;
+
+    while (ligneDisponible >= 0 && grille->GetCellule(ligneDisponible, colonne) != Jeton::Vide)
+    {
+        ligneDisponible--;
     }
 
-    if (ligneDisponible >= 0) {
-            grille->ChangeCellule(ligneDisponible, colonne, jeton);
+    if (ligneDisponible >= 0)
+    {
+        grille->ChangeCellule(ligneDisponible, colonne, jeton);
     }
 
 }

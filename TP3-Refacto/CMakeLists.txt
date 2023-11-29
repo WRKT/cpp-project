@@ -21,6 +21,11 @@ add_executable(TP3-Refacto main.cpp
     joueurfactory.h joueurfactory.cpp
     InterfaceUtilisateur.h InterfaceUtilisateur.cpp
     grillefactory.h grillefactory.cpp
+    IAffichage.h
+    affichageconsole.h affichageconsole.cpp
+    ISaisie.h
+    saisieconsole.h saisieconsole.cpp
+    TypesAffichage.h
 )
 
 include(GNUInstallDirs)

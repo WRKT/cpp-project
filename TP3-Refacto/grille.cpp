@@ -20,27 +20,6 @@ int Grille::getNbLigne() const {
     return nbLignes;
 }
 
-void Grille::AfficherGrille() const {
-    std::cout << std::endl;
-    for (int i = 0; i < nbLignes; i++)
-    {
-        for(int j = 0; j < nbColonnes; j++)
-        {
-            if (j == 0)
-            {
-                std::cout << "| " << static_cast<char>(table[i][j]) <<  " | ";
-            }
-            else
-            {
-                std::cout << static_cast<char>(table[i][j]) << " | ";
-            }
-        }
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
-};
-
-
 bool Grille::ACaseVide(const int x, const int y) const {
     return table[x][y] == Jeton::Vide;
 }
