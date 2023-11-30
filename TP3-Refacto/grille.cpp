@@ -16,11 +16,6 @@ Jeton Grille::GetCellule(const int x, const int y) const
     return table[x][y];
 }
 
-void Grille::SetCellule(int x, int y, Jeton valeur)
-{
-    table[x][y] = valeur;
-}
-
 int Grille::getNbLigne() const {
     return nbLignes;
 }

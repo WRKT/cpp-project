@@ -18,13 +18,13 @@ void JeuOthello::Jouer()
     grille->ChangeCellule(centreX + 1, centreY, Jeton::O);
     grille->ChangeCellule(centreX, centreY + 1, Jeton::O);
     grille->ChangeCellule(centreX + 1, centreY + 1, Jeton::X);
-    grille->AfficherGrille();
+    modeAffichage->AfficherGrille(grille);
 
     while (!PartieFinie())
     {
         Tour();
         joueurCourant->getJeton() == joueur1->getJeton() ? joueurCourant = joueur2 : joueurCourant = joueur1;
-        grille->AfficherGrille();
+        modeAffichage->AfficherGrille(grille);
     }
 
     Jeton gagnant = DetermineGagnant();

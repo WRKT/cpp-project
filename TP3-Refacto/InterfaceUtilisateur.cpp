@@ -4,22 +4,23 @@
 #include <map>
 #include <regex>
 
-TypesJeu InterfaceUtilisateur::demanderTypeDeJeu() {
+TypesJeu InterfaceUtilisateur::demanderTypeDeJeu()
+{
     std::map<TypesJeu, std::string> nomsDesJeux = {
         {TypesJeu::Morpion, "Morpion"},
         {TypesJeu::Puissance4, "Puissance 4"},
-        {TypesJeu::Othello, "Othello"}
-    };
+        {TypesJeu::Othello, "Othello"}};
     // Besoin d'avis sur comment implémenter le mode de saisie -> Tips : static ne pourra pas etre pris en compte en raison de l'interface
     modeSaisie = std::make_unique<SaisieConsole>();
 
     int choixJeu;
     bool choixValide;
 
-    do{
+    do
+    {
         std::cout << "Choisissez un jeu: " << std::endl;
 
-        for (const auto& jeu : nomsDesJeux)
+        for (const auto &jeu : nomsDesJeux)
         {
             std::cout << static_cast<int>(jeu.first) << ". " << jeu.second << std::endl;
         }
@@ -28,18 +29,19 @@ TypesJeu InterfaceUtilisateur::demanderTypeDeJeu() {
 
         choixValide = nomsDesJeux.find(static_cast<TypesJeu>(choixJeu)) != nomsDesJeux.end();
 
-    } while(!choixValide);
-
+    } while (!choixValide);
 
     return static_cast<TypesJeu>(choixJeu);
 }
 
-int InterfaceUtilisateur::demanderModeDeJeu() {
+int InterfaceUtilisateur::demanderModeDeJeu()
+{
 
     int modeJeu;
     bool choixValide;
 
-    do {
+    do
+    {
         std::cout << std::endl;
         std::cout << "Choisissez le mode de jeu:\n1. Joueur vs Joueur\n2. Joueur vs Ordinateur\n\nVotre choix: ";
 
@@ -52,19 +54,22 @@ int InterfaceUtilisateur::demanderModeDeJeu() {
     return modeJeu;
 }
 
-bool InterfaceUtilisateur::demanderRejouer() {
+bool InterfaceUtilisateur::demanderRejouer()
+{
 
     char choix;
     bool choixValide;
 
-    do {
+    do
+    {
         std::cout << std::endl;
         std::cout << "Retourner au menu principal? (o/n): ";
         std::cin >> choix;
 
         choixValide = (choix == 'o' || choix == 'O' || choix == 'n' || choix == 'N');
 
-        if (!choixValide) {
+        if (!choixValide)
+        {
             std::cout << "Réponse invalide. Veuillez répondre par 'o' (oui) ou 'n' (non).\n";
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -76,14 +81,16 @@ bool InterfaceUtilisateur::demanderRejouer() {
     return choix == 'o' || choix == 'O';
 }
 
-
-std::string InterfaceUtilisateur::demanderPrenomJoueur(const std::string& prompt) {
+std::string InterfaceUtilisateur::demanderPrenomJoueur(const std::string &prompt)
+{
     std::string prenom;
     std::regex regexPrenom("^[A-Za-z]{1,20}$");
-    do {
+    do
+    {
         std::cout << prompt;
         std::cin >> prenom;
-        if (!std::regex_match(prenom, regexPrenom)) {
+        if (!std::regex_match(prenom, regexPrenom))
+        {
             std::cout << "Prénom invalide. Utilisez uniquement des lettres et une longueur maximale de 20 caractères." << std::endl;
         }
     } while (!std::regex_match(prenom, regexPrenom));
@@ -91,21 +98,25 @@ std::string InterfaceUtilisateur::demanderPrenomJoueur(const std::string& prompt
     return prenom;
 }
 
-std::pair<int, int> InterfaceUtilisateur::demanderCoupMorpion(int tailleGrille) {
+std::pair<int, int> InterfaceUtilisateur::demanderCoupMorpion(int tailleGrille)
+{
     int x, y;
-    while (true) {
+    while (true)
+    {
         std::cout << "Entrez la ligne (1 - " << tailleGrille << ") : ";
-        if (!(std::cin >> x) || x < 1 || x > tailleGrille) {
+        if (!(std::cin >> x) || x < 1 || x > tailleGrille)
+        {
             std::cout << "Entrée invalide, veuillez réessayer." << std::endl;
-                                                                       std::cin.clear();
+            std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
 
         std::cout << "Entrez la colonne (1 - " << tailleGrille << ") : ";
-        if (!(std::cin >> y) || y < 1 || y > tailleGrille) {
+        if (!(std::cin >> y) || y < 1 || y > tailleGrille)
+        {
             std::cout << "Entrée invalide, veuillez réessayer." << std::endl;
-                                                                       std::cin.clear();
+            std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
@@ -114,21 +125,25 @@ std::pair<int, int> InterfaceUtilisateur::demanderCoupMorpion(int tailleGrille) 
     }
 }
 
-std::pair<int, int> InterfaceUtilisateur::demanderCoupOthello(int tailleGrille) {
+std::pair<int, int> InterfaceUtilisateur::demanderCoupOthello(int tailleGrille)
+{
     int x, y;
-    while (true) {
+    while (true)
+    {
         std::cout << "Entrez la ligne (1 - " << tailleGrille << ") : ";
-        if (!(std::cin >> x) || x < 1 || x > tailleGrille) {
+        if (!(std::cin >> x) || x < 1 || x > tailleGrille)
+        {
             std::cout << "Entrée invalide, veuillez réessayer." << std::endl;
-                                                                       std::cin.clear();
+            std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
 
         std::cout << "Entrez la colonne (1 - " << tailleGrille << ") : ";
-        if (!(std::cin >> y) || y < 1 || y > tailleGrille) {
+        if (!(std::cin >> y) || y < 1 || y > tailleGrille)
+        {
             std::cout << "Entrée invalide, veuillez réessayer." << std::endl;
-                                                                       std::cin.clear();
+            std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
@@ -137,17 +152,19 @@ std::pair<int, int> InterfaceUtilisateur::demanderCoupOthello(int tailleGrille) 
     }
 }
 
-
-int InterfaceUtilisateur::demanderCoupPuissance4(int nbColonnes) {
+int InterfaceUtilisateur::demanderCoupPuissance4(int nbColonnes)
+{
     int colonne;
     bool coupValide = false;
 
-    while (!coupValide) {
+    while (!coupValide)
+    {
         std::cout << "Entrez le numéro de la colonne (1 - " << nbColonnes << ") : ";
-                std::cin >> colonne;
+        std::cin >> colonne;
 
         coupValide = (colonne >= 1 && colonne <= nbColonnes);
-        if (!coupValide) {
+        if (!coupValide)
+        {
             std::cout << "Coup invalide, veuillez réessayer." << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

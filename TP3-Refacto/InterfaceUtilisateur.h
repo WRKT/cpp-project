@@ -23,5 +23,6 @@ private:
     AffichageConsole affichage;
     std::unique_ptr<ISaisie> modeSaisie;
     std::unique_ptr<IAffichage> modeAffichage;
+};
 
 #endif // INTERFACEUTILISATEUR_H

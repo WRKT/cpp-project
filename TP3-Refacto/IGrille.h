@@ -3,7 +3,8 @@
 
 #include "jeton.h"
 
-class IGrille {
+class IGrille
+{
 public:
     virtual void InitialiserGrille() = 0;
     virtual int getNbLigne() const = 0;
