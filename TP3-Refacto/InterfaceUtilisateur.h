@@ -2,9 +2,12 @@
 #define INTERFACEUTILISATEUR_H
 
 #include <iostream>
+#include <memory>
+#include "IAffichage.h"
 #include "TypesJeu.h"
 #include "affichageconsole.h"
 #include <string>
+#include "ISaisie.h"
 
 class InterfaceUtilisateur {
 public:
@@ -18,6 +21,7 @@ public:
 
 private:
     AffichageConsole affichage;
-};
+    std::unique_ptr<ISaisie> modeSaisie;
+    std::unique_ptr<IAffichage> modeAffichage;
 
 #endif // INTERFACEUTILISATEUR_H
