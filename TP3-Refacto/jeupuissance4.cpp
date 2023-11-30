@@ -3,6 +3,7 @@
 #include <vector>
 #include <random>
 #include <ctime>
+#include "InterfaceUtilisateur.h"
 
 JeuPuissance4::JeuPuissance4(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
     : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
@@ -12,12 +13,7 @@ void JeuPuissance4::Jouer() {
     modeAffichage->AfficherGrille(grille);
 
     while (!PartieFinie()) {
-        if (joueurCourant->estHumain()) {
-            TourHumain();
-        } else {
-            TourOrdi();
-        }
-
+        Tour();
         if (AGagne()) {
             modeAffichage->AfficherGrille(grille);
             modeAffichage->AfficherMessage ("Le joueur " + joueurCourant->getNom() + " a gagné !");
@@ -36,50 +32,49 @@ void JeuPuissance4::Jouer() {
     modeAffichage->AfficherMessage("Match nul !");
 }
 
-void JeuPuissance4::TourHumain()
-{
-    int colonne;
-    bool coupValide = false;
+void JeuPuissance4::Tour() {
+    auto coupsPossibles = CoupsPossibles();
+    if (joueurCourant->estHumain()) {
+        bool coupValide = false;
+        int colonne;
+        while (!coupValide) {
+            colonne = InterfaceUtilisateur::demanderCoupPuissance4(grille->getNbColonne());
+            for (auto& coup : coupsPossibles) {
+                if (coup.second == colonne) {
+                    grille->ChangeCellule(coup.first, colonne, joueurCourant->getJeton());
+                    coupValide = true;
+                    break;
+                }
+            }
 
-    while (!coupValide) {
-        modeAffichage->AfficherMessage (joueurCourant->getNom() + " (" + static_cast<char>(joueurCourant->getJeton()) + "), choisissez une colonne (1 - " + std::to_string(grille->getNbColonne()) + ") : ", 0);
-        std::cin >> colonne;
-
-        while (std::cin.fail() || colonne < 1 || colonne > grille->getNbColonne()) {
-            modeAffichage->AfficherErreur ("Entrer un nombre entre 1 et " + std::to_string(grille->getNbColonne()) + ": ");
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cin >> colonne;
+            if (!coupValide) {
+                std::cout << "Coup invalide, veuillez réessayer." << std::endl;
+            }
         }
+    } else {
+        if (!coupsPossibles.empty()) {
+            std::random_device rd;
+            std::mt19937 gen(rd());
+            std::uniform_int_distribution<> distrib(0, coupsPossibles.size() - 1);
 
-        if (colonne > 0 && colonne <= grille->getNbColonne() && grille->GetCellule(0, colonne - 1) == Jeton::Vide) {
-            PlacerJeton(colonne - 1, joueurCourant->getJeton());
-            coupValide = true;
-        } else {
-            modeAffichage->AfficherErreur("\n");
-        }
+            auto coupChoisi = coupsPossibles[distrib(gen)];
+            grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());        }
     }
 }
 
-void JeuPuissance4::TourOrdi()
-{
-    std::vector<int> colonnesPossibles;
-    for (int i = 0; i < grille->getNbColonne(); ++i) {
-        if (grille->GetCellule(0, i) == Jeton::Vide) {
-            colonnesPossibles.push_back(i);
+std::vector<std::pair<int, int>> JeuPuissance4::CoupsPossibles() {
+    std::vector<std::pair<int, int>> coupsPossibles;
+    for (int colonne = 0; colonne < grille->getNbColonne(); ++colonne) {
+        for (int ligne = grille->getNbLigne() - 1; ligne >= 0; --ligne) {
+            if (grille->GetCellule(ligne, colonne) == Jeton::Vide) {
+                coupsPossibles.emplace_back(ligne, colonne);
+                break;
+            }
         }
     }
-
-    if (!colonnesPossibles.empty()) {
-        std::mt19937 rng(static_cast<unsigned int>(time(nullptr)));
-        std::uniform_int_distribution<int> dist(0, colonnesPossibles.size() - 1);
-        int colonneChoisie = colonnesPossibles[dist(rng)];
-
-        modeAffichage->AfficherMessage(joueurCourant->getNom() + " (" + static_cast<char>(joueurCourant->getJeton()) + ") a joué ! ");
-
-        PlacerJeton(colonneChoisie, joueurCourant->getJeton());
-    }
+    return coupsPossibles;
 }
+
 
 bool JeuPuissance4::PartieFinie() const {
     return AGagne() || grille->EstRemplie();
@@ -89,21 +84,7 @@ bool JeuPuissance4::AGagne() const {
     return VerifieLignes() || VerifieColonnes() || VerifieDiagonales();
 }
 
-void JeuPuissance4::PlacerJeton(int colonne, Jeton jeton)
-{
-    int ligneDisponible = grille->getNbLigne() - 1;
 
-    while (ligneDisponible >= 0 && grille->GetCellule(ligneDisponible, colonne) != Jeton::Vide)
-    {
-        ligneDisponible--;
-    }
-
-    if (ligneDisponible >= 0)
-    {
-        grille->ChangeCellule(ligneDisponible, colonne, jeton);
-    }
-
-}
 
 bool JeuPuissance4::VerifieLignes() const {
     for (int i = 0; i < grille->getNbLigne(); ++i) {

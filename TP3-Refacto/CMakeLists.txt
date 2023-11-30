@@ -23,6 +23,7 @@ add_executable(TP3-Refacto main.cpp
     grillefactory.h grillefactory.cpp
     IAffichage.h
     affichageconsole.h affichageconsole.cpp
+    jeuothello.h jeuothello.cpp
     ISaisie.h
     saisieconsole.h saisieconsole.cpp
     TypesAffichage.h

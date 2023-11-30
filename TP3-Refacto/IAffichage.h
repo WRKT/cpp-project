@@ -3,6 +3,7 @@
 
 #include <memory>
 #include "IGrille.h"
+#include <string>
 
 class IAffichage
 {
