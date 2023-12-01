@@ -1,16 +1,14 @@
-#ifndef INTERFACEUTILISATEUR_H
-#define INTERFACEUTILISATEUR_H
+#ifndef INPUTCONSOLE_H
+#define INPUTCONSOLE_H
 
 #include <iostream>
 #include <memory>
-#include "IAffichage.h"
-#include "TypesJeu.h"
-#include "affichageconsole.h"
 #include <string>
-#include "ISaisie.h"
+#include "TypesJeu.h"
 
-class InterfaceUtilisateur {
-public:
+
+class InputConsole {
+public:;
     static TypesJeu demanderTypeDeJeu();
     static int demanderModeDeJeu();
     static bool demanderRejouer();
@@ -18,11 +16,11 @@ public:
     static int demanderCoupPuissance4(int nbColonnes);
     static std::pair<int, int> demanderCoupOthello(int tailleGrille);
     static std::string demanderPrenomJoueur(const std::string& prompt);
+    static std::string getString(const std::string& message);
+    static int getInt(const std::string&);
 
 private:
-    AffichageConsole affichage;
-    std::unique_ptr<ISaisie> modeSaisie;
-    std::unique_ptr<IAffichage> modeAffichage;
+    static void ViderBuffer();
 };
 
-#endif // INTERFACEUTILISATEUR_H
+#endif // INPUTCONSOLE_H
