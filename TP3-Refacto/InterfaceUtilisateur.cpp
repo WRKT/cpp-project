@@ -10,14 +10,13 @@ TypesJeu InterfaceUtilisateur::demanderTypeDeJeu()
         {TypesJeu::Morpion, "Morpion"},
         {TypesJeu::Puissance4, "Puissance 4"},
         {TypesJeu::Othello, "Othello"}};
-    // Besoin d'avis sur comment implémenter le mode de saisie -> Tips : static ne pourra pas etre pris en compte en raison de l'interface
-    modeSaisie = std::make_unique<SaisieConsole>();
 
     int choixJeu;
     bool choixValide;
 
     do
     {
+        std::cout << std::endl;
         std::cout << "Choisissez un jeu: " << std::endl;
 
         for (const auto &jeu : nomsDesJeux)
@@ -25,7 +24,7 @@ TypesJeu InterfaceUtilisateur::demanderTypeDeJeu()
             std::cout << static_cast<int>(jeu.first) << ". " << jeu.second << std::endl;
         }
 
-        choixJeu = modeSaisie->getInt("Votre choix : ");
+        choixJeu = SaisieConsole::getInt("Votre choix : ");
 
         choixValide = nomsDesJeux.find(static_cast<TypesJeu>(choixJeu)) != nomsDesJeux.end();
 
@@ -43,9 +42,9 @@ int InterfaceUtilisateur::demanderModeDeJeu()
     do
     {
         std::cout << std::endl;
-        std::cout << "Choisissez le mode de jeu:\n1. Joueur vs Joueur\n2. Joueur vs Ordinateur\n\nVotre choix: ";
+        std::cout << "Choisissez le mode de jeu:\n1. Joueur vs Joueur\n2. Joueur vs Ordinateur\n";
 
-        modeJeu = modeSaisie->getInt("Choix mode de jeu : ");
+        modeJeu = SaisieConsole::getInt("Choix mode de jeu : ");
 
         choixValide = (modeJeu == 1 || modeJeu == 2);
 

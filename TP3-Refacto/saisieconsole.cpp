@@ -1,7 +1,7 @@
 #include "saisieconsole.h"
 #include <sstream>
 
-std::string SaisieConsole::getString (const std::string& message) const
+std::string SaisieConsole::getString (const std::string& message)
 {
     std::string reponse;
     std::cout << std::endl;
@@ -25,7 +25,7 @@ std::string SaisieConsole::getString (const std::string& message) const
 
 }
 
-int SaisieConsole::getInt(const std::string& message) const
+int SaisieConsole::getInt(const std::string& message)
 {
     int choix;
     std::cout << std::endl;
@@ -49,7 +49,7 @@ int SaisieConsole::getInt(const std::string& message) const
 }
 
 
-void SaisieConsole::ViderBuffer() const {
+void SaisieConsole::ViderBuffer()  {
 
     std::cout << "Saisie invalide. Veuillez réessayer." << std::endl;
     std::cin.clear();

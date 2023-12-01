@@ -2,17 +2,16 @@
 #define SAISIECONSOLE_H
 
 
-#include "ISaisie.h"
 #include <iostream>
 #include <limits>
 
-class SaisieConsole : public ISaisie
+class SaisieConsole
 {
 public:
-    std::string getString(const std::string& message) const;
-    int getInt(const std::string&) const;
+    static std::string getString(const std::string& message);
+    static int getInt(const std::string&);
 private:
-    void ViderBuffer() const;
+    static void ViderBuffer();
 };
 
 #endif // SAISIECONSOLE_H
