@@ -1,5 +1,5 @@
 #include "jeuothello.h"
-#include "InterfaceUtilisateur.h"
+#include "inputconsole.h"
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -31,8 +31,9 @@ void JeuOthello::Jouer()
     if (gagnant != Jeton::Vide) {
         std::cout << "Le gagnant est " << (gagnant == Jeton::X ? "Noir" : "Blanc") << "!" << std::endl;
     } else {
-        std::cout << "La partie se termine par une égalité." << std::endl;
+        modeAffichage->AfficherMessage ("La partie se termine par une égalité.");
     }
+
 }
 
 void JeuOthello::Tour()
@@ -48,7 +49,8 @@ void JeuOthello::Tour()
 
     if (joueurCourant->estHumain()) {
         while (!coupValide) {
-            std::pair<int, int> coup = InterfaceUtilisateur::demanderCoupOthello(grille->getNbLigne());
+            std::pair<int, int> coup = InputConsole::demanderCoupOthello(grille->getNbLigne());
+
             if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end()) {
                 grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
                 RetournerJetons(coup.first, coup.second, joueurCourant->getJeton());
@@ -61,8 +63,10 @@ void JeuOthello::Tour()
         std::random_device rd;
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> distrib(0, coupsPossibles.size() - 1);
+
         int indiceCoupChoisi = distrib(gen);
         std::pair<int, int> coupChoisi = coupsPossibles[indiceCoupChoisi];
+
         grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
         RetournerJetons(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
 
@@ -169,29 +173,10 @@ bool JeuOthello::PeutRetourner(int x, int y, int dx, int dy, Jeton jeton) const 
 
 bool JeuOthello::VerifiePions() const
 {
-    int countNoir = 0;
-    int countBlanc = 0;
+    int countNoir = ComptePions(Jeton::X);
+    int countBlanc = ComptePions(Jeton::O);
 
-    for (int i = 0; i < grille->getNbLigne(); ++i)
-    {
-        for (int j = 0; j < grille->getNbColonne(); ++j)
-        {
-            if (grille->GetCellule(i, j) == Jeton::X)
-            {
-                countNoir++;
-            }
-            else if (grille->GetCellule(i, j) == Jeton::O)
-            {
-                countBlanc++;
-            }
-        }
-    }
-
-    if (countNoir > countBlanc)
-    {
-        return true;
-    }
-    else if (countBlanc > countNoir)
+    if (countNoir != countBlanc)
     {
         return true;
     }
@@ -240,7 +225,7 @@ Jeton JeuOthello::DetermineGagnant() const {
     }
 }
 
-
+// Je pense que ComptePions est la responsabilité de Grille, et non du Jeu
 int JeuOthello::ComptePions(Jeton jeton) const
 {
     int count = 0;
