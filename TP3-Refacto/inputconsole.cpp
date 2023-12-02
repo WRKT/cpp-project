@@ -3,14 +3,15 @@
 #include <map>
 #include <regex>
 
-std::string InputConsole::getString (const std::string& message)
+std::string InputConsole::getString(const std::string &message)
 {
     std::string reponse;
     std::cout << std::endl;
 
-    while (true) {
+    while (true)
+    {
 
-        std:: cout << message;
+        std::cout << message;
         std::cin >> reponse;
 
         if (std::cin.fail())
@@ -24,15 +25,15 @@ std::string InputConsole::getString (const std::string& message)
     }
 
     return reponse;
-
 }
 
-int InputConsole::getInt(const std::string& message)
+int InputConsole::getInt(const std::string &message)
 {
     int choix;
     std::cout << std::endl;
 
-    while (true) {
+    while (true)
+    {
         std::cout << message;
         std::cin >> choix;
 
@@ -47,11 +48,10 @@ int InputConsole::getInt(const std::string& message)
     }
 
     return choix;
-
 }
 
-
-void InputConsole::ViderBuffer()  {
+void InputConsole::ViderBuffer()
+{
 
     std::cout << "Saisie invalide. Veuillez réessayer." << std::endl;
     std::cin.clear();
@@ -150,14 +150,14 @@ std::pair<int, int> InputConsole::demanderCoupMorpion(int tailleGrille)
     int x, y;
     while (true)
     {
-        x = getInt("Entrez la ligne (1 - " + std::to_string(tailleGrille) + ") : ") ;
+        x = getInt("Entrez la ligne (1 - " + std::to_string(tailleGrille) + ") : ");
         if (x < 1 || x > tailleGrille)
         {
             continue;
         }
-        y = getInt("Entrez la colonne (1 - " + std::to_string(tailleGrille) + ") : ") ;
+        y = getInt("Entrez la colonne (1 - " + std::to_string(tailleGrille) + ") : ");
 
-        if ( y < 1 || y > tailleGrille)
+        if (y < 1 || y > tailleGrille)
         {
             continue;
         }
@@ -172,14 +172,14 @@ std::pair<int, int> InputConsole::demanderCoupOthello(int tailleGrille)
 
     while (true)
     {
-        x = getInt("Entrez la ligne (1 - " + std::to_string(tailleGrille) + ") : ") ;
-        if ( x < 1 || x > tailleGrille)
+        x = getInt("Entrez la ligne (1 - " + std::to_string(tailleGrille) + ") : ");
+        if (x < 1 || x > tailleGrille)
         {
             continue;
         }
-        y = getInt("Entrez la colonne (1 - " + std::to_string(tailleGrille) + ") : ") ;
+        y = getInt("Entrez la colonne (1 - " + std::to_string(tailleGrille) + ") : ");
 
-        if ( y < 1 || y > tailleGrille)
+        if (y < 1 || y > tailleGrille)
         {
             continue;
         }
@@ -202,8 +202,7 @@ int InputConsole::demanderCoupPuissance4(int nbColonnes)
             continue;
         }
 
-    } while(!coupValide);
+    } while (!coupValide);
 
     return colonne - 1;
 }
-

@@ -2,17 +2,16 @@
 #define JEUSESSION_H
 
 #include "IJeu.h"
-#include "InterfaceUtilisateur.h"
+#include "IAffichage.h"
 #include <memory>
 
 class JeuSession {
 public:
-    JeuSession(std::shared_ptr<IJeu> jeu, std::shared_ptr<InterfaceUtilisateur> ui);
+    JeuSession(std::shared_ptr<IJeu> jeu, std::shared_ptr<IAffichage> ui);
     void LancerJeu();
 
 private:
     std::shared_ptr<IJeu> jeu;
-    std::shared_ptr<InterfaceUtilisateur> ui;
 };
 
 #endif // JEUSESSION_H

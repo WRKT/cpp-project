@@ -34,7 +34,7 @@ int main()
             std::string prenomJoueur2 = InputConsole::demanderPrenomJoueur("Entrez le prénom du second joueur : ");
             joueur2 = JoueurFactory::CreerJoueurHumain(prenomJoueur2, Jeton::O);
         }
-        else if(modeJeu == 2)
+        else if (modeJeu == 2)
         {
             std::string prenomJoueur1 = InputConsole::demanderPrenomJoueur("Entrez le prénom du premier joueur : ");
             joueur1 = JoueurFactory::CreerJoueurHumain(prenomJoueur1, Jeton::X);
