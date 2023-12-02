@@ -14,10 +14,10 @@ void JeuOthello::Jouer()
 {
     int centreX = grille->getNbLigne() / 2 - 1;
     int centreY = grille->getNbColonne() / 2 - 1;
-    grille->ChangeCellule(centreX, centreY, Jeton::X);
-    grille->ChangeCellule(centreX + 1, centreY, Jeton::O);
-    grille->ChangeCellule(centreX, centreY + 1, Jeton::O);
-    grille->ChangeCellule(centreX + 1, centreY + 1, Jeton::X);
+    grille->ChangeCellule(centreX, centreY, joueur1->getJeton());
+    grille->ChangeCellule(centreX + 1, centreY, joueur2->getJeton());
+    grille->ChangeCellule(centreX, centreY + 1, joueur2->getJeton());
+    grille->ChangeCellule(centreX + 1, centreY + 1, joueur1->getJeton());
     modeAffichage->AfficherGrille(grille);
 
     while (!PartieFinie())
@@ -28,8 +28,9 @@ void JeuOthello::Jouer()
     }
 
     Jeton gagnant = DetermineGagnant();
+
     if (gagnant != Jeton::Vide) {
-        std::cout << "Le gagnant est " << (gagnant == Jeton::X ? "Noir" : "Blanc") << "!" << std::endl;
+        modeAffichage->AfficherMessage("Le gagnant est " + (gagnant == joueur1->getJeton() ? joueur1->getNom(): joueur2->getNom()) + " !");
     } else {
         modeAffichage->AfficherMessage ("La partie se termine par une égalité.");
     }
@@ -42,7 +43,6 @@ void JeuOthello::Tour()
     bool coupValide = false;
 
     if (coupsPossibles.empty()) {
-        joueurCourant = (joueurCourant == joueur1) ? joueur2 : joueur1;
         modeAffichage->AfficherMessage("Aucun coup possible pour " + joueurCourant->getNom() + ". Passage au joueur suivant.");
         return;
     }
@@ -70,7 +70,7 @@ void JeuOthello::Tour()
         grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
         RetournerJetons(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
 
-        modeAffichage->AfficherMessage(joueurCourant->getNom() + " a joué.");
+        modeAffichage->AfficherMessage(joueurCourant->getNom() + "(" + static_cast<char>(joueurCourant->getJeton ()) + ") a joué.");
     }
 }
 
@@ -213,6 +213,7 @@ bool JeuOthello::EstCoupValide(int x, int y, Jeton jeton) const
 
 
 Jeton JeuOthello::DetermineGagnant() const {
+
     int countNoir = ComptePions(Jeton::X);
     int countBlanc = ComptePions(Jeton::O);
 
