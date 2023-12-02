@@ -47,10 +47,8 @@ void JeuPuissance4::Tour() {
                     break;
                 }
             }
-
-            // ne pas oublier
             if (!coupValide) {
-                std::cout << "Coup invalide, veuillez réessayer." << std::endl;
+                modeAffichage->AfficherErreur ("Coup invalide.");
             }
         }
     } else {

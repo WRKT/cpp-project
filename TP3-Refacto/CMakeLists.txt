@@ -25,7 +25,6 @@ add_executable(TP3-Refacto main.cpp
     affichageconsole.h affichageconsole.cpp
     jeuothello.h jeuothello.cpp
 
-
 )
 
 include(GNUInstallDirs)
@@ -33,3 +32,4 @@ install(TARGETS TP3-Refacto
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
