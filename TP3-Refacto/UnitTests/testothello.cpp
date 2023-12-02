@@ -25,6 +25,7 @@ protected:
 
 TEST_F(TestOthello, CompteJeton) {
 
+    ASSERT_FALSE( 1 == 1 );
 }
 
 TEST_F(TestOthello, CoupValide) {
