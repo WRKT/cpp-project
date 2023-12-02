@@ -101,10 +101,11 @@ int InputConsole::demanderModeDeJeu()
         std::cout << "Choisissez le mode de jeu:" << std::endl;
         std::cout << "1. Joueur vs Joueur" << std::endl;
         std::cout << "2. Joueur vs Ordinateur" << std::endl;
+        std::cout << "3. Ordinateur vs Ordinateur" << std::endl;
 
         modeJeu = getInt("Choix mode de jeu : ");
 
-        choixValide = (modeJeu == 1 || modeJeu == 2);
+        choixValide = (modeJeu == 1 || modeJeu == 2 || modeJeu == 3);
 
     } while (!choixValide);
 
