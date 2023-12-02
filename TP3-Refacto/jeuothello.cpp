@@ -47,7 +47,7 @@ void JeuOthello::Tour()
     modeAffichage->AfficherMessage("Coups possibles pour " + joueurCourant->getNom() + " :");
     for (auto coup : coupsPossibles)
     {
-        modeAffichage->AfficherMessage(std::to_string(coup.first) + ", " + std::to_string(coup.second));
+        modeAffichage->AfficherMessage(std::to_string(coup.first + 1) + ", " + std::to_string(coup.second + 1));
     }
 
     if (coupsPossibles.empty())
