@@ -39,6 +39,7 @@ void JeuPuissance4::Tour() {
         int colonne;
         while (!coupValide) {
             colonne = InputConsole::demanderCoupPuissance4(grille->getNbColonne());
+
             for (auto& coup : coupsPossibles) {
                 if (coup.second == colonne) {
                     grille->ChangeCellule(coup.first, colonne, joueurCourant->getJeton());
@@ -47,6 +48,7 @@ void JeuPuissance4::Tour() {
                 }
             }
 
+            // ne pas oublier
             if (!coupValide) {
                 std::cout << "Coup invalide, veuillez réessayer." << std::endl;
             }
