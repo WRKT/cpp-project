@@ -24,8 +24,7 @@ add_executable(TP3-Refacto main.cpp
     IAffichage.h
     affichageconsole.h affichageconsole.cpp
     jeuothello.h jeuothello.cpp
-
-
+    jeusession.h jeusession.cpp
 )
 
 include(GNUInstallDirs)

@@ -7,7 +7,7 @@
 #include <ctime>
 #include <limits>
 
-JeuOthello::JeuOthello(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2,  std::shared_ptr<IAffichage> modeAffichage)
+JeuOthello::JeuOthello(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
     : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
 
 void JeuOthello::Jouer()
@@ -28,12 +28,14 @@ void JeuOthello::Jouer()
     }
 
     Jeton gagnant = DetermineGagnant();
-    if (gagnant != Jeton::Vide) {
-        std::cout << "Le gagnant est " << (gagnant == Jeton::X ? "Noir" : "Blanc") << "!" << std::endl;
-    } else {
-        modeAffichage->AfficherMessage ("La partie se termine par une égalité.");
+    if (gagnant != Jeton::Vide)
+    {
+        std::cout << "Le gagnant est " << (gagnant == Jeton::X ? joueur1->getNom() : joueur2->getNom()) << "!" << std::endl;
     }
-
+    else
+    {
+        modeAffichage->AfficherMessage("La partie se termine par une égalité.");
+    }
 }
 
 void JeuOthello::Tour()
@@ -41,25 +43,40 @@ void JeuOthello::Tour()
     auto coupsPossibles = CoupsPossibles();
     bool coupValide = false;
 
-    if (coupsPossibles.empty()) {
-        joueurCourant = (joueurCourant == joueur1) ? joueur2 : joueur1;
+    // afficher les coups possibles
+    modeAffichage->AfficherMessage("Coups possibles pour " + joueurCourant->getNom() + " :");
+    for (auto coup : coupsPossibles)
+    {
+        modeAffichage->AfficherMessage(std::to_string(coup.first) + ", " + std::to_string(coup.second));
+    }
+
+    if (coupsPossibles.empty())
+    {
         modeAffichage->AfficherMessage("Aucun coup possible pour " + joueurCourant->getNom() + ". Passage au joueur suivant.");
         return;
     }
 
-    if (joueurCourant->estHumain()) {
-        while (!coupValide) {
+    else if (joueurCourant->estHumain())
+    {
+        while (!coupValide)
+        {
             std::pair<int, int> coup = InputConsole::demanderCoupOthello(grille->getNbLigne());
 
-            if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end()) {
+            if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
+            {
                 grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
                 RetournerJetons(coup.first, coup.second, joueurCourant->getJeton());
                 coupValide = true;
-            } else {
+            }
+            else
+            {
                 modeAffichage->AfficherErreur("Coup impossible.");
             }
         }
-    } else {
+    }
+    else
+    {
+
         std::random_device rd;
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> distrib(0, coupsPossibles.size() - 1);
@@ -74,7 +91,6 @@ void JeuOthello::Tour()
     }
 }
 
-
 bool JeuOthello::AGagne() const
 {
     return VerifiePions();
@@ -85,13 +101,16 @@ bool JeuOthello::PartieFinie() const
     return grille->EstRemplie();
 }
 
-
-std::vector<std::pair<int, int>> JeuOthello::CoupsPossibles() {
+std::vector<std::pair<int, int>> JeuOthello::CoupsPossibles()
+{
     std::vector<std::pair<int, int>> coupsPossibles;
 
-    for (int x = 0; x < grille->getNbLigne(); ++x) {
-        for (int y = 0; y < grille->getNbColonne(); ++y) {
-            if (EstCoupValide(x, y, joueurCourant->getJeton())) {
+    for (int x = 0; x < grille->getNbLigne(); ++x)
+    {
+        for (int y = 0; y < grille->getNbColonne(); ++y)
+        {
+            if (EstCoupValide(x, y, joueurCourant->getJeton()))
+            {
                 coupsPossibles.emplace_back(x, y);
             }
         }
@@ -128,14 +147,20 @@ bool JeuOthello::EstDirectionValide(int x, int y, int dx, int dy, Jeton jeton) c
     return false;
 }
 
-void JeuOthello::RetournerJetons(const int x, const int y, Jeton jeton) {
-    for (int dx = -1; dx <= 1; ++dx) {
-        for (int dy = -1; dy <= 1; ++dy) {
-            if (dx == 0 && dy == 0) continue;
-            if (PeutRetourner(x, y, dx, dy, jeton)) {
+void JeuOthello::RetournerJetons(const int x, const int y, Jeton jeton)
+{
+    for (int dx = -1; dx <= 1; ++dx)
+    {
+        for (int dy = -1; dy <= 1; ++dy)
+        {
+            if (dx == 0 && dy == 0)
+                continue;
+            if (PeutRetourner(x, y, dx, dy, jeton))
+            {
                 int l = x + dx;
                 int c = y + dy;
-                while (grille->GetCellule(l, c) != jeton) {
+                while (grille->GetCellule(l, c) != jeton)
+                {
                     grille->ChangeCellule(l, c, jeton);
                     l += dx;
                     c += dy;
@@ -145,20 +170,26 @@ void JeuOthello::RetournerJetons(const int x, const int y, Jeton jeton) {
     }
 }
 
-
-bool JeuOthello::PeutRetourner(int x, int y, int dx, int dy, Jeton jeton) const {
+bool JeuOthello::PeutRetourner(int x, int y, int dx, int dy, Jeton jeton) const
+{
     int l = x + dx;
     int c = y + dy;
     bool trouveAdversaire = false;
 
-    while (l >= 0 && l < grille->getNbLigne() && c >= 0 && c < grille->getNbColonne()) {
+    while (l >= 0 && l < grille->getNbLigne() && c >= 0 && c < grille->getNbColonne())
+    {
         Jeton jetonActuel = grille->GetCellule(l, c);
 
-        if (jetonActuel == Jeton::Vide) {
+        if (jetonActuel == Jeton::Vide)
+        {
             return false;
-        } else if (jetonActuel == jeton) {
+        }
+        else if (jetonActuel == jeton)
+        {
             return trouveAdversaire;
-        } else {
+        }
+        else
+        {
             trouveAdversaire = true;
         }
 
@@ -168,8 +199,6 @@ bool JeuOthello::PeutRetourner(int x, int y, int dx, int dy, Jeton jeton) const 
 
     return false;
 }
-
-
 
 bool JeuOthello::VerifiePions() const
 {
@@ -211,16 +240,21 @@ bool JeuOthello::EstCoupValide(int x, int y, Jeton jeton) const
     return false;
 }
 
-
-Jeton JeuOthello::DetermineGagnant() const {
+Jeton JeuOthello::DetermineGagnant() const
+{
     int countNoir = ComptePions(Jeton::X);
     int countBlanc = ComptePions(Jeton::O);
 
-    if (countNoir > countBlanc) {
+    if (countNoir > countBlanc)
+    {
         return Jeton::X;
-    } else if (countBlanc > countNoir) {
+    }
+    else if (countBlanc > countNoir)
+    {
         return Jeton::O;
-    } else {
+    }
+    else
+    {
         return Jeton::Vide;
     }
 }
