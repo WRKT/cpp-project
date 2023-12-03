@@ -197,6 +197,7 @@ int InputConsole::demanderCoupPuissance4(int nbColonnes)
     {
         colonne = getInt("Entrez le numéro de la colonne (1 - " + std::to_string(nbColonnes) + ") : ");
         coupValide = (colonne >= 1 && colonne <= nbColonnes);
+
         if (!coupValide)
         {
             continue;

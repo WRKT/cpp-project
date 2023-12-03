@@ -15,7 +15,8 @@ public:
     bool PartieFinie() const override;
     std::vector<std::pair<int, int>> CoupsPossibles() override;
     void InitialiseJeu() const override;
-    void VoirCoupsPossibles();
+    void AfficherResultat() const override;
+    void VoirCoupsPossibles() const;
     bool EstCoupValide(int x, int y, Jeton jeton) const;
     void RetournerJetons(const int x, const int y, Jeton jeton);
     Jeton DetermineGagnant() const;
