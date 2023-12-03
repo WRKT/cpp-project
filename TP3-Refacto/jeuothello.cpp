@@ -23,9 +23,10 @@ void JeuOthello::Jouer()
     }
 
     Jeton gagnant = DetermineGagnant();
+
     if (gagnant != Jeton::Vide)
     {
-        std::cout << "Le gagnant est " << (gagnant == Jeton::X ? joueur1->getNom() : joueur2->getNom()) << "!" << std::endl;
+        modeAffichage->AfficherMessage ("Le gagnant est " + (gagnant == joueur1->getJeton()? joueur1->getNom() : joueur2->getNom()) + "!");
     }
     else
     {
@@ -42,7 +43,7 @@ void JeuOthello::Tour()
     modeAffichage->AfficherMessage("Coups possibles pour " + joueurCourant->getNom() + " :");
     for (auto coup : coupsPossibles)
     {
-        modeAffichage->AfficherMessage(std::to_string(coup.first + 1) + ", " + std::to_string(coup.second + 1));
+        modeAffichage->AfficherMessage("(" + std::to_string(coup.first + 1) + "," + std::to_string(coup.second + 1) + ") ");
     }
 
     if (coupsPossibles.empty())
