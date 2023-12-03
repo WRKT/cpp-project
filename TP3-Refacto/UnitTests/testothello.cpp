@@ -67,20 +67,21 @@ TEST_F(TestOthello, CheckAGagne)
     std::uniform_int_distribution<> distrib(0, 1);
 
     int countX = 0, countO = 0;
+    int nbMoitieJetons = grille->getNbLigne() * grille->getNbColonne() /2;
 
     for (int i = 0; i < grille->getNbLigne(); i++) {
         for (int j = 0; j < grille->getNbColonne(); j++) {
             int randomValue = distrib(gen);
 
-            if (randomValue == 0 && countX < 31) {
+            if (randomValue == 0 && countX < nbMoitieJetons - 1) {
                 grille->ChangeCellule(i, j, Jeton::X);
                 countX++;
-            } else if (randomValue == 1 && countO < 33) {
+            } else if (randomValue == 1 && countO < nbMoitieJetons + 1) {
                 grille->ChangeCellule(i, j, Jeton::O);
                 countO++;
             } else {
-                grille->ChangeCellule(i, j, (countX < 31) ? Jeton::X : Jeton::O);
-                (countX < 33) ? countX++ : countO++;
+                grille->ChangeCellule(i, j, (countX < nbMoitieJetons - 1) ? Jeton::X : Jeton::O);
+                (countX < nbMoitieJetons + 1) ? countX++ : countO++;
             }
         }
     }
@@ -97,20 +98,21 @@ TEST_F(TestOthello, CheckEgalite)
     std::uniform_int_distribution<> distrib(0, 1);
 
     int countX = 0, countO = 0;
+    int nbMoitieJetons = grille->getNbLigne() * grille->getNbColonne()/ 2;
 
     for (int i = 0; i < grille->getNbLigne(); i++) {
         for (int j = 0; j < grille->getNbColonne(); j++) {
             int randomValue = distrib(gen);
 
-            if (randomValue == 0 && countX < 32) {
+            if (randomValue == 0 && countX < nbMoitieJetons) {
                 grille->ChangeCellule(i, j, Jeton::X);
                 countX++;
-            } else if (randomValue == 1 && countO < 32) {
+            } else if (randomValue == 1 && countO < nbMoitieJetons) {
                 grille->ChangeCellule(i, j, Jeton::O);
                 countO++;
             } else {
-                grille->ChangeCellule(i, j, (countX < 32) ? Jeton::X : Jeton::O);
-                (countX < 32) ? countX++ : countO++;
+                grille->ChangeCellule(i, j, (countX < nbMoitieJetons) ? Jeton::X : Jeton::O);
+                (countX < nbMoitieJetons) ? countX++ : countO++;
             }
         }
     }
