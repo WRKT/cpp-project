@@ -16,7 +16,7 @@ void JeuPuissance4::Jouer() {
         Tour();
         if (AGagne()) {
             modeAffichage->AfficherGrille(grille);
-            modeAffichage->AfficherMessage ("Le joueur " + joueurCourant->getNom() + " a gagné !");
+            modeAffichage->AfficherMessage ("Le joueur " + joueurCourant->getInformations() + " a gagné !");
                 return;
         }
 
@@ -59,6 +59,8 @@ void JeuPuissance4::Tour() {
 
             auto coupChoisi = coupsPossibles[distrib(gen)];
             grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
+
+            modeAffichage->AfficherMessage(joueurCourant->getInformations() + " a joué !");
         }
     }
 }
@@ -76,9 +78,13 @@ std::vector<std::pair<int, int>> JeuPuissance4::CoupsPossibles() {
     return coupsPossibles;
 }
 
+void JeuPuissance4::GetResultat() const
+{
+
+}
+
 void JeuPuissance4::InitialiseJeu() const {
     modeAffichage->AfficherGrille(grille);
-
 }
 
 bool JeuPuissance4::PartieFinie() const {

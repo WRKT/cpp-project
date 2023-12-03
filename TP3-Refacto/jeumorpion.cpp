@@ -21,7 +21,7 @@ void JeuMorpion::Jouer()
         if (AGagne())
         {
             modeAffichage->AfficherGrille(grille);
-            modeAffichage->AfficherMessage("Le joueur " + joueurCourant->getNom() + " a gagné !");
+            modeAffichage->AfficherMessage("Le joueur " + joueurCourant->getInformations() + " a gagné !");
             return;
         }
 
@@ -62,7 +62,7 @@ void JeuMorpion::Tour()
         std::pair<int, int> coupChoisi = coupsPossibles[indiceCoupChoisi];
         grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
 
-        modeAffichage->AfficherMessage(joueurCourant->getNom() + " a joué ");
+        modeAffichage->AfficherMessage(joueurCourant->getInformations() + " a joué ");
     }
 }
 void JeuMorpion::InitialiseJeu() const
@@ -84,6 +84,11 @@ std::vector<std::pair<int, int>> JeuMorpion::CoupsPossibles()
         }
     }
     return coups;
+}
+
+void JeuMorpion::GetResultat() const
+{
+
 }
 
 bool JeuMorpion::AGagne() const
