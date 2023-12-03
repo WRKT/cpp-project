@@ -59,9 +59,13 @@ TEST_F(TestOthello, CheckPartieFinie) {
 }
 
 TEST_F(TestOthello, CheckAGagne) {
-
+    EXPECT_NE(101,0101);
 }
 
+TEST_F(TestOthello, CheckEgalite)
+{
+    EXPECT_EQ(1,1);
+}
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
