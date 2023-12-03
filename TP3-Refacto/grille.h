@@ -16,6 +16,7 @@ public:
     Jeton GetCellule(const int x, const int y) const override;
     void ChangeCellule(const int x, const int y, Jeton jeton) override;
     bool EstRemplie() const override;
+    int CompteJetons(Jeton jeton) const override;
 
 private:
     const int nbLignes, nbColonnes;

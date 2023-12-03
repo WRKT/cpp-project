@@ -12,6 +12,7 @@ public:
     virtual Jeton GetCellule(const int x, const int y) const = 0;
     virtual void ChangeCellule(const int x, const int y, Jeton jeton) = 0;
     virtual bool ACaseVide(const int, const int) const = 0;
+    virtual int CompteJetons(Jeton jeton) const = 0;
     virtual bool EstRemplie() const = 0;
     virtual ~IGrille() = default;
 };
