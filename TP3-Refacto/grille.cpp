@@ -41,19 +41,20 @@ bool Grille::EstRemplie() const {
 
 int Grille::CompteJetons(Jeton jeton) const
 {
-    int count = 0;
-    for (int i = 0; i < getNbLigne(); ++i)
+    int nbJeton = 0;
+    for (int i = 0; i < getNbColonne(); ++i)
     {
-        for (int j = 0; j < getNbColonne(); ++j)
+        for (int j = 0; j < getNbLigne(); ++j)
         {
-            if (GetCellule(i, j) == jeton)
+            if (table[i][j] == jeton)
             {
-                count++;
+                ++nbJeton;
             }
         }
     }
-    return count;
+    return nbJeton;
 }
+
 
 
 

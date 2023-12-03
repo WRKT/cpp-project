@@ -5,6 +5,7 @@
 #include <limits>
 #include "TypesJeu.h"
 #include "inputconsole.h"
+#include "affichageconsole.h"
 #include "IJeu.h"
 #include "IJoueur.h"
 #include "joueurfactory.h"
@@ -12,9 +13,11 @@
 
 int main()
 {
-    std::cout << "=========================================" << std::endl;
-    std::cout << "  Bienvenue dans notre espace de jeux !  " << std::endl;
-    std::cout << "=========================================" << std::endl;
+    AffichageConsole ui;
+
+    ui.AfficherMessage("=========================================");
+    ui.AfficherMessage("  Bienvenue dans notre espace de jeux !  ");
+    ui.AfficherMessage("=========================================");
 
     bool rejouer;
 
@@ -30,14 +33,14 @@ int main()
         if (modeJeu == 1)
         {
             std::string prenomJoueur1 = InputConsole::demanderPrenomJoueur("Entrez le prénom du premier joueur : ");
-            std::shared_ptr<IJoueur> joueur1 = JoueurFactory::CreerJoueurHumain(prenomJoueur1, Jeton::X);
+                joueur1 = JoueurFactory::CreerJoueurHumain(prenomJoueur1, Jeton::X);
             std::string prenomJoueur2 = InputConsole::demanderPrenomJoueur("Entrez le prénom du second joueur : ");
-            joueur2 = JoueurFactory::CreerJoueurHumain(prenomJoueur2, Jeton::O);
+                joueur2 = JoueurFactory::CreerJoueurHumain(prenomJoueur2, Jeton::O);
         }
-        else if(modeJeu == 2)
+        else if (modeJeu == 2)
         {
             std::string prenomJoueur1 = InputConsole::demanderPrenomJoueur("Entrez le prénom du premier joueur : ");
-            std::shared_ptr<IJoueur> joueur1 = JoueurFactory::CreerJoueurHumain(prenomJoueur1, Jeton::X);
+                joueur1 = JoueurFactory::CreerJoueurHumain(prenomJoueur1, Jeton::X);
             joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
         }
         else
@@ -45,7 +48,6 @@ int main()
             joueur1 = JoueurFactory::CreerJoueurOrdinateur(Jeton::X);
             joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
         }
-
         std::unique_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2);
         jeu->Jouer();
 
@@ -53,7 +55,7 @@ int main()
 
     } while (rejouer);
 
-    std::cout << "Merci d'avoir utilise le programme. Au revoir !" << std::endl;
+    ui.AfficherMessage("Merci d'avoir utilise le programme. Au revoir !");
 
     return 0;
 }

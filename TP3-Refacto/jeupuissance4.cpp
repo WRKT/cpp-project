@@ -10,7 +10,7 @@ JeuPuissance4::JeuPuissance4(std::shared_ptr<IGrille> grille, std::shared_ptr<IJ
 
 void JeuPuissance4::Jouer() {
 
-    modeAffichage->AfficherGrille(grille);
+    InitialiseJeu();
 
     while (!PartieFinie()) {
         Tour();
@@ -48,7 +48,7 @@ void JeuPuissance4::Tour() {
                 }
             }
             if (!coupValide) {
-                modeAffichage->AfficherErreur ("Coup invalide.");
+                modeAffichage->AfficherErreur("Coup invalide.");
             }
         }
     } else {
@@ -76,6 +76,10 @@ std::vector<std::pair<int, int>> JeuPuissance4::CoupsPossibles() {
     return coupsPossibles;
 }
 
+void JeuPuissance4::InitialiseJeu() const {
+    modeAffichage->AfficherGrille(grille);
+
+}
 
 bool JeuPuissance4::PartieFinie() const {
     return AGagne() || grille->EstRemplie();
@@ -89,7 +93,7 @@ bool JeuPuissance4::AGagne() const {
 
 bool JeuPuissance4::VerifieLignes() const {
     for (int i = 0; i < grille->getNbLigne(); ++i) {
-            for (int j = 0; j < 4; ++j) {
+        for (int j = 0; j < 4; ++j) {
             Jeton premierJeton = grille->GetCellule(i, j);
             if (premierJeton != Jeton::Vide &&
                 premierJeton == grille->GetCellule(i, j + 1) &&
@@ -97,14 +101,14 @@ bool JeuPuissance4::VerifieLignes() const {
                 premierJeton == grille->GetCellule(i, j + 3)) {
                 return true;
             }
-            }
+        }
     }
     return false;
 }
 
 bool JeuPuissance4::VerifieColonnes() const {
     for (int j = 0; j < grille->getNbColonne(); ++j) {
-            for (int i = 0; i < grille->getNbLigne() - 3; ++i) {
+        for (int i = 0; i < grille->getNbLigne() - 3; ++i) {
             Jeton premierJeton = grille->GetCellule(i, j);
             if (premierJeton != Jeton::Vide &&
                 premierJeton == grille->GetCellule(i + 1, j) &&
@@ -119,7 +123,7 @@ bool JeuPuissance4::VerifieColonnes() const {
 
 bool JeuPuissance4::VerifieDiagonales() const {
     for (int i = 0; i < grille->getNbLigne() - 3; ++i) {
-            for (int j = 0; j < 4; ++j) {
+        for (int j = 0; j < 4; ++j) {
             Jeton premierJeton = grille->GetCellule(i, j);
             if (premierJeton != Jeton::Vide &&
                 premierJeton == grille->GetCellule(i + 1, j + 1) &&
@@ -127,10 +131,11 @@ bool JeuPuissance4::VerifieDiagonales() const {
                 premierJeton == grille->GetCellule(i + 3, j + 3)) {
                 return true;
             }
-            }
+        }
     }
+
     for (int i = 3; i < grille->getNbLigne(); ++i) {
-            for (int j = 0; j < 4; ++j) {
+        for (int j = 0; j < 4; ++j) {
             Jeton premierJeton = grille->GetCellule(i, j);
             if (premierJeton != Jeton::Vide &&
                 premierJeton == grille->GetCellule(i - 1, j + 1) &&
@@ -138,7 +143,7 @@ bool JeuPuissance4::VerifieDiagonales() const {
                 premierJeton == grille->GetCellule(i - 3, j + 3)) {
                 return true;
             }
-            }
+        }
     }
 
     return false;
