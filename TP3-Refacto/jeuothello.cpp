@@ -173,8 +173,8 @@ bool JeuOthello::PeutRetourner(int x, int y, int dx, int dy, Jeton jeton) const 
 
 bool JeuOthello::VerifiePions() const
 {
-    int countNoir = ComptePions(Jeton::X);
-    int countBlanc = ComptePions(Jeton::O);
+    int countNoir = grille->CompteJetons(Jeton::X);
+    int countBlanc = grille->CompteJetons(Jeton::O);
 
     if (countNoir != countBlanc)
     {
@@ -214,8 +214,8 @@ bool JeuOthello::EstCoupValide(int x, int y, Jeton jeton) const
 
 Jeton JeuOthello::DetermineGagnant() const {
 
-    int countNoir = ComptePions(Jeton::X);
-    int countBlanc = ComptePions(Jeton::O);
+    int countNoir = grille->CompteJetons(Jeton::X);
+    int countBlanc = grille->CompteJetons(Jeton::O);
 
     if (countNoir > countBlanc) {
         return Jeton::X;
@@ -224,21 +224,4 @@ Jeton JeuOthello::DetermineGagnant() const {
     } else {
         return Jeton::Vide;
     }
-}
-
-// Je pense que ComptePions est la responsabilité de Grille, et non du Jeu
-int JeuOthello::ComptePions(Jeton jeton) const
-{
-    int count = 0;
-    for (int i = 0; i < grille->getNbLigne(); ++i)
-    {
-        for (int j = 0; j < grille->getNbColonne(); ++j)
-        {
-            if (grille->GetCellule(i, j) == jeton)
-            {
-                count++;
-            }
-        }
-    }
-    return count;
 }

@@ -38,15 +38,6 @@ TEST_F(TestOthello, CheckCompteJeton) {
     ASSERT_FALSE(grille->CompteJetons(Jeton::X) == grille->CompteJetons(Jeton::O));
 }
 
-TEST_F(TestOthello, CheckCoupValide) {
-
-
-}
-
-TEST_F(TestOthello, CheckPeutRetourner) {
-
-
-}
 
 TEST_F(TestOthello, CheckPartieFinie) {
 

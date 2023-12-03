@@ -58,7 +58,8 @@ void JeuPuissance4::Tour() {
             std::uniform_int_distribution<> distrib(0, coupsPossibles.size() - 1);
 
             auto coupChoisi = coupsPossibles[distrib(gen)];
-            grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());        }
+            grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
+        }
     }
 }
 
