@@ -16,6 +16,7 @@ add_executable(TestOthello testothello.cpp
     ../inputconsole.h ../inputconsole.cpp
 
 )
+
 target_link_libraries(
     TestOthello
     gtest_main

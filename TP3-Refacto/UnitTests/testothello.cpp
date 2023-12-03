@@ -38,7 +38,6 @@ TEST_F(TestOthello, CheckCompteJeton) {
     ASSERT_FALSE(grille->CompteJetons(Jeton::X) == grille->CompteJetons(Jeton::O));
 }
 
-
 TEST_F(TestOthello, CheckPartieFinie) {
 
     std::random_device rd;
@@ -49,16 +48,17 @@ TEST_F(TestOthello, CheckPartieFinie) {
         for (int j = 0; j < grille->getNbColonne(); j++) {
             int randomValue = distrib(gen);
 
-            Jeton jeton = (randomValue == 0) ? Jeton::X : Jeton::O;
+            Jeton jetonRandom = (randomValue == 0) ? Jeton::X : Jeton::O;
 
-            grille->ChangeCellule(i, j, jeton);
+            grille->ChangeCellule(i, j, jetonRandom);
         }
     }
 
     ASSERT_TRUE(jeu->PartieFinie());
 }
 
-TEST_F(TestOthello, CheckAGagne) {
+TEST_F(TestOthello, CheckAGagne)
+{
     EXPECT_NE(101,0101);
 }
 
@@ -66,6 +66,7 @@ TEST_F(TestOthello, CheckEgalite)
 {
     EXPECT_EQ(1,1);
 }
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
