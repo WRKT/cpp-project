@@ -21,14 +21,7 @@ void JeuOthello::Jouer()
         modeAffichage->AfficherGrille(grille);
     }
 
-    if (AGagne())
-    {
-        modeAffichage->AfficherMessage ("Le gagnant est " + (DetermineGagnant() == joueur1->getJeton() ? joueur1->getInformations() : joueur2->getInformations()) + " !");
-    }
-    else
-    {
-        modeAffichage->AfficherMessage("La partie se termine par une égalité.");
-    }
+    AfficherResultat();
 }
 
 void JeuOthello::Tour()
@@ -67,6 +60,8 @@ void JeuOthello::Tour()
             }
         }
     } else {
+        modeAffichage->AfficherMessage("", 2);
+
         std::random_device rd;
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> distrib(0, coupsPossibles.size() - 1);
@@ -77,7 +72,7 @@ void JeuOthello::Tour()
         grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
         RetournerJetons(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
 
-        modeAffichage->AfficherMessage("");
+
         modeAffichage->AfficherMessage(joueurCourant->getInformations() + " a joué.");
     }
 }
@@ -98,9 +93,20 @@ void JeuOthello::InitialiseJeu() const {
     modeAffichage->AfficherGrille(grille);
 }
 
-void JeuOthello::GetResultat() const
+void JeuOthello::AfficherResultat() const
 {
+    modeAffichage->AfficherMessage("--> Score : ");
+    modeAffichage->AfficherMessage(joueur1->getInformations() + ": " + std::to_string(grille->CompteJetons(joueur1->getJeton())));
+    modeAffichage->AfficherMessage(joueur2->getInformations() + ": " + std::to_string(grille->CompteJetons(joueur2->getJeton())));
 
+    if (AGagne())
+    {
+        modeAffichage->AfficherMessage ("Le gagnant est " + (DetermineGagnant() == joueur1->getJeton() ? joueur1->getInformations() : joueur2->getInformations()) + " !");
+    }
+    else
+    {
+        modeAffichage->AfficherMessage("La partie se termine par une égalité.");
+    }
 }
 
 std::vector<std::pair<int, int>> JeuOthello::CoupsPossibles()
@@ -155,13 +161,13 @@ void JeuOthello::RetournerJetons(const int x, const int y, Jeton jeton)
 
 bool JeuOthello::PeutRetourner(int x, int y, int directionX, int directionY, Jeton jeton) const
 {
-    int l = x + directionX;
-    int c = y + directionY;
+    int ligne = x + directionX;
+    int colonne = y + directionY;
     bool trouveAdversaire = false;
 
-    while (l >= 0 && l < grille->getNbLigne() && c >= 0 && c < grille->getNbColonne())
+    while (ligne >= 0 && ligne < grille->getNbLigne() && colonne >= 0 && colonne < grille->getNbColonne())
     {
-        Jeton jetonActuel = grille->GetCellule(l, c);
+        Jeton jetonActuel = grille->GetCellule(ligne, colonne);
 
         if (jetonActuel == Jeton::Vide)
         {
@@ -176,8 +182,8 @@ bool JeuOthello::PeutRetourner(int x, int y, int directionX, int directionY, Jet
             trouveAdversaire = true;
         }
 
-        l += directionX;
-        c += directionY;
+        ligne += directionX;
+        colonne += directionY;
     }
 
     return false;
