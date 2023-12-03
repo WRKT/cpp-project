@@ -83,7 +83,7 @@ void JeuOthello::Tour()
         grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
         RetournerJetons(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
 
-        modeAffichage->AfficherMessage(joueurCourant->getNom() + " a joué.");
+        modeAffichage->AfficherMessage(joueurCourant->getNom() + "(" + static_cast<char>(joueurCourant->getJeton ()) + ") a joué.");
     }
 }
 

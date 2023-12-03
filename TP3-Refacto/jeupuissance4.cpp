@@ -39,6 +39,7 @@ void JeuPuissance4::Tour() {
         int colonne;
         while (!coupValide) {
             colonne = InputConsole::demanderCoupPuissance4(grille->getNbColonne());
+
             for (auto& coup : coupsPossibles) {
                 if (coup.second == colonne) {
                     grille->ChangeCellule(coup.first, colonne, joueurCourant->getJeton());
@@ -46,7 +47,6 @@ void JeuPuissance4::Tour() {
                     break;
                 }
             }
-
             if (!coupValide) {
                 modeAffichage->AfficherErreur("Coup invalide.");
             }
@@ -58,7 +58,8 @@ void JeuPuissance4::Tour() {
             std::uniform_int_distribution<> distrib(0, coupsPossibles.size() - 1);
 
             auto coupChoisi = coupsPossibles[distrib(gen)];
-            grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());        }
+            grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
+        }
     }
 }
 

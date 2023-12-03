@@ -15,6 +15,7 @@ public:
     bool ACaseVide(const int x, const int y) const override;
     Jeton GetCellule(const int x, const int y) const override;
     void ChangeCellule(const int x, const int y, Jeton jeton) override;
+    int CompteJetons(Jeton jeton) const override;
     bool EstRemplie() const override;
     int CompteJetons(Jeton jeton) const override;
 
