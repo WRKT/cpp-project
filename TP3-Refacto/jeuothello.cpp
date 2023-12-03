@@ -12,13 +12,8 @@ JeuOthello::JeuOthello(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur>
 
 void JeuOthello::Jouer()
 {
-    int centreX = grille->getNbLigne() / 2 - 1;
-    int centreY = grille->getNbColonne() / 2 - 1;
-    grille->ChangeCellule(centreX, centreY, Jeton::X);
-    grille->ChangeCellule(centreX + 1, centreY, Jeton::O);
-    grille->ChangeCellule(centreX, centreY + 1, Jeton::O);
-    grille->ChangeCellule(centreX + 1, centreY + 1, Jeton::X);
-    modeAffichage->AfficherGrille(grille);
+
+    InitialiseJeu();
 
     while (!PartieFinie())
     {
@@ -91,14 +86,20 @@ void JeuOthello::Tour()
     }
 }
 
-bool JeuOthello::AGagne() const
-{
-    return VerifiePions();
-}
-
 bool JeuOthello::PartieFinie() const
 {
     return grille->EstRemplie();
+}
+
+
+void JeuOthello::InitialiseJeu() const {
+    int centreX = grille->getNbLigne() / 2 - 1;
+    int centreY = grille->getNbColonne() / 2 - 1;
+    grille->ChangeCellule(centreX, centreY, Jeton::X);
+    grille->ChangeCellule(centreX + 1, centreY, Jeton::O);
+    grille->ChangeCellule(centreX, centreY + 1, Jeton::O);
+    grille->ChangeCellule(centreX + 1, centreY + 1, Jeton::X);
+    modeAffichage->AfficherGrille(grille);
 }
 
 std::vector<std::pair<int, int>> JeuOthello::CoupsPossibles()
@@ -146,6 +147,12 @@ bool JeuOthello::EstDirectionValide(int x, int y, int dx, int dy, Jeton jeton) c
 
     return false;
 }
+
+
+bool JeuOthello::AGagne() const {
+    return false;
+}
+
 
 void JeuOthello::RetournerJetons(const int x, const int y, Jeton jeton)
 {
@@ -200,21 +207,6 @@ bool JeuOthello::PeutRetourner(int x, int y, int dx, int dy, Jeton jeton) const
     return false;
 }
 
-bool JeuOthello::VerifiePions() const
-{
-    int countNoir = ComptePions(Jeton::X);
-    int countBlanc = ComptePions(Jeton::O);
-
-    if (countNoir != countBlanc)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
 bool JeuOthello::EstCoupValide(int x, int y, Jeton jeton) const
 {
     if (x < 0 || x >= grille->getNbLigne() || y < 0 || y >= grille->getNbColonne() || grille->GetCellule(x, y) != Jeton::Vide)
@@ -242,8 +234,8 @@ bool JeuOthello::EstCoupValide(int x, int y, Jeton jeton) const
 
 Jeton JeuOthello::DetermineGagnant() const
 {
-    int countNoir = ComptePions(Jeton::X);
-    int countBlanc = ComptePions(Jeton::O);
+    int countNoir = grille->CompteJetons(Jeton::X);
+    int countBlanc = grille->CompteJetons(Jeton::O);
 
     if (countNoir > countBlanc)
     {
@@ -257,21 +249,4 @@ Jeton JeuOthello::DetermineGagnant() const
     {
         return Jeton::Vide;
     }
-}
-
-// Je pense que ComptePions est la responsabilité de Grille, et non du Jeu
-int JeuOthello::ComptePions(Jeton jeton) const
-{
-    int count = 0;
-    for (int i = 0; i < grille->getNbLigne(); ++i)
-    {
-        for (int j = 0; j < grille->getNbColonne(); ++j)
-        {
-            if (grille->GetCellule(i, j) == jeton)
-            {
-                count++;
-            }
-        }
-    }
-    return count;
 }

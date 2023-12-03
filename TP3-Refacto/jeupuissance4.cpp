@@ -10,7 +10,7 @@ JeuPuissance4::JeuPuissance4(std::shared_ptr<IGrille> grille, std::shared_ptr<IJ
 
 void JeuPuissance4::Jouer() {
 
-    modeAffichage->AfficherGrille(grille);
+    InitialiseJeu();
 
     while (!PartieFinie()) {
         Tour();
@@ -75,6 +75,10 @@ std::vector<std::pair<int, int>> JeuPuissance4::CoupsPossibles() {
     return coupsPossibles;
 }
 
+void JeuPuissance4::InitialiseJeu() const {
+    modeAffichage->AfficherGrille(grille);
+
+}
 
 bool JeuPuissance4::PartieFinie() const {
     return AGagne() || grille->EstRemplie();

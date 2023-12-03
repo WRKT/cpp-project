@@ -12,7 +12,7 @@ JeuMorpion::JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur>
 
 void JeuMorpion::Jouer()
 {
-    modeAffichage->AfficherGrille(grille);
+    InitialiseJeu();
 
     while (!PartieFinie())
     {
@@ -55,8 +55,9 @@ void JeuMorpion::Tour() {
             grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
 
             modeAffichage->AfficherMessage(joueurCourant->getNom() + " a joué ");
-
-    }
+void JeuMorpion::InitialiseJeu() const
+{
+    modeAffichage->AfficherGrille(grille);
 }
 
 std::vector<std::pair<int, int>> JeuMorpion::CoupsPossibles() {
