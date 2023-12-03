@@ -22,11 +22,9 @@ void JeuOthello::Jouer()
         modeAffichage->AfficherGrille(grille);
     }
 
-    Jeton gagnant = DetermineGagnant();
-
-    if (gagnant != Jeton::Vide)
+    if (AGagne())
     {
-        modeAffichage->AfficherMessage ("Le gagnant est " + (gagnant == joueur1->getJeton()? joueur1->getNom() : joueur2->getNom()) + "!");
+        modeAffichage->AfficherMessage ("Le gagnant est " + (DetermineGagnant() == joueur1->getJeton() ? joueur1->getNom() : joueur2->getNom()) + "!");
     }
     else
     {
@@ -94,6 +92,7 @@ bool JeuOthello::PartieFinie() const
 
 
 void JeuOthello::InitialiseJeu() const {
+
     int centreX = grille->getNbLigne() / 2 - 1;
     int centreY = grille->getNbColonne() / 2 - 1;
     grille->ChangeCellule(centreX, centreY, Jeton::X);
@@ -151,7 +150,10 @@ bool JeuOthello::EstDirectionValide(int x, int y, int dx, int dy, Jeton jeton) c
 
 
 bool JeuOthello::AGagne() const {
-    return false;
+
+    Jeton gagnant = DetermineGagnant();
+
+    return gagnant == joueur1->getJeton() || gagnant == joueur2->getJeton();
 }
 
 

@@ -40,6 +40,7 @@ TEST_F(TestOthello, CheckCompteJeton) {
 
 TEST_F(TestOthello, CheckPartieFinie) {
 
+    // Cas 1: grille remplie de valeurs aleatoire de Jeton O et X
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(0, 1);
@@ -59,12 +60,62 @@ TEST_F(TestOthello, CheckPartieFinie) {
 
 TEST_F(TestOthello, CheckAGagne)
 {
-    EXPECT_NE(101,0101);
+
+    // Cas 2 : grille remplie avec 31 jetons X et 33 jetons O -> Partie serré mais une partie gagnante :)
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(0, 1);
+
+    int countX = 0, countO = 0;
+
+    for (int i = 0; i < grille->getNbLigne(); i++) {
+        for (int j = 0; j < grille->getNbColonne(); j++) {
+            int randomValue = distrib(gen);
+
+            if (randomValue == 0 && countX < 31) {
+                grille->ChangeCellule(i, j, Jeton::X);
+                countX++;
+            } else if (randomValue == 1 && countO < 33) {
+                grille->ChangeCellule(i, j, Jeton::O);
+                countO++;
+            } else {
+                grille->ChangeCellule(i, j, (countX < 31) ? Jeton::X : Jeton::O);
+                (countX < 33) ? countX++ : countO++;
+            }
+        }
+    }
+
+    ASSERT_TRUE(jeu->AGagne());
 }
 
 TEST_F(TestOthello, CheckEgalite)
 {
-    EXPECT_EQ(1,1);
+
+    // Dernier cas : grille remplie equitablement
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(0, 1);
+
+    int countX = 0, countO = 0;
+
+    for (int i = 0; i < grille->getNbLigne(); i++) {
+        for (int j = 0; j < grille->getNbColonne(); j++) {
+            int randomValue = distrib(gen);
+
+            if (randomValue == 0 && countX < 32) {
+                grille->ChangeCellule(i, j, Jeton::X);
+                countX++;
+            } else if (randomValue == 1 && countO < 32) {
+                grille->ChangeCellule(i, j, Jeton::O);
+                countO++;
+            } else {
+                grille->ChangeCellule(i, j, (countX < 32) ? Jeton::X : Jeton::O);
+                (countX < 32) ? countX++ : countO++;
+            }
+        }
+    }
+
+    ASSERT_FALSE(jeu->AGagne());
 }
 
 int main(int argc, char **argv) {
