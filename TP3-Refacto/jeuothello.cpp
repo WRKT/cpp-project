@@ -24,7 +24,7 @@ void JeuOthello::Jouer()
 
     if (AGagne())
     {
-        modeAffichage->AfficherMessage ("Le gagnant est " + (DetermineGagnant() == joueur1->getJeton() ? joueur1->getNom() : joueur2->getNom()) + (DetermineGagnant() == joueur1->getJeton() ? static_cast<char>(joueur1->getJeton()) : static_cast<char>(joueur2->getJeton())) + " !");
+        modeAffichage->AfficherMessage ("Le gagnant est " + (DetermineGagnant() == joueur1->getJeton() ? joueur1->getInformations() : joueur2->getInformations()) + " !");
     }
     else
     {
@@ -38,20 +38,21 @@ void JeuOthello::Tour()
     bool coupValide = false;
 
     // afficher les coups possibles
-    modeAffichage->AfficherMessage("Coups possibles pour " + joueurCourant->getNom() + " :");
+    modeAffichage->AfficherMessage("Coups possibles pour " + joueurCourant->getInformations() + " :");
     for (auto coup : coupsPossibles)
     {
-        modeAffichage->AfficherMessage("(" + std::to_string(coup.first + 1) + "," + std::to_string(coup.second + 1) + ") ");
+        modeAffichage->AfficherMessage("(" + std::to_string(coup.first + 1) + "," + std::to_string(coup.second + 1) + ") ", 0);
     }
 
     if (coupsPossibles.empty())
     {
-        modeAffichage->AfficherMessage("Aucun coup possible pour " + joueurCourant->getNom() + ". Passage au joueur suivant.");
+        modeAffichage->AfficherMessage("Aucun coup possible pour " + joueurCourant->getInformations() + ". Passage au joueur suivant.");
         return;
     }
 
     else if (joueurCourant->estHumain())
     {
+        modeAffichage->AfficherMessage("");
         while (!coupValide)
         {
             std::pair<int, int> coup = InputConsole::demanderCoupOthello(grille->getNbLigne());
@@ -70,7 +71,6 @@ void JeuOthello::Tour()
     }
     else
     {
-
         std::random_device rd;
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> distrib(0, coupsPossibles.size() - 1);
@@ -80,8 +80,8 @@ void JeuOthello::Tour()
 
         grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
         RetournerJetons(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
-
-        modeAffichage->AfficherMessage(joueurCourant->getNom() + "(" + static_cast<char>(joueurCourant->getJeton ()) + ") a joué.");
+        modeAffichage->AfficherMessage("");
+        modeAffichage->AfficherMessage(joueurCourant->getInformations() + " a joué.");
     }
 }
 
