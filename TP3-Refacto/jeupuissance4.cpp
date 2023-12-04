@@ -15,7 +15,7 @@ void JeuPuissance4::Jouer() {
     while (!PartieFinie()) {
         Tour();
         if (AGagne()) {
-
+            AfficherResultat();
                 return;
         }
 
