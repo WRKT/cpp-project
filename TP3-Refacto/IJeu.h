@@ -11,6 +11,7 @@ public:
     virtual void InitialiseJeu() const = 0;
     virtual bool AGagne() const = 0;
     virtual bool PartieFinie() const = 0;
+    virtual void AfficherResultat() const = 0;
     virtual ~IJeu() = default;
 };
 

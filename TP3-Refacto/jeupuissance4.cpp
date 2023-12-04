@@ -16,11 +16,9 @@ void JeuPuissance4::Jouer()
     while (!PartieFinie())
     {
         Tour();
-        if (AGagne())
-        {
-            modeAffichage->AfficherGrille(grille);
-            modeAffichage->AfficherMessage("Le joueur " + joueurCourant->getNom() + " a gagné !");
-            return;
+        if (AGagne()) {
+            AfficherResultat();
+                return;
         }
 
         if (joueurCourant->getJeton() == joueur1->getJeton())
@@ -48,19 +46,16 @@ void JeuPuissance4::Tour()
         while (!coupValide)
         {
             colonne = InputConsole::demanderCoupPuissance4(grille->getNbColonne());
-            for (auto &coup : coupsPossibles)
-            {
-                if (coup.second == colonne)
-                {
+            for (auto& coup : coupsPossibles) {
+                if (coup.second == colonne) {
                     grille->ChangeCellule(coup.first, colonne, joueurCourant->getJeton());
                     coupValide = true;
                     break;
                 }
             }
 
-            if (!coupValide)
-            {
-                std::cout << "Coup invalide, veuillez réessayer." << std::endl;
+            if (!coupValide) {
+                modeAffichage->AfficherErreur("Coup invalide.");
             }
         }
     }
@@ -74,6 +69,7 @@ void JeuPuissance4::Tour()
 
             auto coupChoisi = coupsPossibles[distrib(gen)];
             grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
+            modeAffichage->AfficherMessage(joueurCourant->getInformations() + " a joué !");
         }
     }
 }
@@ -95,8 +91,17 @@ std::vector<std::pair<int, int>> JeuPuissance4::CoupsPossibles()
     return coupsPossibles;
 }
 
+<<<<<<< TP3-Refacto/jeupuissance4.cpp
 void JeuPuissance4::InitialiseJeu() const
 {
+=======
+void JeuPuissance4::AfficherResultat() const
+{
+    modeAffichage->AfficherGrille(grille);
+    modeAffichage->AfficherMessage ("Le joueur " + joueurCourant->getInformations() + " a gagné !");
+}
+
+void JeuPuissance4::InitialiseJeu() const {
     modeAffichage->AfficherGrille(grille);
 }
 
@@ -108,4 +113,5 @@ bool JeuPuissance4::PartieFinie() const
 bool JeuPuissance4::AGagne() const
 {
     return grille->VerifieLigne(4, joueurCourant->getJeton()) || grille->VerifieColonne(4, joueurCourant->getJeton()) || grille->VerifieDiagonale(4, joueurCourant->getJeton());
+
 }

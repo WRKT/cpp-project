@@ -50,6 +50,7 @@ bool Grille::EstRemplie() const
     return true;
 }
 
+<<<<<<< TP3-Refacto/grille.cpp
 bool Grille::VerifieLigne(const int nbJetons, const Jeton jeton) const
 {
     for (int i = 0; i < getNbLigne(); i++)
@@ -68,6 +69,23 @@ bool Grille::VerifieLigne(const int nbJetons, const Jeton jeton) const
     }
     return false;
 }
+
+int Grille::CompteJetons(Jeton jeton) const
+{
+    int nbJeton = 0;
+    for (int i = 0; i < getNbColonne(); ++i)
+    {
+        for (int j = 0; j < getNbLigne(); ++j)
+        {
+            if (table[i][j] == jeton)
+            {
+                ++nbJeton;
+            }
+        }
+    }
+    return nbJeton;
+}
+
 
 bool Grille::VerifieColonne(const int nbJetons, const Jeton jeton) const
 {
@@ -107,21 +125,6 @@ bool Grille::VerifieDiagonale(const int nbJetons, const Jeton jeton) const
     return false;
 }
 
-int Grille::CompteJetons(Jeton jeton) const
-{
-    int nbJeton = 0;
-    for (int i = 0; i < getNbColonne(); ++i)
-    {
-        for (int j = 0; j < getNbLigne(); ++j)
-        {
-            if (table[i][j] == jeton)
-            {
-                ++nbJeton;
-            }
-        }
-    }
-    return nbJeton;
-}
 
 int Grille::CompteSequence(const int ligneDepart, const int colonneDepart, const int dirLigne, const int dirColonne) const
 {
