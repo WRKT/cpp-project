@@ -3,39 +3,42 @@
 
 void AffichageConsole::AfficherGrille(const std::shared_ptr<IGrille> grille) const
 {
+    const int nbColonnes = grille->getNbColonne();
+    const int nbLignes = grille->getNbLigne();
+
     std::cout << "    ";
-    for (int j = 0; j < grille->getNbColonne(); j++)
+    for (int j = 0; j < nbColonnes; j++)
     {
         std::cout << " " << (j + 1) << "  ";
     }
-    AfficherMessage("");
+    std::cout << "\n";
 
-    for (int i = 0; i < grille->getNbLigne(); i++)
+    std::cout << "   +";
+    for (int j = 0; j < nbColonnes; j++)
     {
-        if (i < 9)
-        {
-            std::cout << (i + 1) << "  ";
-        }
-        else
-        {
-            std::cout << (i + 1) << " ";
-        }
-
-        for(int j = 0; j < grille->getNbColonne(); j++)
-        {
-            if (j == 0)
-            {
-                std::cout << "| " << static_cast<char>(grille->GetCellule(i, j)) << " | ";
-            }
-            else
-            {
-                std::cout << static_cast<char>(grille->GetCellule(i, j)) << " | ";
-            }
-        }
-        AfficherMessage("");
+        std::cout << "---+";
     }
-    AfficherMessage("");
+    std::cout << "\n";
+
+    for (int i = 0; i < nbLignes; i++)
+    {
+        std::cout << (i < 9 ? " " : "") << (i + 1) << " | ";
+
+        for(int j = 0; j < nbColonnes; j++)
+        {
+            std::cout << static_cast<char>(grille->GetCellule(i, j)) << " | ";
+        }
+        std::cout << "\n";
+
+        std::cout << "   +";
+        for(int j = 0; j < nbColonnes; j++)
+        {
+            std::cout << "---+";
+        }
+        std::cout << "\n";
+    }
 }
+
 
 void AffichageConsole::AfficherMessage(const std::string message, const int nbSautLigne) const
 {
