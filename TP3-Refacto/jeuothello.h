@@ -14,14 +14,6 @@ public:
     bool AGagne() const override;
     bool PartieFinie() const override;
     std::vector<std::pair<int, int>> CoupsPossibles() override;
-    void InitialiseJeu() const override;
-    void AfficherResultat() const override;
-    void VoirCoupsPossibles() const;
-    bool EstCoupValide(int x, int y, Jeton jeton) const;
-    void RetournerJetons(const int x, const int y, Jeton jeton);
-    Jeton DetermineGagnant() const;
-    bool PeutRetourner(int x, int y, int dx, int dy, Jeton jeton) const;
-    bool EstDirectionValide(int x, int y, int dx, int dy, Jeton jeton) const;
 
  private:
     std::shared_ptr<IGrille> grille;
@@ -29,6 +21,13 @@ public:
     std::shared_ptr<IJoueur> joueur2;
     std::shared_ptr<IJoueur> joueurCourant;
     std::shared_ptr<IAffichage> modeAffichage;
+    void InitialiseJeu() const;
+    bool EstCoupValide(int x, int y, Jeton jeton) const;
+    void RetournerJetons(const int x, const int y, Jeton jeton);
+    bool PeutRetourner(int x, int y, int directionX, int directionY, Jeton jeton) const;
+    Jeton DetermineGagnant() const;
+    void AfficherResultat() const;
+
 };
 
 #endif // JEUOTHELLO_H
