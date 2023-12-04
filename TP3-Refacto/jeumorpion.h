@@ -17,9 +17,6 @@ public:
     void InitialiseJeu() const override;
     std::vector<std::pair<int, int>> CoupsPossibles() override;
     void AfficherResultat() const override;
-    bool VerifieLignes() const;
-    bool VerifieColonnes() const;
-    bool VerifieDiagonales() const;
     void Jouer() override;
 
 private:

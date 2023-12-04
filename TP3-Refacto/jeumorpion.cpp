@@ -60,7 +60,6 @@ void JeuMorpion::Tour()
         int indiceCoupChoisi = distrib(gen);
         std::pair<int, int> coupChoisi = coupsPossibles[indiceCoupChoisi];
         grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
-
         modeAffichage->AfficherMessage(joueurCourant->getInformations() + " a joué ");
     }
 }
@@ -93,81 +92,7 @@ void JeuMorpion::AfficherResultat() const
 
 bool JeuMorpion::AGagne() const
 {
-    return VerifieLignes() || VerifieColonnes() || VerifieDiagonales();
-}
-
-bool JeuMorpion::VerifieLignes() const
-{
-    for (int i = 0; i < grille->getNbLigne(); ++i)
-    {
-        Jeton premierJeton = grille->GetCellule(i, 0);
-        if (premierJeton != Jeton::Vide)
-        {
-            bool ligneGagnante = true;
-            for (int j = 1; j < grille->getNbColonne(); ++j)
-            {
-                if (grille->GetCellule(i, j) != premierJeton)
-                {
-                    ligneGagnante = false;
-                    break;
-                }
-            }
-            if (ligneGagnante)
-                return true;
-        }
-    }
-    return false;
-}
-
-bool JeuMorpion::VerifieColonnes() const
-{
-    for (int j = 0; j < grille->getNbColonne(); ++j)
-    {
-        Jeton premierJeton = grille->GetCellule(0, j);
-        if (premierJeton != Jeton::Vide)
-        {
-            bool colonneGagnante = true;
-            for (int i = 1; i < grille->getNbLigne(); ++i)
-            {
-                if (grille->GetCellule(i, j) != premierJeton)
-                {
-                    colonneGagnante = false;
-                    break;
-                }
-            }
-            if (colonneGagnante)
-                return true;
-        }
-    }
-    return false;
-}
-
-bool JeuMorpion::VerifieDiagonales() const
-{
-    Jeton premierJeton = grille->GetCellule(0, 0);
-    bool diagonaleGagnante = (premierJeton != Jeton::Vide);
-    for (int i = 1; i < grille->getNbLigne() && diagonaleGagnante; ++i)
-    {
-        if (grille->GetCellule(i, i) != premierJeton)
-        {
-            diagonaleGagnante = false;
-        }
-    }
-
-    if (diagonaleGagnante)
-        return true;
-
-    premierJeton = grille->GetCellule(0, grille->getNbColonne() - 1);
-    diagonaleGagnante = (premierJeton != Jeton::Vide);
-    for (int i = 1; i < grille->getNbLigne() && diagonaleGagnante; ++i)
-    {
-        if (grille->GetCellule(i, grille->getNbColonne() - 1 - i) != premierJeton)
-        {
-            diagonaleGagnante = false;
-        }
-    }
-
-    return diagonaleGagnante;
+    return grille->VerifieLigne(3, joueurCourant->getJeton()) || grille->VerifieColonne(3, joueurCourant->getJeton()) || grille->VerifieDiagonale(3, joueurCourant->getJeton());
 }
 
 bool JeuMorpion::PartieFinie() const

@@ -19,9 +19,7 @@ public:
     void InitialiseJeu() const override;
     std::vector<std::pair<int, int>> CoupsPossibles() override;
     void AfficherResultat() const override;
-    bool VerifieLignes() const;
-    bool VerifieDiagonales() const;
-    bool VerifieColonnes() const;
+
 
 private:
     std::shared_ptr<IGrille> grille;
