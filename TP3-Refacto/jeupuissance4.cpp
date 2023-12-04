@@ -91,10 +91,6 @@ std::vector<std::pair<int, int>> JeuPuissance4::CoupsPossibles()
     return coupsPossibles;
 }
 
-<<<<<<< TP3-Refacto/jeupuissance4.cpp
-void JeuPuissance4::InitialiseJeu() const
-{
-=======
 void JeuPuissance4::AfficherResultat() const
 {
     modeAffichage->AfficherGrille(grille);

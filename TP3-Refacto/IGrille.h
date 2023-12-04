@@ -15,7 +15,6 @@ public:
     virtual bool ACaseVide(const int, const int) const = 0;
     virtual int CompteJetons(Jeton jeton) const = 0;
     virtual bool EstRemplie() const = 0;
-    virtual int CompteJetons(Jeton jeton) const = 0;
     virtual bool VerifieLigne(const int nbJetons, const Jeton jeton) const = 0;
     virtual bool VerifieColonne(const int nbJetons, const Jeton jeton) const = 0;
     virtual bool VerifieDiagonale(const int nbJetons, const Jeton jeton) const = 0;

@@ -50,7 +50,6 @@ bool Grille::EstRemplie() const
     return true;
 }
 
-<<<<<<< TP3-Refacto/grille.cpp
 bool Grille::VerifieLigne(const int nbJetons, const Jeton jeton) const
 {
     for (int i = 0; i < getNbLigne(); i++)
