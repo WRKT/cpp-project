@@ -89,60 +89,7 @@ std::vector<std::pair<int, int>> JeuMorpion::CoupsPossibles()
 
 bool JeuMorpion::AGagne() const
 {
-    return VerifieLignes() || VerifieColonnes() || VerifieDiagonales();
-}
-
-bool JeuMorpion::VerifieLignes() const
-{
-    std::vector<Jeton> Ligne1 = grille->GetLigne(0);
-    std::vector<Jeton> Ligne2 = grille->GetLigne(1);
-    std::vector<Jeton> Ligne3 = grille->GetLigne(2);
-
-    if (std::all_of(Ligne1.begin(), Ligne1.end(), [this](Jeton jeton)
-                    { return jeton == joueurCourant->getJeton(); }))
-        return true;
-    if (std::all_of(Ligne2.begin(), Ligne2.end(), [this](Jeton jeton)
-                    { return jeton == joueurCourant->getJeton(); }))
-        return true;
-    if (std::all_of(Ligne3.begin(), Ligne3.end(), [this](Jeton jeton)
-                    { return jeton == joueurCourant->getJeton(); }))
-        return true;
-    else
-        return false;
-}
-
-bool JeuMorpion::VerifieColonnes() const
-{
-    std::vector<Jeton> Colonne1 = grille->GetColonne(0);
-    std::vector<Jeton> Colonne2 = grille->GetColonne(1);
-    std::vector<Jeton> Colonne3 = grille->GetColonne(2);
-
-    if (std::all_of(Colonne1.begin(), Colonne1.end(), [this](Jeton jeton)
-                    { return jeton == joueurCourant->getJeton(); }))
-        return true;
-    if (std::all_of(Colonne2.begin(), Colonne2.end(), [this](Jeton jeton)
-                    { return jeton == joueurCourant->getJeton(); }))
-        return true;
-    if (std::all_of(Colonne3.begin(), Colonne3.end(), [this](Jeton jeton)
-                    { return jeton == joueurCourant->getJeton(); }))
-        return true;
-    else
-        return false;
-}
-
-bool JeuMorpion::VerifieDiagonales() const
-{
-    std::vector<Jeton> Diagonale1 = grille->GetDiagonale(1);
-    std::vector<Jeton> Diagonale2 = grille->GetDiagonale(0);
-
-    if (std::all_of(Diagonale1.begin(), Diagonale1.end(), [this](Jeton jeton)
-                    { return jeton == joueurCourant->getJeton(); }))
-        return true;
-    if (std::all_of(Diagonale2.begin(), Diagonale2.end(), [this](Jeton jeton)
-                    { return jeton == joueurCourant->getJeton(); }))
-        return true;
-    else
-        return false;
+    return grille->VerifieLigne(3, joueurCourant->getJeton()) || grille->VerifieColonne(3, joueurCourant->getJeton()) || grille->VerifieDiagonale(3, joueurCourant->getJeton());
 }
 
 bool JeuMorpion::PartieFinie() const

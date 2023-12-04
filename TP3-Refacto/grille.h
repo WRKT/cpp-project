@@ -17,9 +17,10 @@ public:
     void ChangeCellule(const int x, const int y, Jeton jeton) override;
     bool EstRemplie() const override;
     int CompteJetons(Jeton jeton) const override;
-    std::vector<Jeton> GetLigne(const int ligne) const;
-    std::vector<Jeton> GetColonne(const int colonne) const;
-    std::vector<Jeton> GetDiagonale(const int sens) const;
+    bool VerifieLigne(const int nbJetons, const Jeton jeton) const override;
+    bool VerifieColonne(const int nbJetons, const Jeton jeton) const override;
+    bool VerifieDiagonale(const int nbJetons, const Jeton jeton) const override;
+    int CompteSequence(const int ligneDepart, const int colonneDepart, const int dirLigne, const int dirColonne) const;
 
 private:
     const int nbLignes, nbColonnes;

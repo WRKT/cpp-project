@@ -50,44 +50,64 @@ bool Grille::EstRemplie() const
     return true;
 }
 
-std::vector<Jeton> Grille::GetLigne(const int ligne) const
+bool Grille::VerifieLigne(const int nbJetons, const Jeton jeton) const
 {
-    std::vector<Jeton> jetons;
-    for (int i = 0; i < getNbColonne(); ++i)
+    for(int i = 0; i < this->getNbLigne(); i++)
     {
-        jetons.push_back(GetCellule(ligne, i));
-    }
-    return jetons;
-}
-
-std::vector<Jeton> Grille::GetColonne(const int colonne) const
-{
-    std::vector<Jeton> jetons;
-    for (int i = 0; i < getNbLigne(); ++i)
-    {
-        jetons.push_back(GetCellule(i, colonne));
-    }
-    return jetons;
-}
-
-std::vector<Jeton> Grille::GetDiagonale(const int sens) const
-{
-    std::vector<Jeton> jetons;
-    if (sens == 1) // Diagonale principale
-    {
-        for (int i = 0; i < getNbLigne(); ++i)
+        for(int j = 0; j < this->getNbColonne(); j++)
         {
-            jetons.push_back(GetCellule(i, i));
+            Jeton premierJeton = this->table[i][j];
+            if (premierJeton == jeton)
+            {
+                if(CompteSequence(i, j, 0, +1) >= nbJetons)
+                {
+                    return true;
+                }
+            }
         }
     }
-    else // Diagonale secondaire
+    return false;
+
+}
+
+bool Grille::VerifieColonne(const int nbJetons, const Jeton jeton) const
+{
+    for(int i = 0; i < this->getNbLigne(); i++)
     {
-        for (int i = 0; i < getNbLigne(); ++i)
+        for(int j = 0; j < this->getNbColonne(); j++)
         {
-            jetons.push_back(GetCellule(i, getNbLigne() - i - 1));
+            Jeton jetonCase = this->table[i][j];
+            if (jetonCase == jeton)
+            {
+                if(CompteSequence(i, j, +1, 0) >= nbJetons)
+                {
+                    return true;
+                }
+            }
         }
     }
-    return jetons;
+    return false;
+
+}
+
+bool Grille::VerifieDiagonale(const int nbJetons, const Jeton jeton) const
+{
+    for(int i = 0; i < this->getNbLigne(); i++)
+    {
+        for(int j = 0; j < this->getNbColonne(); j++)
+        {
+            Jeton jetonCase = this->table[i][j];
+            if (jetonCase == jeton)
+            {
+                if(CompteSequence(i, j, -1, +1) >= nbJetons || CompteSequence(i, j, +1, +1) >= nbJetons)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+
 }
 
 int Grille::CompteJetons(Jeton jeton) const
@@ -104,4 +124,19 @@ int Grille::CompteJetons(Jeton jeton) const
         }
     }
     return nbJeton;
+}
+
+int Grille::CompteSequence(const int ligneDepart, const int colonneDepart, const int dirLigne, const int dirColonne) const
+{
+    int compteur = 0;
+    int ligne = ligneDepart;
+    int colonne = colonneDepart;
+    while (ligne < getNbLigne() && colonne < getNbColonne() &&
+           GetCellule(ligne, colonne) == GetCellule(ligneDepart, colonneDepart) )
+    {
+        compteur++;
+        ligne = ligne + dirLigne;
+        colonne = colonne + dirColonne;
+    }
+    return compteur;
 }
