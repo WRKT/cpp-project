@@ -1,126 +1,116 @@
-## Projet A : Alizée Hett ([lien du projet](https://gitlab.com/dinholu1/CPP-TP01-HETTALIZEE/-/tree/main/TP3_Hett_Alizee?ref_type=heads))
+<a name="readme-top"></a>
 
-### 1. Single Responsability Unique (SRP)
+<div align="center">
+    <h1>TP5 Ajout du jeu Othello ⚪⚫</h1>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1822px-ISO_C%2B%2B_Logo.svg.png"
+      alt="CPP_logo"
+      width="160"
+      height="180"
+     align="center"
+    />
+</div>
 
-- La classe `Board` viole le SRP du fait que : la méthode `checkWin()` devrait être une propriété de la classe Jeu, et que la méthode `placeMarker()` pourrait être déplacée vers la classe Joueur, qui, par logique métier, est responsable du placement des pions.
-  - Proposition d'optimisation : Sectionner `checkWin()` en méthodes distinctes (`checkRow()`, `checkColumns()`, `checkDiagonal()`).
-- La classe `ComputerPlayer` viole le SRP car sa méthode `makeMove()` gère le placement des pions pour tous les jeux (morpion et puissance4), ce qui devrait être sectionné par jeu.
-    - Proposition d'optimisation : passer par une interface de jeu dont les classes héritées implémenteront la méthode `makeMove()` spécifique au règle de jeu.
-- La classe `Game`, `TicTacToe`, et `ConnectFour` viole également le SRP car les  méthodes `makeMove()` et `displayBoard()` ne devraient pas être implémentées dans Game, mais dans les classes Player et Board respectivement.
+# :notebook_with_decorative_cover: Summary
 
-### 2. Principe Ouvert/Fermé (OCP)
+[[_TOC_]]
 
-- La classe `Board` viole le principe OCP car la méthode `placeMarker()` nécessite des paramètres supplémentaires pour s'adapter à différents jeux. Ainsi, en cas de rajout de nouveaux jeux, il est nécessaire d'aller modifier cette classe. 
-- La classe `TicTacToe` et `ConnectFour` viole le principe OCP, car le constructeur de ces classes est fortement couplé à la classe `Board`. De ce fait, des modifications à `Board` nécessiteraient des modifications dans ces classes.
+# Anciens codes
 
-### 3. Principe de Substitution de Liskov (LSP)
+## Projet A : Vlad - Nico ([lien du projet](https://gitlab.com/cnam420539/CPP/-/tree/main/TP03?ref_type=heads))
 
-Ce principe est globalement bien respectée du fait que l'outil utilisé (QtCreator) nous empêche de faire des erreurs de non-implémentation de méthode d'une clase abstraite dans une classe fille.
-Notamment sur la classe `Game` -> `Tictactoe` et `ConnectFour`.
-Cependant, la classe `ComputerPlayer` par exemple ne pourrait pas se substituer à sa super-classe `Player` du fait qu'elle implémente une méthode `makeMove()`.
+### Points d'amélioration identifiés
 
-### 4. Principe de Ségrégation Interface (ISP)
+- Éviter les "nombres magiques" (utilisation de valeurs arbitraires) dans les conditions, par exemple sur la ligne 4 : privilégier l'utilisation d'une constante comme `NbJetonsGagnants` au lieu du nombre "4".
+- Dans une classe, maintenir une organisation constante en suivant l'ordre : Public, Protected, Private.
+- Utiliser des pointeurs logiques ou les shares pointeurs plutôt que des pointeurs C.
+- Réviser la répartition des responsabilités, par exemple, la classe `CreateGame` a actuellement trois responsabilités distinctes (Grilles, Joueurs, Jeu) ; il est préférable de les séparer.
+- Éviter les conditions telles que `if -1` ; préférer l'utilisation d'un booléen.
+- La partie publique de l'interface `Grille` ne doit pas être manipulée (exception utilisateur).
+- Les interfaces/affichage/règles du jeu ne doivent pas dépendre des grilles.
+- Clarifier le rôle de la classe "Grilles" qui détermine les lignes et les états des lignes (alignement des pions) ; c'est cette classe qui sait où le joueur peut placer les pions.
+- Rendre la méthode `ChooseGame` statique plutôt que dynamique.
+- Assurer que le choix du jeu ne communique pas avec l'utilisateur et n'effectue pas d'affichage, car ces sont deux responsabilités distinctes.
 
-L'unique interface présente dans le code est la classe `Game`, signifiant ainsi que toutes les classes communiquent entre eux directement sans passer par des interfaces.
-Ainsi, comme optimisation, il serait plus intéressant de **créer des interfaces spécifiques** pour chaque fonctionnalités au niveau du code :
--> iBoard pour Board
--> iPlayer pour Player
--> iGame pour TicTacToe et ConnectFour
+### Autres observations
 
-Par ces ajouts, les classes de jeux `TicTacToe` et `ConnectFour` n'auront pas à implémenter une instance des classes spécifiques `Board` et `Player`, mais passer par les interfaces pour permettre l'appel des méthodes adaptés au jeu.
+- Veiller à la validation exhaustive des inputs de l'utilisateur, en mettant en place des méthodes définissant les limites, par exemple, conversion entre int et char.
+- Accroître la fréquence des commits pour Nicolas.
+- Porter une attention particulière au nommage, notamment en ce qui concerne l'alignement vertical.
+- Considérer la suppression de l'énumération "Symbole" si elle ne présente pas d'utilité manifeste.
 
-Enfin, évitez de polluer le fichier `main.cpp` par de nouvelles fonctions, mais créer des interfaces spécifiques pour ces fonctionnalités.
+## Projet B : Alizée - Winness ([lien du projet](https://gitlab.com/WRKT1/td-cpp-winness-rakoto/-/tree/main/TP3-Refacto?ref_type=heads))
 
-### 5. Principe d'Inversion de Dépendances (DIP)
+### Points d'amélioration identifiés
 
-A présent, au niveau du code, à l'absence des interfaces comme mentionné précédemment, les classes intéragissent entre eux directement sans **passer par des interfaces**, et viole donc le principe d'inversion de dépendance.
-Aussi, à l'état actuel, les classes de haut niveau comme `TicTacToe` et `ConnectFour` ont une dépendance forte au classes de bas niveau (`Board` et `Player`), et cela dû à l'absence des interfaces pour les classes de bas niveau.
+- Les vérifications dans les jeux sont retirées et intégrées dans la classe `Grille`.
+- La fonction `PlacerJeton()` est retirée des jeux et réintégrée dans la classe `Grille`.
+- La factory pour le joueur est éliminée (supprimée).
+- Une interface dédiée à l'affichage des jeux est créée.
+- Une interface pour les entrées console des utilisateurs réels est mise en place.
+- Davantage de constantes sont ajoutées aux classes.
+- La pratique d'utiliser `override` de manière non justifiée est abandonnée.
+- La notion de "Ligne disponible" est synonyme de "Case disponible", et ces termes sont uniformément utilisés.
 
-Dans le cadre d'une optimisation, si des interfaces seraient amenés à être implémentées pour les différentes classes `Board` et `Player`, il est nécessaire de faire en sorte que ce sont les classes `Board` et `Player` qui dépendront de l'implémentation de l'interface, et non l'interface qui s'adaptera par leur implémentation.
+# Le projet retenu :
 
-## Projet B : Winness Rakotozafy ([lien du projet](https://gitlab.com/WRKT1/td-cpp-winness-rakoto/-/tree/main/TP3?ref_type=heads))
+- Alizée - Winness ([lien du projet](https://gitlab.com/WRKT1/td-cpp-winness-rakoto/-/tree/main/TP3-Refacto?ref_type=heads))
 
-### 1. Principe de responsabilité unique (SRP)
+## Analyse Comparative des Projets
 
-- Les classes `Jeu`, `JeuMorpion`, et `JeuPuissance4` semblent avoir plusieurs responsabilités, comme la gestion de l'interface utilisateur (UI), la logique du jeu, et la gestion des joueurs. Il serait préférable de séparer ces responsabilités en différentes classes pour une meilleure maintenance et évolutivité.
-- `Classe morpion`, `classe force4` : La méthode JouerTour() doit être différente si joueur vs joueur ou computer vs joueur
-- La classe `Grille` gère à la fois la représentation de la grille et la logique de vérification des conditions de victoire, ainsi que les mouvements des joueurs es responsabilités pourraient être séparées.
-- Actuellement, la logique de jeu et l'interface utilisateur sont mélangées (par exemple, affichage dans la console et logique de jeu dans les mêmes classes). Il faudrait les séparer en créant des classes dédiées à l'UI qui peuvent interagir avec les classes de jeu via l'interface `JeuInterface`.
+À la suite de la réunion tenue le 24 novembre 2023, durant laquelle une évaluation exhaustive des projets de Vlad - Nicolas et d'Alizée - Winness a été conduite, une conclusion évidente en faveur du choix du projet Alizée - Winness a émergé.
 
-### 2. Principe Ouvert/Fermé (OCP)
+Cette décision est principalement basée sur les commentaires détaillés que nous avons reçus lors de la première vérification du code du projet. Ces retours ont souligné la nécessité de simplifier et de clarifier le code en effectuant des modifications, afin de rendre le projet plus solide à long terme en suivant les principes SOLID.
 
-Le code ne semble pas facilement extensible sans modification. Par exemple, l'ajout d'un nouveau jeu nécessiterait des modifications dans les méthodes `StartJeu` et `ChoixJeu` de la classe `Match`. Utiliser une stratégie ou un design pattern de factory pourrait améliorer l'extensibilité. Voir Factory() ou faire une énumération de jeux pour éviter à changer la classe match.
+## Complexité des adaptatations requises
 
-Proposition d'amélioration :
+L'inventaire des adaptations nécessaires pour le projet Alizée - Winness révèle moins de complexités pour l'implémentation du jeu Othello. Cette simplicité offre une solution plus rapide et efficiente pour l'amélioration du code existant.
 
-1. **Utiliser un Design Pattern de Factory pour Créer des Jeux :**
-   - Au lieu de modifier la classe `Match` chaque fois qu'un nouveau jeu est ajouté, vous pourriez utiliser un Factory Pattern. Créez une `Factory` de jeux qui peut retourner une instance de jeu en fonction d'un identifiant ou d'un nom.
-   - Dans `Match::ChoixJeu`, au lieu d'un `switch` pour instancier des jeux spécifiques (comme Morpion ou Puissance 4), demander à la Factory de donner l'instance de jeu correspondante. Ainsi, pour ajouter un nouveau jeu, on n'aurait qu'à modifier la Factory et non la classe `Match`, ou alors réussir a récupérer un liste de jeux.
-2. **Abstraire la Logique de Jeu :**
-   - Dans l'interface ou la classe abstraite `Jeu` mettre seulement les méthodes qui définit les méthodes communes à tous les jeux (par exemple, `Initialiser`, `Jouer`, `AfficherGrille`, etc.).
-    - Faire en sorte que `JeuMorpion` et `JeuPuissance4` implémentent cette interface. Cela permettrait à la classe `Match` d'interagir avec une interface commune plutôt qu'avec des implémentations concrètes.
+## Flexibilité face aux évolutions futures
 
-### 3. Principe de Substitution de Liskov (LSP)
+En comparaison, le projet Alizée - Winness se distingue par son approche qui facilite l'intégration du nouveau jeu Othello. Cette caractéristique démontre la souplesse inhérente au projet et son aptitude à s'adapter aisément aux exigences évolutives.
 
-- Ce principe est globalement bien respecté, même si certaines classe réelles et classes abstraites ont trop de méthodes qui ne sont pas toutes utilisées. Tel que `Ordinateur` et la classe abstraite `Joueur` ou encore la classe `Grille`.
+## Absence d'anomalies constaté
 
-### 4. Principe de Ségrégation Interface (ISP)
+De surcroît, le projet Alizée - Winness se démarque par l'absence de soucis présentes dans le projet de Vlad - Nicolas. Des lacunes telles que l'utilisation de nombres magiques et des erreurs de conception, comme la dépendance entre Interface/affichage/Regles du jeu et Grilles, sont écartées dans le projet retenu.
 
-- Les classes (comme `Jeu`, `JeuMorpion`, `JeuPuissance4`, etc.) devraient identifier des groupes de fonctionnalités distincts. Par exemple, la gestion de la grille de jeu, la gestion des tours de jeu, et l'interaction avec l'utilisateur pourraient être considérées comme des fonctionnalités séparées
-- Pour chaque groupe de fonctionnalités identifié, on devrait créer interface spécifique. Par exemple, une interface `IGrille` pour la gestion de la grille, une interface `ITourJeu` pour la gestion des tours de jeu, et une interface `IInteractionUtilisateur` pour la gestion des interactions avec l'utilisateur.
-- `Joueur` et `Ordinateur` ne devraient pas devoir implémenter la classe `grille` directement
-- Dans le code existant, séparez les méthodes et les fonctionnalités en fonction des interfaces nouvellement créées. Par exemple, tout code relatif à l'affichage de la grille devrait être déplacé dans des méthodes définies dans `IGrille`.
+La sélection du projet Alizée - Winness repose sur une évaluation rigoureuse des retours issus de la revue de code, la simplicité des adaptations requises, la capacité à s'ajuster aux évolutions futures, ainsi que l'éradication des anomalies constatées dans le projet concurrent. Ces éléments renforcent la position d'Alizée - Winness en tant que choix optimal pour la poursuite du développement.
 
-### 5. Principe d'Inversion de Dépendances (DIP)
+# Modifications apportées au projet
 
-- Pour chaque classe de bas niveau (comme `Grille`, `JeuMorpion`, `JeuPuissance4`), créé une interface correspondante (par exemple, `IGrille`).
-- Ces interfaces devraient définir les méthodes nécessaires pour interagir avec la logique spécifique à chaque jeu.
-- Au lieu que la classe `Match` crée et interagisse directement avec des instances spécifiques de jeux (comme `morpion` ou `puissance4`), elle devrait interagir avec les interfaces de jeu (`IJeu`).
-- Cela signifie que `Match` ne sera plus dépendant des implémentations concrètes des jeux, mais de leurs abstractions.
-- Mettre en place une Factory ou un Builder qui sera responsable de la création des instances de jeu. Cela permettra d'isoler la création des objets des classes de haut niveau, ce qui réduit encore plus le couplage.
+## Ajout du jeu Othello
 
-## Projet gardé : Projet B de Winness
+Le jeu Othello est ajouté au projet, en suivant les principes SOLID. Les classes sont réorganisées pour respecter les principes de responsabilité unique et d'ouverture/fermeture. Les classes sont également renommées pour refléter leur rôle dans le projet.
 
-### Argumentation du choix de projet
+## Ajout de l'interface "IAffichage"
 
-Nous avons décidé de gardé le projet de Winness car le **squelette de son application** a été le plus facile à remodéliser.
-Ainsi, nous avions pensé en terme de temps consacré pour la refactorisation, car son projet étant plus modulable, nous avions repris son squelette en y rajoutant les nouvelles interfaces.
+Une interface "IAffichage" est ajoutée pour gérer l'affichage des messages et des grilles. Cette interface est implémentée par la classe "AffichageConsole". Cette modification permet de séparer les responsabilités de l'affichage et des grilles.
 
-Au terme des réflexions, nous avions également décidé de reprendre quelques idées de design et de méthodes du projet d'Alizée (exemple : initialisation de tableau de vecteurs mais non de pointeurs), pour que le programme soit plus facile à maintenir et évoluer.
+## Ajout de la classe "InputConsole"
 
-Enfin, étant donné que chaque projet ne respectait pas en grande partie certains principes du principe SOLID, ce choix est surtout justifié par la manière dont le projet initial a été pensé mais ne remet pas en cause la qualité du programme de l'autre, et ainsi donné vie à un projet hybride : [TP3-Refacto](https://gitlab.com/WRKT1/td-cpp-winness-rakoto/-/tree/main/TP3-Refacto?ref_type=heads).
+Une classe "InputConsole" est ajoutée pour gérer les entrées de l'utilisateur. Cette classe est utilisée par la classe "Jeu" pour récupérer les entrées de l'utilisateur. Cette modification permet de séparer les responsabilités de l'affichage et des grilles.
 
-#### Nouveaux squelettes
+## Modification de la classe "Grille"
 
-##### 1. Interfaces et Classes Abstraites
+La classe "Grille" est modifiée pour gérer les grilles de jeu. Cette classe est utilisée par la classe "Jeu" pour gérer les grilles de jeu. Cette modification permet de séparer les responsabilités et de supprimer la dépendance entre les interfaces/affichage/règles du jeu et les grilles.
 
-**Interface Jeu (IJeu) :**
+## Déplacement des méthodes
 
-- Définit les méthodes communes à tous les jeux (Initialiser, Jouer, AfficherGrille, etc.).
-  **Interface Grille (IGrille) :**
-- Définit les méthodes pour gérer la grille de jeu (InitialiserGrille, AfficherGrille, CaseVide, etc.).
-  **Interface InteractionUtilisateur (IInteractionUtilisateur) :**
-- Définit les méthodes pour gérer les interactions utilisateur (SaisirCoordonnees, AfficherMenu, etc.).
+Les methodes de validations de Ligne, colonne et diagonale affectée à grille sont déplacées dans la classe "Grille". Cette modification permet de séparer les responsabilités et de supprimer la dépendance entre les interfaces/affichage/règles du jeu et les grilles.
 
-##### 2. Classes de Jeux
+## Test unitaire
 
-**JeuMorpion et JeuPuissance4 (implémentant IJeu) :**
+Un test unitaire est ajouté pour tester toutes les classes du projet. Ce test permet de vérifier le bon fonctionnement du projet.
 
-- Implémentent l'interface IJeu.
-- Utilisent des instances de IGrille pour gérer la grille de jeu.
-- Utilisent des instances de IInteractionUtilisateur pour interagir avec l'utilisateur.
+# Conclusion
 
-##### 3. Factory et Injection de Dépendance
+Les modifications apportées au projet permettent de respecter les principes SOLID et de séparer les responsabilités comme cela nous a été recommandé lors de la revue de code. Suite à ces changements facilitent l'ajout de nouveaux jeux et l'évolution du projet.
 
-**JeuFactory :**
+# Contributeurs
 
-- Responsable de créer des instances de JeuMorpion, JeuPuissance4, etc.
-- Utilise l'injection de dépendance pour fournir des instances de `IGrille` et `IJoueur` aux jeux.
+- **Winness RAKOTOZAFY** _alias_ [@WRKT1](https://gitlab.com/WRKT1)
+- **Alizée HETT** _alias_ [@Dinholu](https://gitlab.com/Dinholu)
+- **Vladimir SACCHETTO** _alias_ [@Vladimir9595](https://gitlab.com/Vladimir9595)
+- **Nicolas REMY** _alias_ [@NicolasRemy](https://gitlab.com/CFAI-REMY-NICOLAS)
 
-##### 4. Classe Principale
-
-**Classe Main :**
-
-- `JeuFactory` pour obtenir des instances de jeux en utilisant l'interface `IJeu`.
-- `JoueurFactory` pour créer des joueurs humains et ordinateur en utilisant l'interface `IJoueur`
-- Utilisation de la classe `InteractionUtilisateur` pour tout ce qui est saisie de l'utilisateur au programme.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
