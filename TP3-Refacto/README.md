@@ -28,7 +28,7 @@
 - Éviter les conditions telles que `if -1` ; préférer l'utilisation d'un booléen.
 - La partie publique de l'interface `Grille` ne doit pas être manipulée (exception utilisateur).
 - Les interfaces/affichage/règles du jeu ne doivent pas dépendre des grilles.
-- Clarifier le rôle de la classe "Grilles" qui détermine les lignes et les états des lignes (alignement des pions) ; c'est cette classe qui sait où le joueur peut placer les pions.
+- Clarifier le rôle de la classe `Grille` qui détermine les lignes et les états des lignes (alignement des pions) ; c'est cette classe qui sait où le joueur peut placer les pions.
 - Rendre la méthode `ChooseGame` statique plutôt que dynamique.
 - Assurer que le choix du jeu ne communique pas avec l'utilisateur et n'effectue pas d'affichage, car ces sont deux responsabilités distinctes.
 
@@ -37,7 +37,7 @@
 - Veiller à la validation exhaustive des inputs de l'utilisateur, en mettant en place des méthodes définissant les limites, par exemple, conversion entre int et char.
 - Accroître la fréquence des commits pour Nicolas.
 - Porter une attention particulière au nommage, notamment en ce qui concerne l'alignement vertical.
-- Considérer la suppression de l'énumération "Symbole" si elle ne présente pas d'utilité manifeste.
+- Considérer la suppression de l'énumération `Symbole` si elle ne présente pas d'utilité manifeste.
 
 ## Projet B : Alizée - Winness ([lien du projet](https://gitlab.com/WRKT1/td-cpp-winness-rakoto/-/tree/main/TP3-Refacto?ref_type=heads))
 
@@ -82,25 +82,25 @@ La sélection du projet Alizée - Winness repose sur une évaluation rigoureuse 
 
 Le jeu Othello est ajouté au projet, en suivant les principes SOLID. Les classes sont réorganisées pour respecter les principes de responsabilité unique et d'ouverture/fermeture. Les classes sont également renommées pour refléter leur rôle dans le projet.
 
-## Ajout de l'interface "IAffichage"
+## Ajout de l'interface `IAffichage`
 
-Une interface "IAffichage" est ajoutée pour gérer l'affichage des messages et des grilles. Cette interface est implémentée par la classe "AffichageConsole". Cette modification permet de séparer les responsabilités de l'affichage et des grilles.
+Une interface `IAffichage` est ajoutée pour gérer l'affichage des messages et des grilles. Cette interface est implémentée par la classe `AffichageConsole`. Cette modification permet de séparer les responsabilités de l'affichage et des grilles.
 
-## Ajout de la classe "InputConsole"
+## Ajout de la classe `InputConsole`
 
-Une classe "InputConsole" est ajoutée pour gérer les entrées de l'utilisateur. Cette classe est utilisée par la classe "Jeu" pour récupérer les entrées de l'utilisateur. Cette modification permet de séparer les responsabilités de l'affichage et des grilles.
+Une classe `InputConsole` est ajoutée pour gérer les entrées de l'utilisateur. Cette classe est utilisée par la classe `Jeu` pour récupérer les entrées de l'utilisateur. Cette modification permet de séparer les responsabilités de l'affichage et des grilles.
 
-## Modification de la classe "Grille"
+## Modification de la classe `Grille`
 
-La classe "Grille" est modifiée pour gérer les grilles de jeu. Cette classe est utilisée par la classe "Jeu" pour gérer les grilles de jeu. Cette modification permet de séparer les responsabilités et de supprimer la dépendance entre les interfaces/affichage/règles du jeu et les grilles.
+La classe `Grille` est modifiée pour gérer les grilles de jeu. Cette classe est utilisée par la classe `Jeu` pour gérer les grilles de jeu. Cette modification permet de séparer les responsabilités et de supprimer la dépendance entre les interfaces/affichage/règles du jeu et les grilles.
 
 ## Déplacement des méthodes
 
-Les methodes de validations de Ligne, colonne et diagonale affectée à grille sont déplacées dans la classe "Grille". Cette modification permet de séparer les responsabilités et de supprimer la dépendance entre les interfaces/affichage/règles du jeu et les grilles.
+Les methodes de validations de Ligne, colonne et diagonale affectée à grille sont déplacées dans la classe `Grille`. Cette modification permet de séparer les responsabilités et de supprimer la dépendance entre les interfaces/affichage/règles du jeu et les grilles.
 
 ## Test unitaire
 
-Un test unitaire est ajouté pour tester toutes les classes du projet. Ce test permet de vérifier le bon fonctionnement du projet.
+Un test unitaire est ajouté pour tester la classe du jeu Othello. Ce test permet de vérifier le bon fonctionnement du jeu en testant les méthodes de la classe `JeuOthello`.
 
 # Conclusion
 
@@ -113,4 +113,7 @@ Les modifications apportées au projet permettent de respecter les principes SOL
 - **Vladimir SACCHETTO** _alias_ [@Vladimir9595](https://gitlab.com/Vladimir9595)
 - **Nicolas REMY** _alias_ [@NicolasRemy](https://gitlab.com/CFAI-REMY-NICOLAS)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<div align="right">
+    <b><a href="#readme-top">↥ Back To Top</a></b>
+</div>
+<!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
