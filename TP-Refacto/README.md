@@ -84,23 +84,31 @@ Le jeu Othello est ajouté au projet, en suivant les principes SOLID. Les classe
 
 ## Ajout de l'interface `IAffichage`
 
-Une interface `IAffichage` est ajoutée pour gérer l'affichage des messages et des grilles. Cette interface est implémentée par la classe `AffichageConsole`. Cette modification permet de séparer les responsabilités de l'affichage et des grilles.
+Une interface `IAffichage` est ajoutée pour gérer tous les outputs du programme. Entre autre, cette interface nous permettra de faciliter l'intégration d'un nouveau mode d'affichage (future classe `AffichageGUI`) dont l'affichage graphique car elle réduit à minima le couplage entre tout ce qui est output et les classes concrètes.
+
+A cet étape du développement, une seule classe concrétise cete interface : la classe `AffichageConsole` qui comme son nom l'indique, est responsable des outputs en console. 
 
 ## Ajout de la classe `InputConsole`
 
-Une classe `InputConsole` est ajoutée pour gérer les entrées de l'utilisateur. Cette classe est utilisée par la classe `Jeu` pour récupérer les entrées de l'utilisateur. Cette modification permet de séparer les responsabilités de l'affichage et des grilles.
+Une classe `InputConsole` est ajoutée pour gérer toutes les entrées de l'utilisateur en mode `console`. Cette classe est donc responsable de récupérer les choix de l'utilisateur par rapport au jeu à choisir, les différents coups à jouer selon le jeu, etc.
 
-## Modification de la classe `Grille`
+En l'état, nous n'avons pas d'interface pour les Inputs suite à une analyse et manque de connaissance sur comment nous implémenterons la classe `InputGUI` et pour ne pas surcharger le constructeur des jeux qui l'implémenteront.
 
-La classe `Grille` est modifiée pour gérer les grilles de jeu. Cette classe est utilisée par la classe `Jeu` pour gérer les grilles de jeu. Cette modification permet de séparer les responsabilités et de supprimer la dépendance entre les interfaces/affichage/règles du jeu et les grilles.
+## Modification de l'interface `IGrille`
 
-## Clarification des méthodes
+L'interface `IGrille` a été modifiée pour respecter le principe de `Tell don't Ask`, vu pendant la code review.
 
-Les methodes de validations de Ligne, colonne et diagonale affectée à grille sont déplacées dans la classe `Grille`. Cette modification permet de séparer les responsabilités et de supprimer la dépendance entre les interfaces/affichage/règles du jeu et les grilles.
+A présent, la nouvelle version de l'interface a permis de mettre en place toutes les méthode de validations, de vérifications, d'interactions dans la grille en elle-même, limitant ainsi toute fuite de donnée de la grille, et d'éventuels modifications de ces propriétés. 
 
-## Test unitaire
+Un pas de plus pour consolider le principe d'**Encapsulation** de la programmation orientée objet.
+
+## Tests unitaires
 
 Un test unitaire est ajouté pour tester la classe du jeu Othello. Ce test permet de vérifier le bon fonctionnement du jeu en testant les méthodes de la classe `JeuOthello`.
+
+Suite à un essai d'intégration de tests unitaires sur le projet précédent, cette nouvelle version plus allégée nous permet de lancer les tests tout en développant le projet.
+
+Enfin, les tests sont maintenant exécutables et partagées par tous les membres de l'équipe, ce qui optimise notre processus de développement, et la détection d'éventuels bugs.
 
 # Diagramme UML
 
