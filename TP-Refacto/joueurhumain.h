@@ -1,14 +1,14 @@
 #ifndef JOUEUR_HUMAIN_H
 #define JOUEUR_HUMAIN_H
 
-#include "IJoueur.h"
+#include "AJoueur.h"
 #include <string>
 #include <memory>
 
-class JoueurHumain : public IJoueur {
+class JoueurHumain : public AJoueur {
 
 public:
-    JoueurHumain(const std::string& nom, Jeton jeton) : IJoueur(nom, jeton) {};
+    JoueurHumain(const std::string& nom, Jeton jeton) : AJoueur(nom, jeton) {};
     bool estHumain() const override { return true; }
 };
 
