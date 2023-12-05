@@ -94,13 +94,17 @@ Une classe `InputConsole` est ajoutée pour gérer les entrées de l'utilisateur
 
 La classe `Grille` est modifiée pour gérer les grilles de jeu. Cette classe est utilisée par la classe `Jeu` pour gérer les grilles de jeu. Cette modification permet de séparer les responsabilités et de supprimer la dépendance entre les interfaces/affichage/règles du jeu et les grilles.
 
-## Déplacement des méthodes
+## Clarification des méthodes
 
 Les methodes de validations de Ligne, colonne et diagonale affectée à grille sont déplacées dans la classe `Grille`. Cette modification permet de séparer les responsabilités et de supprimer la dépendance entre les interfaces/affichage/règles du jeu et les grilles.
 
 ## Test unitaire
 
 Un test unitaire est ajouté pour tester la classe du jeu Othello. Ce test permet de vérifier le bon fonctionnement du jeu en testant les méthodes de la classe `JeuOthello`.
+
+# Diagramme UML
+
+![Diagramme UML](./Docs/UML_Diagram.png)
 
 # Conclusion
 
