@@ -102,6 +102,8 @@ bool JeuPuissance4::PartieFinie() const
 
 bool JeuPuissance4::AGagne() const
 {
-    return grille->VerifieLigne(4, joueurCourant->getJeton()) || grille->VerifieColonne(4, joueurCourant->getJeton()) || grille->VerifieDiagonale(4, joueurCourant->getJeton());
+    return grille->VerifieLigne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieColonne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieDiagonale(sequenceGagnante, joueurCourant->getJeton());
 
 }

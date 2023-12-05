@@ -25,6 +25,7 @@ private:
     std::shared_ptr<AJoueur> joueur2;
     std::shared_ptr<AJoueur> joueurCourant;
     std::shared_ptr<IAffichage> modeAffichage;
+    const int sequenceGagnante = 3;
 };
 
 #endif // JEUMORPION_H

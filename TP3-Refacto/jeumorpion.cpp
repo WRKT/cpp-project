@@ -92,7 +92,9 @@ void JeuMorpion::AfficherResultat() const
 
 bool JeuMorpion::AGagne() const
 {
-    return grille->VerifieLigne(3, joueurCourant->getJeton()) || grille->VerifieColonne(3, joueurCourant->getJeton()) || grille->VerifieDiagonale(3, joueurCourant->getJeton());
+    return grille->VerifieLigne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieColonne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieDiagonale(sequenceGagnante, joueurCourant->getJeton());
 }
 
 bool JeuMorpion::PartieFinie() const
