@@ -6,6 +6,7 @@ void AffichageConsole::AfficherGrille(const std::shared_ptr<IGrille> grille) con
     const int nbColonnes = grille->getNbColonne();
     const int nbLignes = grille->getNbLigne();
 
+    std::cout << std::endl;
     std::cout << "    ";
     for (int j = 0; j < nbColonnes; j++)
     {
@@ -35,8 +36,9 @@ void AffichageConsole::AfficherGrille(const std::shared_ptr<IGrille> grille) con
         {
             std::cout << "---+";
         }
-        std::cout << "\n";
+        std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
 
 
