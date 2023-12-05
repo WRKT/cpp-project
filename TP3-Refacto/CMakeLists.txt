@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(TP3-Refacto main.cpp
 
     grille.h grille.cpp
-    IJoueur.h
+    AJoueur.h
     joueurhumain.h
     joueurordinateur.h
     IGrille.h

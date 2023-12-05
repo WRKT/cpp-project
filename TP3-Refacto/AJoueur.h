@@ -1,18 +1,18 @@
-#ifndef IJOUEUR_H
-#define IJOUEUR_H
+#ifndef AJoueur_H
+#define AJoueur_H
 
 #include <iostream>
 #include "jeton.h"
 #include <string>
 
-class IJoueur{
+class AJoueur{
 
 public:
-    IJoueur(const std::string& nom, const Jeton& jeton) : nom(nom), jeton(jeton) {}
+    AJoueur(const std::string& nom, const Jeton& jeton) : nom(nom), jeton(jeton) {}
     std::string getNom() const { return nom; }
     Jeton getJeton() const { return jeton; }
     std::string getInformations() const { return nom + "(" + static_cast<char>(jeton) + ")"; };
-    virtual ~IJoueur() = default;
+    virtual ~AJoueur() = default;
     virtual bool estHumain() const = 0;
 
 protected:
@@ -22,5 +22,5 @@ protected:
 
 
 
-#endif // IJOUEUR_H
+#endif // AJoueur_H
 

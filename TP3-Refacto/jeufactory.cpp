@@ -8,7 +8,7 @@
 #include <memory>
 // Inclure les autres fichiers de jeux si nécessaire
 
-std::unique_ptr<IJeu> JeuFactory::CreerJeu(TypesJeu typeDeJeu, std::shared_ptr<IJoueur> joueur1, std::shared_ptr<IJoueur> joueur2) {
+std::unique_ptr<IJeu> JeuFactory::CreerJeu(TypesJeu typeDeJeu, std::shared_ptr<AJoueur> joueur1, std::shared_ptr<AJoueur> joueur2) {
 
     std::shared_ptr<IGrille> grille = GrilleFactory::CreerGrille(typeDeJeu);
     std::shared_ptr<IAffichage> modeAffichage = std::make_shared<AffichageConsole>();

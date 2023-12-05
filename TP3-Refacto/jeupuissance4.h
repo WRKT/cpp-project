@@ -3,7 +3,7 @@
 
 #include "IJeu.h"
 #include "IGrille.h"
-#include "IJoueur.h"
+#include "AJoueur.h"
 #include "IAffichage.h"
 #include <memory>
 #include <string>
@@ -11,7 +11,7 @@
 class JeuPuissance4 : public IJeu {
 
 public:
-    JeuPuissance4(std::shared_ptr<IGrille> grille, std::shared_ptr<IJoueur> j1, std::shared_ptr<IJoueur> j2, std::shared_ptr<IAffichage> modeAffichage);
+    JeuPuissance4(std::shared_ptr<IGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage);
     void Jouer() override;
     void Tour() override;
     bool AGagne() const override;
@@ -23,9 +23,9 @@ public:
 
 private:
     std::shared_ptr<IGrille> grille;
-    std::shared_ptr<IJoueur> joueur1;
-    std::shared_ptr<IJoueur> joueur2;
-    std::shared_ptr<IJoueur> joueurCourant;
+    std::shared_ptr<AJoueur> joueur1;
+    std::shared_ptr<AJoueur> joueur2;
+    std::shared_ptr<AJoueur> joueurCourant;
     std::shared_ptr<IAffichage> modeAffichage;
 
 };

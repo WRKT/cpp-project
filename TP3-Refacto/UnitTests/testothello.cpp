@@ -18,8 +18,8 @@ protected:
 
     // Mise en place environnement de test othello (pour respecter le constructeur)
     void SetUp() override {
-        std::shared_ptr<IJoueur> joueur1 = JoueurFactory::CreerJoueurOrdinateur(Jeton::X);
-        std::shared_ptr<IJoueur> joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
+        std::shared_ptr<AJoueur> joueur1 = JoueurFactory::CreerJoueurOrdinateur(Jeton::X);
+        std::shared_ptr<AJoueur> joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
         std::shared_ptr<IAffichage> modeAffichage = std::make_shared<AffichageConsole>();
         jeu = std::make_unique<JeuOthello>(grille, joueur1, joueur2, modeAffichage);
     }

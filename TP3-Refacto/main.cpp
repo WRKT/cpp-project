@@ -7,7 +7,7 @@
 #include "inputconsole.h"
 #include "affichageconsole.h"
 #include "IJeu.h"
-#include "IJoueur.h"
+#include "AJoueur.h"
 #include "joueurfactory.h"
 #include "jeufactory.h"
 
@@ -27,8 +27,8 @@ int main()
 
         int modeJeu = InputConsole::demanderModeDeJeu();
 
-        std::shared_ptr<IJoueur> joueur1;
-        std::shared_ptr<IJoueur> joueur2;
+        std::shared_ptr<AJoueur> joueur1;
+        std::shared_ptr<AJoueur> joueur2;
 
         if (modeJeu == 1)
         {
