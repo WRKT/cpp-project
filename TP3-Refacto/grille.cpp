@@ -37,9 +37,9 @@ void Grille::ChangeCellule(const int x, const int y, Jeton jeton)
 
 bool Grille::EstRemplie() const
 {
-    for (int i = 0; i < getNbColonne(); ++i)
+    for (int i = 0; i < getNbLigne(); i++)
     {
-        for (int j = 0; j < getNbLigne(); ++j)
+        for (int j = 0; j < getNbColonne(); j++)
         {
             if (ACaseVide(i, j))
             {
