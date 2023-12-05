@@ -39,6 +39,7 @@ void JeuMorpion::Tour()
         std::pair<int, int> coup;
         while (!coupValide)
         {
+            modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
             coup = InputConsole::demanderCoupMorpion(grille->getNbLigne());
             if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
             {

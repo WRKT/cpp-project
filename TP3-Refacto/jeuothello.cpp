@@ -46,6 +46,7 @@ void JeuOthello::Tour()
         modeAffichage->AfficherMessage("");
         while (!coupValide)
         {
+            modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
             std::pair<int, int> coup = InputConsole::demanderCoupOthello(grille->getNbLigne());
 
             if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())

@@ -21,14 +21,7 @@ void JeuPuissance4::Jouer()
                 return;
         }
 
-        if (joueurCourant->getJeton() == joueur1->getJeton())
-        {
-            joueurCourant = joueur2;
-        }
-        else
-        {
-            joueurCourant = joueur1;
-        }
+        joueurCourant->getJeton() == joueur1->getJeton() ? joueurCourant = joueur2 : joueurCourant = joueur1;
 
         modeAffichage->AfficherGrille(grille);
     }
@@ -45,6 +38,7 @@ void JeuPuissance4::Tour()
         int colonne;
         while (!coupValide)
         {
+            modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
             colonne = InputConsole::demanderCoupPuissance4(grille->getNbColonne());
             for (auto& coup : coupsPossibles) {
                 if (coup.second == colonne) {
