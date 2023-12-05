@@ -14,6 +14,8 @@ public:
     bool AGagne() const override;
     bool PartieFinie() const override;
     std::vector<std::pair<int, int>> CoupsPossibles() override;
+    void InitialiseJeu() const override;
+    void AfficherResultat() const override;
 
  private:
     std::shared_ptr<IGrille> grille;
@@ -21,12 +23,10 @@ public:
     std::shared_ptr<AJoueur> joueur2;
     std::shared_ptr<AJoueur> joueurCourant;
     std::shared_ptr<IAffichage> modeAffichage;
-    void InitialiseJeu() const;
     bool EstCoupValide(int x, int y, Jeton jeton) const;
     void RetournerJetons(const int x, const int y, Jeton jeton);
     bool PeutRetourner(int x, int y, int directionX, int directionY, Jeton jeton) const;
     Jeton DetermineGagnant() const;
-    void AfficherResultat() const;
 
 };
 
