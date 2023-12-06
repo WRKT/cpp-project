@@ -24,6 +24,7 @@ add_executable(TP-Refacto main.cpp
     IAffichage.h
     affichageconsole.h affichageconsole.cpp
     jeuothello.h jeuothello.cpp
+    IChoisirCoup.h
 
 )
 

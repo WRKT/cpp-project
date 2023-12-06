@@ -145,65 +145,27 @@ std::string InputConsole::demanderPrenomJoueur(const std::string &prompt)
     return prenom;
 }
 
-std::pair<int, int> InputConsole::demanderCoupMorpion(int tailleGrille)
-{
-    int x, y;
-    while (true)
-    {
-        x = getInt("Entrez la ligne (1 - " + std::to_string(tailleGrille) + ") : ");
-        if (x < 1 || x > tailleGrille)
-        {
-            continue;
-        }
-        y = getInt("Entrez la colonne (1 - " + std::to_string(tailleGrille) + ") : ");
-
-        if (y < 1 || y > tailleGrille)
-        {
-            continue;
-        }
-
-        return {x - 1, y - 1};
-    }
-}
-
-std::pair<int, int> InputConsole::demanderCoupOthello(int tailleGrille)
+std::pair<int, int> InputConsole::demanderCordonnee()
 {
     int x, y;
 
     while (true)
     {
-        x = getInt("Entrez la ligne (1 - " + std::to_string(tailleGrille) + ") : ");
-        if (x < 1 || x > tailleGrille)
-        {
-            continue;
-        }
-        y = getInt("Entrez la colonne (1 - " + std::to_string(tailleGrille) + ") : ");
-
-        if (y < 1 || y > tailleGrille)
-        {
-            continue;
-        }
+        x = getInt("Entrez la ligne : ");
+        y = getInt("Entrez la colonne : ");
 
         return {x - 1, y - 1};
     }
 }
 
-int InputConsole::demanderCoupPuissance4(int nbColonnes)
+int InputConsole::demanderColonne()
 {
     int colonne;
-    bool coupValide = false;
 
-    do
+    while (true)
     {
-        colonne = getInt("Entrez le numéro de la colonne (1 - " + std::to_string(nbColonnes) + ") : ");
-        coupValide = (colonne >= 1 && colonne <= nbColonnes);
+        colonne = getInt("Entrez le numero de la colonne : ");
 
-        if (!coupValide)
-        {
-            continue;
-        }
-
-    } while (!coupValide);
-
-    return colonne - 1;
+        return colonne - 1;
+    }
 }

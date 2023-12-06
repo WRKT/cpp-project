@@ -39,7 +39,7 @@ void JeuPuissance4::Tour()
         while (!coupValide)
         {
             modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
-            colonne = InputConsole::demanderCoupPuissance4(grille->getNbColonne());
+            colonne = InputConsole::demanderColonne();
             for (auto& coup : coupsPossibles) {
                 if (coup.second == colonne) {
                     grille->ChangeCellule(coup.first, colonne, joueurCourant->getJeton());
