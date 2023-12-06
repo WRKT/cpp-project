@@ -37,10 +37,11 @@ void JeuMorpion::Tour()
     {
         bool coupValide = false;
         std::pair<int, int> coup;
+
         while (!coupValide)
         {
             modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
-            coup = InputConsole::demanderCoupMorpion(grille->getNbLigne());
+            coup = InputConsole::demanderCordonnee();
             if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
             {
                 grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
@@ -48,7 +49,7 @@ void JeuMorpion::Tour()
             }
             else
             {
-                modeAffichage->AfficherErreur("Coups Impossible");
+                modeAffichage->AfficherErreur("Coups invalide.\n\n");
             }
         }
     }
