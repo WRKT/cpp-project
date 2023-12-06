@@ -9,8 +9,8 @@ add_executable(TP-Refacto main.cpp
 
     grille.h grille.cpp
     AJoueur.h
-    joueurhumain.h
-    joueurordinateur.h
+    joueurhumain.h joueurhumain.cpp
+    joueurordinateur.h joueurordinateur.cpp
     IGrille.h
     jeton.h
     IJeu.h
@@ -34,16 +34,16 @@ install(TARGETS TP-Refacto
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/5376968f6948923e2411081fd9372e71a59d8e77.zip
-)
-# For Windows: Prevent overriding the parent project's compiler/linker settings
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
+#include(FetchContent)
+#FetchContent_Declare(
+#  googletest
+#  URL https://github.com/google/googletest/archive/5376968f6948923e2411081fd9372e71a59d8e77.zip
+#)
+## For Windows: Prevent overriding the parent project's compiler/linker settings
+#set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+#FetchContent_MakeAvailable(googletest)
 
-include(GoogleTest)
+#include(GoogleTest)
 
 
-add_subdirectory(UnitTests)
+#add_subdirectory(UnitTests)

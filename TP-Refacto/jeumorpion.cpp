@@ -40,6 +40,15 @@ void JeuMorpion::Tour()
     {
         coup = joueurCourant->ChoisirCoupMorpion(coupsPossibles);
         grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
+        if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
+        {
+            grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
+            coupValide = true;
+        }
+        else
+        {
+            modeAffichage->AfficherErreur("Coups Impossible");
+        }
     }
 }
 

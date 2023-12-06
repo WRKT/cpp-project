@@ -4,8 +4,9 @@
 #include <iostream>
 #include "jeton.h"
 #include <string>
+#include "IChoisirCoup.h"
 
-class AJoueur
+class AJoueur : public IChoisirCoup
 {
 
 public:
