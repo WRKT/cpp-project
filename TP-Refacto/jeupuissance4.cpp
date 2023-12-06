@@ -3,7 +3,7 @@
 #include <vector>
 #include <random>
 #include <ctime>
-#include "inputconsole.h"
+#include <algorithm>
 
 JeuPuissance4::JeuPuissance4(std::shared_ptr<IGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
     : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
@@ -38,16 +38,16 @@ void JeuPuissance4::Tour()
     while (!coupValide)
     {
         modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
-//        std::pair<int, int> coup = joueurCourant->ChoisirCoupPuissance4(coupsPossibles);
-//        if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
-//        {
-//            grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
-//            coupValide = true;
-//        }
-//        else
-//        {
-//            modeAffichage->AfficherErreur("Coups Impossible");
-//        }
+        std::pair<int, int> coup = joueurCourant->ChoisirCoupPuissance4(coupsPossibles);
+        if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
+        {
+            grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
+            coupValide = true;
+        }
+        else
+        {
+            modeAffichage->AfficherErreur("Coups Impossible");
+        }
     }
 }
 
