@@ -14,7 +14,7 @@ add_executable(TestOthello testothello.cpp
     ../IAffichage.h
     ../affichageconsole.h ../affichageconsole.cpp
     ../inputconsole.h ../inputconsole.cpp
-
+    ../joueurhumain.cpp ../joueurordinateur.cpp
 )
 
 target_link_libraries(
