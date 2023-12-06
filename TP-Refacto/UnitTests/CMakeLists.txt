@@ -14,6 +14,10 @@ add_executable(TestOthello testothello.cpp
     ../IAffichage.h
     ../affichageconsole.h ../affichageconsole.cpp
     ../inputconsole.h ../inputconsole.cpp
+    testmorpion.cpp
+    testpuissance4.cpp
+    testdame.cpp
+    testgrille.cpp
 
 )
 
