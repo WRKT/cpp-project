@@ -3,10 +3,9 @@
 
 #include <iostream>
 #include "jeton.h"
-#include "IChoisirCoup.h"
 #include <string>
 
-class AJoueur : public IChoisirCoup
+class AJoueur
 {
 
 public:
@@ -15,10 +14,7 @@ public:
     Jeton getJeton() const { return jeton; }
     std::string getInformations() const { return nom + "(" + static_cast<char>(jeton) + ")"; };
     virtual bool estHumain() const = 0;
-    virtual std::pair<int, int> ChoisirCoupMorpion(std::vector<std::pair<int, int>>) = 0;
-    virtual int ChoisirCoupPuissance4(std::vector<int>) = 0;
-    virtual std::pair<int, int> ChoisirCoupOthello(std::vector<std::pair<int, int>>) = 0;
-    virtual ~AJoueur() = default;
+    ~AJoueur() = default;
 
 protected:
     const std::string nom;
