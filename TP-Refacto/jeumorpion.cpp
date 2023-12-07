@@ -5,6 +5,7 @@
 #include <random>
 #include <ctime>
 #include <limits>
+#include "inputconsole.h"
 
 JeuMorpion::JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
     : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
@@ -12,9 +13,9 @@ JeuMorpion::JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<AJoueur>
 void JeuMorpion::Jouer()
 {
     InitialiseJeu();
+
     while (!PartieFinie())
     {
-
         Tour();
         if (AGagne())
         {
@@ -32,24 +33,36 @@ void JeuMorpion::Jouer()
 void JeuMorpion::Tour()
 {
     auto coupsPossibles = CoupsPossibles();
-
-    bool coupValide = false;
-    std::pair<int, int> coup;
-    while (!coupValide)
+    if (joueurCourant->estHumain())
     {
-        coup = joueurCourant->ChoisirCoupMorpion(coupsPossibles);
-        if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
+        bool coupValide = false;
+        std::pair<int, int> coup;
+        while (!coupValide)
         {
-            grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
-            coupValide = true;
-        }
-        else
-        {
-            modeAffichage->AfficherErreur("Coups Impossible");
+            modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
+            coup = InputConsole::demanderCoupMorpion(grille->getNbLigne());
+            if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
+            {
+                grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
+                coupValide = true;
+            }
+            else
+            {
+                modeAffichage->AfficherErreur("Coups Impossible");
+            }
         }
     }
+    else
+    {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> distrib(0, coupsPossibles.size() - 1);
+        int indiceCoupChoisi = distrib(gen);
+        std::pair<int, int> coupChoisi = coupsPossibles[indiceCoupChoisi];
+        grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
+        modeAffichage->AfficherMessage(joueurCourant->getInformations() + " a joué ");
+    }
 }
-
 void JeuMorpion::InitialiseJeu() const
 {
     modeAffichage->AfficherGrille(grille);
@@ -79,7 +92,9 @@ void JeuMorpion::AfficherResultat() const
 
 bool JeuMorpion::AGagne() const
 {
-    return grille->VerifieLigne(sequenceGagnante, joueurCourant->getJeton()) || grille->VerifieColonne(sequenceGagnante, joueurCourant->getJeton()) || grille->VerifieDiagonale(sequenceGagnante, joueurCourant->getJeton());
+    return grille->VerifieLigne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieColonne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieDiagonale(sequenceGagnante, joueurCourant->getJeton());
 }
 
 bool JeuMorpion::PartieFinie() const

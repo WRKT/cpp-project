@@ -40,22 +40,41 @@ void JeuOthello::Tour()
         modeAffichage->AfficherMessage("Aucun coup possible pour " + joueurCourant->getInformations() + ". Passage au joueur suivant.");
         return;
     }
-    modeAffichage->AfficherMessage("");
-    while (!coupValide)
-    {
-        modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
-        std::pair<int, int> coup = joueurCourant->ChoisirCoupOthello(coupsPossibles);
 
-        if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
+    if (joueurCourant->estHumain())
+    {
+        modeAffichage->AfficherMessage("");
+        while (!coupValide)
         {
-            grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
-            RetournerJetons(coup.first, coup.second, joueurCourant->getJeton());
-            coupValide = true;
+            modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
+            std::pair<int, int> coup = InputConsole::demanderCoupOthello(grille->getNbLigne());
+
+            if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
+            {
+                grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
+                RetournerJetons(coup.first, coup.second, joueurCourant->getJeton());
+                coupValide = true;
+            }
+            else
+            {
+                modeAffichage->AfficherErreur("Coup impossible.");
+            }
         }
-        else
-        {
-            modeAffichage->AfficherErreur("Coup impossible.");
-        }
+    } else {
+        modeAffichage->AfficherMessage("", 2);
+
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> distrib(0, coupsPossibles.size() - 1);
+
+        int indiceCoupChoisi = distrib(gen);
+        std::pair<int, int> coupChoisi = coupsPossibles[indiceCoupChoisi];
+
+        grille->ChangeCellule(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
+        RetournerJetons(coupChoisi.first, coupChoisi.second, joueurCourant->getJeton());
+
+
+        modeAffichage->AfficherMessage(joueurCourant->getInformations() + " a joué.");
     }
 }
 
@@ -64,8 +83,8 @@ bool JeuOthello::PartieFinie() const
     return grille->EstRemplie();
 }
 
-void JeuOthello::InitialiseJeu() const
-{
+
+void JeuOthello::InitialiseJeu() const {
     int centreX = grille->getNbLigne() / 2 - 1;
     int centreY = grille->getNbColonne() / 2 - 1;
     grille->ChangeCellule(centreX, centreY, Jeton::X);
@@ -83,7 +102,7 @@ void JeuOthello::AfficherResultat() const
 
     if (AGagne())
     {
-        modeAffichage->AfficherMessage("Le gagnant est " + (DetermineGagnant() == joueur1->getJeton() ? joueur1->getInformations() : joueur2->getInformations()) + " !");
+        modeAffichage->AfficherMessage ("Le gagnant est " + (DetermineGagnant() == joueur1->getJeton() ? joueur1->getInformations() : joueur2->getInformations()) + " !");
     }
     else
     {
@@ -109,13 +128,13 @@ std::vector<std::pair<int, int>> JeuOthello::CoupsPossibles()
     return coupsPossibles;
 }
 
-bool JeuOthello::AGagne() const
-{
+bool JeuOthello::AGagne() const {
 
     Jeton gagnant = DetermineGagnant();
 
     return gagnant == joueur1->getJeton() || gagnant == joueur2->getJeton();
 }
+
 
 void JeuOthello::RetournerJetons(const int x, const int y, Jeton jeton)
 {
