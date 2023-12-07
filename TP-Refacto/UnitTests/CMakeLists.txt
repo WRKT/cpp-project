@@ -5,7 +5,7 @@ project(TP3-Refacto LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(TestOthello testothello.cpp
+add_executable(Unit-Tests testothello.cpp
     ../IJeu.h
     ../jeuothello.h ../jeuothello.cpp
     ../IGrille.h
@@ -15,13 +15,15 @@ add_executable(TestOthello testothello.cpp
     ../affichageconsole.h ../affichageconsole.cpp
     ../inputconsole.h ../inputconsole.cpp
     ../joueurhumain.cpp ../joueurordinateur.cpp
+    testgrille.cpp
+    maintest.cpp
 )
 
 target_link_libraries(
-    TestOthello
+    Unit-Tests
     gtest_main
 )
 
 gtest_discover_tests(
-    TestOthello
+    Unit-Tests
 )
