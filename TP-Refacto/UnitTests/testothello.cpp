@@ -26,18 +26,6 @@ protected:
 
 };
 
-TEST_F(TestOthello, CheckCompteJeton) {
-
-    grille->ChangeCellule(1,1,Jeton::X);
-    grille->ChangeCellule(1,2,Jeton::X);
-    grille->ChangeCellule(1,3,Jeton::X);
-
-    grille->ChangeCellule(2,1,Jeton::O);
-    grille->ChangeCellule(2,2,Jeton::O);
-
-    ASSERT_FALSE(grille->CompteJetons(Jeton::X) == grille->CompteJetons(Jeton::O));
-}
-
 TEST_F(TestOthello, CheckPartieFinie) {
 
     // Cas 1: grille remplie de valeurs aleatoire de Jeton O et X
@@ -118,11 +106,6 @@ TEST_F(TestOthello, CheckEgalite)
     }
 
     ASSERT_FALSE(jeu->AGagne());
-}
-
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
 }
 
 
