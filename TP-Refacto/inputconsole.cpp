@@ -145,7 +145,6 @@ std::string InputConsole::demanderPrenomJoueur(const std::string &prompt)
     return prenom;
 }
 
-
 std::pair<int, int> InputConsole::demanderCordonnee()
 {
     int x, y;
@@ -163,7 +162,7 @@ int InputConsole::demanderColonne()
 {
     int colonne;
 
-    while(true)
+    while (true)
     {
         colonne = getInt("Entrez le numero de la colonne : ");
 
