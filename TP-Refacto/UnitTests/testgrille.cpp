@@ -57,4 +57,39 @@ TEST_F(TestGrille, CheckGetLigne)
     EXPECT_NE(lignefausse, resultatAttendu);
 }
 
+TEST_F(TestGrille, CheckGetColonne)
+{
+    grilleMorpion.ChangeCellule(0,0,Jeton::X);
+    grilleMorpion.ChangeCellule(1,0,Jeton::O);
+    grilleMorpion.ChangeCellule(2,0,Jeton::X);
+    grilleMorpion.ChangeCellule(1,1,Jeton::O);
+    grilleMorpion.ChangeCellule(2,1,Jeton::X);
 
+    std::vector<Jeton> premiereColonne = grilleMorpion.GetColonneContenant(0,0,Jeton::Vide);
+    std::vector<Jeton> colonneFausse = grilleMorpion.GetColonneContenant(1,1,Jeton::X);
+    std::vector<Jeton> resultatAttendu = {Jeton::X,Jeton::O,Jeton::X};
+
+    EXPECT_EQ(premiereColonne, resultatAttendu);
+    EXPECT_NE(colonneFausse, resultatAttendu);
+}
+
+TEST_F(TestGrille, CheckDiagonale)
+{
+    grillePuissance4.ChangeCellule(0,0,Jeton::O);
+    grillePuissance4.ChangeCellule(1,1,Jeton::X);
+    grillePuissance4.ChangeCellule(2,2,Jeton::X);
+
+    grillePuissance4.ChangeCellule(2,0,Jeton::X);
+    grillePuissance4.ChangeCellule(1,1,Jeton::X);
+    grillePuissance4.ChangeCellule(0,2,Jeton::O);
+
+    std::vector<Jeton> diagonaleDescTest = grillePuissance4.GetDiagonaleDESC(0,0,Jeton::O);
+    std::vector<Jeton> diagonaleAscTest = grillePuissance4.GetDiagonaleASC(2,0,Jeton::O);
+
+    // Resultat attendu
+    std::vector<Jeton> diagonaleDescAttendu = {Jeton::O,Jeton::X,Jeton::X,Jeton::Vide};
+    std::vector<Jeton> diagonaleAscAttendu = {Jeton::X, Jeton::X, Jeton::O};
+
+    EXPECT_EQ(diagonaleAscTest, diagonaleAscAttendu);
+    EXPECT_EQ(diagonaleDescTest, diagonaleDescAttendu);
+}

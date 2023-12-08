@@ -164,36 +164,36 @@ std::vector<Jeton> Grille::GetColonneContenant(int x, int y, Jeton jeton) const
     return colonne;
 }
 
-std::vector<Jeton> Grille::GetDiagonaleASC(int x, int y, Jeton jeton) const
-{
-    std::vector<Jeton> diagonaleASC;
-
-    for (int i = 0; x - i >= 0 && y - i >= 0; ++i)
-    {
-        diagonaleASC.push_back(GetCellule(x - i, y - i));
-    }
-
-    for (int i = 1; x + i < getNbLigne() && y + i < getNbColonne(); ++i)
-    {
-        diagonaleASC.push_back(GetCellule(x + i, y + i));
-    }
-
-    return diagonaleASC;
-}
-
 std::vector<Jeton> Grille::GetDiagonaleDESC(int x, int y, Jeton jeton) const
 {
     std::vector<Jeton> diagonaleDESC;
 
+    for (int i = 0; x - i >= 0 && y - i >= 0; ++i)
+    {
+        diagonaleDESC.push_back(GetCellule(x - i, y - i));
+    }
+
+    for (int i = 1; x + i < getNbLigne() && y + i < getNbColonne(); ++i)
+    {
+        diagonaleDESC.push_back(GetCellule(x + i, y + i));
+    }
+
+    return diagonaleDESC;
+}
+
+std::vector<Jeton> Grille::GetDiagonaleASC(int x, int y, Jeton jeton) const
+{
+    std::vector<Jeton> diagonaleASC;
+
     for (int i = 0; x + i < getNbLigne() && y - i >= 0; ++i)
     {
-        diagonaleDESC.push_back(GetCellule(x + i, y - i));
+        diagonaleASC.push_back(GetCellule(x + i, y - i));
     }
 
     for (int i = 1; x - i >= 0 && y + i < getNbColonne(); ++i)
     {
-        diagonaleDESC.push_back(GetCellule(x - i, y + i));
+        diagonaleASC.push_back(GetCellule(x - i, y + i));
     }
 
-    return diagonaleDESC;
+    return diagonaleASC;
 }
