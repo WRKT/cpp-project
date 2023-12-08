@@ -47,6 +47,7 @@ void JeuMorpion::Tour()
         {
             modeAffichage->AfficherErreur("Coups Impossible");
         }
+
     }
 }
 

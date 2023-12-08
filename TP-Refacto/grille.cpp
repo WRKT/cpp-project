@@ -143,7 +143,7 @@ int Grille::CompteSequence(const int ligneDepart, const int colonneDepart, const
     return compteur;
 }
 
-std::vector<Jeton> Grille::GetLigneContenant(int x, int y, Jeton jeton) const
+std::vector<Jeton> Grille::GetLigne(int x, int y) const
 {
     std::vector<Jeton> ligne;
     for (int i = 0; i < getNbColonne(); ++i)
@@ -153,7 +153,7 @@ std::vector<Jeton> Grille::GetLigneContenant(int x, int y, Jeton jeton) const
     return ligne;
 }
 
-std::vector<Jeton> Grille::GetColonneContenant(int x, int y, Jeton jeton) const
+std::vector<Jeton> Grille::GetColonne(int x, int y) const
 {
     std::vector<Jeton> colonne;
 
@@ -164,7 +164,7 @@ std::vector<Jeton> Grille::GetColonneContenant(int x, int y, Jeton jeton) const
     return colonne;
 }
 
-std::vector<Jeton> Grille::GetDiagonaleDESC(int x, int y, Jeton jeton) const
+std::vector<Jeton> Grille::GetDiagonaleDESC(int x, int y) const
 {
     std::vector<Jeton> diagonaleDESC;
 
@@ -181,7 +181,7 @@ std::vector<Jeton> Grille::GetDiagonaleDESC(int x, int y, Jeton jeton) const
     return diagonaleDESC;
 }
 
-std::vector<Jeton> Grille::GetDiagonaleASC(int x, int y, Jeton jeton) const
+std::vector<Jeton> Grille::GetDiagonaleASC(int x, int y) const
 {
     std::vector<Jeton> diagonaleASC;
 
