@@ -22,6 +22,11 @@ public:
     bool VerifieDiagonale(const int sequenceGagnante, const Jeton jeton) const override;
     int CompteSequence(const int ligneDepart, const int colonneDepart, const int dirLigne, const int dirColonne) const;
 
+    std::vector<Jeton> GetLigneContenant(int x, int y, Jeton jeton) const override;
+    std::vector<Jeton> GetColonneContenant(int x, int y, Jeton jeton) const override;
+    std::vector<Jeton> GetDiagonaleASC(int x, int y, Jeton jeton) const override;
+    std::vector<Jeton> GetDiagonaleDESC(int x, int y, Jeton jeton) const override;
+
 private:
     const int nbLignes, nbColonnes;
     std::vector<std::vector<Jeton>> table;

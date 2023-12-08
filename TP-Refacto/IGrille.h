@@ -18,6 +18,12 @@ public:
     virtual bool VerifieLigne(const int nbJetons, const Jeton jeton) const = 0;
     virtual bool VerifieColonne(const int nbJetons, const Jeton jeton) const = 0;
     virtual bool VerifieDiagonale(const int nbJetons, const Jeton jeton) const = 0;
+
+    virtual std::vector<Jeton> GetLigneContenant(int x, int y, Jeton jeton) const = 0;
+    virtual std::vector<Jeton> GetColonneContenant(int x, int y, Jeton jeton) const = 0;
+    virtual std::vector<Jeton> GetDiagonaleASC(int x, int y, Jeton jeton) const = 0;
+    virtual std::vector<Jeton> GetDiagonaleDESC(int x, int y, Jeton jeton) const = 0;
+
     virtual ~IGrille() = default;
 };
 
