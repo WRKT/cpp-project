@@ -54,3 +54,14 @@ TEST_F(TestGrille, CheckVerifierDiagonale)
     EXPECT_NE (grilleMorpion.VerifieColonne (3,Jeton::X), true);
 }
 
+TEST_F(TestGrille, CheckGetLigne)
+{
+    grilleMorpion.ChangeCellule(0,0,Jeton::X);
+    grilleMorpion.ChangeCellule(0,1,Jeton::O);
+    grilleMorpion.ChangeCellule(0,2,Jeton::X);
+    grilleMorpion.ChangeCellule(1,1,Jeton::O);
+    grilleMorpion.ChangeCellule(2,1,Jeton::X);
+
+    std::vector<Jeton> Ligne;
+
+}
