@@ -2,11 +2,19 @@
 #include <iostream>
 #include "jeton.h"
 
-void Grille::InitialiserGrille()
-{
-    for (auto &ligne : table)
-    {
-        std::fill(ligne.begin(), ligne.end(), Jeton::Vide);
+void Grille::InitialiserGrilleOthello() {
+    int centreX = getNbLigne() / 2 - 1;
+    int centreY = getNbColonne() / 2 - 1;
+
+    Jeton positions[2][2] = {
+        {Jeton::X, Jeton::O},
+        {Jeton::O, Jeton::X}
+    };
+
+    for (int i = 0; i < 2; ++i) {
+        for (int j = 0; j < 2; ++j) {
+            ChangeCellule(centreX + i, centreY + j, positions[i][j]);
+        }
     }
 }
 

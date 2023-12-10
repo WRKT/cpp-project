@@ -1,15 +1,15 @@
 ﻿#ifndef GRILLE_H
 #define GRILLE_H
 
-#include "IGrille.h"
+#include "AGrille.h"
 #include <vector>
 
-class Grille : public IGrille
+class Grille : public AGrille
 {
 
 public:
     Grille(const int nbLignes, const int nbColonnes) : nbLignes(nbLignes), nbColonnes(nbColonnes), table(nbLignes, std::vector<Jeton>(nbColonnes, Jeton::Vide)){};
-    void InitialiserGrille() override;
+    void InitialiserGrilleOthello() override;
     int getNbLigne() const override;
     int getNbColonne() const override;
     bool ACaseVide(const int x, const int y) const override;
