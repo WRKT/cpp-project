@@ -1,13 +1,13 @@
-#ifndef IGRILLE_H
-#define IGRILLE_H
+#ifndef AGRILLE_H
+#define AGRILLE_H
 
+#include "IGrilleInit.h"
 #include "jeton.h"
 #include <vector>
 
-class IGrille
+class AGrille : public IGrilleInit
 {
 public:
-    virtual void InitialiserGrille() = 0;
     virtual int getNbLigne() const = 0;
     virtual int getNbColonne() const = 0;
     virtual Jeton GetCellule(const int x, const int y) const = 0;
@@ -24,7 +24,7 @@ public:
     virtual std::vector<Jeton> GetDiagonaleASC(int x, int y) const = 0;
     virtual std::vector<Jeton> GetDiagonaleDESC(int x, int y) const = 0;
 
-    virtual ~IGrille() = default;
+    virtual ~AGrille() = default;
 };
 
-#endif // IGRILLE_H
+#endif // AGRILLE_H
