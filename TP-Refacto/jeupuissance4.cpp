@@ -86,5 +86,7 @@ bool JeuPuissance4::PartieFinie() const
 
 bool JeuPuissance4::AGagne() const
 {
-    return grille->VerifieLigne(sequenceGagnante, joueurCourant->getJeton()) || grille->VerifieColonne(sequenceGagnante, joueurCourant->getJeton()) || grille->VerifieDiagonale(sequenceGagnante, joueurCourant->getJeton());
+    return grille->VerifieLigne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieColonne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieDiagonale(sequenceGagnante, joueurCourant->getJeton());
 }

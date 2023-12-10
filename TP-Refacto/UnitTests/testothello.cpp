@@ -43,6 +43,7 @@ TEST_F(TestOthello, CheckPartieFinie) {
         }
     }
 
+    EXPECT_EQ(grille->EstRemplie(), true);
     ASSERT_TRUE(jeu->PartieFinie());
 }
 

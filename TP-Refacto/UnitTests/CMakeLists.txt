@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(Unit-Tests testothello.cpp
     ../IJeu.h
     ../jeuothello.h ../jeuothello.cpp
+    ../jeumorpion.h ../jeumorpion.cpp
+    ../jeupuissance4.h ../jeupuissance4.cpp
     ../IGrille.h
     ../grille.h ../grille.cpp
     ../joueurfactory.h ../joueurfactory.cpp
@@ -17,6 +19,8 @@ add_executable(Unit-Tests testothello.cpp
     ../joueurhumain.cpp ../joueurordinateur.cpp
     testgrille.cpp
     maintest.cpp
+    testmorpion.cpp
+    testpuissance4.cpp
 )
 
 target_link_libraries(

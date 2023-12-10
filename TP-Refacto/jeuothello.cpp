@@ -1,5 +1,4 @@
 #include "jeuothello.h"
-#include "inputconsole.h"
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -29,6 +28,7 @@ void JeuOthello::Tour()
     auto coupsPossibles = CoupsPossibles();
     bool coupValide = false;
 
+    modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
     modeAffichage->AfficherMessage("Coups possibles pour " + joueurCourant->getInformations() + " :");
     for (auto coup : coupsPossibles)
     {
@@ -40,10 +40,10 @@ void JeuOthello::Tour()
         modeAffichage->AfficherMessage("Aucun coup possible pour " + joueurCourant->getInformations() + ". Passage au joueur suivant.");
         return;
     }
+
     modeAffichage->AfficherMessage("");
     while (!coupValide)
     {
-        modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
         std::pair<int, int> coup = joueurCourant->ChoisirCoupOthello(coupsPossibles);
 
         if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
@@ -119,7 +119,6 @@ bool JeuOthello::AGagne() const
 
 void JeuOthello::RetournerJetons(const int x, const int y, Jeton jeton)
 {
-    // On peut simplifier -> utiliser les autres methodes (EstCoupValide par exemple, on se répète trop)
     for (int directionX = -1; directionX <= 1; ++directionX)
     {
         for (int directionY = -1; directionY <= 1; ++directionY)

@@ -35,8 +35,10 @@ void JeuMorpion::Tour()
 
     bool coupValide = false;
     std::pair<int, int> coup;
+
     while (!coupValide)
     {
+        modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
         coup = joueurCourant->ChoisirCoupMorpion(coupsPossibles);
         if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
         {
@@ -80,7 +82,9 @@ void JeuMorpion::AfficherResultat() const
 
 bool JeuMorpion::AGagne() const
 {
-    return grille->VerifieLigne(sequenceGagnante, joueurCourant->getJeton()) || grille->VerifieColonne(sequenceGagnante, joueurCourant->getJeton()) || grille->VerifieDiagonale(sequenceGagnante, joueurCourant->getJeton());
+    return grille->VerifieLigne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieColonne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieDiagonale(sequenceGagnante, joueurCourant->getJeton());
 }
 
 bool JeuMorpion::PartieFinie() const
