@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(Unit-Tests testothello.cpp
     ../IJeu.h
     ../jeuothello.h ../jeuothello.cpp
-    ../IGrille.h
+    ../AGrille.h
     ../grille.h ../grille.cpp
     ../joueurfactory.h ../joueurfactory.cpp
     ../IAffichage.h

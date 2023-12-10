@@ -3,7 +3,7 @@
 #include <random>
 #include "../IJeu.h"
 #include "../jeuothello.h"
-#include "../IGrille.h"
+#include "../AGrille.h"
 #include "../grille.h"
 #include "../joueurfactory.h"
 #include "../IAffichage.h"
@@ -14,7 +14,7 @@ class TestOthello : public ::testing::Test {
 protected:
     // Les propriétés dont on a besoin pour les tests
     std::unique_ptr<IJeu> jeu;
-    std::shared_ptr<IGrille> grille = std::make_shared<Grille>(8,8);
+    std::shared_ptr<AGrille> grille = std::make_shared<Grille>(8,8);
 
     // Mise en place environnement de test othello (pour respecter le constructeur)
     void SetUp() override {
