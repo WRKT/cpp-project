@@ -2,9 +2,14 @@
 #include <iostream>
 #include "jeton.h"
 
+Jeton Grille::GetCellule(const int x, const int y) const
+{
+    return table[x][y];
+}
+
 void Grille::InitialiserGrilleOthello() {
-    int centreX = getNbLigne() / 2 - 1;
-    int centreY = getNbColonne() / 2 - 1;
+    int centreX = getNbLignes() / 2 - 1;
+    int centreY = getNbColonnes() / 2 - 1;
 
     Jeton positions[2][2] = {
         {Jeton::X, Jeton::O},
@@ -16,21 +21,6 @@ void Grille::InitialiserGrilleOthello() {
             ChangeCellule(centreX + i, centreY + j, positions[i][j]);
         }
     }
-}
-
-int Grille::getNbColonne() const
-{
-    return nbColonnes;
-}
-
-Jeton Grille::GetCellule(const int x, const int y) const
-{
-    return table[x][y];
-}
-
-int Grille::getNbLigne() const
-{
-    return nbLignes;
 }
 
 bool Grille::ACaseVide(const int x, const int y) const
@@ -45,9 +35,9 @@ void Grille::ChangeCellule(const int x, const int y, Jeton jeton)
 
 bool Grille::EstRemplie() const
 {
-    for (int i = 0; i < getNbLigne(); i++)
+    for (int i = 0; i < getNbLignes(); i++)
     {
-        for (int j = 0; j < getNbColonne(); j++)
+        for (int j = 0; j < getNbColonnes(); j++)
         {
             if (ACaseVide(i, j))
             {
@@ -58,13 +48,12 @@ bool Grille::EstRemplie() const
     return true;
 }
 
-
 int Grille::CompteJetons(Jeton jeton) const
 {
     int nbJeton = 0;
-    for (int i = 0; i < getNbColonne(); ++i)
+    for (int i = 0; i < getNbColonnes(); ++i)
     {
-        for (int j = 0; j < getNbLigne(); ++j)
+        for (int j = 0; j < getNbLignes(); ++j)
         {
             if (table[i][j] == jeton)
             {
@@ -77,9 +66,9 @@ int Grille::CompteJetons(Jeton jeton) const
 
 bool Grille::VerifieLigne(const int sequenceGagnante, const Jeton jeton) const
 {
-    for (int i = 0; i < getNbLigne(); i++)
+    for (int i = 0; i < getNbLignes(); i++)
     {
-        for (int j = 0; j < getNbColonne(); j++)
+        for (int j = 0; j < getNbColonnes(); j++)
         {
             Jeton premierJeton = GetCellule(i, j);
             if (premierJeton == jeton)
@@ -96,9 +85,9 @@ bool Grille::VerifieLigne(const int sequenceGagnante, const Jeton jeton) const
 
 bool Grille::VerifieColonne(const int sequenceGagnante, const Jeton jeton) const
 {
-    for (int i = 0; i < getNbLigne(); i++)
+    for (int i = 0; i < getNbLignes(); i++)
     {
-        for (int j = 0; j < getNbColonne(); j++)
+        for (int j = 0; j < getNbColonnes(); j++)
         {
             Jeton jetonCase = GetCellule(i, j);
             if (jetonCase == jeton)
@@ -115,9 +104,9 @@ bool Grille::VerifieColonne(const int sequenceGagnante, const Jeton jeton) const
 
 bool Grille::VerifieDiagonale(const int sequenceGagnante, const Jeton jeton) const
 {
-    for (int i = 0; i < getNbLigne(); i++)
+    for (int i = 0; i < getNbLignes(); i++)
     {
-        for (int j = 0; j < getNbColonne(); j++)
+        for (int j = 0; j < getNbColonnes(); j++)
         {
             Jeton jetonCase = GetCellule(i, j);
             if (jetonCase == jeton)
@@ -132,7 +121,6 @@ bool Grille::VerifieDiagonale(const int sequenceGagnante, const Jeton jeton) con
     return false;
 }
 
-
 int Grille::CompteSequence(const int ligneDepart, const int colonneDepart, const int dirLigne, const int dirColonne) const
 {
     int compteur = 0;
@@ -140,8 +128,8 @@ int Grille::CompteSequence(const int ligneDepart, const int colonneDepart, const
     int colonne = colonneDepart;
     Jeton jetonDeDepart = GetCellule(ligneDepart, colonneDepart);
 
-    while (ligne >= 0 && ligne < getNbLigne() &&
-           colonne >= 0 && colonne < getNbColonne() &&
+    while (ligne >= 0 && ligne < getNbLignes() &&
+           colonne >= 0 && colonne < getNbColonnes() &&
            GetCellule(ligne, colonne) == jetonDeDepart)
     {
         compteur++;
@@ -154,7 +142,7 @@ int Grille::CompteSequence(const int ligneDepart, const int colonneDepart, const
 std::vector<Jeton> Grille::GetLigne(int x, int y) const
 {
     std::vector<Jeton> ligne;
-    for (int i = 0; i < getNbColonne(); ++i)
+    for (int i = 0; i < getNbColonnes(); ++i)
     {
         ligne.push_back(GetCellule(x, i));
     }
@@ -165,7 +153,7 @@ std::vector<Jeton> Grille::GetColonne(int x, int y) const
 {
     std::vector<Jeton> colonne;
 
-    for (int i = 0; i < getNbLigne(); ++i)
+    for (int i = 0; i < getNbLignes(); ++i)
     {
         colonne.push_back(GetCellule(i, y));
     }
@@ -181,7 +169,7 @@ std::vector<Jeton> Grille::GetDiagonaleDESC(int x, int y) const
         diagonaleDESC.push_back(GetCellule(x - i, y - i));
     }
 
-    for (int i = 1; x + i < getNbLigne() && y + i < getNbColonne(); ++i)
+    for (int i = 1; x + i < getNbLignes() && y + i < getNbColonnes(); ++i)
     {
         diagonaleDESC.push_back(GetCellule(x + i, y + i));
     }
@@ -193,12 +181,12 @@ std::vector<Jeton> Grille::GetDiagonaleASC(int x, int y) const
 {
     std::vector<Jeton> diagonaleASC;
 
-    for (int i = 0; x + i < getNbLigne() && y - i >= 0; ++i)
+    for (int i = 0; x + i < getNbLignes() && y - i >= 0; ++i)
     {
         diagonaleASC.push_back(GetCellule(x + i, y - i));
     }
 
-    for (int i = 1; x - i >= 0 && y + i < getNbColonne(); ++i)
+    for (int i = 1; x - i >= 0 && y + i < getNbColonnes(); ++i)
     {
         diagonaleASC.push_back(GetCellule(x - i, y + i));
     }

@@ -16,11 +16,11 @@ TEST_F(TestGrille, CheckCompteJetons)
     std::uniform_int_distribution<> distrib(0, 1);
 
     int countX = 0, countO = 0;
-    int nbMoitieJetons = grilleOthello.getNbLigne() * grilleOthello.getNbColonne() /2;
+    int nbMoitieJetons = grilleOthello.getNbLignes() * grilleOthello.getNbColonnes() /2;
 
     // REMPLIR GRILLEOTHELLO de 31 X et 33 O
-    for (int i = 0; i < grilleOthello.getNbLigne(); i++) {
-        for (int j = 0; j < grilleOthello.getNbColonne(); j++) {
+    for (int i = 0; i < grilleOthello.getNbLignes(); i++) {
+        for (int j = 0; j < grilleOthello.getNbColonnes(); j++) {
             int randomValue = distrib(gen);
 
             if (randomValue == 0 && countX < nbMoitieJetons - 1) {

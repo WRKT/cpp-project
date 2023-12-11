@@ -14,7 +14,6 @@ public:
     std::string getNom() const { return nom; }
     Jeton getJeton() const { return jeton; }
     std::string getInformations() const { return nom + "(" + static_cast<char>(jeton) + ")"; };
-    virtual bool estHumain() const = 0;
     ~AJoueur() = default;
 
 protected:

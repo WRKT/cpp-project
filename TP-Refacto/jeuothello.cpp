@@ -12,8 +12,8 @@ JeuOthello::JeuOthello(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur>
 
 void JeuOthello::Jouer()
 {
-    InitialiseJeu();
-
+    grille->InitialiserGrilleOthello();
+    modeAffichage->AfficherGrille(grille);
     while (!PartieFinie())
     {
         Tour();
@@ -64,14 +64,6 @@ bool JeuOthello::PartieFinie() const
     return grille->EstRemplie();
 }
 
-void JeuOthello::InitialiseJeu() const
-{
-    int centreX = grille->getNbLigne() / 2 - 1;
-    int centreY = grille->getNbColonne() / 2 - 1;
-    grille->InitialiserGrilleOthello();
-    modeAffichage->AfficherGrille(grille);
-}
-
 void JeuOthello::AfficherResultat() const
 {
     modeAffichage->AfficherMessage("--> Score : ");
@@ -92,9 +84,9 @@ std::vector<std::pair<int, int>> JeuOthello::CoupsPossibles()
 {
     std::vector<std::pair<int, int>> coupsPossibles;
 
-    for (int x = 0; x < grille->getNbLigne(); ++x)
+    for (int x = 0; x < grille->getNbLignes(); ++x)
     {
-        for (int y = 0; y < grille->getNbColonne(); ++y)
+        for (int y = 0; y < grille->getNbColonnes(); ++y)
         {
             if (EstCoupValide(x, y, joueurCourant->getJeton()))
             {
@@ -144,7 +136,7 @@ bool JeuOthello::PeutRetourner(int x, int y, int directionX, int directionY, Jet
     int colonne = y + directionY;
     bool trouveAdversaire = false;
 
-    while (ligne >= 0 && ligne < grille->getNbLigne() && colonne >= 0 && colonne < grille->getNbColonne())
+    while (ligne >= 0 && ligne < grille->getNbLignes() && colonne >= 0 && colonne < grille->getNbColonnes())
     {
         Jeton jetonActuel = grille->GetCellule(ligne, colonne);
 
@@ -170,7 +162,7 @@ bool JeuOthello::PeutRetourner(int x, int y, int directionX, int directionY, Jet
 
 bool JeuOthello::EstCoupValide(int x, int y, Jeton jeton) const
 {
-    if (x < 0 || x >= grille->getNbLigne() || y < 0 || y >= grille->getNbColonne() || grille->GetCellule(x, y) != Jeton::Vide)
+    if (x < 0 || x >= grille->getNbLignes() || y < 0 || y >= grille->getNbColonnes() || grille->GetCellule(x, y) != Jeton::Vide)
     {
         return false;
     }
