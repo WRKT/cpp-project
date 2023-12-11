@@ -10,11 +10,9 @@ JeuPuissance4::JeuPuissance4(std::shared_ptr<AGrille> grille, std::shared_ptr<AJ
 
 void JeuPuissance4::Jouer()
 {
-
-    InitialiseJeu();
-
     while (!PartieFinie())
     {
+        modeAffichage->AfficherGrille(grille);
         Tour();
         if (AGagne())
         {
@@ -73,10 +71,6 @@ void JeuPuissance4::AfficherResultat() const
     modeAffichage->AfficherMessage("Le joueur " + joueurCourant->getInformations() + " a gagné !");
 }
 
-void JeuPuissance4::InitialiseJeu() const
-{
-    modeAffichage->AfficherGrille(grille);
-}
 
 bool JeuPuissance4::PartieFinie() const
 {

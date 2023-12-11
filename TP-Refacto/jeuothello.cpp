@@ -12,8 +12,8 @@ JeuOthello::JeuOthello(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur>
 
 void JeuOthello::Jouer()
 {
-    InitialiseJeu();
-
+    grille->InitialiserGrilleOthello();
+    modeAffichage->AfficherGrille(grille);
     while (!PartieFinie())
     {
         Tour();
@@ -62,14 +62,6 @@ void JeuOthello::Tour()
 bool JeuOthello::PartieFinie() const
 {
     return grille->EstRemplie();
-}
-
-void JeuOthello::InitialiseJeu() const
-{
-    int centreX = grille->getNbLignes() / 2 - 1;
-    int centreY = grille->getNbColonnes() / 2 - 1;
-    grille->InitialiserGrilleOthello();
-    modeAffichage->AfficherGrille(grille);
 }
 
 void JeuOthello::AfficherResultat() const

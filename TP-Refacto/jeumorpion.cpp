@@ -11,10 +11,9 @@ JeuMorpion::JeuMorpion(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur>
 
 void JeuMorpion::Jouer()
 {
-    InitialiseJeu();
+    modeAffichage->AfficherGrille(grille);
     while (!PartieFinie())
     {
-
         Tour();
         if (AGagne())
         {
@@ -50,12 +49,6 @@ void JeuMorpion::Tour()
 
     }
 }
-
-void JeuMorpion::InitialiseJeu() const
-{
-    modeAffichage->AfficherGrille(grille);
-}
-
 std::vector<std::pair<int, int>> JeuMorpion::CoupsPossibles()
 {
     std::vector<std::pair<int, int>> coups;
