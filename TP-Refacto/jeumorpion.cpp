@@ -59,9 +59,9 @@ void JeuMorpion::InitialiseJeu() const
 std::vector<std::pair<int, int>> JeuMorpion::CoupsPossibles()
 {
     std::vector<std::pair<int, int>> coups;
-    for (int i = 0; i < grille->getNbLigne(); ++i)
+    for (int i = 0; i < grille->getNbLignes(); ++i)
     {
-        for (int j = 0; j < grille->getNbColonne(); ++j)
+        for (int j = 0; j < grille->getNbColonnes(); ++j)
         {
             if (grille->ACaseVide(i, j))
             {

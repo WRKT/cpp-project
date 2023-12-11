@@ -33,8 +33,8 @@ TEST_F(TestOthello, CheckPartieFinie) {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(0, 1);
 
-    for (int i = 0; i < grille->getNbLigne(); i++) {
-        for (int j = 0; j < grille->getNbColonne(); j++) {
+    for (int i = 0; i < grille->getNbLignes(); i++) {
+        for (int j = 0; j < grille->getNbColonnes(); j++) {
             int randomValue = distrib(gen);
 
             Jeton jetonRandom = (randomValue == 0) ? Jeton::X : Jeton::O;
@@ -55,10 +55,10 @@ TEST_F(TestOthello, CheckAGagne)
     std::uniform_int_distribution<> distrib(0, 1);
 
     int countX = 0, countO = 0;
-    int nbMoitieJetons = grille->getNbLigne() * grille->getNbColonne() /2;
+    int nbMoitieJetons = grille->getNbLignes() * grille->getNbColonnes() /2;
 
-    for (int i = 0; i < grille->getNbLigne(); i++) {
-        for (int j = 0; j < grille->getNbColonne(); j++) {
+    for (int i = 0; i < grille->getNbLignes(); i++) {
+        for (int j = 0; j < grille->getNbColonnes(); j++) {
             int randomValue = distrib(gen);
 
             if (randomValue == 0 && countX < nbMoitieJetons - 1) {
@@ -86,10 +86,10 @@ TEST_F(TestOthello, CheckEgalite)
     std::uniform_int_distribution<> distrib(0, 1);
 
     int countX = 0, countO = 0;
-    int nbMoitieJetons = grille->getNbLigne() * grille->getNbColonne()/ 2;
+    int nbMoitieJetons = grille->getNbLignes() * grille->getNbColonnes()/ 2;
 
-    for (int i = 0; i < grille->getNbLigne(); i++) {
-        for (int j = 0; j < grille->getNbColonne(); j++) {
+    for (int i = 0; i < grille->getNbLignes(); i++) {
+        for (int j = 0; j < grille->getNbColonnes(); j++) {
             int randomValue = distrib(gen);
 
             if (randomValue == 0 && countX < nbMoitieJetons) {
