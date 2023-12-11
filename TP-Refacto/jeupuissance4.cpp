@@ -34,7 +34,6 @@ void JeuPuissance4::Tour()
 {
     auto coupsPossibles = CoupsPossibles();
     bool coupValide = false;
-    int colonne;
     while (!coupValide)
     {
         modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
@@ -54,9 +53,9 @@ void JeuPuissance4::Tour()
 std::vector<std::pair<int, int>> JeuPuissance4::CoupsPossibles()
 {
     std::vector<std::pair<int, int>> coupsPossibles;
-    for (int colonne = 0; colonne < grille->getNbColonne(); ++colonne)
+    for (int colonne = 0; colonne < grille->getNbColonnes(); ++colonne)
     {
-        for (int ligne = grille->getNbLigne() - 1; ligne >= 0; --ligne)
+        for (int ligne = grille->getNbLignes() - 1; ligne >= 0; --ligne)
         {
             if (grille->GetCellule(ligne, colonne) == Jeton::Vide)
             {
