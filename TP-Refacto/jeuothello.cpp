@@ -145,11 +145,9 @@ void JeuOthello::RetournerJetonsDansDirection(int x, int y, int directionX, int 
 
 bool JeuOthello::PeutRetourner(int x, int y, int directionX, int directionY, Jeton jeton) const
 {
-    int ligne = x + directionX;
-    int colonne = y + directionY;
-    bool trouveAdversaire = false;
-
-    while (ligne >= 0 && ligne < grille->getNbLignes() && colonne >= 0 && colonne < grille->getNbColonnes())
+    for (int ligne = x + directionX, colonne = y + directionY;
+         ligne >= 0 && ligne < grille->getNbLignes() && colonne >= 0 && colonne < grille->getNbColonnes();
+         ligne += directionX, colonne += directionY)
     {
         Jeton jetonActuel = grille->GetCellule(ligne, colonne);
 
@@ -159,19 +157,13 @@ bool JeuOthello::PeutRetourner(int x, int y, int directionX, int directionY, Jet
         }
         else if (jetonActuel == jeton)
         {
-            return trouveAdversaire;
+            return true;
         }
-        else
-        {
-            trouveAdversaire = true;
-        }
-
-        ligne += directionX;
-        colonne += directionY;
     }
 
     return false;
 }
+
 
 bool JeuOthello::EstCoupValide(int x, int y, Jeton jeton) const
 {
