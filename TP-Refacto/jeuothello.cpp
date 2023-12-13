@@ -108,24 +108,37 @@ bool JeuOthello::AGagne() const
 
 void JeuOthello::RetournerJetons(const int x, const int y, Jeton jeton)
 {
-    // On peut simplifier -> utiliser les autres methodes (EstCoupValide par exemple, on se répète trop)
+    // Vérifie les 8 directions possibles
     for (int directionX = -1; directionX <= 1; ++directionX)
     {
         for (int directionY = -1; directionY <= 1; ++directionY)
         {
             if (directionX == 0 && directionY == 0)
                 continue;
-            if (PeutRetourner(x, y, directionX, directionY, jeton))
-            {
-                int ligne = x + directionX;
-                int colonne = y + directionY;
-                while (grille->GetCellule(ligne, colonne) != jeton)
-                {
-                    grille->ChangeCellule(ligne, colonne, jeton);
-                    ligne += directionX;
-                    colonne += directionY;
-                }
-            }
+
+            RetournerJetonsDansDirection(x, y, directionX, directionY, jeton);
+        }
+    }
+
+    /*
+    // Possibilité de tester uniquement certaines directions
+    RetournerJetonsDansDirection(x, y, 0, -1, jeton); // Nord
+    RetournerJetonsDansDirection(x, y, -1, 0, jeton); // Sud
+    */
+}
+
+void JeuOthello::RetournerJetonsDansDirection(int x, int y, int directionX, int directionY, Jeton jeton)
+{
+    int ligne = x + directionX;
+    int colonne = y + directionY;
+
+    if (PeutRetourner(x, y, directionX, directionY, jeton))
+    {
+        while (grille->GetCellule(ligne, colonne) != jeton)
+        {
+            grille->ChangeCellule(ligne, colonne, jeton);
+            ligne += directionX;
+            colonne += directionY;
         }
     }
 }

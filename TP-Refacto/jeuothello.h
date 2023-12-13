@@ -24,6 +24,7 @@ public:
     std::shared_ptr<IAffichage> modeAffichage;
     bool EstCoupValide(int x, int y, Jeton jeton) const;
     void RetournerJetons(const int x, const int y, Jeton jeton);
+    void RetournerJetonsDansDirection(int x, int y, int directionX, int directionY, Jeton jeton);
     bool PeutRetourner(int x, int y, int directionX, int directionY, Jeton jeton) const;
     Jeton DetermineGagnant() const;
 
