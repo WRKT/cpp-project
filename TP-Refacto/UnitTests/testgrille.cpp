@@ -99,8 +99,8 @@ TEST_F(TestGrille, CheckInitialiserGrilleOthello)
 {
     grilleOthello.InitialiserGrilleOthello();
 
-    for (int i = 0; i < grilleOthello.getNbLigne(); i++) {
-        for (int j = 0; j < grilleOthello.getNbColonne(); j++) {
+    for (int i = 0; i < grilleOthello.getNbLignes(); i++) {
+        for (int j = 0; j < grilleOthello.getNbColonnes(); j++) {
             if ((i == 3 || i == 4) && (j == 3 || j == 4)) {
                 EXPECT_TRUE(grilleOthello.GetCellule(i, j) == Jeton::X || grilleOthello.GetCellule(i, j) == Jeton::O);
             } else {
