@@ -16,7 +16,7 @@ protected:
     std::shared_ptr<IGrille> grille = std::make_shared<Grille>(4,7);
     std::shared_ptr<IAffichage> modeAffichage = std::make_shared<AffichageConsole>();
 
-    // Mise en place environnement de test othello (pour respecter le constructeur)
+    // Mise en place environnement de test (pour respecter le constructeur)
     void SetUp() override {
         std::shared_ptr<AJoueur> joueur1 = JoueurFactory::CreerJoueurOrdinateur(Jeton::X);
         std::shared_ptr<AJoueur> joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);

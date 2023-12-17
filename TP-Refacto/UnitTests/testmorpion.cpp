@@ -15,7 +15,7 @@ protected:
     std::unique_ptr<IJeu> jeu;
     std::shared_ptr<IGrille> grille = std::make_shared<Grille>(3,3);
 
-    // Mise en place environnement de test othello (pour respecter le constructeur)
+    // Mise en place environnement de test (pour respecter le constructeur)
     void SetUp() override {
         std::shared_ptr<AJoueur> joueur1 = JoueurFactory::CreerJoueurOrdinateur(Jeton::X);
         std::shared_ptr<AJoueur> joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
