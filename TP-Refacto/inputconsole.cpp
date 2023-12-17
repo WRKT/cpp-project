@@ -11,7 +11,6 @@ std::string InputConsole::getString(const std::string &message)
 
     while (true)
     {
-
         std::cout << message;
         std::cin >> reponse;
 
