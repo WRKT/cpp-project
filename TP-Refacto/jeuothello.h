@@ -1,5 +1,6 @@
 #ifndef JEUOTHELLO_H
 #define JEUOTHELLO_H
+
 #include "IJeu.h"
 #include "IGrille.h"
 #include "AJoueur.h"

@@ -1,8 +1,5 @@
 
-#include <iostream>
-#include <map>
 #include <memory>
-#include <limits>
 #include "TypesJeu.h"
 #include "inputconsole.h"
 #include "affichageconsole.h"

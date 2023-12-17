@@ -1,8 +1,5 @@
 #include "jeupuissance4.h"
-#include <iostream>
 #include <vector>
-#include <random>
-#include <ctime>
 #include <algorithm>
 
 JeuPuissance4::JeuPuissance4(std::shared_ptr<IGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
@@ -34,7 +31,6 @@ void JeuPuissance4::Tour()
 {
     auto coupsPossibles = CoupsPossibles();
     bool coupValide = false;
-    int colonne;
     while (!coupValide)
     {
         modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());

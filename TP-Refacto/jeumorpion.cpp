@@ -1,10 +1,6 @@
 #include "jeumorpion.h"
-#include <iostream>
 #include <algorithm>
 #include <vector>
-#include <random>
-#include <ctime>
-#include <limits>
 
 JeuMorpion::JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
     : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
@@ -49,7 +45,6 @@ void JeuMorpion::Tour()
         {
             modeAffichage->AfficherErreur("Coups Impossible");
         }
-
     }
 }
 

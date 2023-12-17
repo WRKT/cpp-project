@@ -1,4 +1,5 @@
 #include "inputconsole.h"
+#include <iostream>
 #include <limits>
 #include <map>
 #include <regex>

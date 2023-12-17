@@ -1,10 +1,6 @@
 #include "jeuothello.h"
-#include <iostream>
 #include <algorithm>
 #include <vector>
-#include <random>
-#include <ctime>
-#include <limits>
 
 JeuOthello::JeuOthello(std::shared_ptr<IGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
     : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
@@ -29,12 +25,7 @@ void JeuOthello::Tour()
     bool coupValide = false;
 
     modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
-    modeAffichage->AfficherMessage("Coups possibles pour " + joueurCourant->getInformations() + " :");
-    for (auto coup : coupsPossibles)
-    {
-        modeAffichage->AfficherMessage("(" + std::to_string(coup.first + 1) + "," + std::to_string(coup.second + 1) + ") ", 0);
-    }
-
+    modeAffichage->AfficherCoupsPossibles(coupsPossibles);
     if (coupsPossibles.empty())
     {
         modeAffichage->AfficherMessage("Aucun coup possible pour " + joueurCourant->getInformations() + ". Passage au joueur suivant.");
@@ -111,7 +102,6 @@ std::vector<std::pair<int, int>> JeuOthello::CoupsPossibles()
 
 bool JeuOthello::AGagne() const
 {
-
     Jeton gagnant = DetermineGagnant();
 
     return gagnant == joueur1->getJeton() || gagnant == joueur2->getJeton();
