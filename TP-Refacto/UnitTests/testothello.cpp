@@ -1,4 +1,3 @@
-
 #include <gtest/gtest.h>
 #include <random>
 #include "IJeu.h"

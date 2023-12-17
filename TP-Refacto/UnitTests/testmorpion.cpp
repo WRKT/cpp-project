@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include <random>
 #include "IJeu.h"
 #include "jeumorpion.h"
 #include "IGrille.h"
