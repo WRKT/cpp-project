@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <random>
-#include "../grille.h"
+#include "grille.h"
 
 class TestGrille : public ::testing::Test {
 protected:

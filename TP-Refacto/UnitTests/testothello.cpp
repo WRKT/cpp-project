@@ -1,13 +1,13 @@
 
 #include <gtest/gtest.h>
 #include <random>
-#include "../IJeu.h"
-#include "../jeuothello.h"
-#include "../IGrille.h"
-#include "../grille.h"
-#include "../joueurfactory.h"
-#include "../IAffichage.h"
-#include "../affichageconsole.h"
+#include "IJeu.h"
+#include "jeuothello.h"
+#include "IGrille.h"
+#include "grille.h"
+#include "joueurfactory.h"
+#include "IAffichage.h"
+#include "affichageconsole.h"
 
 
 class TestOthello : public ::testing::Test {

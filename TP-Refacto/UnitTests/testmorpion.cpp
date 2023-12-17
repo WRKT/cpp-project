@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
 #include <random>
-#include "../IJeu.h"
-#include "../jeumorpion.h"
-#include "../IGrille.h"
-#include "../grille.h"
-#include "../joueurfactory.h"
-#include "../IAffichage.h"
-#include "../affichageconsole.h"
+#include "IJeu.h"
+#include "jeumorpion.h"
+#include "IGrille.h"
+#include "grille.h"
+#include "joueurfactory.h"
+#include "IAffichage.h"
+#include "affichageconsole.h"
 
 
 class TestMorpion : public ::testing::Test {
