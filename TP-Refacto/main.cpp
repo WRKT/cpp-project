@@ -1,4 +1,3 @@
-
 #include <memory>
 #include "TypesJeu.h"
 #include "inputconsole.h"
@@ -30,14 +29,14 @@ int main()
         if (modeJeu == 1)
         {
             std::string prenomJoueur1 = InputConsole::demanderPrenomJoueur("Entrez le prénom du premier joueur : ");
-                joueur1 = JoueurFactory::CreerJoueurHumain(prenomJoueur1, Jeton::X);
+            joueur1 = JoueurFactory::CreerJoueurHumain(prenomJoueur1, Jeton::X);
             std::string prenomJoueur2 = InputConsole::demanderPrenomJoueur("Entrez le prénom du second joueur : ");
-                joueur2 = JoueurFactory::CreerJoueurHumain(prenomJoueur2, Jeton::O);
+            joueur2 = JoueurFactory::CreerJoueurHumain(prenomJoueur2, Jeton::O);
         }
         else if (modeJeu == 2)
         {
             std::string prenomJoueur1 = InputConsole::demanderPrenomJoueur("Entrez le prénom du premier joueur : ");
-                joueur1 = JoueurFactory::CreerJoueurHumain(prenomJoueur1, Jeton::X);
+            joueur1 = JoueurFactory::CreerJoueurHumain(prenomJoueur1, Jeton::X);
             joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
         }
         else

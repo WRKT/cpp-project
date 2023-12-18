@@ -7,12 +7,11 @@
 std::string InputConsole::getString(const std::string &message)
 {
     std::string reponse;
-    std::cout << std::endl;
 
     while (true)
     {
         std::cout << message;
-        std::getline(std::cin, reponse);
+        std::cin >> reponse;
 
         if (std::cin.fail())
         {
@@ -147,7 +146,6 @@ std::pair<int, int> InputConsole::demanderCordonnee()
     {
         x = getInt("Entrez la ligne : ");
         y = getInt("Entrez la colonne : ");
-
         return {x - 1, y - 1};
     }
 }
@@ -159,7 +157,6 @@ int InputConsole::demanderColonne()
     while (true)
     {
         colonne = getInt("Entrez le numero de la colonne : ");
-
         return colonne - 1;
     }
 }

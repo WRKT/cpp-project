@@ -28,6 +28,7 @@ public:
     void RetournerJetons(const int x, const int y, Jeton jeton);
     bool PeutRetourner(int x, int y, int directionX, int directionY, Jeton jeton) const;
     Jeton DetermineGagnant() const;
+    int bloquer = 0;
 
 };
 
