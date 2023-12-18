@@ -80,7 +80,7 @@ void JeuOthello::AfficherResultat() const
     }
     else
     {
-        modeAffichage->AfficherMessage("La partie se termine par une égalité.");
+        modeAffichage->AfficherMessage("Match Nul!");
     }
 }
 

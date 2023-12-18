@@ -113,6 +113,7 @@ bool InputConsole::demanderRejouer()
     bool choixValide;
     do
     {
+        std::cout << std::endl;
         choix = getString("Retourner au menu principal (o/N) ? ");
         choixValide = (choix == "o" || choix == "O" || choix == "n" || choix == "N");
 
