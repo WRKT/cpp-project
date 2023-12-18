@@ -2,16 +2,14 @@
 #include <vector>
 #include <algorithm>
 
-JeuPuissance4::JeuPuissance4(std::shared_ptr<IGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
+JeuPuissance4::JeuPuissance4(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
     : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
 
 void JeuPuissance4::Jouer()
 {
-
-    InitialiseJeu();
-
     while (!PartieFinie())
     {
+        modeAffichage->AfficherGrille(grille);
         Tour();
         if (AGagne())
         {
@@ -50,9 +48,9 @@ void JeuPuissance4::Tour()
 std::vector<std::pair<int, int>> JeuPuissance4::CoupsPossibles()
 {
     std::vector<std::pair<int, int>> coupsPossibles;
-    for (int colonne = 0; colonne < grille->getNbColonne(); ++colonne)
+    for (int colonne = 0; colonne < grille->getNbColonnes(); ++colonne)
     {
-        for (int ligne = grille->getNbLigne() - 1; ligne >= 0; --ligne)
+        for (int ligne = grille->getNbLignes() - 1; ligne >= 0; --ligne)
         {
             if (grille->GetCellule(ligne, colonne) == Jeton::Vide)
             {
@@ -70,10 +68,6 @@ void JeuPuissance4::AfficherResultat() const
     modeAffichage->AfficherMessage("Le joueur " + joueurCourant->getInformations() + " a gagné !");
 }
 
-void JeuPuissance4::InitialiseJeu() const
-{
-    modeAffichage->AfficherGrille(grille);
-}
 
 bool JeuPuissance4::PartieFinie() const
 {

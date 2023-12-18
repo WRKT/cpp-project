@@ -16,11 +16,11 @@ TEST_F(TestGrille, CheckCompteJetons)
     std::uniform_int_distribution<> distrib(0, 1);
 
     int countX = 0, countO = 0;
-    int nbMoitieJetons = grilleOthello.getNbLigne() * grilleOthello.getNbColonne() /2;
+    int nbMoitieJetons = grilleOthello.getNbLignes() * grilleOthello.getNbColonnes() /2;
 
     // REMPLIR GRILLEOTHELLO de 31 X et 33 O
-    for (int i = 0; i < grilleOthello.getNbLigne(); i++) {
-        for (int j = 0; j < grilleOthello.getNbColonne(); j++) {
+    for (int i = 0; i < grilleOthello.getNbLignes(); i++) {
+        for (int j = 0; j < grilleOthello.getNbColonnes(); j++) {
             int randomValue = distrib(gen);
 
             if (randomValue == 0 && countX < nbMoitieJetons - 1) {
@@ -43,11 +43,10 @@ TEST_F(TestGrille, CheckCompteJetons)
 
 TEST_F(TestGrille, CheckGetLigne)
 {
-    // Ligne attendu
     grilleMorpion.ChangeCellule(0,0,Jeton::X);
     grilleMorpion.ChangeCellule(0,1,Jeton::O);
     grilleMorpion.ChangeCellule(0,2,Jeton::X);
-    // Fausse ligne
+
     grilleMorpion.ChangeCellule(1,1,Jeton::O);
     grilleMorpion.ChangeCellule(2,1,Jeton::X);
 
@@ -89,11 +88,30 @@ TEST_F(TestGrille, CheckDiagonale)
     std::vector<Jeton> diagonaleAscTest = grillePuissance4.GetDiagonaleASC(2,0);
     std::vector<Jeton> diagonaleDescTest = grillePuissance4.GetDiagonaleDESC(0,0);
 
-
-    // Resultat attendu
     std::vector<Jeton> diagonaleDescAttendu = {Jeton::O,Jeton::X,Jeton::X,Jeton::Vide};
     std::vector<Jeton> diagonaleAscAttendu = {Jeton::X, Jeton::X, Jeton::O};
 
     EXPECT_EQ(diagonaleAscTest, diagonaleAscAttendu);
     EXPECT_EQ(diagonaleDescTest, diagonaleDescAttendu);
 }
+
+TEST_F(TestGrille, CheckInitialiserGrilleOthello)
+{
+    grilleOthello.InitialiserGrilleOthello();
+
+    for (int i = 0; i < grilleOthello.getNbLignes(); i++) {
+        for (int j = 0; j < grilleOthello.getNbColonnes(); j++) {
+            if ((i == 3 || i == 4) && (j == 3 || j == 4)) {
+                EXPECT_TRUE(grilleOthello.GetCellule(i, j) == Jeton::X || grilleOthello.GetCellule(i, j) == Jeton::O);
+            } else {
+                EXPECT_EQ(grilleOthello.GetCellule(i, j), Jeton::Vide);
+            }
+        }
+    }
+
+    EXPECT_EQ(grilleOthello.GetCellule(3, 3), Jeton::X);
+    EXPECT_EQ(grilleOthello.GetCellule(3, 4), Jeton::O);
+    EXPECT_EQ(grilleOthello.GetCellule(4, 3), Jeton::O);
+    EXPECT_EQ(grilleOthello.GetCellule(4, 4), Jeton::X);
+}
+

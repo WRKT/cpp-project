@@ -2,14 +2,14 @@
 #define IAFFICHAGE_H
 
 #include <memory>
+#include "AGrille.h"
 #include <string>
 #include <vector>
-#include "IGrille.h"
 
 class IAffichage
 {
 public:
-    virtual void AfficherGrille(std::shared_ptr<IGrille>) const = 0;
+    virtual void AfficherGrille(std::shared_ptr<AGrille>) const = 0;
     virtual void AfficherMessage(std::string, const int = 1) const = 0;
     virtual void AfficherErreur(std::string) const = 0;
     virtual void AfficherCoupsPossibles(std::vector<std::pair<int, int>>) const = 0;

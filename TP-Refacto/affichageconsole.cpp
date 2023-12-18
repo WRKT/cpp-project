@@ -1,10 +1,10 @@
 #include "affichageconsole.h"
 #include <iostream>
 
-void AffichageConsole::AfficherGrille(const std::shared_ptr<IGrille> grille) const
+void AffichageConsole::AfficherGrille(const std::shared_ptr<AGrille> grille) const
 {
-    const int nbColonnes = grille->getNbColonne();
-    const int nbLignes = grille->getNbLigne();
+    const int nbColonnes = grille->getNbColonnes();
+    const int nbLignes = grille->getNbLignes();
 
     std::cout << std::endl;
     std::cout << "    ";

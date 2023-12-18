@@ -2,15 +2,14 @@
 #include <algorithm>
 #include <vector>
 
-JeuMorpion::JeuMorpion(std::shared_ptr<IGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
+JeuMorpion::JeuMorpion(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
     : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
 
 void JeuMorpion::Jouer()
 {
-    InitialiseJeu();
+    modeAffichage->AfficherGrille(grille);
     while (!PartieFinie())
     {
-
         Tour();
         if (AGagne())
         {
@@ -47,18 +46,12 @@ void JeuMorpion::Tour()
         }
     }
 }
-
-void JeuMorpion::InitialiseJeu() const
-{
-    modeAffichage->AfficherGrille(grille);
-}
-
 std::vector<std::pair<int, int>> JeuMorpion::CoupsPossibles()
 {
     std::vector<std::pair<int, int>> coups;
-    for (int i = 0; i < grille->getNbLigne(); ++i)
+    for (int i = 0; i < grille->getNbLignes(); ++i)
     {
-        for (int j = 0; j < grille->getNbColonne(); ++j)
+        for (int j = 0; j < grille->getNbColonnes(); ++j)
         {
             if (grille->ACaseVide(i, j))
             {

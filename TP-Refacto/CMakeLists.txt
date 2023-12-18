@@ -11,7 +11,7 @@ add_executable(TP-Refacto main.cpp
     AJoueur.h
     joueurhumain.h joueurhumain.cpp
     joueurordinateur.h joueurordinateur.cpp
-    IGrille.h
+    AGrille.h
     jeton.h
     IJeu.h
     jeumorpion.h jeumorpion.cpp
@@ -25,6 +25,7 @@ add_executable(TP-Refacto main.cpp
     affichageconsole.h affichageconsole.cpp
     jeuothello.h jeuothello.cpp
     IChoisirCoup.h
+    IGrilleInit.h
 
 )
 

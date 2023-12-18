@@ -2,13 +2,13 @@
 #include <algorithm>
 #include <vector>
 
-JeuOthello::JeuOthello(std::shared_ptr<IGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
+JeuOthello::JeuOthello(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
     : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
 
 void JeuOthello::Jouer()
 {
-    InitialiseJeu();
-
+    grille->InitialiserGrilleOthello();
+    modeAffichage->AfficherGrille(grille);
     while (!PartieFinie())
     {
         Tour();
@@ -57,17 +57,6 @@ bool JeuOthello::PartieFinie() const
     return grille->EstRemplie() || bloque == 2;
 }
 
-void JeuOthello::InitialiseJeu() const
-{
-    int centreX = grille->getNbLigne() / 2 - 1;
-    int centreY = grille->getNbColonne() / 2 - 1;
-    grille->ChangeCellule(centreX, centreY, Jeton::X);
-    grille->ChangeCellule(centreX + 1, centreY, Jeton::O);
-    grille->ChangeCellule(centreX, centreY + 1, Jeton::O);
-    grille->ChangeCellule(centreX + 1, centreY + 1, Jeton::X);
-    modeAffichage->AfficherGrille(grille);
-}
-
 void JeuOthello::AfficherResultat() const
 {
     modeAffichage->AfficherMessage("--> Score : ");
@@ -88,9 +77,9 @@ std::vector<std::pair<int, int>> JeuOthello::CoupsPossibles()
 {
     std::vector<std::pair<int, int>> coupsPossibles;
 
-    for (int x = 0; x < grille->getNbLigne(); ++x)
+    for (int x = 0; x < grille->getNbLignes(); ++x)
     {
-        for (int y = 0; y < grille->getNbColonne(); ++y)
+        for (int y = 0; y < grille->getNbColonnes(); ++y)
         {
             if (EstCoupValide(x, y, joueurCourant->getJeton()))
             {
@@ -117,28 +106,39 @@ void JeuOthello::RetournerJetons(const int x, const int y, Jeton jeton)
         {
             if (directionX == 0 && directionY == 0)
                 continue;
-            if (PeutRetourner(x, y, directionX, directionY, jeton))
-            {
-                int ligne = x + directionX;
-                int colonne = y + directionY;
-                while (grille->GetCellule(ligne, colonne) != jeton)
-                {
-                    grille->ChangeCellule(ligne, colonne, jeton);
-                    ligne += directionX;
-                    colonne += directionY;
-                }
-            }
+
+            RetournerJetonsDansDirection(x, y, directionX, directionY, jeton);
+        }
+    }
+
+    /*
+    // Possibilité de tester uniquement certaines directions
+    RetournerJetonsDansDirection(x, y, 0, -1, jeton); // Nord
+    RetournerJetonsDansDirection(x, y, -1, 0, jeton); // Sud
+    */
+}
+
+void JeuOthello::RetournerJetonsDansDirection(int x, int y, int directionX, int directionY, Jeton jeton)
+{
+    int ligne = x + directionX;
+    int colonne = y + directionY;
+
+    if (PeutRetourner(x, y, directionX, directionY, jeton))
+    {
+        while (grille->GetCellule(ligne, colonne) != jeton)
+        {
+            grille->ChangeCellule(ligne, colonne, jeton);
+            ligne += directionX;
+            colonne += directionY;
         }
     }
 }
 
 bool JeuOthello::PeutRetourner(int x, int y, int directionX, int directionY, Jeton jeton) const
 {
-    int ligne = x + directionX;
-    int colonne = y + directionY;
-    bool trouveAdversaire = false;
-
-    while (ligne >= 0 && ligne < grille->getNbLigne() && colonne >= 0 && colonne < grille->getNbColonne())
+    for (int ligne = x + directionX, colonne = y + directionY;
+         ligne >= 0 && ligne < grille->getNbLignes() && colonne >= 0 && colonne < grille->getNbColonnes();
+         ligne += directionX, colonne += directionY)
     {
         Jeton jetonActuel = grille->GetCellule(ligne, colonne);
 
@@ -148,23 +148,17 @@ bool JeuOthello::PeutRetourner(int x, int y, int directionX, int directionY, Jet
         }
         else if (jetonActuel == jeton)
         {
-            return trouveAdversaire;
+            return true;
         }
-        else
-        {
-            trouveAdversaire = true;
-        }
-
-        ligne += directionX;
-        colonne += directionY;
     }
 
     return false;
 }
 
+
 bool JeuOthello::EstCoupValide(int x, int y, Jeton jeton) const
 {
-    if (x < 0 || x >= grille->getNbLigne() || y < 0 || y >= grille->getNbColonne() || grille->GetCellule(x, y) != Jeton::Vide)
+    if (x < 0 || x >= grille->getNbLignes() || y < 0 || y >= grille->getNbColonnes() || grille->GetCellule(x, y) != Jeton::Vide)
     {
         return false;
     }

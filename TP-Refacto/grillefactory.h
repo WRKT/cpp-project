@@ -2,12 +2,12 @@
 #define GRILLEFACTORY_H
 
 #include "TypesJeu.h"
-#include "IGrille.h"
+#include "AGrille.h"
 #include <memory>
 
 class GrilleFactory {
 public:
-    static std::unique_ptr<IGrille> CreerGrille(TypesJeu typeDeJeu);
+    static std::unique_ptr<AGrille> CreerGrille(TypesJeu typeDeJeu);
 };
 
 #endif // GRILLEFACTORY_H
