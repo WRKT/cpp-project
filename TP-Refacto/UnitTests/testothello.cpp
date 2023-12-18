@@ -1,30 +1,19 @@
 #include <gtest/gtest.h>
 #include <random>
-<<<<<<< TP-Refacto/UnitTests/testothello.cpp
-#include "../IJeu.h"
-#include "../jeuothello.h"
-#include "../AGrille.h"
-#include "../grille.h"
-#include "../joueurfactory.h"
-#include "../IAffichage.h"
-#include "../affichageconsole.h"
-=======
 #include "IJeu.h"
 #include "jeuothello.h"
-#include "IGrille.h"
+#include "AGrille.h"
 #include "grille.h"
 #include "joueurfactory.h"
 #include "IAffichage.h"
 #include "affichageconsole.h"
->>>>>>> TP-Refacto/UnitTests/testothello.cpp
 
-class TestOthello : public ::testing::Test
+    class TestOthello : public ::testing::Test
 {
 protected:
     // Les propriétés dont on a besoin pour les tests
     std::unique_ptr<IJeu> jeu;
-    std::shared_ptr<AGrille> grille = std::make_shared<Grille>(8,8);
-
+    std::shared_ptr<AGrille> grille = std::make_shared<Grille>(8, 8);
 
     // Mise en place environnement de test othello (pour respecter le constructeur)
     void SetUp() override
@@ -44,8 +33,10 @@ TEST_F(TestOthello, CheckPartieFinie)
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(0, 1);
 
-    for (int i = 0; i < grille->getNbLignes(); i++) {
-        for (int j = 0; j < grille->getNbColonnes(); j++) {
+    for (int i = 0; i < grille->getNbLignes(); i++)
+    {
+        for (int j = 0; j < grille->getNbColonnes(); j++)
+        {
             int randomValue = distrib(gen);
 
             Jeton jetonRandom = (randomValue == 0) ? Jeton::X : Jeton::O;
@@ -67,10 +58,12 @@ TEST_F(TestOthello, CheckAGagne)
     std::uniform_int_distribution<> distrib(0, 1);
 
     int countX = 0, countO = 0;
-    int nbMoitieJetons = grille->getNbLignes() * grille->getNbColonnes() /2;
+    int nbMoitieJetons = grille->getNbLignes() * grille->getNbColonnes() / 2;
 
-    for (int i = 0; i < grille->getNbLignes(); i++) {
-        for (int j = 0; j < grille->getNbColonnes(); j++) {
+    for (int i = 0; i < grille->getNbLignes(); i++)
+    {
+        for (int j = 0; j < grille->getNbColonnes(); j++)
+        {
             int randomValue = distrib(gen);
 
             if (randomValue == 0 && countX < nbMoitieJetons - 1)
@@ -103,10 +96,12 @@ TEST_F(TestOthello, CheckEgalite)
     std::uniform_int_distribution<> distrib(0, 1);
 
     int countX = 0, countO = 0;
-    int nbMoitieJetons = grille->getNbLignes() * grille->getNbColonnes()/ 2;
+    int nbMoitieJetons = grille->getNbLignes() * grille->getNbColonnes() / 2;
 
-    for (int i = 0; i < grille->getNbLignes(); i++) {
-        for (int j = 0; j < grille->getNbColonnes(); j++) {
+    for (int i = 0; i < grille->getNbLignes(); i++)
+    {
+        for (int j = 0; j < grille->getNbColonnes(); j++)
+        {
             int randomValue = distrib(gen);
 
             if (randomValue == 0 && countX < nbMoitieJetons)
@@ -132,9 +127,9 @@ TEST_F(TestOthello, CheckEgalite)
 
 TEST_F(TestOthello, CheckPartieFinieSansCoupsPossibles)
 {
-    for (int i = 0; i < grille->getNbLigne(); ++i)
+    for (int i = 0; i < grille->getNbLignes(); ++i)
     {
-        for (int j = 0; j < grille->getNbColonne(); ++j)
+        for (int j = 0; j < grille->getNbColonnes(); ++j)
         {
             grille->ChangeCellule(i, j, Jeton::X);
         }

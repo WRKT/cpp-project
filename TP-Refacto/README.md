@@ -94,9 +94,9 @@ Une classe `InputConsole` est ajoutée pour gérer toutes les entrées de l'util
 
 En l'état, nous n'avons pas d'interface pour les Inputs suite à une analyse et manque de connaissance sur comment nous implémenterons la classe `InputGUI` et pour ne pas surcharger le constructeur des jeux qui l'implémenteront.
 
-## Modification de l'interface `IGrille`
+## Modification de l'interface `AGrille`
 
-L'interface `IGrille` a été modifiée pour respecter le principe de `Tell don't Ask`, vu pendant la code review.
+L'interface `AGrille` a été modifiée pour respecter le principe de `Tell don't Ask`, vu pendant la code review.
 
 A présent, la nouvelle version de l'interface a permis de mettre en place toutes les méthode de validations, de vérifications, d'interactions dans la grille en elle-même, limitant ainsi toute fuite de donnée de la grille, et d'éventuels modifications de ces propriétés. 
 

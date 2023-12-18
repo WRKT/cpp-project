@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "IJeu.h"
 #include "jeumorpion.h"
-#include "IGrille.h"
+#include "AGrille.h"
 #include "grille.h"
 #include "joueurfactory.h"
 #include "IAffichage.h"
@@ -12,7 +12,7 @@ class TestMorpion : public ::testing::Test {
 protected:
     // Les propriétés dont on a besoin pour les tests
     std::unique_ptr<IJeu> jeu;
-    std::shared_ptr<IGrille> grille = std::make_shared<Grille>(3,3);
+    std::shared_ptr<AGrille> grille = std::make_shared<Grille>(3,3);
 
     // Mise en place environnement de test (pour respecter le constructeur)
     void SetUp() override {

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "IJeu.h"
 #include "jeupuissance4.h"
-#include "IGrille.h"
+#include "AGrille.h"
 #include "grille.h"
 #include "joueurfactory.h"
 #include "IAffichage.h"
@@ -12,7 +12,7 @@ class TestPuissance4 : public ::testing::Test {
 protected:
     // Les propriétés dont on a besoin pour les tests
     std::unique_ptr<IJeu> jeu;
-    std::shared_ptr<IGrille> grille = std::make_shared<Grille>(4,7);
+    std::shared_ptr<AGrille> grille = std::make_shared<Grille>(4,7);
     std::shared_ptr<IAffichage> modeAffichage = std::make_shared<AffichageConsole>();
 
     // Mise en place environnement de test (pour respecter le constructeur)

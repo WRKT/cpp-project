@@ -13,7 +13,7 @@ add_executable(Unit-Tests maintest.cpp
     testpuissance4.cpp
     testothello.cpp
 
-    ${CMAKE_SOURCE_DIR}/IGrille.h
+    ${CMAKE_SOURCE_DIR}/AGrille.h
     ${CMAKE_SOURCE_DIR}/grille.h ${CMAKE_SOURCE_DIR}/grille.cpp
     ${CMAKE_SOURCE_DIR}/grillefactory.h ${CMAKE_SOURCE_DIR}/grillefactory.cpp
 
