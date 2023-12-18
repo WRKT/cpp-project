@@ -7,7 +7,8 @@
 #include <memory>
 #include "IAffichage.h"
 
-class JeuOthello : public IJeu {
+class JeuOthello : public IJeu
+{
 public:
     JeuOthello(std::shared_ptr<IGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage);
     void Jouer() override;
@@ -18,7 +19,7 @@ public:
     void InitialiseJeu() const override;
     void AfficherResultat() const override;
 
- private:
+private:
     std::shared_ptr<IGrille> grille;
     std::shared_ptr<AJoueur> joueur1;
     std::shared_ptr<AJoueur> joueur2;
@@ -28,8 +29,7 @@ public:
     void RetournerJetons(const int x, const int y, Jeton jeton);
     bool PeutRetourner(int x, int y, int directionX, int directionY, Jeton jeton) const;
     Jeton DetermineGagnant() const;
-    int bloquer = 0;
-
+    int bloque = 0;
 };
 
 #endif // JEUOTHELLO_H

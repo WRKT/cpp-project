@@ -30,7 +30,7 @@ void JeuOthello::Tour()
     if (coupsPossibles.empty())
     {
         modeAffichage->AfficherMessage("Aucun coup possible pour " + joueurCourant->getInformations() + ". Passage au joueur suivant.");
-        bloquer++;
+        bloque++;
         return;
     }
 
@@ -43,7 +43,7 @@ void JeuOthello::Tour()
             grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
             RetournerJetons(coup.first, coup.second, joueurCourant->getJeton());
             coupValide = true;
-            bloquer = 0;
+            bloque = 0;
         }
         else
         {
@@ -54,7 +54,7 @@ void JeuOthello::Tour()
 
 bool JeuOthello::PartieFinie() const
 {
-    return grille->EstRemplie() || bloquer == 2;
+    return grille->EstRemplie() || bloque == 2;
 }
 
 void JeuOthello::InitialiseJeu() const
