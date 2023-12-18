@@ -26,13 +26,13 @@ void JeuOthello::Tour()
 
     modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
     modeAffichage->AfficherCoupsPossibles(coupsPossibles);
+
     if (coupsPossibles.empty())
     {
         modeAffichage->AfficherMessage("Aucun coup possible pour " + joueurCourant->getInformations() + ". Passage au joueur suivant.");
         return;
     }
 
-    modeAffichage->AfficherMessage("");
     while (!coupValide)
     {
         std::pair<int, int> coup = joueurCourant->ChoisirCoupOthello(coupsPossibles);
