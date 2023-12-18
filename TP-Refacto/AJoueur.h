@@ -1,7 +1,6 @@
 #ifndef AJoueur_H
 #define AJoueur_H
 
-#include <iostream>
 #include "jeton.h"
 #include <string>
 #include "IChoisirCoup.h"

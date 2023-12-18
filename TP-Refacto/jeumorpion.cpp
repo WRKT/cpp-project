@@ -1,10 +1,6 @@
 #include "jeumorpion.h"
-#include <iostream>
 #include <algorithm>
 #include <vector>
-#include <random>
-#include <ctime>
-#include <limits>
 
 JeuMorpion::JeuMorpion(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
     : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
@@ -34,8 +30,10 @@ void JeuMorpion::Tour()
 
     bool coupValide = false;
     std::pair<int, int> coup;
+
     while (!coupValide)
     {
+        modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
         coup = joueurCourant->ChoisirCoupMorpion(coupsPossibles);
         if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
         {
@@ -46,7 +44,6 @@ void JeuMorpion::Tour()
         {
             modeAffichage->AfficherErreur("Coups Impossible");
         }
-
     }
 }
 std::vector<std::pair<int, int>> JeuMorpion::CoupsPossibles()
@@ -73,7 +70,9 @@ void JeuMorpion::AfficherResultat() const
 
 bool JeuMorpion::AGagne() const
 {
-    return grille->VerifieLigne(sequenceGagnante, joueurCourant->getJeton()) || grille->VerifieColonne(sequenceGagnante, joueurCourant->getJeton()) || grille->VerifieDiagonale(sequenceGagnante, joueurCourant->getJeton());
+    return grille->VerifieLigne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieColonne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieDiagonale(sequenceGagnante, joueurCourant->getJeton());
 }
 
 bool JeuMorpion::PartieFinie() const

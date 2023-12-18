@@ -2,7 +2,6 @@
 #define JOUEUR_ORDINATEUR_H
 
 #include "AJoueur.h"
-#include "jeton.h"
 #include <string>
 #include <random>
 #include <chrono>
@@ -12,7 +11,7 @@ class JoueurOrdinateur : public AJoueur
 
 public:
     JoueurOrdinateur(Jeton jeton) : AJoueur("Ordinateur", jeton), generateur(std::chrono::system_clock::now().time_since_epoch().count()){};
-
+    
 private:
     std::mt19937 generateur;
     std::vector<std::pair<int, int>> CoupsPossibles;

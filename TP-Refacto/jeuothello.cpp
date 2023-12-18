@@ -1,11 +1,6 @@
 #include "jeuothello.h"
-#include "inputconsole.h"
-#include <iostream>
 #include <algorithm>
 #include <vector>
-#include <random>
-#include <ctime>
-#include <limits>
 
 JeuOthello::JeuOthello(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
     : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
@@ -29,21 +24,18 @@ void JeuOthello::Tour()
     auto coupsPossibles = CoupsPossibles();
     bool coupValide = false;
 
-    modeAffichage->AfficherMessage("Coups possibles pour " + joueurCourant->getInformations() + " :");
-    for (auto coup : coupsPossibles)
-    {
-        modeAffichage->AfficherMessage("(" + std::to_string(coup.first + 1) + "," + std::to_string(coup.second + 1) + ") ", 0);
-    }
+    modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
+    modeAffichage->AfficherCoupsPossibles(coupsPossibles);
 
     if (coupsPossibles.empty())
     {
         modeAffichage->AfficherMessage("Aucun coup possible pour " + joueurCourant->getInformations() + ". Passage au joueur suivant.");
+        bloque++;
         return;
     }
-    modeAffichage->AfficherMessage("");
+
     while (!coupValide)
     {
-        modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
         std::pair<int, int> coup = joueurCourant->ChoisirCoupOthello(coupsPossibles);
 
         if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
@@ -51,6 +43,7 @@ void JeuOthello::Tour()
             grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
             RetournerJetons(coup.first, coup.second, joueurCourant->getJeton());
             coupValide = true;
+            bloque = 0;
         }
         else
         {
@@ -61,7 +54,7 @@ void JeuOthello::Tour()
 
 bool JeuOthello::PartieFinie() const
 {
-    return grille->EstRemplie();
+    return grille->EstRemplie() || bloque == 2;
 }
 
 void JeuOthello::AfficherResultat() const
@@ -76,7 +69,7 @@ void JeuOthello::AfficherResultat() const
     }
     else
     {
-        modeAffichage->AfficherMessage("La partie se termine par une égalité.");
+        modeAffichage->AfficherMessage("Match Nul!");
     }
 }
 
@@ -100,7 +93,6 @@ std::vector<std::pair<int, int>> JeuOthello::CoupsPossibles()
 
 bool JeuOthello::AGagne() const
 {
-
     Jeton gagnant = DetermineGagnant();
 
     return gagnant == joueur1->getJeton() || gagnant == joueur2->getJeton();
@@ -108,7 +100,6 @@ bool JeuOthello::AGagne() const
 
 void JeuOthello::RetournerJetons(const int x, const int y, Jeton jeton)
 {
-    // Vérifie les 8 directions possibles
     for (int directionX = -1; directionX <= 1; ++directionX)
     {
         for (int directionY = -1; directionY <= 1; ++directionY)

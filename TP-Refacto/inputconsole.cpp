@@ -1,4 +1,5 @@
 #include "inputconsole.h"
+#include <iostream>
 #include <limits>
 #include <map>
 #include <regex>
@@ -6,11 +7,9 @@
 std::string InputConsole::getString(const std::string &message)
 {
     std::string reponse;
-    std::cout << std::endl;
 
     while (true)
     {
-
         std::cout << message;
         std::cin >> reponse;
 
@@ -52,11 +51,9 @@ int InputConsole::getInt(const std::string &message)
 
 void InputConsole::ViderBuffer()
 {
-
     std::cout << "Saisie invalide. Veuillez réessayer." << std::endl;
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
     std::cout << std::endl;
 }
 
@@ -91,10 +88,8 @@ TypesJeu InputConsole::demanderTypeDeJeu()
 
 int InputConsole::demanderModeDeJeu()
 {
-
     int modeJeu;
     bool choixValide;
-
     do
     {
         std::cout << std::endl;
@@ -114,12 +109,11 @@ int InputConsole::demanderModeDeJeu()
 
 bool InputConsole::demanderRejouer()
 {
-
     std::string choix;
     bool choixValide;
-
     do
     {
+        std::cout << std::endl;
         choix = getString("Retourner au menu principal (o/N) ? ");
         choixValide = (choix == "o" || choix == "O" || choix == "n" || choix == "N");
 
@@ -138,7 +132,7 @@ std::string InputConsole::demanderPrenomJoueur(const std::string &prompt)
 
         if (!std::regex_match(prenom, regexPrenom))
         {
-            std::cout << "Saisie invalide. Utilisez uniquement des lettres et une longueur maximale de 20 caractères." << std::endl;
+            std::cout << "Saisie invalide. Utilisez uniquement des lettres et une longueur entre 1 et 20 caractères." << std::endl;
         }
     } while (!std::regex_match(prenom, regexPrenom));
 
@@ -153,7 +147,6 @@ std::pair<int, int> InputConsole::demanderCordonnee()
     {
         x = getInt("Entrez la ligne : ");
         y = getInt("Entrez la colonne : ");
-
         return {x - 1, y - 1};
     }
 }
@@ -165,7 +158,6 @@ int InputConsole::demanderColonne()
     while (true)
     {
         colonne = getInt("Entrez le numero de la colonne : ");
-
         return colonne - 1;
     }
 }

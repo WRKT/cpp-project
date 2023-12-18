@@ -1,12 +1,14 @@
 #ifndef JEUOTHELLO_H
 #define JEUOTHELLO_H
+
 #include "IJeu.h"
 #include "AGrille.h"
 #include "AJoueur.h"
 #include <memory>
 #include "IAffichage.h"
 
-class JeuOthello : public IJeu {
+class JeuOthello : public IJeu
+{
 public:
     JeuOthello(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage);
     void Jouer() override;
@@ -27,7 +29,7 @@ public:
     void RetournerJetonsDansDirection(int x, int y, int directionX, int directionY, Jeton jeton);
     bool PeutRetourner(int x, int y, int directionX, int directionY, Jeton jeton) const;
     Jeton DetermineGagnant() const;
-
+    int bloque = 0;
 };
 
 #endif // JEUOTHELLO_H

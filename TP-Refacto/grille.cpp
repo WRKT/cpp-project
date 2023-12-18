@@ -1,5 +1,4 @@
 #include "grille.h"
-#include <iostream>
 #include "jeton.h"
 
 Jeton Grille::GetCellule(const int x, const int y) const
@@ -57,7 +56,7 @@ int Grille::CompteJetons(Jeton jeton) const
         {
             if (table[i][j] == jeton)
             {
-                ++nbJeton;
+                nbJeton++;
             }
         }
     }

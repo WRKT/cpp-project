@@ -1,8 +1,5 @@
 #include "jeupuissance4.h"
-#include <iostream>
 #include <vector>
-#include <random>
-#include <ctime>
 #include <algorithm>
 
 JeuPuissance4::JeuPuissance4(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
@@ -79,5 +76,7 @@ bool JeuPuissance4::PartieFinie() const
 
 bool JeuPuissance4::AGagne() const
 {
-    return grille->VerifieLigne(sequenceGagnante, joueurCourant->getJeton()) || grille->VerifieColonne(sequenceGagnante, joueurCourant->getJeton()) || grille->VerifieDiagonale(sequenceGagnante, joueurCourant->getJeton());
+    return grille->VerifieLigne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieColonne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieDiagonale(sequenceGagnante, joueurCourant->getJeton());
 }
