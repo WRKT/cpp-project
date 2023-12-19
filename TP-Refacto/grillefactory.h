@@ -7,7 +7,7 @@
 
 class GrilleFactory {
 public:
-    static std::unique_ptr<AGrille> CreerGrille(TypesJeu typeDeJeu);
+    static std::unique_ptr<AGrille> CreerGrille(const TypesJeu& typeDeJeu);
 };
 
 #endif // GRILLEFACTORY_H

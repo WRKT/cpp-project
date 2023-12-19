@@ -1,7 +1,7 @@
 #include "affichageconsole.h"
 #include <iostream>
 
-void AffichageConsole::AfficherGrille(const std::shared_ptr<AGrille> grille) const
+void AffichageConsole::AfficherGrille(const std::shared_ptr<AGrille> &grille) const
 {
     const int nbColonnes = grille->getNbColonnes();
     const int nbLignes = grille->getNbLignes();
@@ -42,19 +42,20 @@ void AffichageConsole::AfficherGrille(const std::shared_ptr<AGrille> grille) con
 }
 
 
-void AffichageConsole::AfficherMessage(const std::string message, const int nbSautLigne) const
+void AffichageConsole::AfficherMessage(const std::string& message, const int nbSautLigne) const
 {
     std::cout << message;
     for(int i = 0; i < nbSautLigne; i++)
         std::cout << std::endl;
 }
 
-void AffichageConsole::AfficherErreur(const std::string message) const
+void AffichageConsole::AfficherErreur(const std::string& message) const
 {
-    std::cerr << "Saisie invalide. Veuillez réessayez. " << message;
+    std::cerr << "Saisie invalide. Veuillez réessayez. " << message << std::endl;
+
 }
 
-void AffichageConsole::AfficherCoupsPossibles(std::vector<std::pair<int, int>> coupsPossibles) const
+void AffichageConsole::AfficherCoupsPossibles(const std::vector<std::pair<int, int>> &coupsPossibles) const
 {
     std::cout << "Coups possibles : ";
     for (auto &coup : coupsPossibles)

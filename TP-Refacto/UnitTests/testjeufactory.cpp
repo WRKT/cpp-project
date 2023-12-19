@@ -18,22 +18,26 @@ protected:
 };
 
 TEST_F(JeuFactoryTest, CreerJeuMorpion) {
-    auto jeu = JeuFactory::CreerJeu(TypesJeu::Morpion, joueur1, joueur2);
+    TypesJeu typeDeJeu = TypesJeu::Morpion;
+    auto jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2);
     EXPECT_TRUE(dynamic_cast<JeuMorpion*>(jeu.get()) != nullptr);
 }
 
 TEST_F(JeuFactoryTest, CreerJeuPuissance4) {
-    auto jeu = JeuFactory::CreerJeu(TypesJeu::Puissance4, joueur1, joueur2);
+    TypesJeu typeDeJeu = TypesJeu::Puissance4;
+    auto jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2);
     EXPECT_TRUE(dynamic_cast<JeuPuissance4*>(jeu.get()) != nullptr);
 }
 
 TEST_F(JeuFactoryTest, CreerJeuOthello) {
-    auto jeu = JeuFactory::CreerJeu(TypesJeu::Othello, joueur1, joueur2);
+    TypesJeu typeDeJeu = TypesJeu::Othello;
+    auto jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2);
     EXPECT_TRUE(dynamic_cast<JeuOthello*>(jeu.get()) != nullptr);
 }
 
 TEST_F(JeuFactoryTest, CreerJeuInvalid) {
-    auto jeu = JeuFactory::CreerJeu(TypesJeu::COUNT, joueur1, joueur2);
+    TypesJeu jeuVide = TypesJeu::COUNT;
+    auto jeu = JeuFactory::CreerJeu(jeuVide, joueur1, joueur2);
     EXPECT_EQ(jeu, nullptr);
 }
 

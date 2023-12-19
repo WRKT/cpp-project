@@ -98,7 +98,7 @@ bool JeuOthello::AGagne() const
     return gagnant == joueur1->getJeton() || gagnant == joueur2->getJeton();
 }
 
-void JeuOthello::RetournerJetons(const int x, const int y, Jeton jeton)
+void JeuOthello::RetournerJetons(const int x, const int y, const Jeton &jeton)
 {
     for (int directionX = -1; directionX <= 1; ++directionX)
     {
@@ -110,15 +110,9 @@ void JeuOthello::RetournerJetons(const int x, const int y, Jeton jeton)
             RetournerJetonsDansDirection(x, y, directionX, directionY, jeton);
         }
     }
-
-    /*
-    // Possibilité de tester uniquement certaines directions
-    RetournerJetonsDansDirection(x, y, 0, -1, jeton); // Nord
-    RetournerJetonsDansDirection(x, y, -1, 0, jeton); // Sud
-    */
 }
 
-void JeuOthello::RetournerJetonsDansDirection(int x, int y, int directionX, int directionY, Jeton jeton)
+void JeuOthello::RetournerJetonsDansDirection(int x, int y, int directionX, int directionY, const Jeton &jeton)
 {
     int ligne = x + directionX;
     int colonne = y + directionY;
@@ -134,7 +128,7 @@ void JeuOthello::RetournerJetonsDansDirection(int x, int y, int directionX, int 
     }
 }
 
-bool JeuOthello::PeutRetourner(int x, int y, int directionX, int directionY, Jeton jeton) const
+bool JeuOthello::PeutRetourner(int x, int y, int directionX, int directionY, const Jeton &jeton) const
 {
     for (int ligne = x + directionX, colonne = y + directionY;
          ligne >= 0 && ligne < grille->getNbLignes() && colonne >= 0 && colonne < grille->getNbColonnes();
@@ -155,7 +149,7 @@ bool JeuOthello::PeutRetourner(int x, int y, int directionX, int directionY, Jet
     return false;
 }
 
-bool JeuOthello::EstCoupValide(int x, int y, Jeton jeton) const
+bool JeuOthello::EstCoupValide(int x, int y, const Jeton &jeton) const
 {
     if (x < 0 || x >= grille->getNbLignes() || y < 0 || y >= grille->getNbColonnes() || grille->GetCellule(x, y) != Jeton::Vide)
     {

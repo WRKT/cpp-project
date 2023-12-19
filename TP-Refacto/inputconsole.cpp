@@ -7,6 +7,7 @@
 std::string InputConsole::getString(const std::string &message)
 {
     std::string reponse;
+    std::cout << std::endl;
 
     while (true)
     {
@@ -113,7 +114,6 @@ bool InputConsole::demanderRejouer()
     bool choixValide;
     do
     {
-        std::cout << std::endl;
         choix = getString("Retourner au menu principal (o/N) ? ");
         choixValide = (choix == "o" || choix == "O" || choix == "n" || choix == "N");
 

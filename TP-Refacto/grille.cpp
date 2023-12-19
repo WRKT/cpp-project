@@ -29,7 +29,7 @@ bool Grille::ACaseVide(const int x, const int y) const
     return table[x][y] == Jeton::Vide;
 }
 
-void Grille::ChangeCellule(const int x, const int y, Jeton jeton)
+void Grille::ChangeCellule(const int x, const int y, const Jeton& jeton)
 {
     table[x][y] = jeton;
 }
@@ -49,7 +49,7 @@ bool Grille::EstRemplie() const
     return true;
 }
 
-int Grille::CompteJetons(Jeton jeton) const
+int Grille::CompteJetons(const Jeton& jeton) const
 {
     int nbJeton = 0;
     for (int i = 0; i < getNbColonnes(); ++i)
@@ -65,78 +65,6 @@ int Grille::CompteJetons(Jeton jeton) const
     return nbJeton;
 }
 
-bool Grille::VerifieLigne(const int sequenceGagnante, const Jeton jeton) const
-{
-    for (int i = 0; i < getNbLignes(); ++i)
-    {
-        std::vector<Jeton> ligne = GetLigne(i, 0);
-        if (CompteSequence(ligne, jeton) >= sequenceGagnante)
-            return true;
-    }
-    return false;
-}
-
-bool Grille::VerifieColonne(const int sequenceGagnante, const Jeton jeton) const
-{
-    for (int j = 0; j < getNbColonnes(); ++j)
-    {
-        std::vector<Jeton> colonne = GetColonne(0, j);
-        if (CompteSequence(colonne, jeton) >= sequenceGagnante)
-            return true;
-    }
-    return false;
-}
-
-bool Grille::VerifieDiagonaleASC(const int sequenceGagnante, const Jeton jeton) const
-{
-    for (int i = 0; i < getNbLignes(); ++i)
-    {
-        for (int j = 0; j < getNbColonnes(); ++j)
-        {
-            std::vector<Jeton> diagonaleASC = GetDiagonaleASC(i, j);
-            if (CompteSequence(diagonaleASC, jeton) >= sequenceGagnante)
-                return true;
-        }
-    }
-    return false;
-}
-
-bool Grille::VerifieDiagonaleDESC(const int sequenceGagnante, const Jeton jeton) const
-{
-    for (int i = 0; i < getNbLignes(); ++i)
-    {
-        for (int j = 0; j < getNbColonnes(); ++j)
-        {
-            std::vector<Jeton> diagonaleDESC = GetDiagonaleDESC(i, j);
-            if (CompteSequence(diagonaleDESC, jeton) >= sequenceGagnante)
-                return true;
-        }
-    }
-    return false;
-}
-
-int Grille::CompteSequence(const std::vector<Jeton> &vecteur, Jeton jeton) const
-{
-    int nbJetons = 0;
-    int maxSequence = 0;
-
-    for (const Jeton &token : vecteur)
-    {
-        if (token == jeton)
-        {
-            nbJetons++;
-            if (nbJetons > maxSequence)
-            {
-                maxSequence = nbJetons;
-            }
-        }
-        else
-        {
-            nbJetons = 0;
-        }
-    }
-    return maxSequence;
-}
 
 std::vector<Jeton> Grille::GetLigne(int x, int y) const
 {
@@ -192,3 +120,76 @@ std::vector<Jeton> Grille::GetDiagonaleASC(int x, int y) const
 
     return diagonaleASC;
 }
+bool Grille::VerifieLigne(const int sequenceGagnante, const Jeton& jeton) const
+{
+    for (int i = 0; i < getNbLignes(); ++i)
+    {
+        std::vector<Jeton> ligne = GetLigne(i, 0);
+        if (CompteSequence(ligne, jeton) >= sequenceGagnante)
+            return true;
+    }
+    return false;
+}
+
+bool Grille::VerifieColonne(const int sequenceGagnante, const Jeton& jeton) const
+{
+    for (int j = 0; j < getNbColonnes(); ++j)
+    {
+        std::vector<Jeton> colonne = GetColonne(0, j);
+        if (CompteSequence(colonne, jeton) >= sequenceGagnante)
+            return true;
+    }
+    return false;
+}
+
+bool Grille::VerifieDiagonaleASC(const int sequenceGagnante, const Jeton& jeton) const
+{
+    for (int i = 0; i < getNbLignes(); ++i)
+    {
+        for (int j = 0; j < getNbColonnes(); ++j)
+        {
+            std::vector<Jeton> diagonaleASC = GetDiagonaleASC(i, j);
+            if (CompteSequence(diagonaleASC, jeton) >= sequenceGagnante)
+                return true;
+        }
+    }
+    return false;
+}
+
+bool Grille::VerifieDiagonaleDESC(const int sequenceGagnante, const Jeton& jeton) const
+{
+    for (int i = 0; i < getNbLignes(); ++i)
+    {
+        for (int j = 0; j < getNbColonnes(); ++j)
+        {
+            std::vector<Jeton> diagonaleDESC = GetDiagonaleDESC(i, j);
+            if (CompteSequence(diagonaleDESC, jeton) >= sequenceGagnante)
+                return true;
+        }
+    }
+    return false;
+}
+
+int Grille::CompteSequence(const std::vector<Jeton> &vecteur, const Jeton& jeton) const
+{
+    int nbJetons = 0;
+    int maxSequence = 0;
+
+    for (const Jeton &token : vecteur)
+    {
+        if (token == jeton)
+        {
+            nbJetons++;
+            if (nbJetons > maxSequence)
+            {
+                maxSequence = nbJetons;
+            }
+        }
+        else
+        {
+            nbJetons = 0;
+        }
+    }
+    return maxSequence;
+}
+

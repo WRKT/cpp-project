@@ -1,10 +1,10 @@
 #ifndef JEUOTHELLO_H
 #define JEUOTHELLO_H
 
+#include <memory>
 #include "IJeu.h"
 #include "AGrille.h"
 #include "AJoueur.h"
-#include <memory>
 #include "IAffichage.h"
 
 class JeuOthello : public IJeu
@@ -24,10 +24,10 @@ public:
     std::shared_ptr<AJoueur> joueur2;
     std::shared_ptr<AJoueur> joueurCourant;
     std::shared_ptr<IAffichage> modeAffichage;
-    bool EstCoupValide(int x, int y, Jeton jeton) const;
-    void RetournerJetons(const int x, const int y, Jeton jeton);
-    void RetournerJetonsDansDirection(int x, int y, int directionX, int directionY, Jeton jeton);
-    bool PeutRetourner(int x, int y, int directionX, int directionY, Jeton jeton) const;
+    bool EstCoupValide(int x, int y, const Jeton& jeton) const;
+    void RetournerJetons(const int x, const int y, const Jeton& jeton);
+    void RetournerJetonsDansDirection(int x, int y, int directionX, int directionY, const Jeton& jeton);
+    bool PeutRetourner(int x, int y, int directionX, int directionY, const Jeton& jeton) const;
     Jeton DetermineGagnant() const;
     int bloque = 0;
 };

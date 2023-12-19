@@ -15,9 +15,9 @@ public:
 private:
     std::mt19937 generateur;
     std::vector<std::pair<int, int>> CoupsPossibles;
-    std::pair<int, int> ChoisirCoupMorpion(std::vector<std::pair<int, int>> CoupsPossibles) override;
-    std::pair<int, int> ChoisirCoupPuissance4(std::vector<std::pair<int, int>> CoupsPossibles) override;
-    std::pair<int, int> ChoisirCoupOthello(std::vector<std::pair<int, int>> CoupsPossibles) override;
+    std::pair<int, int> ChoisirCoupMorpion(const std::vector<std::pair<int, int>> &CoupsPossibles) override;
+    std::pair<int, int> ChoisirCoupPuissance4(const std::vector<std::pair<int, int>> &CoupsPossibles) override;
+    std::pair<int, int> ChoisirCoupOthello(const std::vector<std::pair<int, int>> &CoupsPossibles) override;
 };
 
 #endif // JOUEUR_ORDINATEUR_H
