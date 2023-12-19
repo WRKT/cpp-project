@@ -17,8 +17,9 @@ public:
     bool EstRemplie() const override;
     bool VerifieLigne(const int sequenceGagnante, const Jeton jeton) const override;
     bool VerifieColonne(const int sequenceGagnante, const Jeton jeton) const override;
-    bool VerifieDiagonale(const int sequenceGagnante, const Jeton jeton) const override;
-    int CompteSequence(const int ligneDepart, const int colonneDepart, const int dirLigne, const int dirColonne) const;
+    bool VerifieDiagonaleASC(const int sequenceGagnante, const Jeton jeton) const override;
+    bool VerifieDiagonaleDESC(const int sequenceGagnante, const Jeton jeton) const override;
+    int CompteSequence(const std::vector<Jeton> &vecteur, Jeton jeton) const;
     std::vector<Jeton> GetLigne(int x, int y) const override;
     std::vector<Jeton> GetColonne(int x, int y) const override;
     std::vector<Jeton> GetDiagonaleASC(int x, int y) const override;
