@@ -1,11 +1,3 @@
-cmake_minimum_required(VERSION 3.14)
-
-project(TP3-Refacto LANGUAGES CXX)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-
 add_executable(Unit-Tests maintest.cpp
     testgrille.cpp
     testjeufactory.cpp
