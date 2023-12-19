@@ -30,10 +30,10 @@ add_executable(Unit-Tests maintest.cpp
 target_include_directories(Unit-Tests PRIVATE ${CMAKE_SOURCE_DIR})
 
 target_link_libraries(
-    TestOthello
+    Unit-Tests
     gtest_main
 )
 
 gtest_discover_tests(
-    TestOthello
+    Unit-Tests
 )

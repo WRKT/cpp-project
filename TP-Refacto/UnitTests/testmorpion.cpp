@@ -48,3 +48,4 @@ TEST_F(TestMorpion, CheckEgalite)
     EXPECT_EQ(jeu->PartieFinie(), true);
     EXPECT_NE(jeu->AGagne(), true);
 }
+

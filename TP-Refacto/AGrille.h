@@ -1,6 +1,3 @@
-#ifndef AGRILLE_H
-#define AGRILLE_H
-
 #include "IGrilleInit.h"
 #include "jeton.h"
 #include <vector>
@@ -31,3 +28,4 @@ protected:
 };
 
 #endif // AGRILLE_H
+

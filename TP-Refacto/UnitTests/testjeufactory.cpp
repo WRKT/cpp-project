@@ -36,3 +36,4 @@ TEST_F(JeuFactoryTest, CreerJeuInvalid) {
     auto jeu = JeuFactory::CreerJeu(TypesJeu::COUNT, joueur1, joueur2);
     EXPECT_EQ(jeu, nullptr);
 }
+

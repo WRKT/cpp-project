@@ -139,28 +139,7 @@ std::string InputConsole::demanderPrenomJoueur(const std::string &prompt)
     return prenom;
 }
 
-std::pair<int, int> InputConsole::demanderCoupMorpion(int tailleGrille)
-{
-    int x, y;
-    while (true)
-    {
-        x = getInt("Entrez la ligne (1 - " + std::to_string(tailleGrille) + ") : ");
-        if (x < 1 || x > tailleGrille)
-        {
-            continue;
-        }
-        y = getInt("Entrez la colonne (1 - " + std::to_string(tailleGrille) + ") : ");
-
-        if (y < 1 || y > tailleGrille)
-        {
-            continue;
-        }
-
-        return {x - 1, y - 1};
-    }
-}
-
-std::pair<int, int> InputConsole::demanderCoupOthello(int tailleGrille)
+std::pair<int, int> InputConsole::demanderCordonnee()
 {
     int x, y;
 
@@ -172,12 +151,11 @@ std::pair<int, int> InputConsole::demanderCoupOthello(int tailleGrille)
     }
 }
 
-int InputConsole::demanderCoupPuissance4(int nbColonnes)
+int InputConsole::demanderColonne()
 {
     int colonne;
-    bool coupValide = false;
 
-    do
+    while (true)
     {
         colonne = getInt("Entrez le numero de la colonne : ");
         return colonne - 1;

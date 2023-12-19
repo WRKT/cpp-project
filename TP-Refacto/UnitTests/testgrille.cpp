@@ -115,3 +115,4 @@ TEST_F(TestGrille, CheckInitialiserGrilleOthello)
     EXPECT_EQ(grilleOthello.GetCellule(4, 4), Jeton::X);
 }
 
+

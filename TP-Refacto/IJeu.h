@@ -3,7 +3,8 @@
 
 #include <vector>
 
-class IJeu {
+class IJeu
+{
 public:
     virtual void Jouer() = 0;
     virtual void Tour() = 0;
