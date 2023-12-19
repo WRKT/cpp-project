@@ -6,7 +6,6 @@
 #include "AJoueur.h"
 #include "IAffichage.h"
 #include <memory>
-#include <string>
 
 class JeuPuissance4 : public IJeu {
 

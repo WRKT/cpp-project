@@ -9,8 +9,8 @@
 class JoueurFactory {
 
 public:
-    static std::unique_ptr<AJoueur> CreerJoueurHumain(std::string nom, Jeton jeton);
-    static std::unique_ptr<AJoueur> CreerJoueurOrdinateur(Jeton jeton);
+    static std::unique_ptr<AJoueur> CreerJoueurHumain(const std::string& nom, const Jeton& jeton);
+    static std::unique_ptr<AJoueur> CreerJoueurOrdinateur(const Jeton& jeton);
 };
 
 #endif // JOUEURFACTORY_H

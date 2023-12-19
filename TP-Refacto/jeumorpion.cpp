@@ -70,7 +70,10 @@ void JeuMorpion::AfficherResultat() const
 
 bool JeuMorpion::AGagne() const
 {
-    return grille->VerifieLigne(sequenceGagnante, joueurCourant->getJeton()) || grille->VerifieColonne(sequenceGagnante, joueurCourant->getJeton()) || grille->VerifieDiagonale(sequenceGagnante, joueurCourant->getJeton());
+    return grille->VerifieLigne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieColonne(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieDiagonaleASC(sequenceGagnante, joueurCourant->getJeton())
+           || grille->VerifieDiagonaleDESC(sequenceGagnante, joueurCourant->getJeton());
 }
 
 bool JeuMorpion::PartieFinie() const

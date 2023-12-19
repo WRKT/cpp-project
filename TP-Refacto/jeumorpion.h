@@ -1,11 +1,12 @@
 #ifndef JEUMORPION_H
 #define JEUMORPION_H
 
+#include <memory>
 #include "IJeu.h"
 #include "AGrille.h"
 #include "AJoueur.h"
 #include "IAffichage.h"
-#include <memory>
+
 
 class JeuMorpion : public IJeu {
 
