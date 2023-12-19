@@ -102,6 +102,14 @@ A présent, la nouvelle version de l'interface a permis de mettre en place toute
 
 Un pas de plus pour consolider le principe d'**Encapsulation** de la programmation orientée objet.
 
+## Interface pour le choix du coup `IChoisirCoup`
+
+Dans ce projet, nous avons introduit une interface, `IChoisirCoup`, qui permet au joueur de choisir son coup dans différents jeux comme le Morpion, Puissance 4 et Othello. Cette interface définit trois méthodes virtuelles pures ( `ChoisirCoupMorpion`, `ChoisirCoupPuissance4`, `ChoisirCoupOthello`), chacune prenant en entrée une liste de coordonnées possibles et renvoyant la paire de coordonnées choisie par le joueur.
+
+Dans certaines implémentations par défaut, notamment pour un joueur ordinateur, une méthode de choix aléatoire parmi les coups possibles est mise en place. Cette méthode sélectionne aléatoirement un coup parmi les options disponibles, fournissant ainsi une base simple pour un joueur automatique.
+
+Cette abstraction nous permet d'implémenter des stratégies de choix de coups différentes pour chaque jeu tout en suivant un même contrat. Les classes qui implémentent cette interface fournissent la logique spécifique à chaque jeu pour sélectionner le prochain coup à jouer.
+
 ## Tests unitaires
 
 Un test unitaire est ajouté pour tester la classe du jeu Othello. Ce test permet de vérifier le bon fonctionnement du jeu en testant les méthodes de la classe `JeuOthello`.
