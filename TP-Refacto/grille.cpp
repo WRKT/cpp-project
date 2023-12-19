@@ -118,18 +118,24 @@ bool Grille::VerifieDiagonaleDESC(const int sequenceGagnante, const Jeton jeton)
 int Grille::CompteSequence(const std::vector<Jeton> &vecteur, Jeton jeton) const
 {
     int nbJetons = 0;
-    for (int i = 0; i < vecteur.size(); ++i)
+    int maxSequence = 0;
+
+    for (const Jeton &token : vecteur)
     {
-        if (vecteur[i] == jeton)
+        if (token == jeton)
         {
             nbJetons++;
+            if (nbJetons > maxSequence)
+            {
+                maxSequence = nbJetons;
+            }
         }
         else
         {
             nbJetons = 0;
         }
     }
-    return nbJetons;
+    return maxSequence;
 }
 
 std::vector<Jeton> Grille::GetLigne(int x, int y) const
