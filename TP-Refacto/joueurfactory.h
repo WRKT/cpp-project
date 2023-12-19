@@ -1,7 +1,6 @@
 #ifndef JOUEURFACTORY_H
 #define JOUEURFACTORY_H
 
-
 #include "AJoueur.h"
 #include "jeton.h"
 #include <memory>

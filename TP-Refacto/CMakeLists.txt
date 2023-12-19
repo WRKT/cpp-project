@@ -9,9 +9,9 @@ add_executable(TP-Refacto main.cpp
 
     grille.h grille.cpp
     AJoueur.h
-    joueurhumain.h
-    joueurordinateur.h
-    IGrille.h
+    joueurhumain.h joueurhumain.cpp
+    joueurordinateur.h joueurordinateur.cpp
+    AGrille.h
     jeton.h
     IJeu.h
     jeumorpion.h jeumorpion.cpp
@@ -24,6 +24,8 @@ add_executable(TP-Refacto main.cpp
     IAffichage.h
     affichageconsole.h affichageconsole.cpp
     jeuothello.h jeuothello.cpp
+    IChoisirCoup.h
+    IGrilleInit.h
 
 )
 

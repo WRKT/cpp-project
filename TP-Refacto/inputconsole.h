@@ -1,8 +1,6 @@
 #ifndef INPUTCONSOLE_H
 #define INPUTCONSOLE_H
 
-#include <iostream>
-#include <memory>
 #include <string>
 #include "TypesJeu.h"
 
