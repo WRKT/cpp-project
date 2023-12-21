@@ -6,7 +6,7 @@ build:
   before_script:
     - apt-get update
     - apt-get upgrade -y
-    - apt-get install -y cmake
+    - apt-get install -y cmake build-essentials
   script:
     - mkdir build
     - cd build
