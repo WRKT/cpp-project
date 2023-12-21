@@ -2,12 +2,11 @@ build:
   stage: build
   tags:
     - linux
-  image: gcc:13.2.0
+  image: ubuntu:22.04
   before_script:
     - apt-get update
     - apt-get upgrade -y
     - apt-get install -y cmake
-    - apt-get install --only-upgrade libstdc++6
   script:
     - mkdir build
     - cd build
