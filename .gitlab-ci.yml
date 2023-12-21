@@ -4,7 +4,8 @@ build:
     - linux
   image: gcc
   before_script:
-    - apt-get update - apt-get install --yes cmake
+    - apt-get update 
+    - apt-get install -y cmake
   script:
     - mkdir build
     - cd build
