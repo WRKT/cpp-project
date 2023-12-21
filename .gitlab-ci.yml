@@ -7,6 +7,7 @@ build:
     - apt-get update
     - apt-get upgrade -y
     - apt-get install -y cmake
+    - apt-get install --only-upgrade libstdc++6
   script:
     - mkdir build
     - cd build
