@@ -2,7 +2,7 @@ build:
   stage: build
   tags:
     - linux
-  image: gcc
+  image: gcc:13.2.0
   before_script:
     - apt-get update
     - apt-get upgrade -y
@@ -15,9 +15,10 @@ build:
   artifacts:
     paths:
       - build
-
 test:
   stage: test
   script:
     - cd build
     - UnitTests/Unit-Tests
+  dependencies:
+    - build
