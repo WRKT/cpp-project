@@ -1,12 +1,15 @@
+stages:
+  - build
+  - test
+
+before_script:
+  - apk update
+  - apk upgrade
+  - apk add --no-cache cmake build-base
+
 build:
   stage: build
-  tags:
-    - linux
-  image: ubuntu:22.04
-  before_script:
-    - apt-get update
-    - apt-get upgrade -y
-    - apt-get install -y cmake build-essential
+  image: alpine
   script:
     - mkdir build
     - cd build
@@ -15,6 +18,7 @@ build:
   artifacts:
     paths:
       - build
+
 test:
   stage: test
   script:
@@ -22,3 +26,4 @@ test:
     - UnitTests/Unit-Tests
   dependencies:
     - build
+
