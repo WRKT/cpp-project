@@ -21,6 +21,7 @@ build:
 
 test:
   stage: test
+  image: alpine
   script:
     - cd build
     - UnitTests/Unit-Tests
