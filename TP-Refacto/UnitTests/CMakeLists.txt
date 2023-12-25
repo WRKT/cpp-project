@@ -31,8 +31,10 @@ target_include_directories(Unit-Tests PRIVATE ${CMAKE_SOURCE_DIR})
 
 target_link_libraries(
     Unit-Tests
-    gtest_main
+    GTest::gtest_main
 )
+
+include(GoogleTest)
 
 gtest_discover_tests(
     Unit-Tests
