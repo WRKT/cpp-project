@@ -30,7 +30,7 @@ test:
 
 deploy:
   stage: deploy
-  image: alpine
+  image: docker
   script:
     - docker build -t rawinnessy/cpp-project:latest .
     - docker push rawinnessy/cpp-project:latest
