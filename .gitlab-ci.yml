@@ -36,8 +36,11 @@ deploy:
      alias: thedockerhost
   variables:
     DOCKER_HOST: tcp://thedockerhost:2375/
+    DOCKER_USERNAME: rawinnessy
+    DOCKER_AUTH: dckr_pat_zLJAiKwi00Q8QsI0RnfO12FmuvQ
   script:
     - docker build -t rawinnessy/cpp-project:latest .
+    - echo "$DOCKER_AUTH_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker push rawinnessy/cpp-project:latest
   dependencies:
     - build
