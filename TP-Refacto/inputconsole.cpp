@@ -63,7 +63,9 @@ TypesJeu InputConsole::demanderTypeDeJeu()
     std::map<TypesJeu, std::string> nomsDesJeux = {
         {TypesJeu::Morpion, "Morpion"},
         {TypesJeu::Puissance4, "Puissance 4"},
-        {TypesJeu::Othello, "Othello"}};
+        {TypesJeu::Othello, "Othello"},
+        {TypesJeu::Dames, "Dames"}
+    };
 
     int choixJeu;
     bool choixValide;

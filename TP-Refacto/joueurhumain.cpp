@@ -28,3 +28,10 @@ std::pair<int, int> JoueurHumain::ChoisirCoupOthello(const std::vector<std::pair
     coup = InputConsole::demanderCordonnee();
     return coup;
 }
+
+std::pair<int, int> JoueurHumain::ChoisirCoupDames(const std::vector<std::pair<int, int>> &CoupsPossible)
+{
+    std::pair<int, int> coup;
+    coup = InputConsole::demanderCordonnee();
+    return coup;
+}

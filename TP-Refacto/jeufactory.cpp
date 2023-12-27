@@ -2,11 +2,10 @@
 #include "jeumorpion.h"
 #include "jeuothello.h"
 #include "jeupuissance4.h"
+#include "jeudames.h"
 #include "affichageconsole.h"
 #include "grillefactory.h"
-
 #include <memory>
-// Inclure les autres fichiers de jeux si nécessaire
 
 std::unique_ptr<IJeu> JeuFactory::CreerJeu(TypesJeu &typeDeJeu, std::shared_ptr<AJoueur> &joueur1, std::shared_ptr<AJoueur> &joueur2) {
 
@@ -20,6 +19,8 @@ std::unique_ptr<IJeu> JeuFactory::CreerJeu(TypesJeu &typeDeJeu, std::shared_ptr<
         return std::make_unique<JeuPuissance4>(grille, joueur1, joueur2, modeAffichage);
     case TypesJeu::Othello:
         return std::make_unique<JeuOthello>(grille, joueur1, joueur2, modeAffichage);
+    case TypesJeu::Dames:
+        return std::make_unique<JeuDames>(grille, joueur1, joueur2, modeAffichage);
     case TypesJeu::COUNT:
         break;
     };

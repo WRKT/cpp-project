@@ -9,6 +9,8 @@ std::unique_ptr<AGrille> GrilleFactory::CreerGrille(const TypesJeu &typeDeJeu) {
         return std::make_unique<Grille>(4, 7);
     case TypesJeu::Othello:
         return std::make_unique<Grille>(8, 8);
+    case TypesJeu::Dames:
+        return std::make_unique<Grille>(10, 10);
     default:
         return nullptr;
     }

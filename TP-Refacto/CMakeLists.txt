@@ -26,7 +26,7 @@ add_executable(TP-Refacto main.cpp
     jeuothello.h jeuothello.cpp
     IChoisirCoup.h
     IGrilleInit.h
-
+    jeudames.h jeudames.cpp
 )
 
 include(GNUInstallDirs)
@@ -45,6 +45,4 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 include(CTest)
-
-
 add_subdirectory(UnitTests)

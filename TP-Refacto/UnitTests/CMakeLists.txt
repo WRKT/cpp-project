@@ -15,6 +15,7 @@ add_executable(Unit-Tests maintest.cpp
     ${CMAKE_SOURCE_DIR}/jeumorpion.h ${CMAKE_SOURCE_DIR}/jeumorpion.cpp
     ${CMAKE_SOURCE_DIR}/jeupuissance4.h ${CMAKE_SOURCE_DIR}/jeupuissance4.cpp
     ${CMAKE_SOURCE_DIR}/jeuothello.h ${CMAKE_SOURCE_DIR}/jeuothello.cpp
+    ${CMAKE_SOURCE_DIR}/jeudames.h ${CMAKE_SOURCE_DIR}/jeudames.cpp
 
     ${CMAKE_SOURCE_DIR}/AJoueur.h
     ${CMAKE_SOURCE_DIR}/joueurhumain.cpp ${CMAKE_SOURCE_DIR}/joueurordinateur.cpp
