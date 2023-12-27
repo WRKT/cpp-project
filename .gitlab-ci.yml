@@ -40,4 +40,5 @@ deploy:
     - docker build -t rawinnessy/cpp-project:latest .
     - docker push rawinnessy/cpp-project:latest
   dependencies:
+    - build
     - test
