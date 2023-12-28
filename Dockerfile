@@ -4,5 +4,5 @@ COPY build/TP-Refacto /app/
 
 WORKDIR /app
 
-ENTRYPOINT ["/app/TP-Refacto"]
+CMD ["/app/TP-Refacto"]
 
