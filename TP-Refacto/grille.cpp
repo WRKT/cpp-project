@@ -24,6 +24,41 @@ void Grille::InitialiserGrilleOthello()
     }
 }
 
+void Grille::InitialiserGrilleDame()
+{
+
+    for (int i = 0; i < getNbLignes(); ++i)
+    {
+        for (int j = 0; j < getNbColonnes(); ++j)
+        {
+            ChangeCellule(i, j, Jeton::Vide);
+        }
+    }
+
+    for (int i = 0; i < getNbLignes(); ++i)
+    {
+        for (int j = 0; j < getNbColonnes(); ++j)
+        {
+
+            if ((i % 2 == 0 && j % 2 == 1) || (i % 2 == 1 && j % 2 == 0))
+            {
+                if (i < 3)
+                {
+
+                    ChangeCellule(i, j, Jeton::X);
+                }
+                else if (i >= getNbLignes() - 3)
+                {
+
+                    ChangeCellule(i, j, Jeton::O);
+                }
+
+            }
+        }
+    }
+}
+
+
 bool Grille::ACaseVide(const int x, const int y) const
 {
     return table[x][y] == Jeton::Vide;
@@ -192,4 +227,3 @@ int Grille::CompteSequence(const std::vector<Jeton> &vecteur, const Jeton& jeton
     }
     return maxSequence;
 }
-

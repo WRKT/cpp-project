@@ -10,6 +10,7 @@ class Grille : public AGrille
 public:
     Grille(const int nbLignes, const int nbColonnes) : AGrille(nbLignes, nbColonnes){};
     void InitialiserGrilleOthello() override;
+    void InitialiserGrilleDame() override;
     bool ACaseVide(const int x, const int y) const override;
     Jeton GetCellule(const int x, const int y) const override;
     void ChangeCellule(const int x, const int y, const Jeton& jeton) override;
