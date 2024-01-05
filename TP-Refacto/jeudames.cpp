@@ -6,6 +6,8 @@ JeuDames::JeuDames(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1,
     : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage){}
 
 void JeuDames::Jouer() {
+
+    grille->InitialiserGrilleDame();
     modeAffichage->AfficherGrille(grille);
     while (!PartieFinie()) {
         Tour();
