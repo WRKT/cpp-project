@@ -1,11 +1,11 @@
-#include <memory>
-#include "TypesJeu.h"
-#include "inputconsole.h"
-#include "affichageconsole.h"
-#include "IJeu.h"
-#include "AJoueur.h"
-#include "joueurfactory.h"
-#include "jeufactory.h"
+// #include <memory>
+// #include "TypesJeu.h"
+// #include "inputconsole.h"
+// #include "affichageconsole.h"
+// #include "IJeu.h"
+// #include "AJoueur.h"
+// #include "joueurfactory.h"
+// #include "jeufactory.h"
 #include "mainwindow.h"
 #include <QApplication>
 
