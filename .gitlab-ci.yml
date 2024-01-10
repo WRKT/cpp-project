@@ -2,15 +2,12 @@ stages:
   - build
   - test
 
-before_script:
-  - apk update
-  - apk upgrade
-  - apk add --no-cache cmake build-base
-
 build:
   stage: build
-  image: alpine
+  image: ubuntu:latest
   script:
+    - apt-get update -qq
+    - apt-get install -y qt5-default cmake build-essential
     - mkdir build
     - cd build
     - cmake ../PROJET/
@@ -21,8 +18,10 @@ build:
 
 test:
   stage: test
-  image: alpine
+  image: ubuntu:latest
   script:
+    - apt-get update -qq
+    - apt-get install -y qt5-default
     - GTEST_COLOR=1 ctest --test-dir build --output-on-failure -j12
   dependencies:
     - build
