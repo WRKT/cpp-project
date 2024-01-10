@@ -2,12 +2,16 @@ stages:
   - build
   - test
 
+before_script:
+  - apt-get update -qq
+  - apt-get install -y --no-install-recommends qtbase5-dev cmake build-essential
+  - apt-get clean
+  - rm -rf /var/lib/apt/lists/*
+
 build:
   stage: build
-  image: ubuntu:latest
+  image: ubuntu:22.04
   script:
-    - apt-get update -qq
-    - apt-get install -y qtbase5-dev cmake build-essential
     - mkdir build
     - cd build
     - cmake ../PROJET/
@@ -18,11 +22,8 @@ build:
 
 test:
   stage: test
-  image: ubuntu:latest
+  image: ubuntu:22.04
   script:
-    - apt-get update -qq
-    - apt-get install -y qtbase5-dev
     - GTEST_COLOR=1 ctest --test-dir build --output-on-failure -j12
   dependencies:
     - build
-
