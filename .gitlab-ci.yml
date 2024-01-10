@@ -7,7 +7,7 @@ build:
   image: ubuntu:latest
   script:
     - apt-get update -qq
-    - apt-get install -y qt5-default cmake build-essential
+    - apt-get install -y qtbase5-dev cmake build-essential
     - mkdir build
     - cd build
     - cmake ../PROJET/
@@ -21,7 +21,8 @@ test:
   image: ubuntu:latest
   script:
     - apt-get update -qq
-    - apt-get install -y qt5-default
+    - apt-get install -y qtbase5-dev
     - GTEST_COLOR=1 ctest --test-dir build --output-on-failure -j12
   dependencies:
     - build
+
