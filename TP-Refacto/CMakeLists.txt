@@ -27,7 +27,7 @@ add_executable(TP-Refacto main.cpp
     IChoisirCoup.h
     IGrilleInit.h
     jeudames.h jeudames.cpp
-    Direction.h
+    coordonnees.h
 )
 
 include(GNUInstallDirs)
