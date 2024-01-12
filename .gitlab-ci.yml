@@ -25,5 +25,8 @@ test:
   image: ubuntu:22.04
   script:
     - GTEST_COLOR=1 ctest --test-dir build --output-on-failure -j12
+  artifacts:
+    paths:
+      - build
   dependencies:
     - build
