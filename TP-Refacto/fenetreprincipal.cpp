@@ -1,14 +1,6 @@
-//#include "fenetreprincipal.h"
-//#include "ui_fenetreprincipal.h"
+#include "fenetreprincipal.h"
 
-//fenetreprincipal::fenetreprincipal(QWidget *parent) :
-//    QMainWindow(parent),
-//    ui(new Ui::fenetreprincipal)
-//{
-//    ui->setupUi(this);
-//}
+FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent)
+{
 
-//fenetreprincipal::~fenetreprincipal()
-//{
-//    delete ui;
-//}
+}

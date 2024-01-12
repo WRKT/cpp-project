@@ -6,13 +6,13 @@
 #include "AJoueur.h"
 #include "joueurfactory.h"
 #include "jeufactory.h"
-//#include "mainwindow.h"
+//#include "fenetreprincipal.h"
 //#include <QApplication>
 
 int main(int argc, char* argv[])
 {
 //    QApplication application(argc, argv);
-//    MainWindow fenetre;
+//    FenetrePrincipale fenetre;
 //    fenetre.show();
 //    return application.exec();
 
