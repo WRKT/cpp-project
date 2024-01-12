@@ -27,12 +27,15 @@ private:
     std::shared_ptr<AJoueur> joueurCourant;
     std::shared_ptr<IAffichage> modeAffichage;
     std::unordered_map<std::shared_ptr<AJoueur>, std::pair<int, int>> positionsJoueurs;
+    int xPionSelectionne;
+    int yPionSelectionne;
+    std::vector<std::pair<int, int>> PionsJouables();
     bool PeutDeplacerEnDiagonale(int xDepart, int yDepart, int xArrivee, int yArrivee) const;
     void AjouterCapturesPossibles(int x, int y, std::vector<std::pair<int, int>>& coupsPossibles) const;
     void DeplacerPiece(int xDepart, int yDepart, int xArrivee, int yArrivee);
     bool EstDeplacementValide(int xDepart, int yDepart, int xArrivee, int yArrivee) const;
     void CapturerPiece(int xDepart, int yDepart, int xArrivee, int yArrivee);
-    bool PeutCapturer(int x, int y) const;
+    bool PeutCapturer(int x, int y, int xAdversaire, int yAdversaire) const;
 };
 
 #endif // JEUDAMES_H
