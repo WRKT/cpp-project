@@ -2,9 +2,9 @@
 #define IAFFICHAGE_H
 
 #include <memory>
-#include "AGrille.h"
 #include <string>
 #include <vector>
+#include "AGrille.h"
 
 class IAffichage
 {
