@@ -42,12 +42,12 @@ void Grille::InitialiserGrilleDame()
 
             if ((i % 2 == 0 && j % 2 == 1) || (i % 2 == 1 && j % 2 == 0))
             {
-                if (i < 3)
+                if (i < 4)
                 {
 
                     ChangeCellule(i, j, Jeton::X);
                 }
-                else if (i >= getNbLignes() - 3)
+                else if (i >= getNbLignes() - 4)
                 {
 
                     ChangeCellule(i, j, Jeton::O);
