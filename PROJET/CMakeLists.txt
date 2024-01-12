@@ -12,7 +12,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
-# Fetch Google Test
 include(FetchContent)
 FetchContent_Declare(
     googletest
@@ -25,35 +24,44 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        affichageconsole.cpp
+        affichageconsole.h
+        AGrille.h
+        AJoueur.h
+        grille.cpp
+        grille.h
+        grillefactory.cpp
+        grillefactory.h
+        IAffichage.h
+        IChoisirCoup.h
+        IGrilleInit.h
+        IJeu.h
+        inputconsole.cpp
+        inputconsole.h
+        jeton.h
+        jeudames.cpp
+        jeudames.h
+        jeufactory.cpp
+        jeufactory.h
+        jeumorpion.cpp
+        jeumorpion.h
+        jeuothello.cpp
+        jeuothello.h
+        jeupuissance4.cpp
+        jeupuissance4.h
+        joueurfactory.cpp
+        joueurfactory.h
+        joueurhumain.cpp
+        joueurhumain.h
+        joueurordinateur.cpp
+        joueurordinateur.h
+        TypesJeu.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(PROJET
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-	affichageconsole.cpp affichageconsole.h
-	AGrille.h
-	AJoueur.h
-	grille.cpp grille.h
-	grillefactory.cpp grillefactory.h
-	IAffichage.h
-	IChoisirCoup.h
-	IGrilleInit.h
-	IJeu.h
-	inputconsole.cpp inputconsole.h
-	jeton.h
-	jeudames.cpp jeudames.h
-	jeufactory.cpp jeufactory.h
-	jeumorpion.cpp jeumorpion.h
-	jeuothello.cpp jeuothello.h
-	jeupuissance4.cpp jeupuissance4.h
-	joueurfactory.cpp joueurfactory.h
-	joueurhumain.cpp joueurhumain.h
-	joueurordinateur.cpp joueurordinateur.h
-	main.cpp mainwindow.cpp
-	mainwindow.h
-	mainwindow.ui
-	TypesJeu.h
     )
 else()
     if(ANDROID)
