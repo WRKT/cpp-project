@@ -53,15 +53,15 @@ set(PROJECT_SOURCES
         joueurordinateur.cpp
         joueurordinateur.h
         TypesJeu.h
-        fenetreprincipal.cpp
-        fenetreprincipal.h
+	# fenetreprincipal.cpp
+	# fenetreprincipal.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(PROJET
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        menuprincipal.h menuprincipal.cpp menuprincipal.ui
+	# menuprincipal.h menuprincipal.cpp menuprincipal.ui
     )
 else()
     if(ANDROID)

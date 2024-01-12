@@ -21,57 +21,57 @@ FetchContent_MakeAvailable(googletest)
 
 set(PROJECT_SOURCES
         main.cpp
-        affichageconsole.cpp
-        affichageconsole.h
-        AGrille.h
-        AJoueur.h
-        grille.cpp
-        grille.h
-        grillefactory.cpp
-        grillefactory.h
-        IAffichage.h
-        IChoisirCoup.h
-        IGrilleInit.h
-        IJeu.h
-        inputconsole.cpp
-        inputconsole.h
-        jeton.h
-        jeudames.cpp
-        jeudames.h
-        jeufactory.cpp
-        jeufactory.h
-        jeumorpion.cpp
-        jeumorpion.h
-        jeuothello.cpp
-        jeuothello.h
-        jeupuissance4.cpp
-        jeupuissance4.h
-        joueurfactory.cpp
-        joueurfactory.h
-        joueurhumain.cpp
-        joueurhumain.h
-        joueurordinateur.cpp
-        joueurordinateur.h
-        TypesJeu.h
-#        fenetreprincipal.cpp
-#        fenetreprincipal.h
+	affichageconsole.cpp
+	affichageconsole.h
+	AGrille.h
+	AJoueur.h
+	grille.cpp
+	grille.h
+	grillefactory.cpp
+	grillefactory.h
+	IAffichage.h
+	IChoisirCoup.h
+	IGrilleInit.h
+	IJeu.h
+	inputconsole.cpp
+	inputconsole.h
+	jeton.h
+	jeudames.cpp
+	jeudames.h
+	jeufactory.cpp
+	jeufactory.h
+	jeumorpion.cpp
+	jeumorpion.h
+	jeuothello.cpp
+	jeuothello.h
+	jeupuissance4.cpp
+	jeupuissance4.h
+	joueurfactory.cpp
+	joueurfactory.h
+	joueurhumain.cpp
+	joueurhumain.h
+	joueurordinateur.cpp
+	joueurordinateur.h
+	TypesJeu.h
+	# fenetreprincipal.cpp
+	# fenetreprincipal.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(TP-Refacto
-        MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
-#        menuprincipal.h menuprincipal.cpp menuprincipal.ui
+	MANUAL_FINALIZATION
+	${PROJECT_SOURCES}
+	# menuprincipal.h menuprincipal.cpp menuprincipal.ui
     )
 else()
     if(ANDROID)
-        add_library(TP-Refacto SHARED
-            ${PROJECT_SOURCES}
-        )
+	add_library(TP-Refacto SHARED
+	    ${PROJECT_SOURCES}
+	)
     else()
-        add_executable(TP-Refacto
-            ${PROJECT_SOURCES}
-        )
+	add_executable(TP-Refacto
+	    ${PROJECT_SOURCES}
+	)
     endif()
 endif()
 
