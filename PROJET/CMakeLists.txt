@@ -54,6 +54,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 	mainwindow.h
 	mainwindow.ui
 	TypesJeu.h
+	Morpion.ui
     )
 else()
     if(ANDROID)
