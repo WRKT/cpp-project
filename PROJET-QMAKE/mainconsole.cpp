@@ -6,16 +6,10 @@
 #include "AJoueur.h"
 #include "joueurfactory.h"
 #include "jeufactory.h"
-//#include "fenetreprincipal.h"
-//#include <QApplication>
+
 
 int main(int argc, char* argv[])
 {
-    //    QApplication application(argc, argv);
-    //    FenetrePrincipale fenetre;
-    //    fenetre.show();
-    //    return application.exec();
-
     AffichageConsole ui;
 
     ui.AfficherMessage("=========================================");
@@ -62,17 +56,3 @@ int main(int argc, char* argv[])
 
     return 0;
 }
-
-
-
-// #include "mainwindow.h"
-// #include <QApplication>
-
-// int main(int argc, char* argv[])
-// {
-//     QApplication application(argc, argv);
-//     MainWindow fenetre;
-//     fenetre.show();
-//     return application.exec();
-
-// }

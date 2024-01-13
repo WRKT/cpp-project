@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MenuPrincipal</class>
- <widget class="QWidget" name="MenuPrincipal">
+ <class>MorpionWidget</class>
+ <widget class="QWidget" name="MorpionWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>956</width>
-    <height>608</height>
+    <width>860</width>
+    <height>701</height>
    </rect>
   </property>
   <property name="windowTitle">

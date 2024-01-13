@@ -2,7 +2,7 @@
 #include "menuprincipal.h"
 
 
-int main(int argc, char *argv[]) {
+int mainGui(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
     MenuPrincipal menu;

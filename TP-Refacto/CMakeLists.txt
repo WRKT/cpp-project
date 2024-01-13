@@ -61,6 +61,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 	${PROJECT_SOURCES}
 	menuprincipal.h menuprincipal.cpp menuprincipal.ui
 	main.cpp
+	morpionwidget.h morpionwidget.cpp morpionwidget.ui
+
+
     )
 else()
     if(ANDROID)
