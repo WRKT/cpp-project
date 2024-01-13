@@ -6,13 +6,6 @@ MorpionWidget::MorpionWidget(QWidget *parent)
     , ui(new Ui::MorpionWidget)
 {
     ui->setupUi(this);
-    this->setParent(parent);
-
-    retourMenu = new QPushButton("Retour au Menu", this);
-
-    retourMenu->move(250,80);
-
-    QObject::connect(retourMenu, SIGNAL(clicked()), this->parent(), SLOT(RetourMenu()));
 }
 
 MorpionWidget::~MorpionWidget()

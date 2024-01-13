@@ -1,7 +1,6 @@
 #ifndef MORPIONWIDGET_H
 #define MORPIONWIDGET_H
 
-#include "qpushbutton.h"
 #include <QWidget>
 
 namespace Ui {
@@ -18,7 +17,6 @@ public:
 
 private:
     Ui::MorpionWidget *ui;
-    QPushButton* retourMenu;
 };
 
 #endif // MORPIONWIDGET_H

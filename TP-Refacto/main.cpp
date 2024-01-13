@@ -1,12 +1,10 @@
 #include <QApplication>
-#include "menuprincipal.h"
+#include "fenetreprincipale.h"
 
-
-int main(int argc, char *argv[]) {
+int mainGui(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    MenuPrincipal menu;
-    menu.show();
-
+    FenetrePrincipale fenetre;
+    fenetre.show ();
     return app.exec();
 }

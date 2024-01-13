@@ -19,7 +19,11 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
 set(PROJECT_SOURCES
+    main.cpp
         mainconsole.cpp
 	affichageconsole.cpp
 	affichageconsole.h
@@ -53,43 +57,22 @@ set(PROJECT_SOURCES
 	joueurordinateur.cpp
 	joueurordinateur.h
 	TypesJeu.h
+	morpionwidget.cpp
+	morpionwidget.h
+	morpionwidget.ui
+	fenetreprincipale.cpp
+	fenetreprincipale.h
+	fenetreprincipale.ui
+	menuwidget.cpp
+	menuwidget.h
+	menuwidget.ui
+
+
 )
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(TP-Refacto
-	MANUAL_FINALIZATION
-	${PROJECT_SOURCES}
-	menuprincipal.h menuprincipal.cpp menuprincipal.ui
-	main.cpp
-	morpionwidget.h morpionwidget.cpp morpionwidget.ui
-
-
-    )
-else()
-    if(ANDROID)
-	add_library(TP-Refacto SHARED
-	    ${PROJECT_SOURCES}
-	)
-    else()
-	add_executable(TP-Refacto
-	    ${PROJECT_SOURCES}
-	)
-    endif()
-endif()
-
+add_executable(TP-Refacto ${PROJECT_SOURCES})
 target_link_libraries(TP-Refacto PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Core)
 
-
-if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.TP-Refacto)
-endif()
-set_target_properties(TP-Refacto PROPERTIES
-    ${BUNDLE_ID_OPTION}
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
-)
 
 include(GNUInstallDirs)
 install(TARGETS TP-Refacto
@@ -98,9 +81,7 @@ install(TARGETS TP-Refacto
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(TP-Refacto)
-endif()
+
 
 # Unit-Tests
 include(CTest)

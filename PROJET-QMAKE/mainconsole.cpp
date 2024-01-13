@@ -8,7 +8,7 @@
 #include "jeufactory.h"
 
 
-int main(int argc, char* argv[])
+int mainConsole(int argc, char* argv[])
 {
     AffichageConsole ui;
 
