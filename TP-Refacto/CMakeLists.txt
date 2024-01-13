@@ -20,7 +20,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 set(PROJECT_SOURCES
-        main.cpp
+        mainconsole.cpp
 	affichageconsole.cpp
 	affichageconsole.h
 	AGrille.h
@@ -59,6 +59,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(TP-Refacto
 	MANUAL_FINALIZATION
 	${PROJECT_SOURCES}
+	menuprincipal.h menuprincipal.cpp menuprincipal.ui
+	main.cpp
     )
 else()
     if(ANDROID)
