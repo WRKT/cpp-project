@@ -12,27 +12,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Core Gui)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Core Gui)
 
-    grille.h grille.cpp
-    AJoueur.h
-    joueurhumain.h joueurhumain.cpp
-    joueurordinateur.h joueurordinateur.cpp
-    AGrille.h
-    jeton.h
-    IJeu.h
-    jeumorpion.h jeumorpion.cpp
-    jeupuissance4.h jeupuissance4.cpp
-    TypesJeu.h
-    jeufactory.h jeufactory.cpp
-    joueurfactory.h joueurfactory.cpp
-    inputconsole.h inputconsole.cpp
-    grillefactory.h grillefactory.cpp
-    IAffichage.h
-    affichageconsole.h affichageconsole.cpp
-    jeuothello.h jeuothello.cpp
-    IChoisirCoup.h
-    IGrilleInit.h
-    jeudames.h jeudames.cpp
-    coordonnees.h
+include(FetchContent)
+FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.zip
 )
 FetchContent_MakeAvailable(googletest)
 
@@ -41,7 +24,7 @@ FetchContent_MakeAvailable(googletest)
 
 set(PROJECT_SOURCES
     main.cpp
-        mainconsole.cpp
+    mainconsole.cpp
 	affichageconsole.cpp
 	affichageconsole.h
 	AGrille.h
