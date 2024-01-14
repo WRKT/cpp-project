@@ -1,7 +1,6 @@
 #include "jeudames.h"
 #include <vector>
 #include <algorithm>
-#include <iostream>
 
 JeuDames::JeuDames(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
     : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage){}
@@ -66,13 +65,17 @@ bool JeuDames::PartieFinie() const {
 
 std::vector<std::pair<int, int>> JeuDames::PionsJouables() {
     std::vector<std::pair<int, int>> pionsJouables;
+
     for (int ligne = 0; ligne < grille->getNbLignes(); ++ligne) {
         for (int colonne = 0; colonne < grille->getNbColonnes(); ++colonne) {
             if (grille->GetCellule(ligne, colonne) == joueurCourant->getJeton()) {
                 if (PeutDeplacerEnDiagonale(ligne, colonne, ligne - 1, colonne - 1) ||
                     PeutDeplacerEnDiagonale(ligne, colonne, ligne - 1, colonne + 1) ||
                     PeutDeplacerEnDiagonale(ligne, colonne, ligne + 1, colonne - 1) ||
-                    PeutDeplacerEnDiagonale(ligne, colonne, ligne + 1, colonne + 1) ||
+                    PeutDeplacerEnDiagonale(ligne, colonne, ligne + 1, colonne + 1)  ||
+                    PeutCapturer(ligne, colonne, ligne - 1, colonne - 1) ||
+                    PeutCapturer(ligne, colonne, ligne - 1, colonne + 1) ||
+                    PeutCapturer(ligne, colonne, ligne + 1, colonne - 1) ||
                     PeutCapturer(ligne, colonne, ligne + 1, colonne + 1)) {
                     pionsJouables.emplace_back(ligne, colonne);
                 }
@@ -85,6 +88,24 @@ std::vector<std::pair<int, int>> JeuDames::PionsJouables() {
 std::vector<std::pair<int, int>> JeuDames::CoupsPossibles() {
     std::vector<std::pair<int, int>> coupsPossibles;
 
+    // Vérifier tous les déplacements en diagonale
+    for (int i = -1; i <= 1; i += 2) {
+        for (int j = -1; j <= 1; j += 2) {
+            int xDestination = xPionSelectionne + i;
+            int yDestination = yPionSelectionne + j;
+
+            // Déplacements simples
+            if (PeutDeplacerEnDiagonale(xPionSelectionne, yPionSelectionne, xDestination, yDestination)) {
+                coupsPossibles.emplace_back(xDestination, yDestination);
+            }
+
+            // Vérifier les captures possibles
+            AjouterCapturesPossibles(xPionSelectionne, yPionSelectionne, coupsPossibles);
+        }
+    }
+
+    return coupsPossibles;
+    /*
     // Vérifier les déplacements vers l'avant en diagonale d'une seule case
     if (PeutDeplacerEnDiagonale(xPionSelectionne, yPionSelectionne, xPionSelectionne - 1, yPionSelectionne - 1)) {
         coupsPossibles.emplace_back(xPionSelectionne - 1, yPionSelectionne - 1);
@@ -97,6 +118,7 @@ std::vector<std::pair<int, int>> JeuDames::CoupsPossibles() {
     AjouterCapturesPossibles(xPionSelectionne, yPionSelectionne, coupsPossibles);
 
     return coupsPossibles;
+    */
 }
 
 
@@ -109,18 +131,28 @@ bool JeuDames::PeutDeplacerEnDiagonale(int xDepart, int yDepart, int xArrivee, i
     const Jeton jetonAdverse = (joueurCourant == joueur1) ? joueur2->getJeton() : joueur1->getJeton();
 
     if (grille->ACaseVide(xArrivee, yArrivee) &&
-        ((xArrivee - xDepart == -1 && yArrivee - yDepart == -1) ||
-         (xArrivee - xDepart == -1 && yArrivee - yDepart == 1) ||
-         (xArrivee - xDepart == 1 && yArrivee - yDepart == -1) ||
-         (xArrivee - xDepart == 1 && yArrivee - yDepart == 1))) {
-        return true;
-    } else if (grille->GetCellule((xDepart + xArrivee) / 2, (yDepart + yArrivee) / 2) == jetonAdverse &&
+        std::abs(xArrivee - xDepart) == 1 &&
+        std::abs(yArrivee - yDepart) == 1) {
+        return true; // Déplacement d'une case en diagonale sans obstacle
+    } else if (grille->ACaseVide(xArrivee, yArrivee) &&
+               std::abs(xArrivee - xDepart) == 1 &&
+               std::abs(yArrivee - yDepart) == 1 &&
+               grille->GetCellule(xArrivee, yArrivee) == Jeton::Vide) {
+        return true; // Déplacement d'une case en diagonale avec une case vide
+    } else if (grille->ACaseVide(xArrivee, yArrivee) &&
+               grille->GetCellule((xDepart + xArrivee) / 2, (yDepart + yArrivee) / 2) == jetonAdverse &&
                std::abs(xArrivee - xDepart) == 2 &&
                std::abs(yArrivee - yDepart) == 2) {
-        return true;
+        // Déplacement de deux cases en diagonale avec capture d'un pion adverse
+        int xCapture = (xDepart + xArrivee) / 2;
+        int yCapture = (yDepart + yArrivee) / 2;
+        // Appel récursif pour vérifier les déplacements suivants après la capture
+        return PeutDeplacerEnDiagonale(xArrivee, yArrivee, xArrivee + (xArrivee - xDepart), yArrivee + (yArrivee - yDepart));
     }
+
     return false;
 }
+
 
 
 void JeuDames::AjouterCapturesPossibles(int x, int y, std::vector<std::pair<int, int>>& coupsPossibles) const {
