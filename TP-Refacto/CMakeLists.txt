@@ -57,6 +57,7 @@ set(PROJECT_SOURCES
 	joueurordinateur.cpp
 	joueurordinateur.h
 	TypesJeu.h
+	coordonnees.h
 	morpionwidget.cpp
 	morpionwidget.h
 	morpionwidget.ui
