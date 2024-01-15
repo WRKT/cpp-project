@@ -6,7 +6,7 @@
 #include "AGrille.h"
 #include "AJoueur.h"
 #include "IAffichage.h"
-#include "Coordonnees.h"
+#include "coordonnees.h"
 
 class JeuOthello : public IJeu {
 public:

@@ -18,7 +18,7 @@ void JeuDames::Tour() {
     bool coupJouable = false;
 
     while (!coupJouable) {
-        auto pionsJouables = PionsJouables();
+        std::vector<Position> pionsJouables = PionsJouables();
         modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations(),2);
 
         modeAffichage->AfficherCoupsPossibles(pionsJouables, "Pions jouables : ");
@@ -27,7 +27,7 @@ void JeuDames::Tour() {
         pionSelectionne = pionChoisi;
 
         if (std::find(pionsJouables.begin(), pionsJouables.end(), pionChoisi) != pionsJouables.end()) {
-            auto coupsPossibles = CoupsPossibles();
+            std::vector<Position> coupsPossibles = CoupsPossibles();
 
             modeAffichage->AfficherMessage("");
             modeAffichage->AfficherCoupsPossibles(coupsPossibles, "Deplacement possible du pion : ");
