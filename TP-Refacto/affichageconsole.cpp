@@ -52,6 +52,7 @@ void AffichageConsole::AfficherMessage(const std::string& message, const int nbS
 void AffichageConsole::AfficherErreur(const std::string& message) const
 {
     std::cerr << "Saisie invalide. Veuillez réessayez. " << message << std::endl;
+    std::cout << std::endl;
 
 }
 

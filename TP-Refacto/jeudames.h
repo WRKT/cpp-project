@@ -1,12 +1,13 @@
 #ifndef JEUDAMES_H
 #define JEUDAMES_H
 
+#include <memory>
+#include <unordered_map>
+#include "Coordonnees.h"
 #include "IJeu.h"
 #include "AGrille.h"
 #include "AJoueur.h"
 #include "IAffichage.h"
-#include <memory>
-#include <unordered_map>
 
 class JeuDames : public IJeu {
 
@@ -19,7 +20,6 @@ public:
     std::vector<Position> CoupsPossibles() override;
     void AfficherResultat() const override;
 
-
 private:
     std::shared_ptr<AGrille> grille;
     std::shared_ptr<AJoueur> joueur1;
@@ -27,15 +27,14 @@ private:
     std::shared_ptr<AJoueur> joueurCourant;
     std::shared_ptr<IAffichage> modeAffichage;
     std::unordered_map<std::shared_ptr<AJoueur>, Position> positionsJoueurs;
-    int xPionSelectionne;
-    int yPionSelectionne;
+    Position pionSelectionne;
     std::vector<Position> PionsJouables();
-    bool PeutDeplacerEnDiagonale(int xDepart, int yDepart, int xArrivee, int yArrivee) const;
-    void AjouterCapturesPossibles(int x, int y, std::vector<Position>& coupsPossibles) const;
-    void DeplacerPiece(int xDepart, int yDepart, int xArrivee, int yArrivee);
-    bool EstDeplacementValide(int xDepart, int yDepart, int xArrivee, int yArrivee) const;
-    void CapturerPiece(int xDepart, int yDepart, int xArrivee, int yArrivee);
-    bool PeutCapturer(int x, int y, int xAdversaire, int yAdversaire) const;
+    bool PeutDeplacerEnDiagonale(const Position& depart, const Position& arrivee) const;
+    void AjouterCapturesPossibles(const Position& position, std::vector<Position>& coupsPossibles) const;
+    void DeplacerPiece(const Position& depart, const Position& arrivee);
+    bool EstDeplacementValide(const Position& depart, const Position& arrivee) const;
+    void CapturerPiece(const Position& depart, const Position& arrivee);
+    bool PeutCapturer(const Position& position, const Position& adversaire) const;
 };
 
 #endif // JEUDAMES_H

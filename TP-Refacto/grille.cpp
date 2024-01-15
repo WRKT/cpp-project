@@ -45,12 +45,12 @@ void Grille::InitialiserGrilleDame()
                 if (i < 4)
                 {
 
-                    ChangeCellule(i, j, Jeton::X);
+                    ChangeCellule(i, j, Jeton::O);
                 }
                 else if (i >= getNbLignes() - 4)
                 {
 
-                    ChangeCellule(i, j, Jeton::O);
+                    ChangeCellule(i, j, Jeton::X);
                 }
 
             }
