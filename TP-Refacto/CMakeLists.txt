@@ -25,53 +25,52 @@ FetchContent_MakeAvailable(googletest)
 set(PROJECT_SOURCES
     main.cpp
     mainconsole.cpp
-	affichageconsole.cpp
-	affichageconsole.h
-	AGrille.h
-	AJoueur.h
-	grille.cpp
-	grille.h
-	grillefactory.cpp
-	grillefactory.h
-	IAffichage.h
-	IChoisirCoup.h
-	IGrilleInit.h
-	IJeu.h
-	inputconsole.cpp
-	inputconsole.h
-	jeton.h
-	jeudames.cpp
-	jeudames.h
-	jeufactory.cpp
-	jeufactory.h
-	jeumorpion.cpp
-	jeumorpion.h
-	jeuothello.cpp
-	jeuothello.h
-	jeupuissance4.cpp
-	jeupuissance4.h
-	joueurfactory.cpp
-	joueurfactory.h
-	joueurhumain.cpp
-	joueurhumain.h
-	joueurordinateur.cpp
-	joueurordinateur.h
-	TypesJeu.h
-	coordonnees.h
-	morpionwidget.cpp
-	morpionwidget.h
-	morpionwidget.ui
-	fenetreprincipale.cpp
-	fenetreprincipale.h
-	fenetreprincipale.ui
-	menuwidget.cpp
-	menuwidget.h
-	menuwidget.ui
-
-
+    affichageconsole.cpp
+    affichageconsole.h
+    AGrille.h
+    AJoueur.h
+    grille.cpp
+    grille.h
+    grillefactory.cpp
+    grillefactory.h
+    IAffichage.h
+    IChoisirCoup.h
+    IGrilleInit.h
+    IJeu.h
+    inputconsole.cpp
+    inputconsole.h
+    jeton.h
+    jeudames.cpp
+    jeudames.h
+    jeufactory.cpp
+    jeufactory.h
+    jeumorpion.cpp
+    jeumorpion.h
+    jeuothello.cpp
+    jeuothello.h
+    jeupuissance4.cpp
+    jeupuissance4.h
+    joueurfactory.cpp
+    joueurfactory.h
+    joueurhumain.cpp
+    joueurhumain.h
+    joueurordinateur.cpp
+    joueurordinateur.h
+    TypesJeu.h
+    coordonnees.h
+    morpionwidget.cpp
+    morpionwidget.h
+    morpionwidget.ui
+    fenetreprincipale.cpp
+    fenetreprincipale.h
+    fenetreprincipale.ui
+    menuwidget.cpp
+    menuwidget.h
+    menuwidget.ui
 )
 
-add_executable(TP-Refacto ${PROJECT_SOURCES})
+add_executable(TP-Refacto ${PROJECT_SOURCES}
+)
 target_link_libraries(TP-Refacto PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Core)
 
 
@@ -81,8 +80,6 @@ install(TARGETS TP-Refacto
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
-
-
 
 # Unit-Tests
 include(CTest)

@@ -22,23 +22,22 @@ void JeuDames::Tour() {
         auto pionsJouables = PionsJouables();
         modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
         modeAffichage->AfficherMessage("Choisissez votre pion :");
-        modeAffichage->AfficherCoupsPossibles(pionsJouables);
+        modeAffichage->AfficherCoupsPossibles(pionsJouables, "Pions jouables : ");
 
-        std::pair<int, int> pionChoisi = joueurCourant->ChoisirCoupDames(pionsJouables);
+        Position pionChoisi = joueurCourant->ChoisirCoupDames(pionsJouables);
 
-        xPionSelectionne = pionChoisi.first;
-        yPionSelectionne = pionChoisi.second;
+        xPionSelectionne = pionChoisi.x;
+        yPionSelectionne = pionChoisi.y;
 
         if (std::find(pionsJouables.begin(), pionsJouables.end(), pionChoisi) != pionsJouables.end()) {
             auto coupsPossibles = CoupsPossibles();
 
-            modeAffichage->AfficherMessage("Coups possibles pour le pion choisi :");
-            modeAffichage->AfficherCoupsPossibles(coupsPossibles);
+            modeAffichage->AfficherCoupsPossibles(coupsPossibles, "Deplacement possible du pion : ");
 
-            std::pair<int, int> coupChoisi = joueurCourant->ChoisirCoupDames(coupsPossibles);
+            Position coupChoisi = joueurCourant->ChoisirCoupDames(coupsPossibles);
 
             if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coupChoisi) != coupsPossibles.end()) {
-                DeplacerPiece(pionChoisi.first, pionChoisi.second, coupChoisi.first, coupChoisi.second);
+                DeplacerPiece(pionChoisi.x, pionChoisi.y, coupChoisi.x, coupChoisi.y);
                 coupJouable = true;
             } else {
                 modeAffichage->AfficherErreur("Coup impossible pour le pion choisi");
@@ -63,8 +62,8 @@ bool JeuDames::PartieFinie() const {
     return false;
 }
 
-std::vector<std::pair<int, int>> JeuDames::PionsJouables() {
-    std::vector<std::pair<int, int>> pionsJouables;
+std::vector<Position> JeuDames::PionsJouables() {
+    std::vector<Position> pionsJouables;
 
     for (int ligne = 0; ligne < grille->getNbLignes(); ++ligne) {
         for (int colonne = 0; colonne < grille->getNbColonnes(); ++colonne) {
@@ -72,12 +71,12 @@ std::vector<std::pair<int, int>> JeuDames::PionsJouables() {
                 if (PeutDeplacerEnDiagonale(ligne, colonne, ligne - 1, colonne - 1) ||
                     PeutDeplacerEnDiagonale(ligne, colonne, ligne - 1, colonne + 1) ||
                     PeutDeplacerEnDiagonale(ligne, colonne, ligne + 1, colonne - 1) ||
-                    PeutDeplacerEnDiagonale(ligne, colonne, ligne + 1, colonne + 1)  ||
+                    PeutDeplacerEnDiagonale(ligne, colonne, ligne + 1, colonne + 1) ||
                     PeutCapturer(ligne, colonne, ligne - 1, colonne - 1) ||
                     PeutCapturer(ligne, colonne, ligne - 1, colonne + 1) ||
                     PeutCapturer(ligne, colonne, ligne + 1, colonne - 1) ||
                     PeutCapturer(ligne, colonne, ligne + 1, colonne + 1)) {
-                    pionsJouables.emplace_back(ligne, colonne);
+                    pionsJouables.emplace_back(Position{ligne, colonne});
                 }
             }
         }
@@ -85,8 +84,8 @@ std::vector<std::pair<int, int>> JeuDames::PionsJouables() {
     return pionsJouables;
 }
 
-std::vector<std::pair<int, int>> JeuDames::CoupsPossibles() {
-    std::vector<std::pair<int, int>> coupsPossibles;
+std::vector<Position> JeuDames::CoupsPossibles() {
+    std::vector<Position> coupsPossibles;
 
     // Vérifier tous les déplacements en diagonale
     for (int i = -1; i <= 1; i += 2) {
@@ -96,7 +95,7 @@ std::vector<std::pair<int, int>> JeuDames::CoupsPossibles() {
 
             // Déplacements simples
             if (PeutDeplacerEnDiagonale(xPionSelectionne, yPionSelectionne, xDestination, yDestination)) {
-                coupsPossibles.emplace_back(xDestination, yDestination);
+                coupsPossibles.emplace_back(Position{xDestination, yDestination});
             }
 
             // Vérifier les captures possibles
@@ -105,20 +104,6 @@ std::vector<std::pair<int, int>> JeuDames::CoupsPossibles() {
     }
 
     return coupsPossibles;
-    /*
-    // Vérifier les déplacements vers l'avant en diagonale d'une seule case
-    if (PeutDeplacerEnDiagonale(xPionSelectionne, yPionSelectionne, xPionSelectionne - 1, yPionSelectionne - 1)) {
-        coupsPossibles.emplace_back(xPionSelectionne - 1, yPionSelectionne - 1);
-    }
-    if (PeutDeplacerEnDiagonale(xPionSelectionne, yPionSelectionne, xPionSelectionne - 1, yPionSelectionne + 1)) {
-        coupsPossibles.emplace_back(xPionSelectionne - 1, yPionSelectionne + 1);
-    }
-
-    // Vérifier les captures possibles
-    AjouterCapturesPossibles(xPionSelectionne, yPionSelectionne, coupsPossibles);
-
-    return coupsPossibles;
-    */
 }
 
 
@@ -147,7 +132,7 @@ bool JeuDames::PeutDeplacerEnDiagonale(int xDepart, int yDepart, int xArrivee, i
         int xCapture = (xDepart + xArrivee) / 2;
         int yCapture = (yDepart + yArrivee) / 2;
         // Appel récursif pour vérifier les déplacements suivants après la capture
-        return PeutDeplacerEnDiagonale(xArrivee, yArrivee, xArrivee + (xArrivee - xDepart), yArrivee + (yArrivee - yDepart));
+        return PeutDeplacerEnDiagonale(xArrivee, yArrivee, xCapture, yCapture);
     }
 
     return false;
@@ -155,21 +140,21 @@ bool JeuDames::PeutDeplacerEnDiagonale(int xDepart, int yDepart, int xArrivee, i
 
 
 
-void JeuDames::AjouterCapturesPossibles(int x, int y, std::vector<std::pair<int, int>>& coupsPossibles) const {
+void JeuDames::AjouterCapturesPossibles(int x, int y, std::vector<Position>& coupsPossibles) const {
     const Jeton jetonCourant = joueurCourant->getJeton();
 
     // Vérifier les captures possibles dans toutes les directions
     if (PeutCapturer(x, y, x - 1, y - 1)) {
-        coupsPossibles.emplace_back(x - 2, y - 2);
+        coupsPossibles.emplace_back(Position{x - 2, y - 2});
     }
     if (PeutCapturer(x, y, x - 1, y + 1)) {
-        coupsPossibles.emplace_back(x - 2, y + 2);
+        coupsPossibles.emplace_back(Position{x - 2, y + 2});
     }
     if (PeutCapturer(x, y, x + 1, y - 1)) {
-        coupsPossibles.emplace_back(x + 2, y - 2);
+        coupsPossibles.emplace_back(Position{x + 2, y - 2});
     }
     if (PeutCapturer(x, y, x + 1, y + 1)) {
-        coupsPossibles.emplace_back(x + 2, y + 2);
+        coupsPossibles.emplace_back(Position{x + 2, y + 2});
     }
 }
 

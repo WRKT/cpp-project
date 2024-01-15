@@ -55,12 +55,12 @@ void AffichageConsole::AfficherErreur(const std::string& message) const
 
 }
 
-void AffichageConsole::AfficherCoupsPossibles(const std::vector<std::pair<int, int>> &coupsPossibles) const
+void AffichageConsole::AfficherCoupsPossibles(const std::vector<Position> &coupsPossibles, const std::string& message) const
 {
-    std::cout << "Coups possibles : ";
+    std::cout << message;
     for (auto &coup : coupsPossibles)
     {
-        std::cout << "(" << coup.first + 1 << ", " << coup.second + 1 << ") ";
+        std::cout << "(" << coup.x + 1 << ", " << coup.y + 1 << ") ";
     }
     std::cout << std::endl;
 }

@@ -26,18 +26,18 @@ void JeuMorpion::Jouer()
 
 void JeuMorpion::Tour()
 {
-    auto coupsPossibles = CoupsPossibles();
+    std::vector<Position> coupsPossibles = CoupsPossibles();
 
     bool coupValide = false;
-    std::pair<int, int> coup;
 
     while (!coupValide)
     {
         modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
-        coup = joueurCourant->ChoisirCoupMorpion(coupsPossibles);
+        const Position& coup = joueurCourant->ChoisirCoupMorpion(coupsPossibles);
+
         if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
         {
-            grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
+            grille->ChangeCellule(coup.x, coup.y, joueurCourant->getJeton());
             coupValide = true;
         }
         else
@@ -46,16 +46,18 @@ void JeuMorpion::Tour()
         }
     }
 }
-std::vector<std::pair<int, int>> JeuMorpion::CoupsPossibles()
+
+std::vector<Position> JeuMorpion::CoupsPossibles()
 {
-    std::vector<std::pair<int, int>> coups;
-    for (int i = 0; i < grille->getNbLignes(); ++i)
+    std::vector<Position> coups;
+
+    for (int ligne = 0; ligne < grille->getNbLignes(); ligne++)
     {
-        for (int j = 0; j < grille->getNbColonnes(); ++j)
+        for (int colonne = 0; colonne < grille->getNbColonnes(); colonne++)
         {
-            if (grille->ACaseVide(i, j))
+            if (grille->ACaseVide(ligne, colonne))
             {
-                coups.emplace_back(i, j);
+                coups.emplace_back(Position{ligne, colonne});
             }
         }
     }

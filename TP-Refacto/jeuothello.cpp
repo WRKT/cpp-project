@@ -36,12 +36,12 @@ void JeuOthello::Tour()
 
     while (!coupValide)
     {
-        std::pair<int, int> coup = joueurCourant->ChoisirCoupOthello(coupsPossibles);
+        const Position& coup = joueurCourant->ChoisirCoupOthello(coupsPossibles);
 
         if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
         {
-            grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
-            RetournerJetons(coup.first, coup.second, joueurCourant->getJeton());
+            grille->ChangeCellule(coup.x, coup.y, joueurCourant->getJeton());
+            RetournerJetons(coup.x, coup.y, joueurCourant->getJeton());
             coupValide = true;
             bloque = 0;
         }
@@ -73,17 +73,17 @@ void JeuOthello::AfficherResultat() const
     }
 }
 
-std::vector<std::pair<int, int>> JeuOthello::CoupsPossibles()
+std::vector<Position> JeuOthello::CoupsPossibles()
 {
-    std::vector<std::pair<int, int>> coupsPossibles;
+    std::vector<Position> coupsPossibles;
 
-    for (int x = 0; x < grille->getNbLignes(); ++x)
+    for (int ligne = 0; ligne < grille->getNbLignes(); ligne++)
     {
-        for (int y = 0; y < grille->getNbColonnes(); ++y)
+        for (int colonne = 0; colonne < grille->getNbColonnes(); colonne++)
         {
-            if (EstCoupValide(x, y, joueurCourant->getJeton()))
+            if (EstCoupValide(ligne, colonne, joueurCourant->getJeton()))
             {
-                coupsPossibles.emplace_back(x, y);
+                coupsPossibles.emplace_back(Position{ligne, colonne});
             }
         }
     }

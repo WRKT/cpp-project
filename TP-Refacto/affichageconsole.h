@@ -10,7 +10,7 @@ public:
     void AfficherGrille(const std::shared_ptr<AGrille>&) const override;
     void AfficherMessage(const std::string&, const int = 1) const override;
     void AfficherErreur(const std::string&) const override;
-    void AfficherCoupsPossibles(const std::vector<std::pair<int, int>>&) const override;
+    void AfficherCoupsPossibles(const std::vector<Position>&, const std::string& = "Coups possibles : ") const override;
 };
 
 #endif // AFFICHAGECONSOLE_H

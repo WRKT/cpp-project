@@ -1,28 +1,28 @@
 #include "joueurordinateur.h"
 #include <vector>
 
-std::pair<int, int> JoueurOrdinateur::ChoisirCoupMorpion(const std::vector<std::pair<int, int>> &CoupsPossible)
+Position JoueurOrdinateur::ChoisirCoupMorpion(const std::vector<Position> &CoupsPossible)
 {
     std::uniform_int_distribution<int> distribution(0, CoupsPossible.size() - 1);
     int random = distribution(generateur);
     return CoupsPossible[random];
 }
 
-std::pair<int, int> JoueurOrdinateur::ChoisirCoupPuissance4(const std::vector<std::pair<int, int>> &CoupsPossible)
+Position JoueurOrdinateur::ChoisirCoupPuissance4(const std::vector<Position> &CoupsPossible)
 {
     std::uniform_int_distribution<int> distribution(0, CoupsPossible.size() - 1);
     int random = distribution(generateur);
     return CoupsPossible[random];
 }
 
-std::pair<int, int> JoueurOrdinateur::ChoisirCoupOthello(const std::vector<std::pair<int, int>> &CoupsPossible)
+Position JoueurOrdinateur::ChoisirCoupOthello(const std::vector<Position> &CoupsPossible)
 {
     std::uniform_int_distribution<int> distribution(0, CoupsPossible.size() - 1);
     int random = distribution(generateur);
     return CoupsPossible[random];
 }
 
-std::pair<int, int> JoueurOrdinateur::ChoisirCoupDames(const std::vector<std::pair<int, int>> &CoupsPossible)
+Position JoueurOrdinateur::ChoisirCoupDames(const std::vector<Position> &CoupsPossible)
 {
     std::uniform_int_distribution<int> distribution(0, CoupsPossible.size() - 1);
     int random = distribution(generateur);

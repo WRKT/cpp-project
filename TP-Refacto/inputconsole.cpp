@@ -141,7 +141,7 @@ std::string InputConsole::demanderPrenomJoueur(const std::string &prompt)
     return prenom;
 }
 
-std::pair<int, int> InputConsole::demanderCordonnee()
+Position InputConsole::demanderCordonnee()
 {
     int x, y;
 
@@ -149,7 +149,8 @@ std::pair<int, int> InputConsole::demanderCordonnee()
     {
         x = getInt("Entrez la ligne : ");
         y = getInt("Entrez la colonne : ");
-        return {x - 1, y - 1};
+
+        return {x-1, y-1};
     }
 }
 

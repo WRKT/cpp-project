@@ -3,6 +3,7 @@
 
 #include <string>
 #include "TypesJeu.h"
+#include "coordonnees.h"
 
 class InputConsole
 {
@@ -10,7 +11,7 @@ public:
     static TypesJeu demanderTypeDeJeu();
     static int demanderModeDeJeu();
     static bool demanderRejouer();
-    static std::pair<int, int> demanderCordonnee();
+    static Position demanderCordonnee();
     static int demanderColonne();
     static std::string demanderPrenomJoueur(const std::string&);
     static std::string getString(const std::string&);

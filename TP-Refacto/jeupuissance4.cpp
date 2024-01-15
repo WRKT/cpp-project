@@ -29,13 +29,15 @@ void JeuPuissance4::Tour()
 {
     auto coupsPossibles = CoupsPossibles();
     bool coupValide = false;
+
     while (!coupValide)
     {
         modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
-        std::pair<int, int> coup = joueurCourant->ChoisirCoupPuissance4(coupsPossibles);
+        const Position& coup = joueurCourant->ChoisirCoupPuissance4(coupsPossibles);
+
         if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
         {
-            grille->ChangeCellule(coup.first, coup.second, joueurCourant->getJeton());
+            grille->ChangeCellule(coup.x, coup.y, joueurCourant->getJeton());
             coupValide = true;
         }
         else
@@ -45,17 +47,17 @@ void JeuPuissance4::Tour()
     }
 }
 
-std::vector<std::pair<int, int>> JeuPuissance4::CoupsPossibles()
+std::vector<Position> JeuPuissance4::CoupsPossibles()
 {
-    std::vector<std::pair<int, int>> coupsPossibles;
+    std::vector<Position> coupsPossibles;
+
     for (int colonne = 0; colonne < grille->getNbColonnes(); ++colonne)
     {
         for (int ligne = grille->getNbLignes() - 1; ligne >= 0; --ligne)
         {
-            if (grille->GetCellule(ligne, colonne) == Jeton::Vide)
+            if (grille->ACaseVide(ligne, colonne))
             {
-                coupsPossibles.emplace_back(ligne, colonne);
-                break;
+                coupsPossibles.emplace_back(Position{ligne, colonne});
             }
         }
     }

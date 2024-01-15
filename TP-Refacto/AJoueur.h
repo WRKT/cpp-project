@@ -1,8 +1,8 @@
 #ifndef AJoueur_H
 #define AJoueur_H
 
-#include "jeton.h"
 #include <string>
+#include "jeton.h"
 #include "IChoisirCoup.h"
 
 class AJoueur : public IChoisirCoup

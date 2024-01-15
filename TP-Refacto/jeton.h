@@ -4,8 +4,8 @@
 enum class Jeton {
     X = 'X',
     O = 'O',
-    DameX = 'R',
-    DameO = 'Q',
+    DameX = 'W',
+    DameO = 'B',
     Vide = '-'
 };
 

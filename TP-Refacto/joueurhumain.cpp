@@ -2,36 +2,37 @@
 #include "inputconsole.h"
 #include <vector>
 
-std::pair<int, int> JoueurHumain::ChoisirCoupMorpion(const std::vector<std::pair<int, int>> &CoupsPossible)
+Position JoueurHumain::ChoisirCoupMorpion(const std::vector<Position> &CoupsPossible)
 {
-    std::pair<int, int> coup;
+    Position coup;
     coup = InputConsole::demanderCordonnee();
+
     return coup;
 }
 
-std::pair<int, int> JoueurHumain::ChoisirCoupPuissance4(const std::vector<std::pair<int, int>> &CoupsPossible)
+Position JoueurHumain::ChoisirCoupPuissance4(const std::vector<Position> &CoupsPossible)
 {
     int colonne = InputConsole::demanderColonne();
     for (auto &coup : CoupsPossible)
     {
-        if (coup.second == colonne)
+        if (coup.y == colonne)
         {
             return coup;
         }
     }
-    return std::make_pair(-1, -1);
+    return {-1, -1};
 }
 
-std::pair<int, int> JoueurHumain::ChoisirCoupOthello(const std::vector<std::pair<int, int>> &CoupsPossible)
+Position JoueurHumain::ChoisirCoupOthello(const std::vector<Position> &CoupsPossible)
 {
-    std::pair<int, int> coup;
+    Position coup;
     coup = InputConsole::demanderCordonnee();
     return coup;
 }
 
-std::pair<int, int> JoueurHumain::ChoisirCoupDames(const std::vector<std::pair<int, int>> &CoupsPossible)
+Position JoueurHumain::ChoisirCoupDames(const std::vector<Position> &CoupsPossible)
 {
-    std::pair<int, int> coup;
+    Position coup;
     coup = InputConsole::demanderCordonnee();
     return coup;
 }

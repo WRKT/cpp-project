@@ -11,12 +11,12 @@ public:
     JoueurHumain(const std::string &nom, const Jeton& jeton) : AJoueur(nom, jeton){};
 
 private:
-    std::vector<std::pair<int, int>> CoupsPossibles;
     std::vector<int> CoupsPossible;
-    std::pair<int, int> ChoisirCoupMorpion(const std::vector<std::pair<int, int>> &CoupsPossibles) override;
-    std::pair<int, int> ChoisirCoupPuissance4(const std::vector<std::pair<int, int>> &CoupsPossibles) override;
-    std::pair<int, int> ChoisirCoupOthello(const std::vector<std::pair<int, int>> &CoupsPossibles) override;
-    std::pair<int, int> ChoisirCoupDames(const std::vector<std::pair<int, int>> &CoupsPossibles) override;
+    std::vector<Position> CoupsPossibles;
+    Position ChoisirCoupMorpion(const std::vector<Position> &CoupsPossibles) override;
+    Position ChoisirCoupPuissance4(const std::vector<Position> &CoupsPossibles) override;
+    Position ChoisirCoupOthello(const std::vector<Position> &CoupsPossibles) override;
+    Position ChoisirCoupDames(const std::vector<Position> &CoupsPossibles) override;
 };
 
 #endif // JOUEUR_HUMAIN_H

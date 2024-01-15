@@ -15,7 +15,7 @@ public:
     void Tour() override;
     bool AGagne() const override;
     bool PartieFinie() const override;
-    std::vector<std::pair<int, int>> CoupsPossibles() override;
+    std::vector<Position> CoupsPossibles() override;
     void AfficherResultat() const override;
 
 
