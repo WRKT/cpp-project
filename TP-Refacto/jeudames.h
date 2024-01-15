@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <unordered_map>
-#include "Coordonnees.h"
+#include "coordonnees.h"
 #include "IJeu.h"
 #include "AGrille.h"
 #include "AJoueur.h"
