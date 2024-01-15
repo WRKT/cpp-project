@@ -18,7 +18,7 @@ void JeuOthello::Jouer() {
 }
 
 void JeuOthello::Tour() {
-    auto coupsPossibles = CoupsPossibles();
+    std::vector<Position> coupsPossibles = CoupsPossibles();
     bool coupValide = false;
 
     modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations());
@@ -65,8 +65,9 @@ std::vector<Position> JeuOthello::CoupsPossibles() {
 
     for (int ligne = 0; ligne < grille->getNbLignes(); ligne++) {
         for (int colonne = 0; colonne < grille->getNbColonnes(); colonne++) {
-            if (EstCoupValide({ligne, colonne}, joueurCourant->getJeton())) {
-                coupsPossibles.emplace_back(Position{ligne, colonne});
+            Position position{ligne, colonne};
+            if (EstCoupValide(position, joueurCourant->getJeton())) {
+                coupsPossibles.emplace_back(position);
             }
         }
     }

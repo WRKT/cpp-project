@@ -27,7 +27,7 @@ void JeuPuissance4::Jouer()
 
 void JeuPuissance4::Tour()
 {
-    auto coupsPossibles = CoupsPossibles();
+    std::vector<Position> coupsPossibles = CoupsPossibles();
     bool coupValide = false;
 
     while (!coupValide)

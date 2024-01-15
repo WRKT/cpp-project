@@ -11,6 +11,7 @@ public:
     AGrille(const int nbLignes, const int nbColonnes) : nbLignes(nbLignes), nbColonnes(nbColonnes), table(nbLignes, std::vector<Jeton>(nbColonnes, Jeton::Vide)) {}
     int getNbLignes() const { return nbLignes; }
     int getNbColonnes() const { return nbColonnes; }
+    virtual bool EstDansGrille(const int x, const int y) const = 0;
     virtual Jeton GetCellule(const int x, const int y) const = 0;
     virtual void ChangeCellule(const int x, const int y, const Jeton& jeton) = 0;
     virtual bool ACaseVide(const int, const int) const = 0;

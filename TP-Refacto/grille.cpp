@@ -227,3 +227,7 @@ int Grille::CompteSequence(const std::vector<Jeton> &vecteur, const Jeton& jeton
     }
     return maxSequence;
 }
+
+bool Grille::EstDansGrille(const int x, const int y) const {
+    return x >= 0 && x < nbLignes && y >= 0 && y < nbColonnes;
+}

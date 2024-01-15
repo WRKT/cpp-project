@@ -25,6 +25,8 @@ public:
     bool VerifieDiagonaleASC(const int sequenceGagnante, const Jeton& jeton) const override;
     bool VerifieDiagonaleDESC(const int sequenceGagnante, const Jeton& jeton) const override;
     int CompteSequence(const std::vector<Jeton> &vecteur, const Jeton& jeton) const;
+    bool EstDansGrille(const int x, const int y) const;
+
 
 };
 

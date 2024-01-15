@@ -4,8 +4,8 @@
 struct Position
 {
     int x, y;
-    bool operator==(const Position& other) const {
-        return x == other.x && y == other.y;
+    bool operator==(const Position& autrePosition) const {
+        return x == autrePosition.x && y == autrePosition.y;
     }
 };
 
