@@ -70,27 +70,45 @@ bool JeuDames::PartieFinie() const {
 std::vector<Position> JeuDames::PionsJouables() {
     std::vector<Position> pionsJouables;
 
+    bool peutCapturer = false;
+
     for (int ligne = 0; ligne < grille->getNbLignes(); ++ligne) {
         for (int colonne = 0; colonne < grille->getNbColonnes(); ++colonne) {
             if (grille->GetCellule(ligne, colonne) == joueurCourant->getJeton()) {
                 Position position{ligne, colonne};
 
-                // A CLEAN, METHODE TROP LONGUE
-                if (PeutDeplacerEnDiagonale(position, {ligne - 1, colonne - 1}) ||
-                    PeutDeplacerEnDiagonale(position, {ligne - 1, colonne + 1}) ||
-                    PeutDeplacerEnDiagonale(position, {ligne + 1, colonne - 1}) ||
-                    PeutDeplacerEnDiagonale(position, {ligne + 1, colonne + 1}) ||
-                    PeutCapturer(position, {ligne - 1, colonne - 1}) ||
-                    PeutCapturer(position, {ligne - 1, colonne + 1}) ||
-                    PeutCapturer(position, {ligne + 1, colonne - 1}) ||
-                    PeutCapturer(position, {ligne + 1, colonne + 1})) {
+                if (PeutCapturer(position, { -1, -1 }) ||
+                    PeutCapturer(position, { -1, 1 }) ||
+                    PeutCapturer(position, { 1, -1 }) ||
+                    PeutCapturer(position, { 1, 1 })) {
                     pionsJouables.push_back(position);
+                    peutCapturer = true;
                 }
             }
         }
     }
+
+    if (!peutCapturer) {
+        for (int ligne = 0; ligne < grille->getNbLignes(); ++ligne) {
+            for (int colonne = 0; colonne < grille->getNbColonnes(); ++colonne) {
+                if (grille->GetCellule(ligne, colonne) == joueurCourant->getJeton()) {
+                    Position position{ligne, colonne};
+
+                    if (PeutDeplacerEnDiagonale(position, {ligne - 1, colonne - 1}) ||
+                        PeutDeplacerEnDiagonale(position, {ligne - 1, colonne + 1}) ||
+                        PeutDeplacerEnDiagonale(position, {ligne + 1, colonne - 1}) ||
+                        PeutDeplacerEnDiagonale(position, {ligne + 1, colonne + 1})) {
+                        pionsJouables.push_back(position);
+                    }
+                }
+            }
+        }
+    }
+
     return pionsJouables;
 }
+
+
 
 bool JeuDames::PeutDeplacerEnDiagonale(const Position& depart, const Position& arrivee) const {
     if (!grille->EstDansGrille(arrivee.x, arrivee.y)) {
