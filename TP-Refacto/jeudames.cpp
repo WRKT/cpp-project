@@ -123,14 +123,18 @@ std::vector<Position> JeuDames::CoupsPossibles() {
     std::vector<Position> coupsPossibles;
     int direction = (joueurCourant == joueur1) ? -1 : 1;
 
+    AjouterCapturesPossibles(pionSelectionne, coupsPossibles);
+
+    if (!coupsPossibles.empty()) {
+        return coupsPossibles;
+    }
+
     for (int j = -1; j <= 1; j += 2) {
         Position destination{pionSelectionne.x + direction, pionSelectionne.y + j};
         if (PeutDeplacerEnDiagonale(pionSelectionne, destination)) {
             coupsPossibles.push_back(destination);
         }
     }
-
-    AjouterCapturesPossibles(pionSelectionne, coupsPossibles);
 
     return coupsPossibles;
 }
