@@ -40,13 +40,14 @@ void JeuDames::Tour() {
                 if (coups == coupChoisi) {
                     this->DeplacerPiece(pionSelectionne, coupChoisi);
                     coupJouable = true;
-                } else {
-                    // PETIT BUG ICI : Je rentre toujours dans la condition
+                }
+                if (!coupJouable){
                     modeAffichage->AfficherErreur("Coup impossible pour le pion choisi");
                 }
             }
         }
-        else {
+        else
+        {
             modeAffichage->AfficherErreur("Pion choisi n'est pas valide");
         }
 
@@ -62,7 +63,8 @@ bool JeuDames::AGagne() const {
 }
 
 bool JeuDames::PartieFinie() const {
-    return false;
+    return grille->CompteJetons(joueur1->getJeton()) == 0 ||
+           grille->CompteJetons(joueur2->getJeton()) == 0 ; // RAJOUTER ICI, QUAND DEPLACEMEN
 }
 
 std::vector<Position> JeuDames::PionsJouables() {
