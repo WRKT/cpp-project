@@ -66,6 +66,44 @@ bool JeuDames::PartieFinie() const {
     return AGagne(); // RAJOUTER ICI, QUAND DEPLACEMENT impossible ?
 }
 
+void JeuDames::AfficherResultat() const {
+    int nbJetonJoueur1 = grille->CompteJetons(joueur1->getJeton());
+    int nbJetonJoueur2 = grille->CompteJetons(joueur2->getJeton());
+
+    if(nbJetonJoueur1 > nbJetonJoueur2)
+    {
+        modeAffichage->AfficherMessage("Le gagnant est " +  joueur1->getInformations() + " !");
+    }
+    else if (nbJetonJoueur2 > nbJetonJoueur1)
+    {
+        modeAffichage->AfficherMessage("Le gagnant est " +  joueur2->getInformations() + " !");
+    }
+    else
+    {
+        modeAffichage->AfficherMessage("Match Nul!");
+    }
+}
+
+std::vector<Position> JeuDames::CoupsPossibles() {
+    std::vector<Position> coupsPossibles;
+    int direction = (joueurCourant == joueur1) ? -1 : 1;
+
+    AjouterCapturesPossibles(pionSelectionne, coupsPossibles);
+
+    if (!coupsPossibles.empty()) {
+        return coupsPossibles;
+    }
+
+    for (int j = -1; j <= 1; j += 2) {
+        Position destination{pionSelectionne.x + direction, pionSelectionne.y + j};
+        if (PeutDeplacerEnDiagonale(pionSelectionne, destination)) {
+            coupsPossibles.push_back(destination);
+        }
+    }
+
+    return coupsPossibles;
+}
+
 std::vector<Position> JeuDames::PionsJouables() {
     std::vector<Position> pionsJouables;
     const std::vector<Direction> toutesDirections = {{ -1, -1 }, { -1, 1 }, { 1, -1 },{ 1, 1 }};
@@ -94,8 +132,6 @@ std::vector<Position> JeuDames::PionsJouables() {
     return pionsJouables;
 }
 
-
-
 bool JeuDames::PeutDeplacerEnDiagonale(const Position& depart, const Position& arrivee) const {
     if (!grille->EstDansGrille(arrivee.x, arrivee.y)) {
         return false;
@@ -105,25 +141,7 @@ bool JeuDames::PeutDeplacerEnDiagonale(const Position& depart, const Position& a
     return grille->ACaseVide(arrivee.x, arrivee.y) && (arrivee.x - depart.x) == direction;
 }
 
-std::vector<Position> JeuDames::CoupsPossibles() {
-    std::vector<Position> coupsPossibles;
-    int direction = (joueurCourant == joueur1) ? -1 : 1;
 
-    AjouterCapturesPossibles(pionSelectionne, coupsPossibles);
-
-    if (!coupsPossibles.empty()) {
-        return coupsPossibles;
-    }
-
-    for (int j = -1; j <= 1; j += 2) {
-        Position destination{pionSelectionne.x + direction, pionSelectionne.y + j};
-        if (PeutDeplacerEnDiagonale(pionSelectionne, destination)) {
-            coupsPossibles.push_back(destination);
-        }
-    }
-
-    return coupsPossibles;
-}
 bool JeuDames::PeutCapturer(const Position& position, const Direction& direction) const {
     Position adversaire = {position.x + direction.deltaX, position.y + direction.deltaY};
     Position destination = {adversaire.x + direction.deltaX, adversaire.y + direction.deltaY};
@@ -136,16 +154,6 @@ bool JeuDames::PeutCapturer(const Position& position, const Direction& direction
     return grille->ACaseVide(destination.x, destination.y);
 }
 
-void JeuDames::DeplacerPiece(const Position& depart, const Position& arrivee) {
-    grille->ChangeCellule(arrivee.x, arrivee.y, joueurCourant->getJeton());
-    grille->ChangeCellule(depart.x, depart.y, Jeton::Vide);
-
-    if (std::abs(arrivee.x - depart.x) == 2) {
-        Position capturePos{(depart.x + arrivee.x) / 2, (depart.y + arrivee.y) / 2};
-        grille->ChangeCellule(capturePos.x, capturePos.y, Jeton::Vide);
-    }
-}
-
 void JeuDames::AjouterCapturesPossibles(const Position& position, std::vector<Position>& coupsPossibles) const {
     std::vector<Direction> directions =  {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
     for (const Direction& dir : directions) {
@@ -156,21 +164,13 @@ void JeuDames::AjouterCapturesPossibles(const Position& position, std::vector<Po
     }
 }
 
-void JeuDames::AfficherResultat() const {
-    int nbJetonJoueur1 = grille->CompteJetons(joueur1->getJeton());
-    int nbJetonJoueur2 = grille->CompteJetons(joueur2->getJeton());
+void JeuDames::DeplacerPiece(const Position& depart, const Position& arrivee) {
+    grille->ChangeCellule(arrivee.x, arrivee.y, joueurCourant->getJeton());
+    grille->ChangeCellule(depart.x, depart.y, Jeton::Vide);
 
-    if(nbJetonJoueur1 > nbJetonJoueur2)
-    {
-        modeAffichage->AfficherMessage("Le gagnant est " +  joueur1->getInformations() + " !");
-    }
-    else if (nbJetonJoueur2 > nbJetonJoueur1)
-    {
-        modeAffichage->AfficherMessage("Le gagnant est " +  joueur2->getInformations() + " !");
-    }
-    else
-    {
-        modeAffichage->AfficherMessage("Match Nul!");
+    if (std::abs(arrivee.x - depart.x) == 2) {
+        Position capturePos{(depart.x + arrivee.x) / 2, (depart.y + arrivee.y) / 2};
+        grille->ChangeCellule(capturePos.x, capturePos.y, Jeton::Vide);
     }
 }
 

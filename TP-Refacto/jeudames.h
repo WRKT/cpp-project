@@ -2,7 +2,6 @@
 #define JEUDAMES_H
 
 #include <memory>
-#include <unordered_map>
 #include "coordonnees.h"
 #include "IJeu.h"
 #include "AGrille.h"
@@ -26,15 +25,13 @@ private:
     std::shared_ptr<AJoueur> joueur2;
     std::shared_ptr<AJoueur> joueurCourant;
     std::shared_ptr<IAffichage> modeAffichage;
-    std::unordered_map<std::shared_ptr<AJoueur>, Position> positionsJoueurs;
     Position pionSelectionne;
     std::vector<Position> PionsJouables();
     bool PeutDeplacerEnDiagonale(const Position& depart, const Position& arrivee) const;
-    void AjouterCapturesPossibles(const Position& position, std::vector<Position>& coupsPossibles) const;
-    void DeplacerPiece(const Position& depart, const Position& arrivee);
-    bool EstDeplacementValide(const Position& depart, const Position& arrivee) const;
-    void CapturerPiece(const Position& depart, const Position& arrivee);
     bool PeutCapturer(const Position& position, const Direction& direction) const;
+    void DeplacerPiece(const Position& depart, const Position& arrivee);
+    void CapturerPiece(const Position& depart, const Position& arrivee);
+    void AjouterCapturesPossibles(const Position& position, std::vector<Position>& coupsPossibles) const;
     Jeton GetJetonAdverse() const;
     Jeton DeterminerGagnant() const;
 };

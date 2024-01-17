@@ -48,6 +48,11 @@ bool JeuOthello::PartieFinie() const {
     return grille->EstRemplie() || bloque == 2;
 }
 
+bool JeuOthello::AGagne() const {
+    Jeton gagnant = DetermineGagnant();
+    return gagnant == joueur1->getJeton() || gagnant == joueur2->getJeton();
+}
+
 void JeuOthello::AfficherResultat() const {
     modeAffichage->AfficherMessage("--> Score : ");
     modeAffichage->AfficherMessage(joueur1->getInformations() + ": " + std::to_string(grille->CompteJetons(joueur1->getJeton())));
@@ -73,11 +78,6 @@ std::vector<Position> JeuOthello::CoupsPossibles() {
     }
 
     return coupsPossibles;
-}
-
-bool JeuOthello::AGagne() const {
-    Jeton gagnant = DetermineGagnant();
-    return gagnant == joueur1->getJeton() || gagnant == joueur2->getJeton();
 }
 
 void JeuOthello::RetournerJetons(const Position& position, const Jeton& jeton) {
