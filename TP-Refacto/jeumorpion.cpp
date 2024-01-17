@@ -57,7 +57,8 @@ std::vector<Position> JeuMorpion::CoupsPossibles()
         {
             if (grille->ACaseVide(ligne, colonne))
             {
-                coups.emplace_back(Position{ligne, colonne});
+                Position position = {ligne, colonne};
+                coups.emplace_back(position);
             }
         }
     }

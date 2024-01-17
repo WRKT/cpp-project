@@ -36,6 +36,7 @@ private:
     void CapturerPiece(const Position& depart, const Position& arrivee);
     bool PeutCapturer(const Position& position, const Direction& direction) const;
     Jeton GetJetonAdverse() const;
+    Jeton DeterminerGagnant() const;
 };
 
 #endif // JEUDAMES_H

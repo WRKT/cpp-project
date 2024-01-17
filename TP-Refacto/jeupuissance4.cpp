@@ -57,7 +57,8 @@ std::vector<Position> JeuPuissance4::CoupsPossibles()
         {
             if (grille->ACaseVide(ligne, colonne))
             {
-                coupsPossibles.emplace_back(Position{ligne, colonne});
+                Position position = {ligne, colonne};
+                coupsPossibles.emplace_back(position);
             }
         }
     }
