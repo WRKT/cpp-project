@@ -68,8 +68,6 @@ bool JeuDames::PartieFinie() const {
 
 std::vector<Position> JeuDames::PionsJouables() {
     std::vector<Position> pionsJouables;
-
-    // Refacto : amélioré la lisibilité de la condition if en déclarant la variable présente (gagnant ainsi des lignes) -> On peut encore améliorer!
     const std::vector<Direction> toutesDirections = {{ -1, -1 }, { -1, 1 }, { 1, -1 },{ 1, 1 }};
     bool capturable = false;
 
@@ -84,28 +82,15 @@ std::vector<Position> JeuDames::PionsJouables() {
                         capturable = true;
                         break;
                     }
-                }
-            }
-        }
-    }
 
-    if (!capturable) {
-        for (int ligne = 0; ligne < grille->getNbLignes(); ++ligne) {
-            for (int colonne = 0; colonne < grille->getNbColonnes(); ++colonne) {
-                if (grille->GetCellule(ligne, colonne) == joueurCourant->getJeton()) {
-                    Position position{ligne, colonne};
-                    for (const Direction& direction : toutesDirections) {
-                        if (PeutDeplacerEnDiagonale(position, {ligne + direction.deltaX, colonne + direction.deltaY}))
-                        {
-                            pionsJouables.push_back(position);
-                            break;
-                        }
+                    if (!capturable && PeutDeplacerEnDiagonale(position, {ligne + direction.deltaX, colonne + direction.deltaY})) {
+                        pionsJouables.push_back(position);
+                        break;
                     }
                 }
             }
         }
     }
-
     return pionsJouables;
 }
 
