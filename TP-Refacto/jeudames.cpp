@@ -120,15 +120,28 @@ std::vector<Position> JeuDames::PionsJouables() {
                         capturable = true;
                         break;
                     }
+                }
+            }
+        }
+    }
 
-                    if (!capturable && PeutDeplacerEnDiagonale(position, {ligne + direction.deltaX, colonne + direction.deltaY})) {
-                        pionsJouables.push_back(position);
-                        break;
+    if (!capturable) {
+        for (int ligne = 0; ligne < grille->getNbLignes(); ++ligne) {
+            for (int colonne = 0; colonne < grille->getNbColonnes(); ++colonne) {
+                if (grille->GetCellule(ligne, colonne) == joueurCourant->getJeton()) {
+                    Position position{ligne, colonne};
+
+                    for (const Direction& direction : toutesDirections) {
+                        if (PeutDeplacerEnDiagonale(position, {ligne + direction.deltaX, colonne + direction.deltaY})) {
+                            pionsJouables.push_back(position);
+                            break;
+                        }
                     }
                 }
             }
         }
     }
+
     return pionsJouables;
 }
 

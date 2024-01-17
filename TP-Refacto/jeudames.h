@@ -25,6 +25,7 @@ private:
     std::shared_ptr<AJoueur> joueur2;
     std::shared_ptr<AJoueur> joueurCourant;
     std::shared_ptr<IAffichage> modeAffichage;
+
     Position pionSelectionne;
     std::vector<Position> PionsJouables();
     bool PeutDeplacerEnDiagonale(const Position& depart, const Position& arrivee) const;
