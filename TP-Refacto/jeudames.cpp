@@ -15,48 +15,34 @@ void JeuDames::Jouer() {
 }
 
 void JeuDames::Tour() {
-    // A CLEAN, METHODE TROP LONGUE
-    bool coupJouable = false;
-
-    while (!coupJouable) {
+    while (true) {
         std::vector<Position> pionsJouables = PionsJouables();
-        modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations(),2);
-
-        modeAffichage->AfficherCoupsPossibles(pionsJouables, "Pions jouables : ");
+        AfficherTourEtPions(pionsJouables);
 
         Position pionChoisi = joueurCourant->ChoisirCoupDames(pionsJouables);
         pionSelectionne = pionChoisi;
 
-        if (std::find(pionsJouables.begin(), pionsJouables.end(), pionChoisi) != pionsJouables.end()) {
+        if (EstPionChoisiValide(pionChoisi, pionsJouables)) {
             std::vector<Position> coupsPossibles = CoupsPossibles();
-
-            modeAffichage->AfficherMessage("");
-            modeAffichage->AfficherCoupsPossibles(coupsPossibles, "Deplacement possible du pion : ");
+            AfficherCoupsPossibles(coupsPossibles);
 
             Position coupChoisi = joueurCourant->ChoisirCoupDames(coupsPossibles);
 
-            for (const Position& coups : coupsPossibles)
-            {
-                if (coups == coupChoisi) {
-                    this->DeplacerPiece(pionSelectionne, coupChoisi);
-                    coupJouable = true;
-                }
-            }
-            if (!coupJouable){
+            if (EstCoupChoisiValide(coupChoisi, coupsPossibles)) {
+                DeplacerPiece(pionSelectionne, coupChoisi);
+                break;
+            } else {
                 modeAffichage->AfficherErreur("Coup impossible pour le pion choisi");
             }
-        }
-        else
-        {
+        } else {
             modeAffichage->AfficherErreur("Pion choisi n'est pas valide");
         }
-
     }
 
     joueurCourant = (joueurCourant == joueur1) ? joueur2 : joueur1;
-
     modeAffichage->AfficherGrille(grille);
 }
+
 
 bool JeuDames::AGagne() const {
     return grille->CompteJetons(joueur1->getJeton()) == 0 || grille->CompteJetons(joueur2->getJeton()) == 0;
@@ -82,6 +68,24 @@ void JeuDames::AfficherResultat() const {
     {
         modeAffichage->AfficherMessage("Match Nul!");
     }
+}
+
+void JeuDames::AfficherTourEtPions(const std::vector<Position>& pionsJouables) {
+    modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations(), 2);
+    modeAffichage->AfficherCoupsPossibles(pionsJouables, "Pions jouables : ");
+}
+
+bool JeuDames::EstPionChoisiValide(const Position& pionChoisi, const std::vector<Position>& pionsJouables) const {
+    return std::find(pionsJouables.begin(), pionsJouables.end(), pionChoisi) != pionsJouables.end();
+}
+
+void JeuDames::AfficherCoupsPossibles(const std::vector<Position>& coupsPossibles) const {
+    modeAffichage->AfficherMessage("");
+    modeAffichage->AfficherCoupsPossibles(coupsPossibles, "Deplacement possible du pion : ");
+}
+
+bool JeuDames::EstCoupChoisiValide(const Position& coupChoisi, const std::vector<Position>& coupsPossibles) const {
+    return std::find(coupsPossibles.begin(), coupsPossibles.end(), coupChoisi) != coupsPossibles.end();
 }
 
 std::vector<Position> JeuDames::CoupsPossibles() {
