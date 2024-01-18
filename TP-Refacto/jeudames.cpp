@@ -17,14 +17,14 @@ void JeuDames::Jouer() {
 void JeuDames::Tour() {
     while (true) {
         std::vector<Position> pionsJouables = PionsJouables();
-        AfficherTourEtPions(pionsJouables);
+        AfficherPionsJouables(pionsJouables);
 
         Position pionChoisi = joueurCourant->ChoisirCoupDames(pionsJouables);
         pionSelectionne = pionChoisi;
 
         if (EstPionChoisiValide(pionChoisi, pionsJouables)) {
             std::vector<Position> coupsPossibles = CoupsPossibles();
-            AfficherCoupsPossibles(coupsPossibles);
+            AfficherDeplacementsPions(coupsPossibles);
 
             Position coupChoisi = joueurCourant->ChoisirCoupDames(coupsPossibles);
 
