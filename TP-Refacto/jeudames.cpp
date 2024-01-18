@@ -43,29 +43,23 @@ void JeuDames::Tour() {
     modeAffichage->AfficherGrille(grille);
 }
 
-
 bool JeuDames::AGagne() const {
     return grille->CompteJetons(joueur1->getJeton()) == 0 || grille->CompteJetons(joueur2->getJeton()) == 0;
 }
 
 bool JeuDames::PartieFinie() const {
-    return AGagne(); // RAJOUTER ICI, QUAND DEPLACEMENT impossible ?
+    return AGagne();
 }
 
 void JeuDames::AfficherResultat() const {
     int nbJetonJoueur1 = grille->CompteJetons(joueur1->getJeton());
     int nbJetonJoueur2 = grille->CompteJetons(joueur2->getJeton());
 
-    if(nbJetonJoueur1 > nbJetonJoueur2)
-    {
+    if (nbJetonJoueur1 > nbJetonJoueur2) {
         modeAffichage->AfficherMessage("Le gagnant est " +  joueur1->getInformations() + " !");
-    }
-    else if (nbJetonJoueur2 > nbJetonJoueur1)
-    {
+    } else if (nbJetonJoueur2 > nbJetonJoueur1) {
         modeAffichage->AfficherMessage("Le gagnant est " +  joueur2->getInformations() + " !");
-    }
-    else
-    {
+    } else {
         modeAffichage->AfficherMessage("Match Nul!");
     }
 }
@@ -109,6 +103,7 @@ std::vector<Position> JeuDames::CoupsPossibles() {
 }
 
 std::vector<Position> JeuDames::PionsJouables() {
+    // A CLEAN AUSSI : j'ai essayé de regroupe dans une seule boucle, mais ça foire toute la logique en jouant
     std::vector<Position> pionsJouables;
     const std::vector<Direction> toutesDirections = {{ -1, -1 }, { -1, 1 }, { 1, -1 },{ 1, 1 }};
     bool capturable = false;
@@ -118,8 +113,7 @@ std::vector<Position> JeuDames::PionsJouables() {
             if (grille->GetCellule(ligne, colonne) == joueurCourant->getJeton()) {
                 Position position{ligne, colonne};
                 for (const Direction& direction : toutesDirections) {
-                    if (PeutCapturer(position, direction))
-                    {
+                    if (PeutCapturer(position, direction)) {
                         pionsJouables.push_back(position);
                         capturable = true;
                         break;
@@ -158,13 +152,11 @@ bool JeuDames::PeutDeplacerEnDiagonale(const Position& depart, const Position& a
     return grille->ACaseVide(arrivee.x, arrivee.y) && (arrivee.x - depart.x) == direction;
 }
 
-
 bool JeuDames::PeutCapturer(const Position& position, const Direction& direction) const {
     Position adversaire = {position.x + direction.deltaX, position.y + direction.deltaY};
     Position destination = {adversaire.x + direction.deltaX, adversaire.y + direction.deltaY};
 
-    if (!grille->EstDansGrille(destination.x, destination.y) ||
-        grille->GetCellule(adversaire.x, adversaire.y) != GetJetonAdverse()) {
+    if (!grille->EstDansGrille(adversaire.x, adversaire.y) || !grille->EstDansGrille(destination.x, destination.y) || grille->GetCellule(adversaire.x, adversaire.y) != GetJetonAdverse()) {
         return false;
     }
 
@@ -172,12 +164,11 @@ bool JeuDames::PeutCapturer(const Position& position, const Direction& direction
 }
 
 void JeuDames::AjouterCapturesPossibles(const Position& position, std::vector<Position>& coupsPossibles) const {
-    std::vector<Direction> directions =  {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
-    for (const Direction& dir : directions) {
-        if (PeutCapturer(position, dir)) {
-            Position destination{position.x + 2 * dir.deltaX, position.y + 2 * dir.deltaY};
-            coupsPossibles.push_back(destination);
-        }
+    const std::vector<Direction> toutesDirections = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
+
+    for (const Direction& direction : toutesDirections) {
+        std::vector<Position> prisesPossibles = PrisesPossiblesDepuisPosition(position, direction, 1);
+        coupsPossibles.insert(coupsPossibles.end(), prisesPossibles.begin(), prisesPossibles.end());
     }
 }
 
@@ -188,6 +179,52 @@ void JeuDames::DeplacerPiece(const Position& depart, const Position& arrivee) {
     if (std::abs(arrivee.x - depart.x) == 2) {
         Position capturePos{(depart.x + arrivee.x) / 2, (depart.y + arrivee.y) / 2};
         grille->ChangeCellule(capturePos.x, capturePos.y, Jeton::Vide);
+        EffectuerPriseMultiple(arrivee);
+    }
+}
+
+std::vector<Position> JeuDames::PrisesPossiblesDepuisPosition(const Position& position, const Direction& direction, int nbCaptures) const {
+    std::vector<Position> prisesPossibles;
+
+    if (nbCaptures <= 0) {
+        return prisesPossibles;
+    }
+
+    Position adversaire = {position.x + direction.deltaX, position.y + direction.deltaY};
+    Position destination = {adversaire.x + direction.deltaX, adversaire.y + direction.deltaY};
+
+    if (PeutCapturer(position, direction)) {
+        prisesPossibles.push_back(destination);
+        std::vector<Position> prisesSupplementaires = PrisesPossiblesDepuisPosition(destination, direction, nbCaptures - 1);
+        prisesPossibles.insert(prisesPossibles.end(), prisesSupplementaires.begin(), prisesSupplementaires.end());
+    }
+
+    return prisesPossibles;
+}
+
+void JeuDames::EffectuerPriseMultiple(const Position& position) {
+    const std::vector<Direction> toutesDirections = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
+    std::vector<Position> toutesLesPrises;
+
+    for (const Direction& direction : toutesDirections) {
+        std::vector<Position> prisesPossibles = PrisesPossiblesDepuisPosition(position, direction, 1);
+        toutesLesPrises.insert(toutesLesPrises.end(), prisesPossibles.begin(), prisesPossibles.end());
+    }
+
+    if (!toutesLesPrises.empty()) {
+        AfficherDeplacementsPions(toutesLesPrises);
+
+        while (!toutesLesPrises.empty()) {
+            Position coupChoisi = joueurCourant->ChoisirCoupDames(toutesLesPrises);
+            if (EstCoupChoisiValide(coupChoisi, toutesLesPrises)) {
+                DeplacerPiece(position, coupChoisi);
+                toutesLesPrises = PrisesPossiblesDepuisPosition(coupChoisi, Direction{0, 0}, 1);
+                AfficherDeplacementsPions(toutesLesPrises);
+            } else {
+                modeAffichage->AfficherErreur("Coup impossible pour la position actuelle");
+                break;
+            }
+        }
     }
 }
 

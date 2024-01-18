@@ -35,10 +35,12 @@ private:
     bool PeutDeplacerEnDiagonale(const Position& depart, const Position& arrivee) const;
     bool PeutCapturer(const Position& position, const Direction& direction) const;
     void DeplacerPiece(const Position& depart, const Position& arrivee);
-    void CapturerPiece(const Position& depart, const Position& arrivee);
     void AjouterCapturesPossibles(const Position& position, std::vector<Position>& coupsPossibles) const;
+    void EffectuerPriseMultiple(const Position &position);
+    std::vector<Position> PrisesPossiblesDepuisPosition(const Position &position, const Direction &direction, int profondeur) const;
     Jeton GetJetonAdverse() const;
     Jeton DeterminerGagnant() const;
+
 };
 
 #endif // JEUDAMES_H
