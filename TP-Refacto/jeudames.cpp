@@ -70,7 +70,7 @@ void JeuDames::AfficherResultat() const {
     }
 }
 
-void JeuDames::AfficherTourEtPions(const std::vector<Position>& pionsJouables) {
+void JeuDames::AfficherPionsJouables(const std::vector<Position>& pionsJouables) {
     modeAffichage->AfficherMessage("Tour de " + joueurCourant->getInformations(), 2);
     modeAffichage->AfficherCoupsPossibles(pionsJouables, "Pions jouables : ");
 }
@@ -79,7 +79,7 @@ bool JeuDames::EstPionChoisiValide(const Position& pionChoisi, const std::vector
     return std::find(pionsJouables.begin(), pionsJouables.end(), pionChoisi) != pionsJouables.end();
 }
 
-void JeuDames::AfficherCoupsPossibles(const std::vector<Position>& coupsPossibles) const {
+void JeuDames::AfficherDeplacementsPions(const std::vector<Position>& coupsPossibles) const {
     modeAffichage->AfficherMessage("");
     modeAffichage->AfficherCoupsPossibles(coupsPossibles, "Deplacement possible du pion : ");
 }

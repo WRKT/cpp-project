@@ -28,9 +28,9 @@ private:
 
     Position pionSelectionne;
     std::vector<Position> PionsJouables();
-    void AfficherTourEtPions(const std::vector<Position> &pionsJouables);
+    void AfficherPionsJouables(const std::vector<Position> &pionsJouables);
     bool EstPionChoisiValide(const Position &pionChoisi, const std::vector<Position> &pionsJouables) const;
-    void AfficherCoupsPossibles(const std::vector<Position> &coupsPossibles) const;
+    void AfficherDeplacementsPions(const std::vector<Position> &coupsPossibles) const;
     bool EstCoupChoisiValide(const Position &coupChoisi, const std::vector<Position> &coupsPossibles) const;
     bool PeutDeplacerEnDiagonale(const Position& depart, const Position& arrivee) const;
     bool PeutCapturer(const Position& position, const Direction& direction) const;
