@@ -22,13 +22,13 @@ void JeuDames::Tour() {
         Position pionChoisi = joueurCourant->ChoisirCoupDames(pionsJouables);
         pionSelectionne = pionChoisi;
 
-        if (EstPionChoisiValide(pionChoisi, pionsJouables)) {
+        if (EstPionValide(pionChoisi, pionsJouables)) {
             std::vector<Position> coupsPossibles = CoupsPossibles();
-            AfficherDeplacementsPions(coupsPossibles);
+            AfficherDeplacements(coupsPossibles);
 
             Position coupChoisi = joueurCourant->ChoisirCoupDames(coupsPossibles);
 
-            if (EstCoupChoisiValide(coupChoisi, coupsPossibles)) {
+            if (EstCoupValide(coupChoisi, coupsPossibles)) {
                 DeplacerPiece(pionSelectionne, coupChoisi);
                 break;
             } else {
@@ -69,16 +69,16 @@ void JeuDames::AfficherPionsJouables(const std::vector<Position>& pionsJouables)
     modeAffichage->AfficherCoupsPossibles(pionsJouables, "Pions jouables : ");
 }
 
-bool JeuDames::EstPionChoisiValide(const Position& pionChoisi, const std::vector<Position>& pionsJouables) const {
+bool JeuDames::EstPionValide(const Position& pionChoisi, const std::vector<Position>& pionsJouables) const {
     return std::find(pionsJouables.begin(), pionsJouables.end(), pionChoisi) != pionsJouables.end();
 }
 
-void JeuDames::AfficherDeplacementsPions(const std::vector<Position>& coupsPossibles) const {
+void JeuDames::AfficherDeplacements(const std::vector<Position>& coupsPossibles) const {
     modeAffichage->AfficherMessage("");
     modeAffichage->AfficherCoupsPossibles(coupsPossibles, "Deplacement possible du pion : ");
 }
 
-bool JeuDames::EstCoupChoisiValide(const Position& coupChoisi, const std::vector<Position>& coupsPossibles) const {
+bool JeuDames::EstCoupValide(const Position& coupChoisi, const std::vector<Position>& coupsPossibles) const {
     return std::find(coupsPossibles.begin(), coupsPossibles.end(), coupChoisi) != coupsPossibles.end();
 }
 
@@ -94,7 +94,7 @@ std::vector<Position> JeuDames::CoupsPossibles() {
 
     for (int j = -1; j <= 1; j += 2) {
         Position destination{pionSelectionne.x + direction, pionSelectionne.y + j};
-        if (PeutDeplacerEnDiagonale(pionSelectionne, destination)) {
+        if (PeutDeplacer(pionSelectionne, destination)) {
             coupsPossibles.push_back(destination);
         }
     }
@@ -130,7 +130,7 @@ std::vector<Position> JeuDames::PionsJouables() {
                     Position position{ligne, colonne};
 
                     for (const Direction& direction : toutesDirections) {
-                        if (PeutDeplacerEnDiagonale(position, {ligne + direction.deltaX, colonne + direction.deltaY})) {
+                        if (PeutDeplacer(position, {ligne + direction.deltaX, colonne + direction.deltaY})) {
                             pionsJouables.push_back(position);
                             break;
                         }
@@ -143,7 +143,7 @@ std::vector<Position> JeuDames::PionsJouables() {
     return pionsJouables;
 }
 
-bool JeuDames::PeutDeplacerEnDiagonale(const Position& depart, const Position& arrivee) const {
+bool JeuDames::PeutDeplacer(const Position& depart, const Position& arrivee) const {
     if (!grille->EstDansGrille(arrivee.x, arrivee.y)) {
         return false;
     }
@@ -167,7 +167,7 @@ void JeuDames::AjouterCapturesPossibles(const Position& position, std::vector<Po
     const std::vector<Direction> toutesDirections = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
 
     for (const Direction& direction : toutesDirections) {
-        std::vector<Position> prisesPossibles = PrisesPossiblesDepuisPosition(position, direction, 1);
+        std::vector<Position> prisesPossibles = CapturesPossiblesDepuisPosition(position, direction, 1);
         coupsPossibles.insert(coupsPossibles.end(), prisesPossibles.begin(), prisesPossibles.end());
     }
 }
@@ -179,11 +179,11 @@ void JeuDames::DeplacerPiece(const Position& depart, const Position& arrivee) {
     if (std::abs(arrivee.x - depart.x) == 2) {
         Position capturePos{(depart.x + arrivee.x) / 2, (depart.y + arrivee.y) / 2};
         grille->ChangeCellule(capturePos.x, capturePos.y, Jeton::Vide);
-        EffectuerPriseMultiple(arrivee);
+        EffectuerCapturesMultiples(arrivee);
     }
 }
 
-std::vector<Position> JeuDames::PrisesPossiblesDepuisPosition(const Position& position, const Direction& direction, int nbCaptures) const {
+std::vector<Position> JeuDames::CapturesPossiblesDepuisPosition(const Position& position, const Direction& direction, int nbCaptures) const {
     std::vector<Position> prisesPossibles;
 
     if (nbCaptures <= 0) {
@@ -195,31 +195,31 @@ std::vector<Position> JeuDames::PrisesPossiblesDepuisPosition(const Position& po
 
     if (PeutCapturer(position, direction)) {
         prisesPossibles.push_back(destination);
-        std::vector<Position> prisesSupplementaires = PrisesPossiblesDepuisPosition(destination, direction, nbCaptures - 1);
+        std::vector<Position> prisesSupplementaires = CapturesPossiblesDepuisPosition(destination, direction, nbCaptures - 1);
         prisesPossibles.insert(prisesPossibles.end(), prisesSupplementaires.begin(), prisesSupplementaires.end());
     }
 
     return prisesPossibles;
 }
 
-void JeuDames::EffectuerPriseMultiple(const Position& position) {
+void JeuDames::EffectuerCapturesMultiples(const Position& position) {
     const std::vector<Direction> toutesDirections = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
     std::vector<Position> toutesLesPrises;
 
     for (const Direction& direction : toutesDirections) {
-        std::vector<Position> prisesPossibles = PrisesPossiblesDepuisPosition(position, direction, 1);
+        std::vector<Position> prisesPossibles = CapturesPossiblesDepuisPosition(position, direction, 1);
         toutesLesPrises.insert(toutesLesPrises.end(), prisesPossibles.begin(), prisesPossibles.end());
     }
 
     if (!toutesLesPrises.empty()) {
-        AfficherDeplacementsPions(toutesLesPrises);
+        AfficherDeplacements(toutesLesPrises);
 
         while (!toutesLesPrises.empty()) {
             Position coupChoisi = joueurCourant->ChoisirCoupDames(toutesLesPrises);
-            if (EstCoupChoisiValide(coupChoisi, toutesLesPrises)) {
+            if (EstCoupValide(coupChoisi, toutesLesPrises)) {
                 DeplacerPiece(position, coupChoisi);
-                toutesLesPrises = PrisesPossiblesDepuisPosition(coupChoisi, Direction{0, 0}, 1);
-                AfficherDeplacementsPions(toutesLesPrises);
+                toutesLesPrises = CapturesPossiblesDepuisPosition(coupChoisi, Direction{0, 0}, 1);
+                AfficherDeplacements(toutesLesPrises);
             } else {
                 modeAffichage->AfficherErreur("Coup impossible pour la position actuelle");
                 break;
