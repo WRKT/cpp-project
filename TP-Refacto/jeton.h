@@ -2,10 +2,10 @@
 #define JETON_H
 
 enum class Jeton {
-    X = 'X',
-    O = 'O',
-    DameX = 'W',
-    DameO = 'B',
+    X = 'x',
+    O = 'o',
+    DameX = 'X',
+    DameO = 'O',
     Vide = '-'
 };
 

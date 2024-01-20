@@ -103,7 +103,6 @@ std::vector<Position> JeuDames::CoupsPossibles() {
 }
 
 std::vector<Position> JeuDames::PionsJouables() {
-    // A CLEAN AUSSI : j'ai essayé de regroupe dans une seule boucle, mais ça foire toute la logique en jouant
     std::vector<Position> pionsJouables;
     const std::vector<Direction> toutesDirections = {{ -1, -1 }, { -1, 1 }, { 1, -1 },{ 1, 1 }};
     bool capturable = false;
@@ -119,16 +118,8 @@ std::vector<Position> JeuDames::PionsJouables() {
                         break;
                     }
                 }
-            }
-        }
-    }
 
-    if (!capturable) {
-        for (int ligne = 0; ligne < grille->getNbLignes(); ++ligne) {
-            for (int colonne = 0; colonne < grille->getNbColonnes(); ++colonne) {
-                if (grille->GetCellule(ligne, colonne) == joueurCourant->getJeton()) {
-                    Position position{ligne, colonne};
-
+                if (!capturable) {
                     for (const Direction& direction : toutesDirections) {
                         if (PeutDeplacer(position, {ligne + direction.deltaX, colonne + direction.deltaY})) {
                             pionsJouables.push_back(position);
