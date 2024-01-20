@@ -3,6 +3,7 @@
 
 #include "AGrille.h"
 #include <vector>
+#include "coordonnees.h"
 
 class Grille : public AGrille
 {
@@ -16,6 +17,7 @@ public:
     void ChangeCellule(const int x, const int y, const Jeton& jeton) override;
     int CompteJetons(const Jeton& jeton) const override;
     bool EstRemplie() const override;
+    void PromouvoirJeton(const Position& position) override;
     std::vector<Jeton> GetLigne(const int x, const int y) const override;
     std::vector<Jeton> GetColonne(const int x, const int y) const override;
     std::vector<Jeton> GetDiagonaleASC(const int x, const int y) const override;

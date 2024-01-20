@@ -32,11 +32,16 @@ private:
     bool EstPionValide(const Position &pionChoisi, const std::vector<Position> &pionsJouables) const;
     void AfficherDeplacements(const std::vector<Position> &coupsPossibles) const;
     bool EstCoupValide(const Position &coupChoisi, const std::vector<Position> &coupsPossibles) const;
-    bool PeutDeplacer(const Position& depart, const Position& arrivee) const;
+    bool PeutDeplacer(const Position& position) const;
     bool PeutCapturer(const Position& position, const Direction& direction) const;
     void DeplacerPiece(const Position& depart, const Position& arrivee);
+    bool PeutDeplacerDame(const Position& position) const;
+    std::vector<Position> CoupsPossiblesDame(const Position& pion);
     void AjouterCapturesPossibles(const Position& position, std::vector<Position>& coupsPossibles) const;
     void EffectuerCapturesMultiples(const Position &position);
+    void VerifierPromotionDame(const Position& position);
+    void PromouvoirEnDame(const Position& position);
+    bool PeutCapturerDame(const Position& depart, const Direction& direction) const;
     std::vector<Position> CapturesPossiblesDepuisPosition(const Position &position, const Direction &direction, int profondeur) const;
     Jeton GetJetonAdverse() const;
     Jeton DeterminerGagnant() const;

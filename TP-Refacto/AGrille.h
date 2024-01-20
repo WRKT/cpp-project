@@ -4,6 +4,7 @@
 #include "IGrilleInit.h"
 #include "jeton.h"
 #include <vector>
+#include "coordonnees.h"
 
 class AGrille : public IGrilleInit
 {
@@ -17,6 +18,7 @@ public:
     virtual bool ACaseVide(const int, const int) const = 0;
     virtual int CompteJetons(const Jeton& jeton) const = 0;
     virtual bool EstRemplie() const = 0;
+    virtual void PromouvoirJeton( const Position& position) = 0;
     virtual bool VerifieLigne(const int nbJetons, const Jeton& jeton) const = 0;
     virtual bool VerifieColonne(const int nbJetons, const Jeton& jeton) const = 0;
     virtual bool VerifieDiagonaleASC(const int nbJetons, const Jeton& jeton) const = 0;

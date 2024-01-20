@@ -24,6 +24,22 @@ void Grille::InitialiserGrilleOthello()
     }
 }
 
+
+
+void Grille::PromouvoirJeton(const Position& position) {
+    Jeton jetonActuel = GetCellule(position.x, position.y);
+
+    switch (jetonActuel) {
+    case Jeton::X:
+        ChangeCellule(position.x, position.y, Jeton::DameX);
+        break;
+    case Jeton::O:
+        ChangeCellule(position.x, position.y, Jeton::DameO);
+        break;
+    default:
+        break;
+    }
+}
 void Grille::InitialiserGrilleDame()
 {
 
