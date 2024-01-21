@@ -40,8 +40,8 @@ void JeuGUI::on_retourAccueil_clicked()
 
 void JeuGUI::on_JouerButton_clicked(){
 
-    joueur1 = JoueurFactory::CreerJoueurOrdinateur(Jeton::X);
-    joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
+    joueur1 = JoueurFactory::CreerJoueurHumain("Joueur1", Jeton::X, *input);
+    joueur2 = JoueurFactory::CreerJoueurHumain("Joueur2", Jeton::O, *input);
 
     std::unique_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
     jeu->Jouer();
