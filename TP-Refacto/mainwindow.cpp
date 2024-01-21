@@ -11,17 +11,15 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    delete accueilWidget;
-    delete morpionWidget;
     delete ui;
 }
 
 void MainWindow::initWidgets()
 {
-    accueilWidget = new Accueil(this);
-    setCentralWidget(accueilWidget);
+    accueilWidget = std::make_unique<Accueil>(this);
+    setCentralWidget(accueilWidget.get());
 
-    connect(accueilWidget, &Accueil::selectionTypeJeu, this, &MainWindow::creerNouveauJeu);
+    connect(accueilWidget.get(), &Accueil::selectionTypeJeu, this, &MainWindow::creerNouveauJeu);
 
 }
 
@@ -29,17 +27,16 @@ void MainWindow::creerNouveauJeu(TypesJeu typeDeJeu)
 {
     typeJeu = typeDeJeu;
 
-    if (morpionWidget) {
-        delete morpionWidget;
-        morpionWidget = nullptr;
+    if (jeuWidget) {
+        jeuWidget = nullptr;
     }
 
-    morpionWidget = new MorpionGUI(this, typeJeu);
+    jeuWidget = std::make_unique<JeuGUI>(this, typeDeJeu);
 
-    connect(morpionWidget, &MorpionGUI::showAccueil, this, [=]() {
-        morpionWidget->hide();
+    connect(jeuWidget.get(), &JeuGUI::showAccueil, this, [=]() {
+        jeuWidget->hide();
         accueilWidget->show();
     });
 
-    morpionWidget->show();
+    jeuWidget->show();
 }

@@ -65,7 +65,7 @@ add_executable(TP-Refacto ${PROJECT_SOURCES}
     affichagegui.h affichagegui.cpp
     mainwindow.h mainwindow.cpp mainwindow.ui
     accueil.h accueil.cpp accueil.ui
-    morpiongui.h morpiongui.cpp morpiongui.ui
+    jeugui.h jeugui.cpp jeugui.ui
     inputgui.h inputgui.cpp
 
 

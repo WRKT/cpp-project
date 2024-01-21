@@ -44,7 +44,8 @@ void JeuDames::Tour() {
 }
 
 bool JeuDames::AGagne() const {
-    return (grille->CompteJetons(joueur1->getJeton()) == 0 && grille->CompteJetons(getPromotion(joueur1->getJeton()))== 0 )   || (grille->CompteJetons(joueur2->getJeton()) == 0  && grille->CompteJetons(getPromotion(joueur2->getJeton())) == 0) ;
+    return (grille->CompteJetons(joueur1->getJeton()) == 0 && grille->CompteJetons(getPromotion(joueur1->getJeton())) == 0 )
+           || (grille->CompteJetons(joueur2->getJeton()) == 0  && grille->CompteJetons(getPromotion(joueur2->getJeton())) == 0) ;
 }
 
 bool JeuDames::PartieFinie() const {

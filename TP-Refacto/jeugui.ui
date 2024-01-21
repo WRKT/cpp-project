@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MorpionGUI</class>
- <widget class="QWidget" name="MorpionGUI">
+ <class>JeuGUI</class>
+ <widget class="QWidget" name="JeuGUI">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>MORPION</string>
+    <string>JEU</string>
    </property>
   </widget>
   <widget class="QPushButton" name="JouerButton">

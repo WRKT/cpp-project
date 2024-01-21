@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include "accueil.h"
-#include "morpiongui.h"
+#include "jeugui.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,8 +21,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    Accueil *accueilWidget;
-    MorpionGUI *morpionWidget;
+    std::unique_ptr<Accueil> accueilWidget;
+    std::unique_ptr<JeuGUI> jeuWidget;
     TypesJeu typeJeu;
 
     void initWidgets();

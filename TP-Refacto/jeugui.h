@@ -1,5 +1,5 @@
-﻿#ifndef MORPIONGUI_H
-#define MORPIONGUI_H
+#ifndef JEUGUI_H
+#define JEUGUI_H
 
 #include <QWidget>
 #include "AJoueur.h"
@@ -8,23 +8,23 @@
 #include "Input.h"
 
 namespace Ui {
-class MorpionGUI;
+class JeuGUI;
 }
 
-class MorpionGUI : public QWidget
+class JeuGUI : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit MorpionGUI(QWidget *parent = nullptr, TypesJeu typeJeu = TypesJeu::Morpion);
-    ~MorpionGUI();
+    explicit JeuGUI(QWidget *parent = nullptr, TypesJeu typeJeu = TypesJeu::Morpion);
+    ~JeuGUI();
 
 public slots:
     void on_retourAccueil_clicked();
     void on_JouerButton_clicked();
 
 private:
-    Ui::MorpionGUI *ui;
+    Ui::JeuGUI *ui;
     TypesJeu typeDeJeu = TypesJeu::Morpion;
     std::shared_ptr<AJoueur> joueur1;
     std::shared_ptr<AJoueur> joueur2;
@@ -35,4 +35,4 @@ signals:
     void showAccueil();
 };
 
-#endif // MORPIONGUI_H
+#endif // JEUGUI_H
