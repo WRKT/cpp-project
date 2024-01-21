@@ -43,8 +43,10 @@ private:
     void PromouvoirEnDame(const Position& position);
     bool PeutCapturerDame(const Position& depart, const Direction& direction) const;
     std::vector<Position> CapturesPossiblesDepuisPosition(const Position &position, const Direction &direction, int profondeur) const;
-    Jeton GetJetonAdverse() const;
+    std::vector<Jeton> GetJetonAdverse() const;
+    bool EstJetonAdverse(const Jeton& jeton) const;
     Jeton DeterminerGagnant() const;
+    Jeton getPromotion(const Jeton& jeton) const;
 
 };
 
