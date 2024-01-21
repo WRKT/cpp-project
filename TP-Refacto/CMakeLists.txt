@@ -58,18 +58,17 @@ set(PROJECT_SOURCES
     joueurordinateur.h
     TypesJeu.h
     coordonnees.h
-    morpionwidget.cpp
-    morpionwidget.h
-    morpionwidget.ui
-    fenetreprincipale.cpp
-    fenetreprincipale.h
-    fenetreprincipale.ui
-    menuwidget.cpp
-    menuwidget.h
-    menuwidget.ui
+    Input.h
 )
 
 add_executable(TP-Refacto ${PROJECT_SOURCES}
+    affichagegui.h affichagegui.cpp
+    mainwindow.h mainwindow.cpp mainwindow.ui
+    accueil.h accueil.cpp accueil.ui
+    morpiongui.h morpiongui.cpp morpiongui.ui
+    inputgui.h inputgui.cpp
+    puissance4gui.h puissance4gui.cpp puissance4gui.ui
+
 )
 target_link_libraries(TP-Refacto PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Core)
 

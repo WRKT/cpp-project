@@ -2,20 +2,20 @@
 #define INPUTCONSOLE_H
 
 #include <string>
+#include "Input.h"
 #include "TypesJeu.h"
-#include "coordonnees.h"
 
-class InputConsole
+class InputConsole : public Input
 {
 public:
-    static TypesJeu demanderTypeDeJeu();
-    static int demanderModeDeJeu();
-    static bool demanderRejouer();
-    static Position demanderCordonnee();
-    static int demanderColonne();
-    static std::string demanderPrenomJoueur(const std::string&);
-    static std::string getString(const std::string&);
-    static int getInt(const std::string&);
+    TypesJeu demanderTypeDeJeu() const;
+    int demanderModeDeJeu() const;
+    bool demanderRejouer() const;
+    virtual Position demanderCoordonnees() const override;
+    virtual int demanderColonne() const override;
+    std::string demanderPrenomJoueur(const std::string &) const;
+    virtual std::string getString(const std::string &) const override;
+    virtual int getInt(const std::string &) const override;
 
 private:
     static void ViderBuffer();

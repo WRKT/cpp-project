@@ -19,7 +19,7 @@ void JeuMorpion::Jouer()
 
         joueurCourant->getJeton() == joueur1->getJeton() ? joueurCourant = joueur2 : joueurCourant = joueur1;
 
-        modeAffichage->AfficherGrille(grille);
+        modeAffichage->MettreAJourGrille(grille);
     }
     modeAffichage->AfficherMessage("Match nul !");
 }
@@ -67,7 +67,7 @@ std::vector<Position> JeuMorpion::CoupsPossibles()
 
 void JeuMorpion::AfficherResultat() const
 {
-    modeAffichage->AfficherGrille(grille);
+    modeAffichage->MettreAJourGrille(grille);
     modeAffichage->AfficherMessage("Le joueur " + joueurCourant->getInformations() + " a gagné !");
 }
 

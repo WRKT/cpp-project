@@ -1,18 +1,16 @@
 #include "joueurhumain.h"
-#include "inputconsole.h"
 #include <vector>
 
 Position JoueurHumain::ChoisirCoupMorpion(const std::vector<Position> &CoupsPossible)
 {
     Position coup;
-    coup = InputConsole::demanderCordonnee();
-
+    coup = input.demanderCoordonnees();
     return coup;
 }
 
 Position JoueurHumain::ChoisirCoupPuissance4(const std::vector<Position> &CoupsPossible)
 {
-    int colonne = InputConsole::demanderColonne();
+    int colonne = input.demanderColonne();
     for (auto &coup : CoupsPossible)
     {
         if (coup.y == colonne)
@@ -26,13 +24,13 @@ Position JoueurHumain::ChoisirCoupPuissance4(const std::vector<Position> &CoupsP
 Position JoueurHumain::ChoisirCoupOthello(const std::vector<Position> &CoupsPossible)
 {
     Position coup;
-    coup = InputConsole::demanderCordonnee();
+    coup = input.demanderCoordonnees();
     return coup;
 }
 
 Position JoueurHumain::ChoisirCoupDames(const std::vector<Position> &CoupsPossible)
 {
     Position coup;
-    coup = InputConsole::demanderCordonnee();
+    coup = input.demanderCoordonnees();
     return coup;
 }

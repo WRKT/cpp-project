@@ -6,7 +6,7 @@ enum class Jeton {
     O = 'o',
     DameX = 'X',
     DameO = 'O',
-    Vide = '-'
+    Vide = ' '
 };
 
 #endif // JETON_H

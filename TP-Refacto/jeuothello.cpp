@@ -11,7 +11,7 @@ void JeuOthello::Jouer() {
     while (!PartieFinie()) {
         Tour();
         joueurCourant = (joueurCourant == joueur1) ? joueur2 : joueur1;
-        modeAffichage->AfficherGrille(grille);
+        modeAffichage->MettreAJourGrille(grille);
     }
 
     AfficherResultat();
