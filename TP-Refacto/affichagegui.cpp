@@ -5,15 +5,15 @@
 #include <QGridLayout>
 #include <QObject>
 
-AffichageGUI::AffichageGUI(QWidget *parentWidget) : parentWidget(parentWidget) {}
-
-void AffichageGUI::AfficherGrille(const std::shared_ptr<AGrille>& grille)
-{
-    QGridLayout *gridLayout = new QGridLayout(parentWidget);
+AffichageGUI::AffichageGUI(QWidget *parentWidget) : parentWidget(parentWidget) {
+    gridLayout = new QGridLayout(parentWidget);
     gridLayout->setAlignment(Qt::AlignCenter);
 
     parentWidget->setLayout(gridLayout);
+}
 
+void AffichageGUI::AfficherGrille(const std::shared_ptr<AGrille>& grille)
+{
     boutonsGrille.resize(grille->getNbLignes());
 
     for (int x = 0; x < grille->getNbLignes(); ++x)
@@ -58,6 +58,5 @@ void AffichageGUI::AfficherErreur(const std::string &erreur) const
 
 void AffichageGUI::AfficherCoupsPossibles(const std::vector<Position>& coups, const std::string& message) const
 {
-    // Affiche les coups possibles
-    // Vous pouvez par exemple mettre en surbrillance les cellules de la grille où les coups sont possibles
+
 }

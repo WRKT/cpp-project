@@ -5,7 +5,7 @@
 #include "AJoueur.h"
 #include "TypesJeu.h"
 #include "IAffichage.h"
-#include "inputgui.h"
+#include "Input.h"
 
 namespace Ui {
 class Puissance4GUI;
@@ -29,7 +29,7 @@ private:
     std::shared_ptr<AJoueur> joueur1;
     std::shared_ptr<AJoueur> joueur2;
     std::shared_ptr<IAffichage> modeAffichage;
-    InputGUI* input;
+    std::shared_ptr<Input> input;
     void ReinitialiserJeu();
 
 signals:

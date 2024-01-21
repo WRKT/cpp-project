@@ -12,7 +12,7 @@ public:
     explicit InputGUI(QObject *parent = nullptr);
 
     Position demanderCoordonnees() const override;
-    int demanderColonne() const override { return 0; }
+    int demanderColonne() const override;
     std::string getString(const std::string &) const override { return ""; }
     int getInt(const std::string &) const override { return 0; }
 

@@ -19,17 +19,3 @@ void Accueil::on_morpionButton_clicked()
     emit showMorpion();
 }
 
-void Accueil::on_puissance4Button_clicked()
-{
-    emit showPuissance4();
-}
-
-void Accueil::on_othelloButton_clicked()
-{
-    emit showOthello();
-}
-
-void Accueil::on_damesButton_clicked()
-{
-    emit showDames();
-}

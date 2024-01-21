@@ -12,13 +12,15 @@ Puissance4GUI::Puissance4GUI(QWidget *parent)
 {
     ui->setupUi(this);
     modeAffichage = std::make_shared<AffichageGUI>(this) ;
-    input = new InputGUI(this);
+    input = std::make_shared<Input>(this);
 
     connect(ui->retourAccueil, &QPushButton::clicked, this, &Puissance4GUI::on_retourAccueil_clicked);
-    std::shared_ptr<AffichageGUI> affichageGUI = std::dynamic_pointer_cast<AffichageGUI>(modeAffichage);
 
-    if (affichageGUI) {
-        connect(affichageGUI.get(), &AffichageGUI::celluleBoutonClick, input, &InputGUI::onCelluleClique);
+    std::shared_ptr<AffichageGUI> affichageGUI = std::dynamic_pointer_cast<AffichageGUI>(modeAffichage);
+    std::shared_ptr<InputGUI> inputGUI = std::dynamic_pointer_cast<InputGUI>(input);
+
+    if (affichageGUI && inputGUI) {
+        connect(affichageGUI.get(), &AffichageGUI::celluleBoutonClick, inputGUI.get(), &InputGUI::onCelluleClique);
     }
     connect(ui->JouerButton, &QPushButton::clicked, this, &Puissance4GUI::on_JouerButton_clicked);
 }
@@ -38,14 +40,13 @@ void Puissance4GUI::on_retourAccueil_clicked()
 
 void Puissance4GUI::ReinitialiserJeu()
 {
-    delete input;
-    input = new InputGUI(this);
+
 }
 
 void Puissance4GUI::on_JouerButton_clicked(){
 
     joueur1 = JoueurFactory::CreerJoueurHumain("Test", Jeton::X, *input);
-    joueur2 = JoueurFactory::CreerJoueurHumain("Test", Jeton::O, *input);
+    joueur2 = JoueurFactory::CreerJoueurHumain ("Test2", Jeton::O, *input);
 
     std::unique_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
     jeu->Jouer();

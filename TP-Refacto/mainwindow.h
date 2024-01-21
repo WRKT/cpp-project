@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include "accueil.h"
 #include "morpiongui.h"
-#include "puissance4gui.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -24,7 +23,6 @@ private:
     Ui::MainWindow *ui;
     Accueil *accueilWidget;
     MorpionGUI *morpionWidget;
-    // Puissance4GUI *puissance4Widget;
 
     void initWidgets();
 };

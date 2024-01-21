@@ -18,18 +18,12 @@ public:
 
 public slots:
     void on_morpionButton_clicked();
-    void on_puissance4Button_clicked();
-    void on_othelloButton_clicked();
-    void on_damesButton_clicked();
 
 private:
     Ui::Accueil *ui;
 
 signals:
     void showMorpion();
-    void showPuissance4();
-    void showOthello();
-    void showDames();
 };
 
 #endif // Accueil_H

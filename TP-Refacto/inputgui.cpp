@@ -11,3 +11,8 @@ Position InputGUI::demanderCoordonnees() const {
     loop.exec();
     return dernierCoup;
 }
+
+int InputGUI::demanderColonne() const {
+    loop.exec();
+    return dernierCoup.y;
+}
