@@ -16,6 +16,7 @@ Accueil::~Accueil()
 
 void Accueil::on_morpionButton_clicked()
 {
-    emit showMorpion();
+    hide();
+    emit nouveauJeu();
 }
 

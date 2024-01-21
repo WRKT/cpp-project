@@ -25,5 +25,8 @@ private:
     MorpionGUI *morpionWidget;
 
     void initWidgets();
+
+public slots:
+    void creerNouveauJeu();
 };
 #endif // MAINWINDOW_H

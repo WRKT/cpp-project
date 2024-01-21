@@ -23,7 +23,7 @@ private:
     Ui::Accueil *ui;
 
 signals:
-    void showMorpion();
+    void nouveauJeu();
 };
 
 #endif // Accueil_H

@@ -19,18 +19,19 @@ MainWindow::~MainWindow()
 void MainWindow::initWidgets()
 {
     accueilWidget = new Accueil(this);
-    morpionWidget = new MorpionGUI(this);
+    setCentralWidget(accueilWidget);
 
-    connect(accueilWidget, &Accueil::showMorpion, this, [=]() {
-        accueilWidget->hide();
-        morpionWidget->show();
-    });
+    connect(accueilWidget, &Accueil::nouveauJeu, this, &MainWindow::creerNouveauJeu);
+}
+
+void MainWindow::creerNouveauJeu()
+{
+    morpionWidget = new MorpionGUI(this);
 
     connect(morpionWidget, &MorpionGUI::showAccueil, this, [=]() {
         morpionWidget->hide();
         accueilWidget->show();
     });
 
-    accueilWidget->show();
-    morpionWidget->hide();
+    morpionWidget->show();
 }
