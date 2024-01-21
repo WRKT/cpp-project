@@ -112,14 +112,23 @@ std::vector<Position> JeuDames::PionsJouables() {
             if (grille->GetCellule(ligne, colonne) == joueurCourant->getJeton()) {
                 Position position{ligne, colonne};
                 for (const Direction& direction : toutesDirections) {
-                    if (PeutCapturer(position, direction)) {
+                    if (PeutCapturer(position, direction))
+                    {
                         pionsJouables.push_back(position);
                         capturable = true;
                         break;
                     }
                 }
+            }
+        }
+    }
 
-                if (!capturable) {
+    if (!capturable) {
+        for (int ligne = 0; ligne < grille->getNbLignes(); ++ligne) {
+            for (int colonne = 0; colonne < grille->getNbColonnes(); ++colonne) {
+                if (grille->GetCellule(ligne, colonne) == joueurCourant->getJeton()) {
+                    Position position{ligne, colonne};
+
                     for (const Direction& direction : toutesDirections) {
                         if (PeutDeplacer(position, {ligne + direction.deltaX, colonne + direction.deltaY})) {
                             pionsJouables.push_back(position);
@@ -133,6 +142,8 @@ std::vector<Position> JeuDames::PionsJouables() {
 
     return pionsJouables;
 }
+
+
 
 bool JeuDames::PeutDeplacer(const Position& depart, const Position& arrivee) const {
     if (!grille->EstDansGrille(arrivee.x, arrivee.y)) {
@@ -209,7 +220,8 @@ void JeuDames::EffectuerCapturesMultiples(const Position& position) {
             Position coupChoisi = joueurCourant->ChoisirCoupDames(toutesLesPrises);
             if (EstCoupValide(coupChoisi, toutesLesPrises)) {
                 DeplacerPiece(position, coupChoisi);
-                toutesLesPrises = CapturesPossiblesDepuisPosition(coupChoisi, Direction{0, 0}, 1);
+                Direction derniereDirection = {coupChoisi.x - position.x, coupChoisi.y - position.y};
+                toutesLesPrises = CapturesPossiblesDepuisPosition(coupChoisi, derniereDirection, 1);
                 AfficherDeplacements(toutesLesPrises);
             } else {
                 modeAffichage->AfficherErreur("Coup impossible pour la position actuelle");
@@ -218,6 +230,7 @@ void JeuDames::EffectuerCapturesMultiples(const Position& position) {
         }
     }
 }
+
 
 Jeton JeuDames::GetJetonAdverse() const {
     return (joueurCourant == joueur1) ? joueur2->getJeton() : joueur1->getJeton();
