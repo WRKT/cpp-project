@@ -36,6 +36,7 @@ private:
     bool PeutCapturer(const Position& position, const Direction& direction) const;
     void DeplacerPiece(const Position& depart, const Position& arrivee);
     void AjouterCapturesPossibles(const Position& position, std::vector<Position>& coupsPossibles) const;
+    std::vector<Position> CoupsPossiblesDame(const Position& positionDame);
     bool PeutDeplacerDame(const Position& position) const;
     bool PeutCapturerDame(const Position& depart,const Direction& direction) const;
     void EffectuerCapturesMultiples(const Position &position);
