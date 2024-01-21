@@ -12,7 +12,7 @@ Puissance4GUI::Puissance4GUI(QWidget *parent)
 {
     ui->setupUi(this);
     modeAffichage = std::make_shared<AffichageGUI>(this) ;
-    input = std::make_shared<Input>(this);
+    input = std::make_shared<InputGUI>(this);
 
     connect(ui->retourAccueil, &QPushButton::clicked, this, &Puissance4GUI::on_retourAccueil_clicked);
 
