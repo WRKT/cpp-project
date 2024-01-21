@@ -6,9 +6,10 @@
 #include "jeufactory.h"
 
 
-MorpionGUI::MorpionGUI(QWidget *parent)
+MorpionGUI::MorpionGUI(QWidget *parent, TypesJeu typeDeJeu)
     : QWidget(parent)
     , ui(new Ui::MorpionGUI)
+    , typeDeJeu(typeDeJeu)
 {
     ui->setupUi(this);
     modeAffichage = std::make_shared<AffichageGUI>(this) ;
@@ -35,12 +36,6 @@ void MorpionGUI::on_retourAccueil_clicked()
 {
     hide();
     emit showAccueil();
-
-}
-
-void MorpionGUI::ReinitialiserJeu()
-{
-
 }
 
 void MorpionGUI::on_JouerButton_clicked(){

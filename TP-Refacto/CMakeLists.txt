@@ -67,7 +67,7 @@ add_executable(TP-Refacto ${PROJECT_SOURCES}
     accueil.h accueil.cpp accueil.ui
     morpiongui.h morpiongui.cpp morpiongui.ui
     inputgui.h inputgui.cpp
-    puissance4gui.h puissance4gui.cpp puissance4gui.ui
+
 
 )
 target_link_libraries(TP-Refacto PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Core)

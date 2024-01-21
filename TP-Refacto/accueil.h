@@ -1,6 +1,7 @@
 #ifndef Accueil_H
 #define Accueil_H
 
+#include "TypesJeu.h"
 #include <QWidget>
 #include <QPushButton>
 
@@ -18,12 +19,16 @@ public:
 
 public slots:
     void on_morpionButton_clicked();
+    void on_puissance4Button_clicked();
+    void on_othelloButton_clicked();
+    void on_damesButton_clicked();
 
 private:
     Ui::Accueil *ui;
 
 signals:
     void nouveauJeu();
+    void selectionTypeJeu(TypesJeu typeDeJeu);
 };
 
 #endif // Accueil_H

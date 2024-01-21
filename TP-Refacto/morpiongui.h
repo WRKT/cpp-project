@@ -16,7 +16,7 @@ class MorpionGUI : public QWidget
     Q_OBJECT
 
 public:
-    explicit MorpionGUI(QWidget *parent = nullptr);
+    explicit MorpionGUI(QWidget *parent = nullptr, TypesJeu typeJeu = TypesJeu::Morpion);
     ~MorpionGUI();
 
 public slots:
@@ -30,7 +30,6 @@ private:
     std::shared_ptr<AJoueur> joueur2;
     std::shared_ptr<IAffichage> modeAffichage;
     std::shared_ptr<Input> input;
-    void ReinitialiserJeu();
 
 signals:
     void showAccueil();

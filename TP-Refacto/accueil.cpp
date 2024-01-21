@@ -17,6 +17,23 @@ Accueil::~Accueil()
 void Accueil::on_morpionButton_clicked()
 {
     hide();
-    emit nouveauJeu();
+    emit selectionTypeJeu(TypesJeu::Morpion);
 }
 
+void Accueil::on_puissance4Button_clicked()
+{
+    hide();
+    emit selectionTypeJeu(TypesJeu::Puissance4);
+}
+
+void Accueil::on_othelloButton_clicked()
+{
+    hide();
+    emit selectionTypeJeu(TypesJeu::Othello);
+}
+
+void Accueil::on_damesButton_clicked()
+{
+    hide();
+    emit selectionTypeJeu(TypesJeu::Dames);
+}

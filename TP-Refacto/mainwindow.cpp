@@ -21,12 +21,20 @@ void MainWindow::initWidgets()
     accueilWidget = new Accueil(this);
     setCentralWidget(accueilWidget);
 
-    connect(accueilWidget, &Accueil::nouveauJeu, this, &MainWindow::creerNouveauJeu);
+    connect(accueilWidget, &Accueil::selectionTypeJeu, this, &MainWindow::creerNouveauJeu);
+
 }
 
-void MainWindow::creerNouveauJeu()
+void MainWindow::creerNouveauJeu(TypesJeu typeDeJeu)
 {
-    morpionWidget = new MorpionGUI(this);
+    typeJeu = typeDeJeu;
+
+    if (morpionWidget) {
+        delete morpionWidget;
+        morpionWidget = nullptr;
+    }
+
+    morpionWidget = new MorpionGUI(this, typeJeu);
 
     connect(morpionWidget, &MorpionGUI::showAccueil, this, [=]() {
         morpionWidget->hide();

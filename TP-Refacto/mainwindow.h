@@ -23,10 +23,11 @@ private:
     Ui::MainWindow *ui;
     Accueil *accueilWidget;
     MorpionGUI *morpionWidget;
+    TypesJeu typeJeu;
 
     void initWidgets();
 
 public slots:
-    void creerNouveauJeu();
+    void creerNouveauJeu(TypesJeu typedeJeu);
 };
 #endif // MAINWINDOW_H
