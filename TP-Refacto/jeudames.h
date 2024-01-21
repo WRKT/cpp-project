@@ -36,10 +36,14 @@ private:
     bool PeutCapturer(const Position& position, const Direction& direction) const;
     void DeplacerPiece(const Position& depart, const Position& arrivee);
     void AjouterCapturesPossibles(const Position& position, std::vector<Position>& coupsPossibles) const;
+    bool PeutDeplacerDame(const Position& position) const;
+    bool PeutCapturerDame(const Position& depart,const Direction& direction) const;
     void EffectuerCapturesMultiples(const Position &position);
     std::vector<Position> CapturesPossiblesDepuisPosition(const Position &position, const Direction &direction, int profondeur) const;
-    Jeton GetJetonAdverse() const;
+    std::vector<Jeton> GetJetonAdverse() const;
     Jeton DeterminerGagnant() const;
+    bool EstJetonAdverse(const Jeton& jeton) const;
+    void VerifierPromotionDame(const Position& position);
 
 };
 

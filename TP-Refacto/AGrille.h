@@ -4,6 +4,7 @@
 #include "IGrilleInit.h"
 #include "jeton.h"
 #include <vector>
+#include "coordonnees.h"
 
 class AGrille : public IGrilleInit
 {
@@ -25,6 +26,8 @@ public:
     virtual std::vector<Jeton> GetColonne(const int x, const int y) const = 0;
     virtual std::vector<Jeton> GetDiagonaleASC(const int x, const int y) const = 0;
     virtual std::vector<Jeton> GetDiagonaleDESC(const int x, const int y) const = 0;
+    virtual void PromouvoirJeton(const Position& position) = 0;
+
     virtual ~AGrille() = default;
 
 protected:

@@ -3,6 +3,7 @@
 
 #include "AGrille.h"
 #include <vector>
+#include "coordonnees.h"
 
 class Grille : public AGrille
 {
@@ -26,7 +27,7 @@ public:
     bool VerifieDiagonaleDESC(const int sequenceGagnante, const Jeton& jeton) const override;
     int CompteSequence(const std::vector<Jeton> &vecteur, const Jeton& jeton) const;
     bool EstDansGrille(const int x, const int y) const override;
-
+    void PromouvoirJeton(const Position& position) override;
 
 };
 
