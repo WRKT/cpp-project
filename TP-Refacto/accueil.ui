@@ -16,57 +16,52 @@
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
   </property>
-  <widget class="QPushButton" name="morpionButton">
+  <widget class="QWidget" name="verticalLayoutWidgetModeJeu">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>300</x>
      <y>220</y>
-     <width>83</width>
-     <height>29</height>
+     <width>171</width>
+     <height>175</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Morpion</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="puissance4Button">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>260</y>
-     <width>83</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Puissance 4</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="othelloButton">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>300</y>
-     <width>83</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Othello</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="damesButton">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>340</y>
-     <width>83</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Dames</string>
-   </property>
+   <layout class="QVBoxLayout" name="buttonLayout">
+    <item>
+     <widget class="QPushButton" name="morpionButton">
+      <property name="text">
+       <string>Morpion</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="puissance4Button">
+      <property name="text">
+       <string>Puissance 4</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="othelloButton">
+      <property name="text">
+       <string>Othello</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="damesButton">
+      <property name="text">
+       <string>Dames</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="exitGame">
+      <property name="text">
+       <string>Quitter le programme</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

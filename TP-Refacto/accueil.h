@@ -22,6 +22,7 @@ public slots:
     void on_puissance4Button_clicked();
     void on_othelloButton_clicked();
     void on_damesButton_clicked();
+    void on_exitGame_clicked();
 
 private:
     Ui::Accueil *ui;

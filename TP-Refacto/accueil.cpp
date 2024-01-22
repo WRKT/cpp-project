@@ -39,11 +39,13 @@ Accueil::Accueil(QWidget *parent)
     ui->puissance4Button->setMinimumSize(150, 50);
     ui->othelloButton->setMinimumSize(150, 50);
     ui->damesButton->setMinimumSize(150, 50);
+    ui->exitGame->setMinimumSize(150, 50);
 
     buttonLayout->addWidget(ui->morpionButton);
     buttonLayout->addWidget(ui->puissance4Button);
     buttonLayout->addWidget(ui->othelloButton);
     buttonLayout->addWidget(ui->damesButton);
+    buttonLayout->addWidget(ui->exitGame);
 
     buttonLayout->setAlignment(Qt::AlignCenter);
     buttonLayout->setSpacing(20);
@@ -55,6 +57,8 @@ Accueil::Accueil(QWidget *parent)
     mainLayout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     setLayout(mainLayout);
+
+    connect(ui->exitGame, &QPushButton::clicked, this, &Accueil::on_exitGame_clicked);
 
 }
 
@@ -86,3 +90,10 @@ void Accueil::on_damesButton_clicked()
     hide();
     emit selectionTypeJeu(TypesJeu::Dames);
 }
+
+void Accueil::on_exitGame_clicked()
+{
+    QApplication::quit();
+}
+
+
