@@ -35,7 +35,7 @@ void AffichageGUI::AfficherGrille(const std::shared_ptr<AGrille>& grille)
 
             gridLayout->addWidget(button, x, y);
             boutonsGrille[x][y] = button;
-            QAction::connect(button, &QPushButton::clicked, this, [this, x, y](){
+            connect(button, &QPushButton::clicked, this, [this, x, y](){
                 emit celluleBoutonClick(x, y);
             });
         }
