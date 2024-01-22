@@ -23,9 +23,14 @@ JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
     if (affichageGUI && inputGUI) {
         connect(affichageGUI.get(), &AffichageGUI::celluleBoutonClick, inputGUI.get(), &InputGUI::onCelluleClique);
     }
-    connect(ui->JvsJButton, &QPushButton::clicked, this, &JeuGUI::on_JvsJButton_clicked);
-    connect(ui->JvsOButton, &QPushButton::clicked, this, &JeuGUI::on_JvsOButton_clicked);
-    connect(ui->OvsOButton, &QPushButton::clicked, this, &JeuGUI::on_OvsOButton_clicked);
+    auto JvsJButton = std::make_shared<QPushButton>("Joueur vs Joueur");
+    connect(JvsJButton.get(), &QPushButton::clicked, this, &JeuGUI::on_JvsJButton_clicked);
+
+    auto JvsOButton = std::make_shared<QPushButton>("Joueur vs Joueur");
+    connect(JvsOButton.get(), &QPushButton::clicked, this, &JeuGUI::on_JvsOButton_clicked);
+
+    auto OvsOButton = std::make_shared<QPushButton>("Joueur vs Joueur");
+    connect(OvsOButton.get(), &QPushButton::clicked, this, &JeuGUI::on_OvsOButton_clicked);
 
     ui->buttonLayout->setAlignment(Qt::AlignCenter);
     ui->JvsJButton->setMinimumSize(80, 20);
