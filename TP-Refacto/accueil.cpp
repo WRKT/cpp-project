@@ -12,11 +12,26 @@ Accueil::Accueil(QWidget *parent)
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
+    QVBoxLayout *welcomeLayout = new QVBoxLayout();
+    QLabel *welcomeLabel = new QLabel("Bienvenue dans notre interface", this);
+    welcomeLabel->setFont(QFont("Segoe UI", 14, QFont::Bold));
+    welcomeLabel->setAlignment(Qt::AlignHCenter);
+    welcomeLayout->addWidget(welcomeLabel);
+    welcomeLayout->setSpacing (20);
+
     QLabel *menuLabel = new QLabel("Menu Principal", this);
+    menuLabel->setFont(QFont("Segoe UI", 12, QFont::Bold));
     menuLabel->setAlignment(Qt::AlignHCenter);
     mainLayout->addWidget(menuLabel);
     mainLayout->setSpacing (100);
 
+    QLabel *choixLabel = new QLabel("Veuillez choisir votre jeu", this);
+    choixLabel->setFont(QFont("Segoe UI", 12, QFont::Bold));
+    choixLabel->setAlignment(Qt::AlignHCenter);
+    welcomeLayout->addWidget(choixLabel);
+    welcomeLayout->setSpacing (20);
+
+    mainLayout->addLayout(welcomeLayout);
 
     QVBoxLayout *buttonLayout = new QVBoxLayout();
 

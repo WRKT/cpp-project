@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>485</width>
-    <height>378</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
   <widget class="QPushButton" name="morpionButton">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>80</y>
+     <x>330</x>
+     <y>220</y>
      <width>83</width>
      <height>29</height>
     </rect>
@@ -32,8 +32,8 @@
   <widget class="QPushButton" name="puissance4Button">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>120</y>
+     <x>330</x>
+     <y>260</y>
      <width>83</width>
      <height>29</height>
     </rect>
@@ -45,8 +45,8 @@
   <widget class="QPushButton" name="othelloButton">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>160</y>
+     <x>330</x>
+     <y>300</y>
      <width>83</width>
      <height>29</height>
     </rect>
@@ -58,8 +58,8 @@
   <widget class="QPushButton" name="damesButton">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>200</y>
+     <x>330</x>
+     <y>340</y>
      <width>83</width>
      <height>29</height>
     </rect>
