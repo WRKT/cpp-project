@@ -3,6 +3,13 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QDir>
+#include <QFileDialog>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QMessageBox>
 
 Accueil::Accueil(QWidget *parent)
     : QWidget(parent),
@@ -97,8 +104,38 @@ void Accueil::on_exitGame_clicked()
     QApplication::quit();
 }
 
-void Accueil::on_chargerButton_clicked()
-{
+void Accueil::on_chargerButton_clicked() {
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    tr("Ouvrir fichier de sauvegarde"),
+                                                    "",
+                                                    tr("Fichiers JSON (*.json)"));
+    if (!fileName.isEmpty()) {
+        QFile file(fileName);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QMessageBox::warning(this, "Erreur", "Impossible d'ouvrir le fichier");
+            return;
+        }
 
+        QString val = file.readAll();
+        file.close();
+        QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
+        QJsonObject jsonObj = doc.object();
+
+        QString typeJeu = jsonObj["TypesJeu"].toString();
+
+        if (typeJeu == "Morpion") {
+            emit selectionTypeJeu(TypesJeu::Morpion);
+        } else if (typeJeu == "Puissance4") {
+            emit selectionTypeJeu(TypesJeu::Puissance4);
+        } else if (typeJeu == "Othello") {
+            emit selectionTypeJeu(TypesJeu::Othello);
+        } else if (typeJeu == "Dames") {
+            emit selectionTypeJeu(TypesJeu::Dames);
+            // Créer et montrer JeuGUI pour Dames
+        } else {
+            QMessageBox::warning(this, "Erreur", "Type de jeu inconnu");
+        }
+    }
 }
+
 

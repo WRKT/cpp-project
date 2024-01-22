@@ -5,12 +5,14 @@
 #include "joueurfactory.h"
 #include "jeufactory.h"
 #include <QMessageBox>
+#include <QFileDialog>
+#include <QString>
+
 
 JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
     : QWidget(parent)
     , ui(new Ui::JeuGUI)
     , typeDeJeu(typeDeJeu)
-    , typeDeJeuInitial(typeDeJeu)
 {
     ui->setupUi(this);;
     ui->gridLayout->setSpacing(0);
@@ -91,10 +93,8 @@ void JeuGUI::on_JvsOButton_clicked(){
 
 void JeuGUI::on_saveButton_clicked() {
     if (jeu == nullptr) {
-        // Affiche une boîte de dialogue indiquant que le jeu n'est pas choisi
         QMessageBox::warning(this, "Avertissement", "Aucun jeu n'est choisi pour la sauvegarde.");
     } else {
-        // Lance la sauvegarde du jeu
         jeu->Sauvegarder();
     }
 }
@@ -127,6 +127,8 @@ void JeuGUI::on_rejouerButton_clicked()
     ui->JvsOButton->show();
     ui->OvsOButton->show();
 }
+
+
 
 void JeuGUI::on_retourMenuButton_clicked()
 {

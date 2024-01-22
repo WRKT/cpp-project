@@ -21,6 +21,7 @@ public:
     virtual void AfficherResultat() const = 0;
     virtual TypesJeu getType() const = 0;
     virtual void Sauvegarder() const override;
+    virtual void Charger() const override;
     virtual ~IJeu() = default;
 
 protected:

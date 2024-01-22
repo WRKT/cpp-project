@@ -9,8 +9,9 @@
 #include <QGridLayout>
 #include "IJeu.h"
 
-namespace Ui {
-class JeuGUI;
+namespace Ui
+{
+    class JeuGUI;
 }
 
 class JeuGUI : public QWidget
@@ -38,7 +39,6 @@ private:
     std::shared_ptr<AJoueur> joueur2;
     std::shared_ptr<IAffichage> modeAffichage;
     std::shared_ptr<Input> input;
-    TypesJeu typeDeJeuInitial;
 
 signals:
     void showAccueil();

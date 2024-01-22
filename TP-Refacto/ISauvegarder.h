@@ -4,7 +4,9 @@
 class ISauvegarder {
 public :
     virtual void Sauvegarder() const = 0;
+    virtual void Charger() const = 0;
     virtual ~ISauvegarder() = default;
+
 };
 
 #endif // ISAUVEGARDER_H

@@ -60,7 +60,6 @@ void IJeu::Sauvegarder() const
 
     jeuObj["TypesJeu"] = type;
 
-    // Sauvegarde de la grille
     QJsonArray grilleArray;
     for (int i = 0; i < grille->getNbLignes(); ++i)
     {
@@ -82,11 +81,12 @@ void IJeu::Sauvegarder() const
     joueursArray.append(joueur1Obj);
     joueursArray.append(joueur2Obj);
     jeuObj["Joueurs"] = joueursArray;
+    jeuObj["JoueurCourant"] = QJsonValue(QChar(static_cast<char>(joueurCourant->getJeton())));
 
     QJsonDocument doc(jeuObj);
 
-    QFile file("sauvegarde.json");
-    QString filePath = file.fileName(); // Obtenez le chemin complet du fichier
+    QFile file( type+"-sauvegarde.json");
+    QString filePath = file.fileName();
     modeAffichage->AfficherMessage("Chemin du fichier de sauvegarde : " + filePath.toStdString());
     if (file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
@@ -109,3 +109,7 @@ void IJeu::Sauvegarder() const
     }
 }
 
+
+void IJeu::Charger() const {
+    //
+}
