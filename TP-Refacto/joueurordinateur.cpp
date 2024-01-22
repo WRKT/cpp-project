@@ -1,4 +1,5 @@
 #include "joueurordinateur.h"
+#include <thread>
 
 Position JoueurOrdinateur::ChoisirCoordonnees(const std::vector<Position> &CoupsPossible)
 {

@@ -13,11 +13,18 @@ JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
     , typeDeJeuInitial(typeDeJeu)
 {
     ui->setupUi(this);;
-    gridLayout = new QGridLayout(this);
-    gridLayout->setSpacing(0);
-    gridLayout->setAlignment(Qt::AlignCenter);
+    ui->gridLayout->setSpacing(0);
+    ui->gridLayout->setAlignment(Qt::AlignCenter);
 
-    modeAffichage = std::make_shared<AffichageGUI>(this, gridLayout, ui->labelMessage, ui->labelErreur);
+    QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    sizePolicy.setHorizontalStretch(1);
+    sizePolicy.setVerticalStretch(1);
+    ui->gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding), 0, 0);
+    ui->gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding), 0, 2);
+    ui->gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding), 2, 0);
+    ui->gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding), 2, 2);
+
+    modeAffichage = std::make_shared<AffichageGUI>(this, ui->gridLayout, ui->labelMessage, ui->labelErreur);
     input = std::make_shared<InputGUI>(this);
 
     std::shared_ptr<AffichageGUI> affichageGUI = std::dynamic_pointer_cast<AffichageGUI>(modeAffichage);
@@ -26,17 +33,6 @@ JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
     if (affichageGUI && inputGUI) {
         connect(affichageGUI.get(), &AffichageGUI::celluleBoutonClick, inputGUI.get(), &InputGUI::onCelluleClique);
     }
-    std::shared_ptr<QPushButton> JvsJButton = std::make_shared<QPushButton>("Joueur vs Joueur");
-    connect(JvsJButton.get(), &QPushButton::clicked, this, &JeuGUI::on_JvsJButton_clicked);
-
-    std::shared_ptr<QPushButton> JvsOButton = std::make_shared<QPushButton>("Joueur vs Joueur");
-    connect(JvsOButton.get(), &QPushButton::clicked, this, &JeuGUI::on_JvsOButton_clicked);
-
-    std::shared_ptr<QPushButton> OvsOButton = std::make_shared<QPushButton>("Joueur vs Joueur");
-    connect(OvsOButton.get(), &QPushButton::clicked, this, &JeuGUI::on_OvsOButton_clicked);
-
-    std::shared_ptr<QPushButton> retourMenuButton = std::make_shared<QPushButton>("Retour au menu");
-    connect(retourMenuButton.get(), &QPushButton::clicked, this, &JeuGUI::on_retourMenuButton_clicked);
 
     ui->buttonLayout->setAlignment(Qt::AlignCenter);
     ui->JvsJButton->setMinimumSize(80, 20);
@@ -47,11 +43,6 @@ JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
 
     connect(ui->rejouerButton, &QPushButton::clicked, this, &JeuGUI::on_rejouerButton_clicked);
     connect(ui->retourMenuButton, &QPushButton::clicked, this, &JeuGUI::on_retourMenuButton_clicked);
-
-    ui->buttonLayout->addWidget(JvsJButton.get());
-    ui->buttonLayout->addWidget(JvsOButton.get());
-    ui->buttonLayout->addWidget(OvsOButton.get());
-    ui->buttonLayout->addWidget(retourMenuButton.get());;
 
     ui->labelRejouer->hide();
     ui->rejouerButton->hide();
@@ -142,3 +133,9 @@ void JeuGUI::on_retourMenuButton_clicked()
     hide();
     emit showAccueil();
 }
+
+void JeuGUI::on_chargerButton_clicked()
+{
+
+}
+

@@ -11,20 +11,17 @@ void AffichageGUI::AfficherGrille(const std::shared_ptr<AGrille>& grille)
 {
     boutonsGrille.resize(grille->getNbLignes());
 
-    gridLayout->setSpacing(0);
-
     for (int x = 0; x < grille->getNbLignes(); ++x)
     {
         boutonsGrille[x].resize(grille->getNbColonnes());
         for (int y = 0; y < grille->getNbColonnes(); ++y)
         {
             QPushButton *button = new QPushButton(parentWidget);
-            button->setFixedSize(50, 50);
 
             Jeton jeton = grille->GetCellule(x, y);
             button->setText(QString(static_cast<char>(jeton)));
             QFont font = button->font();
-            font.setPointSize(button->height() / 3);
+            font.setPointSize(button->height() / 2);
             button->setFont(font);
 
             QString style = "QPushButton { background-color : #dcdcdc; border: 1px solid #a0a0a0; }";
@@ -32,6 +29,8 @@ void AffichageGUI::AfficherGrille(const std::shared_ptr<AGrille>& grille)
             style += "QPushButton:pressed { background-color : #c0c0c0; }";
             style += "QLabel { background-color : #f0f0f0; border: 1px solid #a0a0a0; }";
             button->setStyleSheet(style);
+
+            button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
             gridLayout->addWidget(button, x, y);
             boutonsGrille[x][y] = button;
@@ -41,6 +40,7 @@ void AffichageGUI::AfficherGrille(const std::shared_ptr<AGrille>& grille)
         }
     }
 }
+
 
 void AffichageGUI::MettreAJourGrille(const std::shared_ptr<AGrille>& grille)
 {
@@ -58,12 +58,10 @@ void AffichageGUI::AfficherMessage(const std::string& message, const int duree) 
     labelMessage->setText(QString::fromStdString(message));
 }
 
-void AffichageGUI::AfficherErreur(const std::string &erreur) const
-{
+void AffichageGUI::AfficherErreur(const std::string &erreur) const {
     QMessageBox::critical(parentWidget, "Erreur", QString::fromStdString("Saisie invalide. Veuillez réessayer. " + erreur));
 }
 
-void AffichageGUI::AfficherCoupsPossibles(const std::vector<Position>& coups, const std::string& message) const
-{
+void AffichageGUI::AfficherCoupsPossibles(const std::vector<Position>& coups, const std::string& message) const {
 
 }
