@@ -11,7 +11,7 @@
 #include <QPushButton>
 #include <QGridLayout>
 
-class AffichageGUI : public QObject,  public IAffichage {
+class AffichageGUI : public QWidget,  public IAffichage {
     Q_OBJECT
 public:
     AffichageGUI(QWidget *parentWidget);
@@ -28,8 +28,8 @@ signals:
 private:
     QWidget *parentWidget;
     QVector<QVector<QPushButton*>> boutonsGrille;
-    std::shared_ptr<AGrille> grilleJeu;
     QGridLayout* gridLayout;
+    std::shared_ptr<AGrille> grilleJeu;
 
 public slots:
 

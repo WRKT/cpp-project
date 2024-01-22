@@ -8,8 +8,8 @@
 AffichageGUI::AffichageGUI(QWidget *parentWidget) : parentWidget(parentWidget) {
     gridLayout = new QGridLayout(parentWidget);
     gridLayout->setAlignment(Qt::AlignCenter);
-
     parentWidget->setLayout(gridLayout);
+
 }
 
 void AffichageGUI::AfficherGrille(const std::shared_ptr<AGrille>& grille)

@@ -6,51 +6,72 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>730</width>
-    <height>612</height>
+    <width>756</width>
+    <height>708</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
-  <widget class="QLabel" name="label">
+  <property name="windowTitle">
+   <string>JeuGUI</string>
+  </property>
+  <widget class="QLabel" name="nomJeu">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>330</x>
      <y>40</y>
-     <width>81</width>
+     <width>31</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
     <string>JEU</string>
    </property>
-  </widget>
-  <widget class="QPushButton" name="JouerButton">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>500</y>
-     <width>83</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Jouer</string>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="retourAccueil">
+  <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>540</y>
-     <width>83</width>
-     <height>29</height>
+     <x>270</x>
+     <y>610</y>
+     <width>221</width>
+     <height>71</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Retour</string>
-   </property>
+   <layout class="QVBoxLayout" name="buttonLayout">
+    <item>
+     <widget class="QPushButton" name="JouerButton">
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Jouer</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="retourAccueil">
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Retour</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

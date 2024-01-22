@@ -1,6 +1,6 @@
 #include "inputgui.h"
 
-InputGUI::InputGUI(QObject *parent) : QObject(parent) {}
+InputGUI::InputGUI(QWidget *parent) : QWidget(parent) {}
 
 void InputGUI::onCelluleClique(int x, int y) {
     dernierCoup = {x, y};

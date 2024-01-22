@@ -24,6 +24,12 @@ JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
         connect(affichageGUI.get(), &AffichageGUI::celluleBoutonClick, inputGUI.get(), &InputGUI::onCelluleClique);
     }
     connect(ui->JouerButton, &QPushButton::clicked, this, &JeuGUI::on_JouerButton_clicked);
+
+    ui->buttonLayout->setAlignment(Qt::AlignCenter);
+    ui->JouerButton->setMinimumSize(80, 20);
+    ui->retourAccueil->setMinimumSize(80, 20);
+    ui->buttonLayout->setSpacing(10);
+    ui->nomJeu->setAlignment(Qt::AlignHCenter);
 }
 
 

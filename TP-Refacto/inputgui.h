@@ -2,14 +2,15 @@
 #define INPUTGUI_H
 
 #include "Input.h"
+#include <QWidget>
 #include <QObject>
 #include <QEventLoop>
 
-class InputGUI : public QObject, public Input {
+class InputGUI : public QWidget, public Input {
     Q_OBJECT
 
 public:
-    explicit InputGUI(QObject *parent = nullptr);
+    explicit InputGUI(QWidget *parent = nullptr);
 
     Position demanderCoordonnees() const override;
     int demanderColonne() const override;
