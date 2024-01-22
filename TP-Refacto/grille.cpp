@@ -22,8 +22,6 @@ void Grille::InitialiserGrilleOthello()
     }
 }
 
-
-
 void Grille::PromouvoirJeton(const Position& position) {
     Jeton jetonActuel = GetCellule(position.x, position.y);
 
@@ -38,6 +36,7 @@ void Grille::PromouvoirJeton(const Position& position) {
         break;
     }
 }
+
 void Grille::InitialiserGrilleDame()
 {
     for (int i = 0; i < getNbLignes(); ++i) {

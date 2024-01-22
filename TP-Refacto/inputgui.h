@@ -19,13 +19,15 @@ public:
 
 signals:
     void celluleChoisie(int x, int y);
+    void entreeRecu();
 
 public slots:
     void onCelluleClique(int x, int y);
 
 private:
-    mutable Position dernierCoup;
-    mutable QEventLoop loop;
+    Position attendreEntree() const;
+    Position dernierCoup;
+    QEventLoop loop;
 };
 
 #endif // INPUTGUI_H

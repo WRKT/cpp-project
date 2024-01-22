@@ -1,18 +1,26 @@
 #include "inputgui.h"
 
-InputGUI::InputGUI(QWidget *parent) : QWidget(parent) {}
+InputGUI::InputGUI(QWidget *parent) : QWidget(parent) {
+    connect(this, &InputGUI::celluleChoisie, this, &InputGUI::onCelluleClique);
+}
 
 void InputGUI::onCelluleClique(int x, int y) {
     dernierCoup = {x, y};
-    loop.quit();
+    emit entreeRecu();
 }
 
 Position InputGUI::demanderCoordonnees() const {
-    loop.exec();
-    return dernierCoup;
+    return attendreEntree();
 }
 
 int InputGUI::demanderColonne() const {
+    return attendreEntree().y;
+}
+
+Position InputGUI::attendreEntree() const {
+    QEventLoop loop;
+    connect(this, &InputGUI::entreeRecu, &loop, &QEventLoop::quit);
     loop.exec();
-    return dernierCoup.y;
+    disconnect(this, &InputGUI::entreeRecu, &loop, &QEventLoop::quit);
+    return dernierCoup;
 }
