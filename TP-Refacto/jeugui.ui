@@ -35,6 +35,48 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
+  <widget class="QLabel" name="labelRejouer">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>620</y>
+     <width>142</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Voulez-vous rejouer ?</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="rejouerButton">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>660</y>
+     <width>93</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Rejouer</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="retourMenuButton">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>660</y>
+     <width>114</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Retour au menu</string>
+   </property>
+  </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>

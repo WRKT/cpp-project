@@ -24,6 +24,8 @@ public slots:
     void on_JvsJButton_clicked();
     void on_JvsOButton_clicked();
     void on_OvsOButton_clicked();
+    void on_rejouerButton_clicked();
+    void on_retourMenuButton_clicked();
 
 private:
     Ui::JeuGUI *ui;
@@ -32,6 +34,7 @@ private:
     std::shared_ptr<AJoueur> joueur2;
     std::shared_ptr<IAffichage> modeAffichage;
     std::shared_ptr<Input> input;
+    TypesJeu typeDeJeuInitial;
 
 signals:
     void showAccueil();

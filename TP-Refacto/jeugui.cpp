@@ -10,6 +10,7 @@ JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
     : QWidget(parent)
     , ui(new Ui::JeuGUI)
     , typeDeJeu(typeDeJeu)
+    , typeDeJeuInitial(typeDeJeu)
 {
     ui->setupUi(this);
     modeAffichage = std::make_shared<AffichageGUI>(this) ;
@@ -39,6 +40,10 @@ JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
     ui->retourAccueil->setMinimumSize(80, 20);
     ui->buttonLayout->setSpacing(10);
     ui->nomJeu->setAlignment(Qt::AlignHCenter);
+
+    connect(ui->rejouerButton, &QPushButton::clicked, this, &JeuGUI::on_rejouerButton_clicked);
+    connect(ui->retourMenuButton, &QPushButton::clicked, this, &JeuGUI::on_retourMenuButton_clicked);
+
 }
 
 
@@ -77,4 +82,20 @@ void JeuGUI::on_OvsOButton_clicked(){
 
     std::unique_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
     jeu->Jouer();
+}
+
+void JeuGUI::on_rejouerButton_clicked()
+{
+    if (typeDeJeu == typeDeJeuInitial) {
+        joueur1 = JoueurFactory::CreerJoueurHumain("Joueur1", Jeton::X, *input);
+        joueur2 = JoueurFactory::CreerJoueurHumain("Joueur2", Jeton::O, *input);
+        std::unique_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
+        jeu->Jouer();
+    }
+}
+
+void JeuGUI::on_retourMenuButton_clicked()
+{
+    hide();
+    emit showAccueil();
 }
