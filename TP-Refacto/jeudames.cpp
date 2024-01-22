@@ -280,19 +280,36 @@ void JeuDames::AjouterCapturesPossibles(const Position& position, std::vector<Po
     }
 }
 void JeuDames::DeplacerPiece(const Position& depart, const Position& arrivee) {
+    // Déplacer le jeton
     grille->ChangeCellule(arrivee.x, arrivee.y, grille->GetCellule(depart.x, depart.y));
     grille->ChangeCellule(depart.x, depart.y, Jeton::Vide);
 
-    if (std::abs(arrivee.x - depart.x) == 2) {
-        // Capture réalisée
-        Position capturePos{(depart.x + arrivee.x) / 2, (depart.y + arrivee.y) / 2};
-        grille->ChangeCellule(capturePos.x, capturePos.y, Jeton::Vide);
+    // Vérifier si une capture a eu lieu
+    if (std::abs(arrivee.x - depart.x) > 1) {
+        // Capture réalisée, peut être simple ou multiple
+        int stepX = (arrivee.x - depart.x > 0) ? 1 : -1;
+        int stepY = (arrivee.y - depart.y > 0) ? 1 : -1;
+        Position capturePos = depart;
+
+        // Parcourir le chemin entre depart et arrivee
+        while (capturePos.x != arrivee.x && capturePos.y != arrivee.y) {
+            capturePos.x += stepX;
+            capturePos.y += stepY;
+
+            // Si une pièce adverse est trouvée, la supprimer
+            if (EstJetonAdverse(grille->GetCellule(capturePos.x, capturePos.y))) {
+                grille->ChangeCellule(capturePos.x, capturePos.y, Jeton::Vide);
+            }
+        }
 
         // Mise à jour de captureEnCours
         captureEnCours = true;
 
+        // Vérifier et effectuer des captures multiples si possible
         EffectuerCapturesMultiples(arrivee);
     }
+
+    // Vérifier si le pion doit être promu en dame
     VerifierPromotionDame(arrivee);
 }
 std::vector<Position> JeuDames::CapturesPossiblesDepuisPosition(const Position& position, const Direction& direction) const {
