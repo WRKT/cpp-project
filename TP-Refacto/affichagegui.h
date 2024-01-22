@@ -13,9 +13,9 @@
 
 class AffichageGUI : public QWidget,  public IAffichage {
     Q_OBJECT
-public:
-    AffichageGUI(QWidget *parentWidget);
 
+public:
+    AffichageGUI(QWidget *parentWidget, QGridLayout* gridLayout);
     void AfficherGrille(const std::shared_ptr<AGrille>& grille) override;
     void AfficherMessage(const std::string& message, const int duree = 1) const override;
     void AfficherErreur(const std::string& erreur) const override;

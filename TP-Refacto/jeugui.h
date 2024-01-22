@@ -6,6 +6,7 @@
 #include "TypesJeu.h"
 #include "IAffichage.h"
 #include "Input.h"
+#include <QGridLayout>
 
 namespace Ui {
 class JeuGUI;
@@ -28,6 +29,7 @@ public slots:
 
 private:
     Ui::JeuGUI *ui;
+    QGridLayout *gridLayout;
     TypesJeu typeDeJeu = TypesJeu::Morpion;
     std::shared_ptr<AJoueur> joueur1;
     std::shared_ptr<AJoueur> joueur2;

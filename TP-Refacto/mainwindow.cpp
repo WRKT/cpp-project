@@ -45,5 +45,5 @@ void MainWindow::CreerNouveauJeu(TypesJeu typeDeJeu)
 
 void MainWindow::QuitterApplication()
 {
-    QCoreApplication::quit();
+    qApp->quit();
 }

@@ -5,12 +5,7 @@
 #include <QGridLayout>
 #include <QObject>
 
-AffichageGUI::AffichageGUI(QWidget *parentWidget) : parentWidget(parentWidget) {
-    gridLayout = new QGridLayout(parentWidget);
-    gridLayout->setAlignment(Qt::AlignCenter);
-    parentWidget->setLayout(gridLayout);
-
-}
+AffichageGUI::AffichageGUI(QWidget *parentWidget, QGridLayout *gridLayout) : parentWidget(parentWidget), gridLayout(gridLayout) {}
 
 void AffichageGUI::AfficherGrille(const std::shared_ptr<AGrille>& grille)
 {
