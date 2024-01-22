@@ -11,6 +11,7 @@ Accueil::Accueil(QWidget *parent)
     ui->setupUi(this);
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
 
     QVBoxLayout *welcomeLayout = new QVBoxLayout();
     QLabel *welcomeLabel = new QLabel("Bienvenue dans notre interface", this);
@@ -33,7 +34,7 @@ Accueil::Accueil(QWidget *parent)
 
     mainLayout->addLayout(welcomeLayout);
 
-    QVBoxLayout *buttonLayout = new QVBoxLayout();
+    QGridLayout *buttonGridLayout = new QGridLayout();
 
     ui->morpionButton->setMinimumSize(150, 50);
     ui->puissance4Button->setMinimumSize(150, 50);
@@ -41,17 +42,17 @@ Accueil::Accueil(QWidget *parent)
     ui->damesButton->setMinimumSize(150, 50);
     ui->exitGame->setMinimumSize(150, 50);
 
-    buttonLayout->addWidget(ui->morpionButton);
-    buttonLayout->addWidget(ui->puissance4Button);
-    buttonLayout->addWidget(ui->othelloButton);
-    buttonLayout->addWidget(ui->damesButton);
-    buttonLayout->addWidget(ui->exitGame);
+    buttonGridLayout->addWidget(ui->morpionButton, 0, 0);
+    buttonGridLayout->addWidget(ui->puissance4Button, 0, 1);
+    buttonGridLayout->addWidget(ui->othelloButton, 1, 0);
+    buttonGridLayout->addWidget(ui->damesButton, 1, 1);
+    buttonGridLayout->addWidget(ui->exitGame, 2, 0, 1, 2);
 
-    buttonLayout->setAlignment(Qt::AlignCenter);
-    buttonLayout->setSpacing(20);
+    buttonGridLayout->setAlignment(Qt::AlignCenter);
+    buttonGridLayout->setSpacing(20);
 
 
-    mainLayout->addLayout(buttonLayout);
+    mainLayout->addLayout(buttonGridLayout);
     mainLayout->addStretch();
 
     mainLayout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
@@ -95,5 +96,3 @@ void Accueil::on_exitGame_clicked()
 {
     QApplication::quit();
 }
-
-

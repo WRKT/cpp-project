@@ -39,7 +39,7 @@
    <property name="geometry">
     <rect>
      <x>260</x>
-     <y>480</y>
+     <y>460</y>
      <width>161</width>
      <height>20</height>
     </rect>
@@ -55,7 +55,7 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>520</y>
+     <y>500</y>
      <width>483</width>
      <height>51</height>
     </rect>
@@ -105,9 +105,9 @@
   <widget class="QLabel" name="labelRejouer">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>590</y>
-     <width>142</width>
+     <x>270</x>
+     <y>570</y>
+     <width>161</width>
      <height>20</height>
     </rect>
    </property>
@@ -122,7 +122,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>40</y>
+     <y>20</y>
      <width>121</width>
      <height>29</height>
     </rect>
@@ -135,13 +135,26 @@
    <property name="geometry">
     <rect>
      <x>300</x>
-     <y>630</y>
+     <y>610</y>
      <width>91</width>
      <height>29</height>
     </rect>
    </property>
    <property name="text">
     <string>Rejouer</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="saveButton">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>20</y>
+     <width>121</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Sauvgarder</string>
    </property>
   </widget>
  </widget>
