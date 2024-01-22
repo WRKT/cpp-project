@@ -38,15 +38,15 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>610</y>
+     <x>230</x>
+     <y>460</y>
      <width>221</width>
-     <height>71</height>
+     <height>139</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="buttonLayout">
     <item>
-     <widget class="QPushButton" name="JouerButton">
+     <widget class="QPushButton" name="JvsJButton">
       <property name="sizeIncrement">
        <size>
         <width>2</width>
@@ -54,7 +54,33 @@
        </size>
       </property>
       <property name="text">
-       <string>Jouer</string>
+       <string>Joueur vs Joueur</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="JvsOButton">
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Joueur vs Ordi</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="OvsOButton">
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Ordi vs Ordi</string>
       </property>
      </widget>
     </item>

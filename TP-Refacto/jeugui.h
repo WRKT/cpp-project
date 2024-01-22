@@ -21,7 +21,9 @@ public:
 
 public slots:
     void on_retourAccueil_clicked();
-    void on_JouerButton_clicked();
+    void on_JvsJButton_clicked();
+    void on_JvsOButton_clicked();
+    void on_OvsOButton_clicked();
 
 private:
     Ui::JeuGUI *ui;
