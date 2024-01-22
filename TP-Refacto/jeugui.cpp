@@ -35,6 +35,9 @@ JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
     std::shared_ptr<QPushButton> OvsOButton = std::make_shared<QPushButton>("Joueur vs Joueur");
     connect(OvsOButton.get(), &QPushButton::clicked, this, &JeuGUI::on_OvsOButton_clicked);
 
+    std::shared_ptr<QPushButton> retourMenuButton = std::make_shared<QPushButton>("Retour au menu");
+    connect(retourMenuButton.get(), &QPushButton::clicked, this, &JeuGUI::on_retourMenuButton_clicked);
+
     ui->buttonLayout->setAlignment(Qt::AlignCenter);
     ui->JvsJButton->setMinimumSize(80, 20);
     ui->JvsOButton->setMinimumSize(80, 20);
@@ -48,10 +51,10 @@ JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
     ui->buttonLayout->addWidget(JvsJButton.get());
     ui->buttonLayout->addWidget(JvsOButton.get());
     ui->buttonLayout->addWidget(OvsOButton.get());
+    ui->buttonLayout->addWidget(retourMenuButton.get());;
 
     ui->labelRejouer->hide();
     ui->rejouerButton->hide();
-    ui->retourMenuButton->hide();
 }
 
 
@@ -113,7 +116,6 @@ void JeuGUI::on_OvsOButton_clicked(){
 void JeuGUI::on_rejouerButton_clicked()
 {
     ui->rejouerButton->hide();
-    ui->retourMenuButton->hide();
     ui->labelRejouer->hide();
 
     ui->choixMode->show();
