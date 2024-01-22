@@ -13,10 +13,8 @@ public:
 private:
     std::vector<Position> CoupsPossibles;
     std::vector<int> CoupsPossible;
-    Position ChoisirCoupMorpion(const std::vector<Position> &CoupsPossibles) override;
-    Position ChoisirCoupPuissance4(const std::vector<Position> &CoupsPossibles) override;
-    Position ChoisirCoupOthello(const std::vector<Position> &CoupsPossibles) override;
-    Position ChoisirCoupDames(const std::vector<Position> &CoupsPossibles) override;
+    Position ChoisirCoordonnees(const std::vector<Position> &CoupsPossibles) override;
+    Position ChoisirColonne(const std::vector<Position> &CoupsPossibles) override;
 };
 
 #endif // JOUEUR_HUMAIN_H

@@ -4,7 +4,7 @@
 #include "inputgui.h"
 #include "joueurfactory.h"
 #include "jeufactory.h"
-
+#include <QMessageBox>
 
 JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
     : QWidget(parent)
@@ -69,7 +69,7 @@ void JeuGUI::on_JvsJButton_clicked(){
 
     joueur1 = JoueurFactory::CreerJoueurHumain("Joueur1", Jeton::X, *input);
     joueur2 = JoueurFactory::CreerJoueurHumain("Joueur2", Jeton::O, *input);
-    std::unique_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
+    jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
     jeu->Jouer();
 
     ui->choixMode->hide();
@@ -85,7 +85,7 @@ void JeuGUI::on_JvsOButton_clicked(){
 
     joueur1 = JoueurFactory::CreerJoueurHumain("prenomJoueur1", Jeton::X, *input);
     joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
-    std::unique_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
+    std::shared_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
     jeu->Jouer();
 
     ui->choixMode->hide();
@@ -97,12 +97,23 @@ void JeuGUI::on_JvsOButton_clicked(){
     ui->rejouerButton->show();
     ui->retourMenuButton->show();
 }
+
+void JeuGUI::on_saveButton_clicked() {
+    if (jeu == nullptr) {
+        // Affiche une boîte de dialogue indiquant que le jeu n'est pas choisi
+        QMessageBox::warning(this, "Avertissement", "Aucun jeu n'est choisi pour la sauvegarde.");
+    } else {
+        // Lance la sauvegarde du jeu
+        jeu->Sauvegarder();
+    }
+}
+
 void JeuGUI::on_OvsOButton_clicked(){
 
     joueur1 = JoueurFactory::CreerJoueurOrdinateur(Jeton::X);
     joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
 
-    std::unique_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
+    jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
     jeu->Jouer();
 
     ui->choixMode->hide();

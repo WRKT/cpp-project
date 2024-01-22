@@ -174,20 +174,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Sauvgarder</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="saveButton">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>20</y>
-     <width>121</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Sauvgarder</string>
+    <string>Sauvegarder</string>
    </property>
   </widget>
  </widget>

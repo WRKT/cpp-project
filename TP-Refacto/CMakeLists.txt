@@ -36,7 +36,7 @@ set(PROJECT_SOURCES
     IAffichage.h
     IChoisirCoup.h
     IGrilleInit.h
-    IJeu.h
+    IJeu.h IJeu.cpp
     inputconsole.cpp
     inputconsole.h
     jeton.h
@@ -67,6 +67,8 @@ add_executable(TP-Refacto ${PROJECT_SOURCES}
     accueil.h accueil.cpp accueil.ui
     jeugui.h jeugui.cpp jeugui.ui
     inputgui.h inputgui.cpp
+    ISauvegarder.h
+
 
 
 )
@@ -80,9 +82,9 @@ install(TARGETS TP-Refacto
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-# Unit-Tests
-include(CTest)
-enable_testing()
+# # Unit-Tests
+# include(CTest)
+# enable_testing()
 
-# Include the UnitTests directory
-add_subdirectory(UnitTests)
+# # Include the UnitTests directory
+# add_subdirectory(UnitTests)

@@ -15,10 +15,8 @@ public:
 private:
     std::mt19937 generateur;
     std::vector<Position> CoupsPossibles;
-    Position ChoisirCoupMorpion(const std::vector<Position> &CoupsPossibles) override;
-    Position ChoisirCoupPuissance4(const std::vector<Position> &CoupsPossibles) override;
-    Position ChoisirCoupOthello(const std::vector<Position> &CoupsPossibles) override;
-    Position ChoisirCoupDames(const std::vector<Position> &CoupsPossibles) override;
+    Position ChoisirCoordonnees(const std::vector<Position> &CoupsPossibles) override;
+    Position ChoisirColonne(const std::vector<Position> &CoupsPossibles) override;
 };
 
 #endif // JOUEUR_ORDINATEUR_H

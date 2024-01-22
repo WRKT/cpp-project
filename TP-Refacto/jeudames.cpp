@@ -2,20 +2,6 @@
 #include <vector>
 #include <algorithm>
 
-JeuDames::JeuDames(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
-    : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
-
-void JeuDames::Jouer() {
-    grille->InitialiserGrilleDame();
-    joueur1->AttribuerListeJeton({Jeton::X, Jeton::DameX});
-    joueur2->AttribuerListeJeton({Jeton::O, Jeton::DameO});
-    modeAffichage->AfficherGrille(grille);
-    while (!PartieFinie()) {
-        Tour();
-        joueurCourant = (joueurCourant == joueur1) ? joueur2 : joueur1;
-    }
-    AfficherResultat();
-}
 
 void JeuDames::Tour() {
     captureEnCours = false;
@@ -27,12 +13,12 @@ void JeuDames::Tour() {
         }
         else {
             AfficherPionsJouables(pionsJouables);
-            Position pionChoisi = joueurCourant->ChoisirCoupDames(pionsJouables);
+            Position pionChoisi = joueurCourant->ChoisirCoordonnees(pionsJouables);
             pionSelectionne = pionChoisi;
             if (EstPionValide(pionChoisi, pionsJouables)) {
                 std::vector<Position> coupsPossibles = CoupsPossibles();
                 AfficherDeplacements(coupsPossibles);
-                Position coupChoisi = joueurCourant->ChoisirCoupDames(coupsPossibles);
+                Position coupChoisi = joueurCourant->ChoisirCoordonnees(coupsPossibles);
                 if (EstCoupValide(coupChoisi, coupsPossibles)) {
                     DeplacerPiece(pionSelectionne, coupChoisi);
                     break;
@@ -368,7 +354,7 @@ void JeuDames::EffectuerCapturesMultiples(const Position& positionInitiale) {
         }
 
         if (!toutesCapturesPossibles.empty()) {
-            Position captureChoisie = joueurCourant->ChoisirCoupDames(toutesCapturesPossibles);
+            Position captureChoisie = joueurCourant->ChoisirCoordonnees(toutesCapturesPossibles);
             DeplacerPiece(positionCourante, captureChoisie);
             positionCourante = captureChoisie; // Mise à jour de la position pour le prochain tour de capture
 

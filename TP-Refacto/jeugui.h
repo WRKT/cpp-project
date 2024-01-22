@@ -7,6 +7,7 @@
 #include "IAffichage.h"
 #include "Input.h"
 #include <QGridLayout>
+#include "IJeu.h"
 
 namespace Ui {
 class JeuGUI;
@@ -24,13 +25,15 @@ public slots:
     void on_JvsJButton_clicked();
     void on_JvsOButton_clicked();
     void on_OvsOButton_clicked();
+    void on_saveButton_clicked();
     void on_rejouerButton_clicked();
     void on_retourMenuButton_clicked();
 
 private:
     Ui::JeuGUI *ui;
     QGridLayout *gridLayout;
-    TypesJeu typeDeJeu = TypesJeu::Morpion;
+    TypesJeu typeDeJeu;
+    std::shared_ptr<IJeu> jeu;
     std::shared_ptr<AJoueur> joueur1;
     std::shared_ptr<AJoueur> joueur2;
     std::shared_ptr<IAffichage> modeAffichage;

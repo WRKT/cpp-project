@@ -47,7 +47,7 @@ int mainConsole(int argc, char *argv[])
             joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
         }
 
-        std::unique_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
+        std::shared_ptr<IJeu> jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
         jeu->Jouer();
 
         rejouer = input.demanderRejouer();

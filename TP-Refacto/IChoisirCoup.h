@@ -7,10 +7,8 @@
 class IChoisirCoup
 {
 public:
-    virtual Position ChoisirCoupMorpion(const std::vector<Position>&) = 0;
-    virtual Position ChoisirCoupPuissance4(const std::vector<Position>&) = 0;
-    virtual Position ChoisirCoupOthello(const std::vector<Position>&) = 0;
-    virtual Position ChoisirCoupDames(const std::vector<Position>&) = 0;
+    virtual Position ChoisirCoordonnees(const std::vector<Position>&) = 0;
+    virtual Position ChoisirColonne(const std::vector<Position>&) = 0;
     virtual ~IChoisirCoup() = default;
 };
 

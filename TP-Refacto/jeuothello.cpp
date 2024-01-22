@@ -2,11 +2,7 @@
 #include <algorithm>
 #include <vector>
 
-JeuOthello::JeuOthello(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
-    : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
-
 void JeuOthello::Jouer() {
-    grille->InitialiserGrilleOthello();
     modeAffichage->AfficherGrille(grille);
     while (!PartieFinie()) {
         Tour();
@@ -31,7 +27,7 @@ void JeuOthello::Tour() {
     }
 
     while (!coupValide) {
-        const Position& coup = joueurCourant->ChoisirCoupOthello(coupsPossibles);
+        const Position& coup = joueurCourant->ChoisirCoordonnees(coupsPossibles);
 
         if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end()) {
             grille->ChangeCellule(coup.x, coup.y, joueurCourant->getJeton());
