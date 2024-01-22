@@ -16,8 +16,6 @@ JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
     modeAffichage = std::make_shared<AffichageGUI>(this) ;
     input = std::make_shared<InputGUI>(this);
 
-    connect(ui->retourAccueil, &QPushButton::clicked, this, &JeuGUI::on_retourAccueil_clicked);
-
     std::shared_ptr<AffichageGUI> affichageGUI = std::dynamic_pointer_cast<AffichageGUI>(modeAffichage);
     std::shared_ptr<InputGUI> inputGUI = std::dynamic_pointer_cast<InputGUI>(input);
 
@@ -37,7 +35,6 @@ JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
     ui->JvsJButton->setMinimumSize(80, 20);
     ui->JvsOButton->setMinimumSize(80, 20);
     ui->OvsOButton->setMinimumSize(80, 20);
-    ui->retourAccueil->setMinimumSize(80, 20);
     ui->buttonLayout->setSpacing(10);
     ui->nomJeu->setAlignment(Qt::AlignHCenter);
 
@@ -50,12 +47,6 @@ JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
 JeuGUI::~JeuGUI()
 {
     delete ui;
-}
-
-void JeuGUI::on_retourAccueil_clicked()
-{
-    hide();
-    emit showAccueil();
 }
 
 void JeuGUI::on_JvsJButton_clicked(){

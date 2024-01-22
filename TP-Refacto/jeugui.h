@@ -20,7 +20,6 @@ public:
     ~JeuGUI();
 
 public slots:
-    void on_retourAccueil_clicked();
     void on_JvsJButton_clicked();
     void on_JvsOButton_clicked();
     void on_OvsOButton_clicked();
