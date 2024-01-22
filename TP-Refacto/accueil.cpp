@@ -96,3 +96,9 @@ void Accueil::on_exitGame_clicked()
 {
     QApplication::quit();
 }
+
+void Accueil::on_chargerButton_clicked()
+{
+
+}
+

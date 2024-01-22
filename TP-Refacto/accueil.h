@@ -30,6 +30,9 @@ private:
 signals:
     void nouveauJeu();
     void selectionTypeJeu(TypesJeu typeDeJeu);
+
+private slots:
+    void on_chargerButton_clicked();
 };
 
 #endif // Accueil_H

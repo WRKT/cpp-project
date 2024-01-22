@@ -134,8 +134,4 @@ void JeuGUI::on_retourMenuButton_clicked()
     emit showAccueil();
 }
 
-void JeuGUI::on_chargerButton_clicked()
-{
-
-}
 

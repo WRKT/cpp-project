@@ -42,8 +42,6 @@ private:
 
 signals:
     void showAccueil();
-private slots:
-    void on_chargerButton_clicked();
 };
 
 #endif // JEUGUI_H

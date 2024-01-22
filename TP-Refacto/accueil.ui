@@ -16,6 +16,19 @@
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
   </property>
+    <widget class="QPushButton" name="chargerButton">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>60</y>
+     <width>121</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Charger</string>
+   </property>
+  </widget>
   <widget class="QWidget" name="verticalLayoutWidgetModeJeu">
    <property name="geometry">
     <rect>
