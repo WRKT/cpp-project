@@ -28,6 +28,8 @@ private:
     void initWidgets();
 
 public slots:
-    void creerNouveauJeu(TypesJeu typedeJeu);
+    void CreerNouveauJeu(TypesJeu typedeJeu);
+    void QuitterApplication();
 };
+
 #endif // MAINWINDOW_H

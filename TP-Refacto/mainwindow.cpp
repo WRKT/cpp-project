@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     initWidgets();
+
+    disconnect(this, &MainWindow::destroyed, this, &MainWindow::QuitterApplication);
 }
 
 MainWindow::~MainWindow()
@@ -19,11 +21,11 @@ void MainWindow::initWidgets()
     accueilWidget = std::make_unique<Accueil>(this);
     setCentralWidget(accueilWidget.get());
 
-    connect(accueilWidget.get(), &Accueil::selectionTypeJeu, this, &MainWindow::creerNouveauJeu);
+    connect(accueilWidget.get(), &Accueil::selectionTypeJeu, this, &MainWindow::CreerNouveauJeu);
 
 }
 
-void MainWindow::creerNouveauJeu(TypesJeu typeDeJeu)
+void MainWindow::CreerNouveauJeu(TypesJeu typeDeJeu)
 {
     typeJeu = typeDeJeu;
 
@@ -39,4 +41,9 @@ void MainWindow::creerNouveauJeu(TypesJeu typeDeJeu)
     });
 
     jeuWidget->show();
+}
+
+void MainWindow::QuitterApplication()
+{
+    QCoreApplication::quit();
 }
