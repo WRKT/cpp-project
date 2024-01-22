@@ -5,7 +5,7 @@
 #include <QGridLayout>
 #include <QObject>
 
-AffichageGUI::AffichageGUI(QWidget *parentWidget, QGridLayout *gridLayout) : parentWidget(parentWidget), gridLayout(gridLayout) {}
+AffichageGUI::AffichageGUI(QWidget *parentWidget, QGridLayout *gridLayout, QLabel *labelMessage, QLabel *labelErreur) : parentWidget(parentWidget), gridLayout(gridLayout), labelMessage(labelMessage) {}
 
 void AffichageGUI::AfficherGrille(const std::shared_ptr<AGrille>& grille)
 {
@@ -55,7 +55,7 @@ void AffichageGUI::MettreAJourGrille(const std::shared_ptr<AGrille>& grille)
 }
 
 void AffichageGUI::AfficherMessage(const std::string& message, const int duree) const {
-    QMessageBox::information(parentWidget, "Message", QString::fromStdString(message));
+    labelMessage->setText(QString::fromStdString(message));
 }
 
 void AffichageGUI::AfficherErreur(const std::string &erreur) const

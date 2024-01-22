@@ -10,12 +10,13 @@
 #include <QVector>
 #include <QPushButton>
 #include <QGridLayout>
+#include <QLabel>
 
 class AffichageGUI : public QWidget,  public IAffichage {
     Q_OBJECT
 
 public:
-    AffichageGUI(QWidget *parentWidget, QGridLayout* gridLayout);
+    AffichageGUI(QWidget *parentWidget, QGridLayout* gridLayout, QLabel *labelMessage, QLabel *labelErreur);
     void AfficherGrille(const std::shared_ptr<AGrille>& grille) override;
     void AfficherMessage(const std::string& message, const int duree = 1) const override;
     void AfficherErreur(const std::string& erreur) const override;
@@ -27,8 +28,10 @@ signals:
 
 private:
     QWidget *parentWidget;
-    QVector<QVector<QPushButton*>> boutonsGrille;
     QGridLayout* gridLayout;
+    QLabel *labelMessage;
+    QLabel *labelErreur;
+    QVector<QVector<QPushButton*>> boutonsGrille;
     std::shared_ptr<AGrille> grilleJeu;
 
 public slots:

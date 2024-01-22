@@ -17,7 +17,7 @@ JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
     gridLayout->setSpacing(0);
     gridLayout->setAlignment(Qt::AlignCenter);
 
-    modeAffichage = std::make_shared<AffichageGUI>(this, gridLayout);
+    modeAffichage = std::make_shared<AffichageGUI>(this, gridLayout, ui->labelMessage, ui->labelErreur);
     input = std::make_shared<InputGUI>(this);
 
     std::shared_ptr<AffichageGUI> affichageGUI = std::dynamic_pointer_cast<AffichageGUI>(modeAffichage);
@@ -42,8 +42,8 @@ JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
     ui->JvsJButton->setMinimumSize(80, 20);
     ui->JvsOButton->setMinimumSize(80, 20);
     ui->OvsOButton->setMinimumSize(80, 20);
+    ui->rejouerButton->setMinimumSize(80,20);
     ui->buttonLayout->setSpacing(10);
-    ui->nomJeu->setAlignment(Qt::AlignHCenter);
 
     connect(ui->rejouerButton, &QPushButton::clicked, this, &JeuGUI::on_rejouerButton_clicked);
     connect(ui->retourMenuButton, &QPushButton::clicked, this, &JeuGUI::on_retourMenuButton_clicked);
@@ -55,6 +55,8 @@ JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
 
     ui->labelRejouer->hide();
     ui->rejouerButton->hide();
+
+    ui->labelMessage->setAlignment(Qt::AlignHCenter);
 }
 
 

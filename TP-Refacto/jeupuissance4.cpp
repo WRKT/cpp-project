@@ -59,6 +59,7 @@ std::vector<Position> JeuPuissance4::CoupsPossibles()
             {
                 Position position = {ligne, colonne};
                 coupsPossibles.emplace_back(position);
+                break;
             }
         }
     }
