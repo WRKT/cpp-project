@@ -19,7 +19,7 @@ void JeuPuissance4::Jouer()
 
         joueurCourant->getJeton() == joueur1->getJeton() ? joueurCourant = joueur2 : joueurCourant = joueur1;
 
-        modeAffichage->AfficherGrille(grille);
+        modeAffichage->MettreAJourGrille(grille);
     }
 
     modeAffichage->AfficherMessage("Match nul !");
@@ -59,6 +59,7 @@ std::vector<Position> JeuPuissance4::CoupsPossibles()
             {
                 Position position = {ligne, colonne};
                 coupsPossibles.emplace_back(position);
+                break;
             }
         }
     }
@@ -67,7 +68,7 @@ std::vector<Position> JeuPuissance4::CoupsPossibles()
 
 void JeuPuissance4::AfficherResultat() const
 {
-    modeAffichage->AfficherGrille(grille);
+    modeAffichage->MettreAJourGrille(grille);
     modeAffichage->AfficherMessage("Le joueur " + joueurCourant->getInformations() + " a gagné !");
 }
 

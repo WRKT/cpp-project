@@ -53,7 +53,8 @@ void JeuDames::Tour() {
 }
 
 bool JeuDames::AGagne() const {
-    return grille->CompteJetons(joueur1->getJeton()) == 0 || grille->CompteJetons(joueur2->getJeton()) == 0;
+    return (grille->CompteJetons(joueur1->getJeton()) == 0 && grille->CompteJetons(getPromotion(joueur1->getJeton())) == 0 )
+           || (grille->CompteJetons(joueur2->getJeton()) == 0  && grille->CompteJetons(getPromotion(joueur2->getJeton())) == 0) ;
 }
 
 bool JeuDames::PartieFinie() const {
@@ -173,7 +174,7 @@ bool JeuDames::PeutCapturerDame(const Position& depart, const Direction& directi
 
 std::vector<Position> JeuDames::PionsJouables() {
     std::vector<Position> pionsJouables;
-    const std::vector<Direction> toutesDirections = {{ -1, -1 }, { -1, 1 }, { 1, -1 },{ 1, 1 }};
+    const std::vector<Direction> toutesDirections = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
     bool capturable = false;
     std::vector<Jeton> listeJetonsJoueur = joueurCourant->GetListeJeton();
 
@@ -182,6 +183,8 @@ std::vector<Position> JeuDames::PionsJouables() {
             Jeton jetonCourant = grille->GetCellule(ligne, colonne);
             if (std::find(listeJetonsJoueur.begin(), listeJetonsJoueur.end(), jetonCourant) != listeJetonsJoueur.end()) {
                 Position position{ligne, colonne};
+                capturable = false;
+
                 for (const Direction& direction : toutesDirections) {
                     bool capture = (jetonCourant == listeJetonsJoueur[0] ? PeutCapturer(position, direction) : PeutCapturerDame(position, direction));
                     if (capture)

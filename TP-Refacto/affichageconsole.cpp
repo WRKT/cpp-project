@@ -1,7 +1,7 @@
 #include "affichageconsole.h"
 #include <iostream>
 
-void AffichageConsole::AfficherGrille(const std::shared_ptr<AGrille> &grille) const
+void AffichageConsole::AfficherGrille(const std::shared_ptr<AGrille> &grille)
 {
     const int nbColonnes = grille->getNbColonnes();
     const int nbLignes = grille->getNbLignes();
@@ -65,3 +65,9 @@ void AffichageConsole::AfficherCoupsPossibles(const std::vector<Position> &coups
     }
     std::cout << std::endl;
 }
+
+void AffichageConsole::MettreAJourGrille(const std::shared_ptr<AGrille> &grille)
+{
+    AfficherGrille(grille);
+}
+

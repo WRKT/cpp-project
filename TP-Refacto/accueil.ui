@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Accueil</class>
+ <widget class="QWidget" name="Accueil">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
+  <widget class="QWidget" name="verticalLayoutWidgetModeJeu">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>220</y>
+     <width>171</width>
+     <height>175</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="buttonLayout">
+    <item>
+     <widget class="QPushButton" name="morpionButton">
+      <property name="text">
+       <string>Morpion</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="puissance4Button">
+      <property name="text">
+       <string>Puissance 4</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="othelloButton">
+      <property name="text">
+       <string>Othello</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="damesButton">
+      <property name="text">
+       <string>Dames</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="exitGame">
+      <property name="text">
+       <string>Quitter le programme</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

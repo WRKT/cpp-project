@@ -3,14 +3,12 @@
 #include "jeuothello.h"
 #include "jeupuissance4.h"
 #include "jeudames.h"
-#include "affichageconsole.h"
 #include "grillefactory.h"
 #include <memory>
 
-std::unique_ptr<IJeu> JeuFactory::CreerJeu(TypesJeu &typeDeJeu, std::shared_ptr<AJoueur> &joueur1, std::shared_ptr<AJoueur> &joueur2) {
+std::unique_ptr<IJeu> JeuFactory::CreerJeu(TypesJeu &typeDeJeu, std::shared_ptr<AJoueur> &joueur1, std::shared_ptr<AJoueur> &joueur2, std::shared_ptr<IAffichage> &modeAffichage) {
 
     std::shared_ptr<AGrille> grille = GrilleFactory::CreerGrille(typeDeJeu);
-    std::shared_ptr<IAffichage> modeAffichage = std::make_shared<AffichageConsole>();
 
     switch (typeDeJeu) {
     case TypesJeu::Morpion:

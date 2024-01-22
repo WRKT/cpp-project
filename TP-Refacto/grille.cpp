@@ -15,44 +15,44 @@ void Grille::InitialiserGrilleOthello()
         {Jeton::X, Jeton::O},
         {Jeton::O, Jeton::X}};
 
-    for (int i = 0; i < 2; ++i)
-    {
-        for (int j = 0; j < 2; ++j)
-        {
+    for (int i = 0; i < 2; ++i) {
+        for (int j = 0; j < 2; ++j) {
             ChangeCellule(centreX + i, centreY + j, positions[i][j]);
         }
     }
 }
 
+void Grille::PromouvoirJeton(const Position& position) {
+    Jeton jetonActuel = GetCellule(position.x, position.y);
+
+    switch (jetonActuel) {
+    case Jeton::X:
+        ChangeCellule(position.x, position.y, Jeton::DameX);
+        break;
+    case Jeton::O:
+        ChangeCellule(position.x, position.y, Jeton::DameO);
+        break;
+    default:
+        break;
+    }
+}
+
 void Grille::InitialiserGrilleDame()
 {
-
-    for (int i = 0; i < getNbLignes(); ++i)
-    {
-        for (int j = 0; j < getNbColonnes(); ++j)
-        {
+    for (int i = 0; i < getNbLignes(); ++i) {
+        for (int j = 0; j < getNbColonnes(); ++j) {
             ChangeCellule(i, j, Jeton::Vide);
         }
     }
 
-    for (int i = 0; i < getNbLignes(); ++i)
-    {
-        for (int j = 0; j < getNbColonnes(); ++j)
-        {
-
-            if ((i % 2 == 0 && j % 2 == 1) || (i % 2 == 1 && j % 2 == 0))
-            {
-                if (i < 4)
-                {
-
+    for (int i = 0; i < getNbLignes(); ++i) {
+        for (int j = 0; j < getNbColonnes(); ++j) {
+            if ((i % 2 == 0 && j % 2 == 1) || (i % 2 == 1 && j % 2 == 0)) {
+                if (i < 4){
                     ChangeCellule(i, j, Jeton::O);
-                }
-                else if (i >= getNbLignes() - 4)
-                {
-
+                } else if (i >= getNbLignes() - 4) {
                     ChangeCellule(i, j, Jeton::X);
                 }
-
             }
         }
     }
