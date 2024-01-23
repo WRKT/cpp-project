@@ -44,6 +44,12 @@ private:
     void ShowBoutonsChoixMode();
     void ShowBoutonsRejouer();
     void HideBoutonsRejouer();
+    void Setup();
+    void SetupGridSpacers();
+    void SetupAffichageAndInput();
+    void SetupButtonLayout();
+    void SetupButtonMinimumSize();
+    void SetupButtonConnections();
 
 signals:
     void showAccueil();

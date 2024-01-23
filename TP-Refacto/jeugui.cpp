@@ -14,44 +14,70 @@
 JeuGUI::JeuGUI(QWidget *parent, TypesJeu typeDeJeu)
     : QWidget(parent), ui(new Ui::JeuGUI), typeDeJeu(typeDeJeu)
 {
+    Setup();
+}
+
+void JeuGUI::Setup()
+{
     ui->setupUi(this);
-    ;
     ui->gridLayout->setSpacing(0);
     ui->gridLayout->setAlignment(Qt::AlignCenter);
 
+    SetupGridSpacers();
+    SetupAffichageAndInput();
+    SetupButtonLayout();
+    SetupButtonMinimumSize();
+    SetupButtonConnections();
+
+    ui->labelRejouer->hide();
+    ui->rejouerButton->hide();
+    ui->labelMessage->setAlignment(Qt::AlignHCenter);
+}
+
+void JeuGUI::SetupGridSpacers()
+{
     QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     sizePolicy.setHorizontalStretch(1);
     sizePolicy.setVerticalStretch(1);
+
     ui->gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding), 0, 0);
     ui->gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding), 0, 2);
     ui->gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding), 2, 0);
     ui->gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding), 2, 2);
+}
 
+void JeuGUI::SetupAffichageAndInput()
+{
     modeAffichage = std::make_shared<AffichageGUI>(this, ui->gridLayout, ui->labelMessage, ui->labelErreur);
     input = std::make_shared<InputGUI>(this);
 
-    std::shared_ptr<AffichageGUI> affichageGUI = std::dynamic_pointer_cast<AffichageGUI>(modeAffichage);
-    std::shared_ptr<InputGUI> inputGUI = std::dynamic_pointer_cast<InputGUI>(input);
+    auto affichageGUI = std::dynamic_pointer_cast<AffichageGUI>(modeAffichage);
+    auto inputGUI = std::dynamic_pointer_cast<InputGUI>(input);
 
     if (affichageGUI && inputGUI)
     {
         connect(affichageGUI.get(), &AffichageGUI::celluleBoutonClick, inputGUI.get(), &InputGUI::onCelluleClique);
     }
+}
 
+void JeuGUI::SetupButtonLayout()
+{
     ui->buttonLayout->setAlignment(Qt::AlignCenter);
+    ui->buttonLayout->setSpacing(10);
+}
+
+void JeuGUI::SetupButtonMinimumSize()
+{
     ui->JvsJButton->setMinimumSize(80, 20);
     ui->JvsOButton->setMinimumSize(80, 20);
     ui->OvsOButton->setMinimumSize(80, 20);
     ui->rejouerButton->setMinimumSize(80, 20);
-    ui->buttonLayout->setSpacing(10);
+}
 
+void JeuGUI::SetupButtonConnections()
+{
     connect(ui->rejouerButton, &QPushButton::clicked, this, &JeuGUI::on_rejouerButton_clicked);
     connect(ui->retourMenuButton, &QPushButton::clicked, this, &JeuGUI::on_retourMenuButton_clicked);
-
-    ui->labelRejouer->hide();
-    ui->rejouerButton->hide();
-
-    ui->labelMessage->setAlignment(Qt::AlignHCenter);
 }
 
 JeuGUI::~JeuGUI()
