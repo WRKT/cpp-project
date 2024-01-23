@@ -23,13 +23,13 @@ public:
     ~JeuGUI();
 
 public slots:
-    void on_JvsJButton_clicked();
-    void on_JvsOButton_clicked();
-    void on_OvsOButton_clicked();
-    void on_saveButton_clicked();
-    void on_rejouerButton_clicked();
-    void on_retourMenuButton_clicked();
-    void on_chargerButton_clicked();
+    void on_JvsJBouton_clicked();
+    void on_JvsOBouton_clicked();
+    void on_OvsOBouton_clicked();
+    void on_sauvegardeBouton_clicked();
+    void on_rejouerBouton_clicked();
+    void on_retourMenuBouton_clicked();
+    void on_chargerBouton_clicked();
 private:
     Ui::JeuGUI *ui;
     QGridLayout *gridLayout;
@@ -40,16 +40,16 @@ private:
     std::shared_ptr<IAffichage> modeAffichage;
     std::shared_ptr<Input> input;
     void VisibiliteBoutonsChoixMode();
-    void HideBoutonsChoixMode();
-    void ShowBoutonsChoixMode();
-    void ShowBoutonsRejouer();
-    void HideBoutonsRejouer();
+    void CacherBoutonsChoixMode();
+    void AfficherBoutonsChoixMode();
+    void AfficherBoutonsRejouer();
+    void CacherBoutonsRejouer();
     void Setup();
-    void SetupGridSpacers();
-    void SetupAffichageAndInput();
-    void SetupButtonLayout();
-    void SetupButtonMinimumSize();
-    void SetupButtonConnections();
+    void SetupEspace();
+    void SetupAffichageEtInput();
+    void SetupBoutonLayout();
+    void SetupBoutonTailleMinimale();
+    void SetupBoutonConnections();
 
 signals:
     void showAccueil();

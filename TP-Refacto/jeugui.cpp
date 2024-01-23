@@ -23,18 +23,18 @@ void JeuGUI::Setup()
     ui->gridLayout->setSpacing(0);
     ui->gridLayout->setAlignment(Qt::AlignCenter);
 
-    SetupGridSpacers();
-    SetupAffichageAndInput();
-    SetupButtonLayout();
-    SetupButtonMinimumSize();
-    SetupButtonConnections();
+    SetupEspace();
+    SetupAffichageEtInput();
+    SetupBoutonLayout();
+    SetupBoutonTailleMinimale();
+    SetupBoutonConnections();
 
     ui->labelRejouer->hide();
-    ui->rejouerButton->hide();
+    ui->rejouerBouton->hide();
     ui->labelMessage->setAlignment(Qt::AlignHCenter);
 }
 
-void JeuGUI::SetupGridSpacers()
+void JeuGUI::SetupEspace()
 {
     QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     sizePolicy.setHorizontalStretch(1);
@@ -46,7 +46,7 @@ void JeuGUI::SetupGridSpacers()
     ui->gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding), 2, 2);
 }
 
-void JeuGUI::SetupAffichageAndInput()
+void JeuGUI::SetupAffichageEtInput()
 {
     modeAffichage = std::make_shared<AffichageGUI>(this, ui->gridLayout, ui->labelMessage, ui->labelErreur);
     input = std::make_shared<InputGUI>(this);
@@ -60,24 +60,24 @@ void JeuGUI::SetupAffichageAndInput()
     }
 }
 
-void JeuGUI::SetupButtonLayout()
+void JeuGUI::SetupBoutonLayout()
 {
-    ui->buttonLayout->setAlignment(Qt::AlignCenter);
-    ui->buttonLayout->setSpacing(10);
+    ui->boutonLayout->setAlignment(Qt::AlignCenter);
+    ui->boutonLayout->setSpacing(10);
 }
 
-void JeuGUI::SetupButtonMinimumSize()
+void JeuGUI::SetupBoutonTailleMinimale()
 {
-    ui->JvsJButton->setMinimumSize(80, 20);
-    ui->JvsOButton->setMinimumSize(80, 20);
-    ui->OvsOButton->setMinimumSize(80, 20);
-    ui->rejouerButton->setMinimumSize(80, 20);
+    ui->JvsJBouton->setMinimumSize(80, 20);
+    ui->JvsOBouton->setMinimumSize(80, 20);
+    ui->OvsOBouton->setMinimumSize(80, 20);
+    ui->rejouerBouton->setMinimumSize(80, 20);
 }
 
-void JeuGUI::SetupButtonConnections()
+void JeuGUI::SetupBoutonConnections()
 {
-    connect(ui->rejouerButton, &QPushButton::clicked, this, &JeuGUI::on_rejouerButton_clicked);
-    connect(ui->retourMenuButton, &QPushButton::clicked, this, &JeuGUI::on_retourMenuButton_clicked);
+    connect(ui->rejouerBouton, &QPushButton::clicked, this, &JeuGUI::on_rejouerBouton_clicked);
+    connect(ui->retourMenuBouton, &QPushButton::clicked, this, &JeuGUI::on_retourMenuBouton_clicked);
 }
 
 JeuGUI::~JeuGUI()
@@ -85,7 +85,7 @@ JeuGUI::~JeuGUI()
     delete ui;
 }
 
-void JeuGUI::on_JvsJButton_clicked()
+void JeuGUI::on_JvsJBouton_clicked()
 {
     VisibiliteBoutonsChoixMode();
 
@@ -94,11 +94,11 @@ void JeuGUI::on_JvsJButton_clicked()
     jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
     jeu->Jouer();
 
-    HideBoutonsChoixMode();
+    CacherBoutonsChoixMode();
 
-    ShowBoutonsRejouer();
+    AfficherBoutonsRejouer();
 }
-void JeuGUI::on_JvsOButton_clicked()
+void JeuGUI::on_JvsOBouton_clicked()
 {
     VisibiliteBoutonsChoixMode();
 
@@ -107,12 +107,12 @@ void JeuGUI::on_JvsOButton_clicked()
     jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
     jeu->Jouer();
 
-    HideBoutonsChoixMode();
+    CacherBoutonsChoixMode();
 
-    ShowBoutonsRejouer();
+    AfficherBoutonsRejouer();
 }
 
-void JeuGUI::on_saveButton_clicked()
+void JeuGUI::on_sauvegardeBouton_clicked()
 {
     if (jeu != nullptr)
     {
@@ -124,7 +124,7 @@ void JeuGUI::on_saveButton_clicked()
     }
 }
 
-void JeuGUI::on_OvsOButton_clicked()
+void JeuGUI::on_OvsOBouton_clicked()
 {
     VisibiliteBoutonsChoixMode();
 
@@ -134,19 +134,19 @@ void JeuGUI::on_OvsOButton_clicked()
     jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
     jeu->Jouer();
 
-    HideBoutonsChoixMode();
+    CacherBoutonsChoixMode();
 
-    ShowBoutonsRejouer();
+    AfficherBoutonsRejouer();
 }
 
-void JeuGUI::on_rejouerButton_clicked()
+void JeuGUI::on_rejouerBouton_clicked()
 {
-    HideBoutonsRejouer();
+    CacherBoutonsRejouer();
 
-    ShowBoutonsChoixMode();
+    AfficherBoutonsChoixMode();
 }
 
-void JeuGUI::on_chargerButton_clicked()
+void JeuGUI::on_chargerBouton_clicked()
 {
     HideBoutonsRejouer();
     // verifier si un jeu est en cours
@@ -221,7 +221,7 @@ void JeuGUI::on_chargerButton_clicked()
     }
 }
 
-void JeuGUI::on_retourMenuButton_clicked()
+void JeuGUI::on_retourMenuBouton_clicked()
 {
     hide();
     emit showAccueil();
@@ -230,35 +230,35 @@ void JeuGUI::on_retourMenuButton_clicked()
 void JeuGUI::VisibiliteBoutonsChoixMode()
 {
     ui->choixMode->setVisible(false);
-    ui->JvsJButton->setVisible(false);
-    ui->JvsOButton->setVisible(false);
-    ui->OvsOButton->setVisible(false);
+    ui->JvsJBouton->setVisible(false);
+    ui->JvsOBouton->setVisible(false);
+    ui->OvsOBouton->setVisible(false);
 }
 
-void JeuGUI::HideBoutonsChoixMode()
+void JeuGUI::CacherBoutonsChoixMode()
 {
     ui->choixMode->hide();
-    ui->JvsJButton->hide();
-    ui->JvsOButton->hide();
-    ui->OvsOButton->hide();
+    ui->JvsJBouton->hide();
+    ui->JvsOBouton->hide();
+    ui->OvsOBouton->hide();
 }
 
-void JeuGUI::ShowBoutonsChoixMode()
+void JeuGUI::AfficherBoutonsChoixMode()
 {
     ui->choixMode->show();
-    ui->JvsJButton->show();
-    ui->JvsOButton->show();
-    ui->OvsOButton->show();
+    ui->JvsJBouton->show();
+    ui->JvsOBouton->show();
+    ui->OvsOBouton->show();
 }
 
-void JeuGUI::ShowBoutonsRejouer()
+void JeuGUI::AfficherBoutonsRejouer()
 {
     ui->labelRejouer->show();
-    ui->rejouerButton->show();
+    ui->rejouerBouton->show();
 }
 
-void JeuGUI::HideBoutonsRejouer()
+void JeuGUI::CacherBoutonsRejouer()
 {
     ui->labelRejouer->hide();
-    ui->rejouerButton->hide();
+    ui->rejouerBouton->hide();
 }
