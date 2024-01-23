@@ -27,6 +27,7 @@ signals:
     void celluleBoutonClick(int x, int y);
 
 private:
+
     QWidget *parentWidget;
     QGridLayout* gridLayout;
     QLabel *labelMessage;

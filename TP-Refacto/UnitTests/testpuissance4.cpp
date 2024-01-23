@@ -22,7 +22,6 @@ protected:
 
         jeu = std::make_unique<JeuPuissance4>(grille, joueur1, joueur2, modeAffichage);
     }
-
 };
 
 TEST_F(TestPuissance4, CheckAGagne)

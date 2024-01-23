@@ -24,6 +24,7 @@ void IJeu::Jouer()
         {
             modeAffichage->MettreAJourGrille(grille);
             AfficherResultat();
+            modeAffichage->MettreAJourGrille(grille);
             return;
         }
         joueurCourant->getJeton() == joueur1->getJeton() ? joueurCourant = joueur2 : joueurCourant = joueur1;

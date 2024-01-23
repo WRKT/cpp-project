@@ -61,7 +61,6 @@ Accueil::Accueil(QWidget *parent)
     setLayout(mainLayout);
 
     connect(ui->exitGame, &QPushButton::clicked, this, &Accueil::on_exitGame_clicked);
-
 }
 
 Accueil::~Accueil()

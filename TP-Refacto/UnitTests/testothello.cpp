@@ -11,11 +11,9 @@
 class TestOthello : public ::testing::Test
 {
 protected:
-    // Les propriétés dont on a besoin pour les tests
-    std::unique_ptr<IJeu> jeu;
+    std::shared_ptr<IJeu> jeu;
     std::shared_ptr<AGrille> grille = std::make_shared<Grille>(8, 8);
 
-    // Mise en place environnement de test othello (pour respecter le constructeur)
     void SetUp() override
     {
         std::shared_ptr<AJoueur> joueur1 = JoueurFactory::CreerJoueurOrdinateur(Jeton::X);

@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include "jeudames.h"
 #include "jeufactory.h"
 #include "jeumorpion.h"
 #include "jeuothello.h"
@@ -35,6 +36,12 @@ TEST_F(JeuFactoryTest, CreerJeuOthello) {
     TypesJeu typeDeJeu = TypesJeu::Othello;
     auto jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
     EXPECT_TRUE(dynamic_cast<JeuOthello*>(jeu.get()) != nullptr);
+}
+
+TEST_F(JeuFactoryTest, CreerJeuDames) {
+    TypesJeu typeDeJeu = TypesJeu::Dames;
+    auto jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
+    EXPECT_TRUE(dynamic_cast<JeuDames*>(jeu.get()) != nullptr);
 }
 
 TEST_F(JeuFactoryTest, CreerJeuInvalid) {

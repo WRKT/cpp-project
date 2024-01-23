@@ -68,10 +68,8 @@ add_executable(TP-Refacto ${PROJECT_SOURCES}
     jeugui.h jeugui.cpp jeugui.ui
     inputgui.h inputgui.cpp
     ISauvegarder.h
-
-
-
 )
+
 target_link_libraries(TP-Refacto PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Core)
 
 

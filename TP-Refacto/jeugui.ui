@@ -23,7 +23,7 @@
    <property name="geometry">
     <rect>
      <x>300</x>
-     <y>540</y>
+     <y>560</y>
      <width>161</width>
      <height>20</height>
     </rect>
@@ -39,25 +39,12 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>560</y>
+     <y>580</y>
      <width>483</width>
      <height>51</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="buttonLayout">
-    <item>
-     <widget class="QPushButton" name="JvsOButton">
-      <property name="sizeIncrement">
-       <size>
-        <width>2</width>
-        <height>2</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Joueur vs Ordi</string>
-      </property>
-     </widget>
-    </item>
     <item>
      <widget class="QPushButton" name="JvsJButton">
       <property name="sizeIncrement">
@@ -68,6 +55,19 @@
       </property>
       <property name="text">
        <string>Joueur vs Joueur</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="JvsOButton">
+      <property name="sizeIncrement">
+       <size>
+        <width>2</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Joueur vs Ordi</string>
       </property>
      </widget>
     </item>
@@ -90,7 +90,7 @@
    <property name="geometry">
     <rect>
      <x>300</x>
-     <y>540</y>
+     <y>560</y>
      <width>161</width>
      <height>20</height>
     </rect>
@@ -119,7 +119,7 @@
    <property name="geometry">
     <rect>
      <x>300</x>
-     <y>570</y>
+     <y>590</y>
      <width>161</width>
      <height>29</height>
     </rect>

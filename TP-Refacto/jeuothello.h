@@ -10,8 +10,9 @@
 
 class JeuOthello : public IJeu {
 public:
-    JeuOthello(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage) : IJeu(grille, j1, j2, modeAffichage){    grille->InitialiserGrilleOthello();
-};
+    JeuOthello(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage) : IJeu(grille, j1, j2, modeAffichage){
+       grille->InitialiserGrilleOthello();
+    };
     void Jouer() override;
     void Tour() override;
     bool AGagne() const override;

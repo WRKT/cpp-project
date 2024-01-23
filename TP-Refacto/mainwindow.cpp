@@ -1,18 +1,25 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    : QMainWindow(parent),
+    ui(new Ui::MainWindow),
+    accueilWidget(nullptr),
+    jeuWidget(nullptr)
 {
     ui->setupUi(this);
     initWidgets();
 
-    disconnect(this, &MainWindow::destroyed, this, &MainWindow::QuitterApplication);
+    connect(this, &QMainWindow::destroyed, this, &MainWindow::QuitterApplication);
 }
 
 MainWindow::~MainWindow()
 {
+    disconnect(accueilWidget.get(), &Accueil::selectionTypeJeu, this, &MainWindow::CreerNouveauJeu);
+    accueilWidget.reset();
+    jeuWidget.reset();
+
     delete ui;
 }
 
@@ -22,7 +29,6 @@ void MainWindow::initWidgets()
     setCentralWidget(accueilWidget.get());
 
     connect(accueilWidget.get(), &Accueil::selectionTypeJeu, this, &MainWindow::CreerNouveauJeu);
-
 }
 
 void MainWindow::CreerNouveauJeu(TypesJeu typeDeJeu)
@@ -43,7 +49,18 @@ void MainWindow::CreerNouveauJeu(TypesJeu typeDeJeu)
     jeuWidget->show();
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    QuitterApplication();
+    event->accept();
+}
+
 void MainWindow::QuitterApplication()
 {
+    disconnect(accueilWidget.get(), &Accueil::selectionTypeJeu, this, &MainWindow::CreerNouveauJeu);
+    accueilWidget.reset();
+    jeuWidget.reset();
+
+    qDebug() << "Quitting application...";
     qApp->quit();
 }
