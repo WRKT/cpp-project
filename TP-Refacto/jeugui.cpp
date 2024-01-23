@@ -168,10 +168,7 @@ void JeuGUI::on_chargerBouton_clicked()
         Reinitialiser();
     }
 
-    QString fileName = QFileDialog::getOpenFileName(this,
-                                                    tr("Ouvrir fichier de sauvegarde"),
-                                                    "",
-                                                    tr("Fichiers JSON (*.json)"));
+    QString fileName = QFileDialog::getOpenFileName(this,tr("Ouvrir fichier de sauvegarde"),"",tr("Fichiers JSON (*.json)"));
     if (!fileName.isEmpty())
     {
         QFile file(fileName);
