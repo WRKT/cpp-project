@@ -61,6 +61,10 @@ JeuGUI::~JeuGUI()
 
 void JeuGUI::on_JvsJButton_clicked()
 {
+    ui->choixMode->setVisible(false);
+    ui->JvsJButton->setVisible(false);
+    ui->JvsOButton->setVisible(false);
+    ui->OvsOButton->setVisible(false);
 
     joueur1 = JoueurFactory::CreerJoueurHumain("Joueur1", Jeton::X, *input);
     joueur2 = JoueurFactory::CreerJoueurHumain("Joueur2", Jeton::O, *input);
@@ -78,6 +82,11 @@ void JeuGUI::on_JvsJButton_clicked()
 }
 void JeuGUI::on_JvsOButton_clicked()
 {
+    ui->choixMode->setVisible(false);
+    ui->JvsJButton->setVisible(false);
+    ui->JvsOButton->setVisible(false);
+    ui->OvsOButton->setVisible(false);
+
 
     joueur1 = JoueurFactory::CreerJoueurHumain("prenomJoueur1", Jeton::X, *input);
     joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
@@ -105,6 +114,10 @@ void JeuGUI::on_saveButton_clicked()
 
 void JeuGUI::on_OvsOButton_clicked()
 {
+    ui->choixMode->setVisible(false);
+    ui->JvsJButton->setVisible(false);
+    ui->JvsOButton->setVisible(false);
+    ui->OvsOButton->setVisible(false);
 
     joueur1 = JoueurFactory::CreerJoueurOrdinateur(Jeton::X);
     joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
