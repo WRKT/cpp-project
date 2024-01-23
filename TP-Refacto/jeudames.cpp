@@ -250,15 +250,38 @@ bool JeuDames::PeutDeplacerDame(const Position &position) const
         courant.x += direction.deltaX;
         courant.y += direction.deltaY;
 
+        bool jetonTrouve = false;
+
         while (grille->EstDansGrille(courant.x, courant.y))
         {
             Jeton jetonCourant = grille->GetCellule(courant.x, courant.y);
 
+            // Si on trouve un jeton, on note sa présence mais on continue à chercher
             if (jetonCourant != Jeton::Vide)
             {
+                if (jetonTrouve) {
+                    // Un deuxième jeton trouvé, donc la dame ne peut pas se déplacer ici
+                    break;
+                }
+                jetonTrouve = true;
+            }
+
+            // Si on a trouvé un jeton, on vérifie si la cellule suivante est vide
+            // pour permettre un saut
+            if (jetonTrouve)
+            {
+                courant.x += direction.deltaX;
+                courant.y += direction.deltaY;
+
+                if (grille->EstDansGrille(courant.x, courant.y) &&
+                    grille->GetCellule(courant.x, courant.y) == Jeton::Vide)
+                {
+                    return true;
+                }
                 break;
             }
 
+            // Si aucun jeton n'est trouvé, la dame peut se déplacer
             return true;
 
             courant.x += direction.deltaX;
