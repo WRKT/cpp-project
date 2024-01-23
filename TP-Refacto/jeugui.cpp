@@ -61,46 +61,29 @@ JeuGUI::~JeuGUI()
 
 void JeuGUI::on_JvsJButton_clicked()
 {
-    ui->choixMode->setVisible(false);
-    ui->JvsJButton->setVisible(false);
-    ui->JvsOButton->setVisible(false);
-    ui->OvsOButton->setVisible(false);
+    VisibiliteBoutonsChoixMode();
 
     joueur1 = JoueurFactory::CreerJoueurHumain("Joueur1", Jeton::X, *input);
     joueur2 = JoueurFactory::CreerJoueurHumain("Joueur2", Jeton::O, *input);
     jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
     jeu->Jouer();
 
-    ui->choixMode->hide();
-    ui->JvsJButton->hide();
-    ui->JvsOButton->hide();
-    ui->OvsOButton->hide();
+    HideBoutonsChoixMode();
 
-    ui->labelRejouer->show();
-    ui->rejouerButton->show();
-    ui->retourMenuButton->show();
+    ShowBoutonsRejouer();
 }
 void JeuGUI::on_JvsOButton_clicked()
 {
-    ui->choixMode->setVisible(false);
-    ui->JvsJButton->setVisible(false);
-    ui->JvsOButton->setVisible(false);
-    ui->OvsOButton->setVisible(false);
+    VisibiliteBoutonsChoixMode();
 
-
-    joueur1 = JoueurFactory::CreerJoueurHumain("prenomJoueur1", Jeton::X, *input);
+    joueur1 = JoueurFactory::CreerJoueurHumain("Joueur1", Jeton::X, *input);
     joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
     jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
     jeu->Jouer();
 
-    ui->choixMode->hide();
-    ui->JvsJButton->hide();
-    ui->JvsOButton->hide();
-    ui->OvsOButton->hide();
+    HideBoutonsChoixMode();
 
-    ui->labelRejouer->show();
-    ui->rejouerButton->show();
-    ui->retourMenuButton->show();
+    ShowBoutonsRejouer();
 }
 
 void JeuGUI::on_saveButton_clicked()
@@ -114,10 +97,7 @@ void JeuGUI::on_saveButton_clicked()
 
 void JeuGUI::on_OvsOButton_clicked()
 {
-    ui->choixMode->setVisible(false);
-    ui->JvsJButton->setVisible(false);
-    ui->JvsOButton->setVisible(false);
-    ui->OvsOButton->setVisible(false);
+    VisibiliteBoutonsChoixMode();
 
     joueur1 = JoueurFactory::CreerJoueurOrdinateur(Jeton::X);
     joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
@@ -125,25 +105,16 @@ void JeuGUI::on_OvsOButton_clicked()
     jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
     jeu->Jouer();
 
-    ui->choixMode->hide();
-    ui->JvsJButton->hide();
-    ui->JvsOButton->hide();
-    ui->OvsOButton->hide();
+    HideBoutonsChoixMode();
 
-    ui->labelRejouer->show();
-    ui->rejouerButton->show();
-    ui->retourMenuButton->show();
+    ShowBoutonsRejouer();
 }
 
 void JeuGUI::on_rejouerButton_clicked()
 {
-    ui->rejouerButton->hide();
-    ui->labelRejouer->hide();
+    HideBoutonsRejouer();
 
-    ui->choixMode->show();
-    ui->JvsJButton->show();
-    ui->JvsOButton->show();
-    ui->OvsOButton->show();
+    ShowBoutonsChoixMode();
 }
 
 void JeuGUI::on_chargerButton_clicked()
@@ -209,4 +180,40 @@ void JeuGUI::on_retourMenuButton_clicked()
 {
     hide();
     emit showAccueil();
+}
+
+void JeuGUI::VisibiliteBoutonsChoixMode()
+{
+    ui->choixMode->setVisible(false);
+    ui->JvsJButton->setVisible(false);
+    ui->JvsOButton->setVisible(false);
+    ui->OvsOButton->setVisible(false);
+}
+
+void JeuGUI::HideBoutonsChoixMode()
+{
+    ui->choixMode->hide();
+    ui->JvsJButton->hide();
+    ui->JvsOButton->hide();
+    ui->OvsOButton->hide();
+}
+
+void JeuGUI::ShowBoutonsChoixMode()
+{
+    ui->choixMode->show();
+    ui->JvsJButton->show();
+    ui->JvsOButton->show();
+    ui->OvsOButton->show();
+}
+
+void JeuGUI::ShowBoutonsRejouer()
+{
+    ui->labelRejouer->show();
+    ui->rejouerButton->show();
+}
+
+void JeuGUI::HideBoutonsRejouer()
+{
+    ui->labelRejouer->hide();
+    ui->rejouerButton->hide();
 }

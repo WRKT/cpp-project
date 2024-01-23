@@ -39,6 +39,11 @@ private:
     std::shared_ptr<AJoueur> joueur2;
     std::shared_ptr<IAffichage> modeAffichage;
     std::shared_ptr<Input> input;
+    void VisibiliteBoutonsChoixMode();
+    void HideBoutonsChoixMode();
+    void ShowBoutonsChoixMode();
+    void ShowBoutonsRejouer();
+    void HideBoutonsRejouer();
 
 signals:
     void showAccueil();
