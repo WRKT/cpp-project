@@ -16,8 +16,8 @@ void Accueil::Setup()
 {
     ui->setupUi(this);
     SetupLayoutPrincipale();
-    SetupLayoutBienvenue();
     SetupMenuLabels();
+    SetupLayoutBienvenue();
     SetupBoutons();
     SetupBoutonConnections();
 }
