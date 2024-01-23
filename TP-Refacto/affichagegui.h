@@ -33,6 +33,7 @@ private:
     QLabel *labelMessage;
     QLabel *labelErreur;
     QVector<QVector<QPushButton*>> boutonsGrille;
+    QString getImage(Jeton jeton);
     std::shared_ptr<AGrille> grilleJeu;
 
 public slots:

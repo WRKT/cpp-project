@@ -1,6 +1,3 @@
-include_directories(${Qt5Core_INCLUDE_DIRS})
-include_directories(${Qt5Widgets_INCLUDE_DIRS})
-
 add_executable(Unit-Tests maintest.cpp
     testgrille.cpp
     testjeufactory.cpp
@@ -30,10 +27,8 @@ add_executable(Unit-Tests maintest.cpp
     ${CMAKE_SOURCE_DIR}/inputconsole.h ${CMAKE_SOURCE_DIR}/inputconsole.cpp
 
 )
-
 target_include_directories(Unit-Tests PRIVATE ${CMAKE_SOURCE_DIR} Qt${QT_VERSION_MAJOR}::Core)
-
-target_link_libraries(Unit-Tests GTest::gtest_main Qt5::Core Qt5::Widgets)
+target_link_libraries(Unit-Tests GTest::gtest_main Qt6::Core Qt6::Widgets)
 
 include(GoogleTest)
 

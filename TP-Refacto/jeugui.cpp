@@ -148,8 +148,9 @@ void JeuGUI::on_rejouerBouton_clicked()
 
 void JeuGUI::on_chargerBouton_clicked()
 {
+    jeu.reset();
     CacherBoutonsRejouer();
-    // verifier si un jeu est en cours
+
     if (jeu != nullptr)
     {
         QMessageBox::warning(this, "Avertissement", "Un jeu est actuellement en cours. Veuillez le terminer avant de charger une partie.");

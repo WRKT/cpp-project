@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     initWidgets();
 
+    setFixedSize(1024,768);
+
     connect(this, &QMainWindow::destroyed, this, &MainWindow::QuitterApplication);
 }
 

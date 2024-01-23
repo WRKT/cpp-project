@@ -9,6 +9,8 @@ AffichageGUI::AffichageGUI(QWidget *parentWidget, QGridLayout *gridLayout, QLabe
 
 void AffichageGUI::AfficherGrille(const std::shared_ptr<AGrille>& grille)
 {
+    const QSize imageSize(50, 50);
+
     boutonsGrille.resize(grille->getNbLignes());
 
     for (int x = 0; x < grille->getNbLignes(); ++x)
@@ -19,22 +21,26 @@ void AffichageGUI::AfficherGrille(const std::shared_ptr<AGrille>& grille)
             QPushButton *button = new QPushButton(parentWidget);
 
             Jeton jeton = grille->GetCellule(x, y);
-            button->setText(QString(static_cast<char>(jeton)));
-            QFont font = button->font();
-            font.setPointSize(button->height() / 2);
-            button->setFont(font);
+            QString imagePath = getImage(jeton);
+            QPixmap originalPixmap(imagePath);
 
-            QString style = "QPushButton { background-color : #dcdcdc; border: 1px solid #a0a0a0; }";
-            style += "QPushButton:hover { background-color : #f0f0f0; }";
-            style += "QPushButton:pressed { background-color : #c0c0c0; }";
-            style += "QLabel { background-color : #f0f0f0; border: 1px solid #a0a0a0; }";
-            button->setStyleSheet(style);
+            QPixmap scaledPixmap = originalPixmap.scaled(imageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+            QIcon icon(scaledPixmap);
+            button->setIcon(icon);
+            button->setIconSize(imageSize);
+
+            if ((x + y) % 2 == 0) {
+                button->setStyleSheet("QPushButton { background-color : #dcdcdc; border: 1px solid #a0a0a0; }");
+            } else {
+                button->setStyleSheet("QPushButton { background-color : #808080; border: 1px solid #a0a0a0; }");
+            }
 
             button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
             gridLayout->addWidget(button, x, y);
             boutonsGrille[x][y] = button;
-            connect(button, &QPushButton::clicked, this, [this, x, y](){
+            connect(button, &QPushButton::clicked, this, [this, x, y]() {
                 emit celluleBoutonClick(x, y);
             });
         }
@@ -44,12 +50,21 @@ void AffichageGUI::AfficherGrille(const std::shared_ptr<AGrille>& grille)
 
 void AffichageGUI::MettreAJourGrille(const std::shared_ptr<AGrille>& grille)
 {
+    const QSize imageSize(50, 50);
+
     for (int x = 0; x < grille->getNbLignes(); ++x)
     {
         for (int y = 0; y < grille->getNbColonnes(); ++y)
         {
             Jeton jeton = grille->GetCellule(x, y);
-            boutonsGrille[x][y]->setText(QString(static_cast<char>(jeton)));
+            QString imagePath = getImage(jeton);
+            QPixmap originalPixmap(imagePath);
+
+            QPixmap scaledPixmap = originalPixmap.scaled(imageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+            QIcon icon(scaledPixmap);
+            boutonsGrille[x][y]->setIcon(icon);
+            boutonsGrille[x][y]->setIconSize(imageSize);
         }
     }
 }
@@ -64,4 +79,28 @@ void AffichageGUI::AfficherErreur(const std::string &erreur) const {
 
 void AffichageGUI::AfficherCoupsPossibles(const std::vector<Position>& coups, const std::string& message) const {
 
+}
+
+QString AffichageGUI::getImage(Jeton jeton)
+{
+    QString imagePath;
+    switch (jeton)
+    {
+    case Jeton::X:
+        imagePath = ":/Assets/PiecesNoir.png";
+        break;
+    case Jeton::O:
+        imagePath = ":/Assets/PiecesBlanche.png";
+        break;
+    case Jeton::DameX:
+        imagePath = ":/Assets/DamesNoir.png";
+        break;
+    case Jeton::DameO:
+        imagePath = ":/Assets/DamesBlanche.png";
+        break;
+    default:
+        imagePath = ":/Assets/CaseVide.png";
+        break;
+    }
+    return imagePath;
 }
