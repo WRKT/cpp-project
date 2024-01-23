@@ -36,8 +36,6 @@ private:
     QString getImage(Jeton jeton);
     std::shared_ptr<AGrille> grilleJeu;
 
-public slots:
-
 };
 
 

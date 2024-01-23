@@ -25,30 +25,30 @@
      <height>175</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="buttonLayout">
+   <layout class="QVBoxLayout" name="boutonLayout">
     <item>
-     <widget class="QPushButton" name="morpionButton">
+     <widget class="QPushButton" name="morpionBouton">
       <property name="text">
        <string>Morpion</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="puissance4Button">
+     <widget class="QPushButton" name="puissance4Bouton">
       <property name="text">
        <string>Puissance 4</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="othelloButton">
+     <widget class="QPushButton" name="othelloBouton">
       <property name="text">
        <string>Othello</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="damesButton">
+     <widget class="QPushButton" name="damesBouton">
       <property name="text">
        <string>Dames</string>
       </property>

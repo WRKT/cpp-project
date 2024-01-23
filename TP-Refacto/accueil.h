@@ -2,6 +2,9 @@
 #define Accueil_H
 
 #include "TypesJeu.h"
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QLabel>
 #include <QWidget>
 #include <QPushButton>
 
@@ -18,14 +21,22 @@ public:
     ~Accueil();
 
 public slots:
-    void on_morpionButton_clicked();
-    void on_puissance4Button_clicked();
-    void on_othelloButton_clicked();
-    void on_damesButton_clicked();
+    void on_morpionBouton_clicked();
+    void on_puissance4Bouton_clicked();
+    void on_othelloBouton_clicked();
+    void on_damesBouton_clicked();
     void on_exitGame_clicked();
 
 private:
     Ui::Accueil *ui;
+    QVBoxLayout *layoutPrincipale;
+    void Setup();
+    void SetupLayoutPrincipale();
+    void SetupLayoutBienvenue();
+    void SetupMenuLabels();
+    void SetupBoutons();
+    void SetupBoutonConnections();
+    QLabel* CreationDuLabelEnGras(const QString &text, int fontSize);
 
 signals:
     void nouveauJeu();
