@@ -34,8 +34,7 @@ private:
     QLabel *labelErreur;
     QVector<QVector<QPushButton*>> boutonsGrille;
     std::shared_ptr<AGrille> grilleJeu;
-
-public slots:
+    QPushButton *CreerBoutonGrille(int x, int y, Jeton jeton);  
 
 };
 

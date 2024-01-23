@@ -9,36 +9,46 @@ AffichageGUI::AffichageGUI(QWidget *parentWidget, QGridLayout *gridLayout, QLabe
 
 void AffichageGUI::AfficherGrille(const std::shared_ptr<AGrille>& grille)
 {
-    boutonsGrille.resize(grille->getNbLignes());
+    const int nbLignes = grille->getNbLignes();
+    const int nbColonnes = grille->getNbColonnes();
 
-    for (int x = 0; x < grille->getNbLignes(); ++x)
+    boutonsGrille.resize(nbLignes);
+
+    for (int x = 0; x < nbLignes; ++x)
     {
-        boutonsGrille[x].resize(grille->getNbColonnes());
-        for (int y = 0; y < grille->getNbColonnes(); ++y)
+        boutonsGrille[x].resize(nbColonnes);
+
+        for (int y = 0; y < nbColonnes; ++y)
         {
-            QPushButton *button = new QPushButton(parentWidget);
-
-            Jeton jeton = grille->GetCellule(x, y);
-            button->setText(QString(static_cast<char>(jeton)));
-            QFont font = button->font();
-            font.setPointSize(button->height() / 2);
-            button->setFont(font);
-
-            QString style = "QPushButton { background-color : #dcdcdc; border: 1px solid #a0a0a0; }";
-            style += "QPushButton:hover { background-color : #f0f0f0; }";
-            style += "QPushButton:pressed { background-color : #c0c0c0; }";
-            style += "QLabel { background-color : #f0f0f0; border: 1px solid #a0a0a0; }";
-            button->setStyleSheet(style);
-
-            button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
+            QPushButton* button = CreerBoutonGrille(x, y, grille->GetCellule(x, y));
             gridLayout->addWidget(button, x, y);
             boutonsGrille[x][y] = button;
-            connect(button, &QPushButton::clicked, this, [this, x, y](){
+
+            connect(button, &QPushButton::clicked, this, [this, x, y]() {
                 emit celluleBoutonClick(x, y);
             });
         }
     }
+}
+
+QPushButton* AffichageGUI::CreerBoutonGrille(int x, int y, Jeton jeton)
+{
+    QPushButton* button = new QPushButton(parentWidget);
+    button->setText(QString(static_cast<char>(jeton)));
+
+    QFont font = button->font();
+    font.setPointSize(button->height() / 2);
+    button->setFont(font);
+
+    QString style = "QPushButton { background-color : #dcdcdc; border: 1px solid #a0a0a0; }";
+    style += "QPushButton:hover { background-color : #f0f0f0; }";
+    style += "QPushButton:pressed { background-color : #c0c0c0; }";
+    style += "QLabel { background-color : #f0f0f0; border: 1px solid #a0a0a0; }";
+    button->setStyleSheet(style);
+
+    button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    return button;
 }
 
 
