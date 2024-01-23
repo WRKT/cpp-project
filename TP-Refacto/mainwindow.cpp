@@ -16,9 +16,14 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    disconnect(accueilWidget.get(), &Accueil::selectionTypeJeu, this, &MainWindow::CreerNouveauJeu);
-    accueilWidget.reset();
-    jeuWidget.reset();
+    if (accueilWidget) {
+        disconnect(accueilWidget.get(), &Accueil::selectionTypeJeu, this, &MainWindow::CreerNouveauJeu);
+        accueilWidget.reset();
+    }
+
+    if (jeuWidget) {
+        jeuWidget.reset();
+    }
 
     delete ui;
 }
