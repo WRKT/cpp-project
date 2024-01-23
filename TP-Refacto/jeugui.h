@@ -29,7 +29,7 @@ public slots:
     void on_saveButton_clicked();
     void on_rejouerButton_clicked();
     void on_retourMenuButton_clicked();
-
+    void on_chargerButton_clicked();
 private:
     Ui::JeuGUI *ui;
     QGridLayout *gridLayout;

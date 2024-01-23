@@ -4,7 +4,6 @@
 
 
 void JeuDames::Tour() {
-    captureEnCours = false;
     while (true) {
         std::vector<Position> pionsJouables = PionsJouables();
         if (pionsJouables.empty()) {
@@ -30,8 +29,6 @@ void JeuDames::Tour() {
             }
         }
     }
-    modeAffichage->AfficherGrille(grille);
-
 }
 
 bool JeuDames::AGagne() const {
@@ -230,8 +227,7 @@ bool JeuDames::PeutCapturer(const Position& position, const Direction& direction
     Jeton jetonAdversaire = grille->GetCellule(adversaire.x, adversaire.y);
     Jeton jetonDestination = grille->GetCellule(destination.x, destination.y);
 
-    // Permettre la capture en arrière seulement si une capture est déjà en cours
-    bool directionCorrecte = captureEnCours || (direction.deltaX == ((joueurCourant == joueur1) ? -1 : 1));
+    bool directionCorrecte = (direction.deltaX == ((joueurCourant == joueur1) ? -1 : 1));
     return directionCorrecte && EstJetonAdverse(jetonAdversaire) && jetonDestination == Jeton::Vide;
 }
 
@@ -270,32 +266,21 @@ void JeuDames::DeplacerPiece(const Position& depart, const Position& arrivee) {
     grille->ChangeCellule(arrivee.x, arrivee.y, grille->GetCellule(depart.x, depart.y));
     grille->ChangeCellule(depart.x, depart.y, Jeton::Vide);
 
-    // Vérifier si une capture a eu lieu
     if (std::abs(arrivee.x - depart.x) > 1) {
-        // Capture réalisée, peut être simple ou multiple
         int stepX = (arrivee.x - depart.x > 0) ? 1 : -1;
         int stepY = (arrivee.y - depart.y > 0) ? 1 : -1;
         Position capturePos = depart;
 
-        // Parcourir le chemin entre depart et arrivee
         while (capturePos.x != arrivee.x && capturePos.y != arrivee.y) {
             capturePos.x += stepX;
             capturePos.y += stepY;
 
-            // Si une pièce adverse est trouvée, la supprimer
             if (EstJetonAdverse(grille->GetCellule(capturePos.x, capturePos.y))) {
                 grille->ChangeCellule(capturePos.x, capturePos.y, Jeton::Vide);
             }
         }
-
-        // Mise à jour de captureEnCours
-        captureEnCours = true;
-
-        // Vérifier et effectuer des captures multiples si possible
         EffectuerCapturesMultiples(arrivee);
     }
-
-    // Vérifier si le pion doit être promu en dame
     VerifierPromotionDame(arrivee);
 }
 std::vector<Position> JeuDames::CapturesPossiblesDepuisPosition(const Position& position, const Direction& direction) const {
@@ -392,11 +377,9 @@ std::vector<Position> JeuDames::CalculerPositionsCaptureDame(const Position& pos
             if (EstJetonAdverse(jetonCourant)) {
                 adversaireTrouve = true;
             } else {
-                // Si un pion allié est trouvé, arrêter la recherche
                 break;
             }
         } else if (jetonCourant == Jeton::Vide && adversaireTrouve) {
-            // Ajouter toutes les positions vides après la capture
             positionsCapture.push_back(courant);
         }
 

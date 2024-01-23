@@ -24,8 +24,6 @@ public:
     void AfficherResultat() const override;
     TypesJeu getType() const override { return TypesJeu::Dames;}
 private:
-    bool captureEnCours = false;
-
     Position pionSelectionne;
     std::vector<Position> PionsJouables();
     void AfficherPionsJouables(const std::vector<Position> &pionsJouables);

@@ -16,6 +16,8 @@ void JeuPuissance4::Tour()
         if (std::find(coupsPossibles.begin(), coupsPossibles.end(), coup) != coupsPossibles.end())
         {
             grille->ChangeCellule(coup.x, coup.y, joueurCourant->getJeton());
+            modeAffichage->MettreAJourGrille(grille);
+
             coupValide = true;
         }
         else

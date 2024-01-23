@@ -8,6 +8,7 @@
 #include "ISauvegarder.h"
 #include "IAffichage.h"
 #include "TypesJeu.h"
+#include <QJsonArray>
 
 class IJeu : public ISauvegarder
 {
@@ -21,7 +22,7 @@ public:
     virtual void AfficherResultat() const = 0;
     virtual TypesJeu getType() const = 0;
     virtual void Sauvegarder() const override;
-    virtual void Charger() const override;
+    virtual void Charger(const QJsonArray &grilleData, const QString& nomJoueurCourant )  override;
     virtual ~IJeu() = default;
 
 protected:

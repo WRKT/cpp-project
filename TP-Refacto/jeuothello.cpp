@@ -33,6 +33,7 @@ void JeuOthello::Tour() {
             grille->ChangeCellule(coup.x, coup.y, joueurCourant->getJeton());
             RetournerJetons(coup, joueurCourant->getJeton());
             coupValide = true;
+            modeAffichage->MettreAJourGrille(grille);
             bloque = 0;
         } else {
             modeAffichage->AfficherErreur("Coup impossible.");

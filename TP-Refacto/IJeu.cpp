@@ -9,7 +9,6 @@
 #include <QJsonValue>
 #include <QTextStream>
 
-
 IJeu::IJeu(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
     : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
 
@@ -21,18 +20,14 @@ void IJeu::Jouer()
         Tour();
         if (AGagne())
         {
+            modeAffichage->MettreAJourGrille(grille);
             AfficherResultat();
             return;
         }
-
         joueurCourant->getJeton() == joueur1->getJeton() ? joueurCourant = joueur2 : joueurCourant = joueur1;
-
-        modeAffichage->MettreAJourGrille(grille);
     }
     modeAffichage->AfficherMessage("Match nul !");
 }
-
-
 
 void IJeu::Sauvegarder() const
 {
@@ -40,15 +35,16 @@ void IJeu::Sauvegarder() const
 
     QString type;
 
-    switch(getType()){
+    switch (getType())
+    {
     case TypesJeu::Othello:
         type = "Othello";
         break;
     case TypesJeu::Morpion:
-       type = "Morpion";
+        type = "Morpion";
         break;
     case TypesJeu::Dames:
-        type= "Dames";
+        type = "Dames";
         break;
     case TypesJeu::Puissance4:
         type = "Puissance4";
@@ -81,11 +77,11 @@ void IJeu::Sauvegarder() const
     joueursArray.append(joueur1Obj);
     joueursArray.append(joueur2Obj);
     jeuObj["Joueurs"] = joueursArray;
-    jeuObj["JoueurCourant"] = QJsonValue(QChar(static_cast<char>(joueurCourant->getJeton())));
+    jeuObj["JoueurCourant"] = joueurCourant == joueur1 ? "joueur1" : "joueur2";
 
     QJsonDocument doc(jeuObj);
 
-    QFile file( type+"-sauvegarde.json");
+    QFile file(type + "-sauvegarde.json");
     QString filePath = file.fileName();
     modeAffichage->AfficherMessage("Chemin du fichier de sauvegarde : " + filePath.toStdString());
     if (file.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -109,7 +105,37 @@ void IJeu::Sauvegarder() const
     }
 }
 
+void IJeu::Charger(const QJsonArray &grilleData, const QString& nomJoueurCourant)
+{
+    for (const QJsonValue &valeur : grilleData)
+    {
+        QJsonObject cellule = valeur.toObject();
+        int ligne = cellule["Ligne"].toInt();
+        int colonne = cellule["Colonne"].toInt();
+        QChar valeurCellule = cellule["Valeur"].toString()[0];
+        Jeton jeton;
+        if (valeurCellule == 'x')
+        {
+            jeton = Jeton::X;
+        }
+        else if (valeurCellule == 'o')
+        {
+            jeton = Jeton::O;
+        }
+        else if (valeurCellule == 'X')
+        {
+            jeton = Jeton::DameX;
+        }
+        else if (valeurCellule == 'O')
+        {
+            jeton = Jeton::DameO;
+        }
+        else
+        {
+            jeton = Jeton::Vide;
+        }
+        grille->ChangeCellule(ligne, colonne, jeton);
 
-void IJeu::Charger() const {
-    //
+        nomJoueurCourant == "joueur1" ?  joueurCourant = joueur1 : joueurCourant = joueur2;
+    }
 }

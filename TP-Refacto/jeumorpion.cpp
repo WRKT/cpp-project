@@ -18,6 +18,7 @@ void JeuMorpion::Tour()
         {
             grille->ChangeCellule(coup.x, coup.y, joueurCourant->getJeton());
             coupValide = true;
+            modeAffichage->MettreAJourGrille(grille);
         }
         else
         {
