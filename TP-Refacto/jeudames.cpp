@@ -250,44 +250,33 @@ bool JeuDames::PeutDeplacerDame(const Position &position) const
         courant.x += direction.deltaX;
         courant.y += direction.deltaY;
 
-        bool jetonTrouve = false;
+        // Drapeau pour vérifier si au moins une case vide est trouvée dans la direction
+        bool caseVideTrouvee = false;
 
         while (grille->EstDansGrille(courant.x, courant.y))
         {
             Jeton jetonCourant = grille->GetCellule(courant.x, courant.y);
 
-            // Si on trouve un jeton, on note sa présence mais on continue à chercher
+            // Si un jeton est trouvé, on ne peut pas se déplacer dans cette direction
             if (jetonCourant != Jeton::Vide)
             {
-                if (jetonTrouve) {
-                    // Un deuxième jeton trouvé, donc la dame ne peut pas se déplacer ici
-                    break;
-                }
-                jetonTrouve = true;
-            }
-
-            // Si on a trouvé un jeton, on vérifie si la cellule suivante est vide
-            // pour permettre un saut
-            if (jetonTrouve)
-            {
-                courant.x += direction.deltaX;
-                courant.y += direction.deltaY;
-
-                if (grille->EstDansGrille(courant.x, courant.y) &&
-                    grille->GetCellule(courant.x, courant.y) == Jeton::Vide)
-                {
-                    return true;
-                }
                 break;
             }
 
-            // Si aucun jeton n'est trouvé, la dame peut se déplacer
-            return true;
+            // Marquer qu'une case vide a été trouvée
+            caseVideTrouvee = true;
 
             courant.x += direction.deltaX;
             courant.y += direction.deltaY;
         }
+
+        // Si une case vide a été trouvée dans cette direction, la dame peut se déplacer
+        if (caseVideTrouvee) {
+            return true;
+        }
     }
+
+    // Si aucune direction valide n'est trouvée, retourner false
     return false;
 }
 
