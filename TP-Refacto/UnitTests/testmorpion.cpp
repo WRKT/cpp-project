@@ -10,18 +10,15 @@
 
 class TestMorpion : public ::testing::Test {
 protected:
-    // Les propriétés dont on a besoin pour les tests
     std::unique_ptr<IJeu> jeu;
     std::shared_ptr<AGrille> grille = std::make_shared<Grille>(3,3);
 
-    // Mise en place environnement de test (pour respecter le constructeur)
     void SetUp() override {
         std::shared_ptr<AJoueur> joueur1 = JoueurFactory::CreerJoueurOrdinateur(Jeton::X);
         std::shared_ptr<AJoueur> joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
         std::shared_ptr<IAffichage> modeAffichage = std::make_shared<AffichageConsole>();
         jeu = std::make_unique<JeuMorpion>(grille, joueur1, joueur2, modeAffichage);
     }
-
 };
 
 TEST_F(TestMorpion, CheckAGagne)

@@ -10,21 +10,15 @@
 class JeuPuissance4 : public IJeu {
 
 public:
-    JeuPuissance4(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage);
-    void Jouer() override;
+    JeuPuissance4(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage) : IJeu(grille, j1, j2, modeAffichage){};
     void Tour() override;
     bool AGagne() const override;
     bool PartieFinie() const override;
-    std::vector<std::pair<int, int>> CoupsPossibles() override;
+    std::vector<Position> CoupsPossibles() override;
     void AfficherResultat() const override;
-
+    TypesJeu getType() const override { return TypesJeu::Puissance4;}
 
 private:
-    std::shared_ptr<AGrille> grille;
-    std::shared_ptr<AJoueur> joueur1;
-    std::shared_ptr<AJoueur> joueur2;
-    std::shared_ptr<AJoueur> joueurCourant;
-    std::shared_ptr<IAffichage> modeAffichage;
     const int sequenceGagnante = 4;
 
 };

@@ -1,7 +1,7 @@
 #include "affichageconsole.h"
 #include <iostream>
 
-void AffichageConsole::AfficherGrille(const std::shared_ptr<AGrille> &grille) const
+void AffichageConsole::AfficherGrille(const std::shared_ptr<AGrille> &grille)
 {
     const int nbColonnes = grille->getNbColonnes();
     const int nbLignes = grille->getNbLignes();
@@ -52,15 +52,22 @@ void AffichageConsole::AfficherMessage(const std::string& message, const int nbS
 void AffichageConsole::AfficherErreur(const std::string& message) const
 {
     std::cerr << "Saisie invalide. Veuillez réessayez. " << message << std::endl;
+    std::cout << std::endl;
 
 }
 
-void AffichageConsole::AfficherCoupsPossibles(const std::vector<std::pair<int, int>> &coupsPossibles) const
+void AffichageConsole::AfficherCoupsPossibles(const std::vector<Position> &coupsPossibles, const std::string& message) const
 {
-    std::cout << "Coups possibles : ";
+    std::cout << message;
     for (auto &coup : coupsPossibles)
     {
-        std::cout << "(" << coup.first + 1 << ", " << coup.second + 1 << ") ";
+        std::cout << "(" << coup.x + 1 << ", " << coup.y + 1 << ") ";
     }
     std::cout << std::endl;
 }
+
+void AffichageConsole::MettreAJourGrille(const std::shared_ptr<AGrille> &grille)
+{
+    AfficherGrille(grille);
+}
+

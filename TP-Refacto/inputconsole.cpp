@@ -4,7 +4,7 @@
 #include <map>
 #include <regex>
 
-std::string InputConsole::getString(const std::string &message)
+std::string InputConsole::getString(const std::string &message) const
 {
     std::string reponse;
     std::cout << std::endl;
@@ -27,7 +27,7 @@ std::string InputConsole::getString(const std::string &message)
     return reponse;
 }
 
-int InputConsole::getInt(const std::string &message)
+int InputConsole::getInt(const std::string &message) const
 {
     int choix;
     std::cout << std::endl;
@@ -58,12 +58,14 @@ void InputConsole::ViderBuffer()
     std::cout << std::endl;
 }
 
-TypesJeu InputConsole::demanderTypeDeJeu()
+TypesJeu InputConsole::demanderTypeDeJeu() const
 {
     std::map<TypesJeu, std::string> nomsDesJeux = {
         {TypesJeu::Morpion, "Morpion"},
         {TypesJeu::Puissance4, "Puissance 4"},
-        {TypesJeu::Othello, "Othello"}};
+        {TypesJeu::Othello, "Othello"},
+        {TypesJeu::Dames, "Dames"}
+    };
 
     int choixJeu;
     bool choixValide;
@@ -87,7 +89,7 @@ TypesJeu InputConsole::demanderTypeDeJeu()
     return static_cast<TypesJeu>(choixJeu);
 }
 
-int InputConsole::demanderModeDeJeu()
+int InputConsole::demanderModeDeJeu() const
 {
     int modeJeu;
     bool choixValide;
@@ -108,7 +110,7 @@ int InputConsole::demanderModeDeJeu()
     return modeJeu;
 }
 
-bool InputConsole::demanderRejouer()
+bool InputConsole::demanderRejouer() const
 {
     std::string choix;
     bool choixValide;
@@ -122,7 +124,7 @@ bool InputConsole::demanderRejouer()
     return choix == "o" || choix == "O";
 }
 
-std::string InputConsole::demanderPrenomJoueur(const std::string &prompt)
+std::string InputConsole::demanderPrenomJoueur(const std::string &prompt) const
 {
     std::string prenom;
     std::regex regexPrenom("^[A-Za-z]{1,20}$");
@@ -139,7 +141,7 @@ std::string InputConsole::demanderPrenomJoueur(const std::string &prompt)
     return prenom;
 }
 
-std::pair<int, int> InputConsole::demanderCordonnee()
+Position InputConsole::demanderCoordonnees() const
 {
     int x, y;
 
@@ -147,11 +149,12 @@ std::pair<int, int> InputConsole::demanderCordonnee()
     {
         x = getInt("Entrez la ligne : ");
         y = getInt("Entrez la colonne : ");
-        return {x - 1, y - 1};
+
+        return {x-1, y-1};
     }
 }
 
-int InputConsole::demanderColonne()
+int InputConsole::demanderColonne() const
 {
     int colonne;
 

@@ -10,14 +10,13 @@ class JoueurOrdinateur : public AJoueur
 {
 
 public:
-    JoueurOrdinateur(Jeton jeton) : AJoueur("Ordinateur", jeton), generateur(std::chrono::system_clock::now().time_since_epoch().count()){};
+    JoueurOrdinateur(Jeton jeton) : AJoueur("Ordinateur", jeton, input), generateur(std::chrono::system_clock::now().time_since_epoch().count()){};
 
 private:
     std::mt19937 generateur;
-    std::vector<std::pair<int, int>> CoupsPossibles;
-    std::pair<int, int> ChoisirCoupMorpion(const std::vector<std::pair<int, int>> &CoupsPossibles) override;
-    std::pair<int, int> ChoisirCoupPuissance4(const std::vector<std::pair<int, int>> &CoupsPossibles) override;
-    std::pair<int, int> ChoisirCoupOthello(const std::vector<std::pair<int, int>> &CoupsPossibles) override;
+    std::vector<Position> CoupsPossibles;
+    Position ChoisirCoordonnees(const std::vector<Position> &CoupsPossibles) override;
+    Position ChoisirColonne(const std::vector<Position> &CoupsPossibles) override;
 };
 
 #endif // JOUEUR_ORDINATEUR_H

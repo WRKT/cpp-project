@@ -1,0 +1,3 @@
+[submodule "PROJET-QMAKE/UnitTests/gtest"]
+	path = PROJET-QMAKE/UnitTests/gtest
+	url = https://github.com/google/googletest.git

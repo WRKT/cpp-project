@@ -5,7 +5,7 @@ class IGrilleInit
 {
 public:
     virtual void InitialiserGrilleOthello() = 0;
-    // virtual void InitialiserGrilleDame() = 0;
+    virtual void InitialiserGrilleDame() = 0;
 
 };
 

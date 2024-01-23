@@ -1,13 +1,14 @@
 #ifndef ICHOISIRCOUP_H
 #define ICHOISIRCOUP_H
+
 #include <vector>
+#include "coordonnees.h"
 
 class IChoisirCoup
 {
 public:
-    virtual std::pair<int, int> ChoisirCoupMorpion(const std::vector<std::pair<int, int>>&) = 0;
-    virtual std::pair<int, int> ChoisirCoupPuissance4(const std::vector<std::pair<int, int>>&) = 0;
-    virtual std::pair<int, int> ChoisirCoupOthello(const std::vector<std::pair<int, int>>&) = 0;
+    virtual Position ChoisirCoordonnees(const std::vector<Position>&) = 0;
+    virtual Position ChoisirColonne(const std::vector<Position>&) = 0;
     virtual ~IChoisirCoup() = default;
 };
 
