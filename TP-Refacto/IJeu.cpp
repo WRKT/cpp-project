@@ -10,11 +10,13 @@
 #include <QTextStream>
 
 IJeu::IJeu(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage)
-    : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {}
+    : grille(grille), joueur1(j1), joueur2(j2), joueurCourant(j1), modeAffichage(modeAffichage) {
+
+}
 
 void IJeu::Jouer()
-{
-    modeAffichage->AfficherGrille(grille);
+{        modeAffichage->AfficherGrille(grille);
+
     while (!PartieFinie())
     {
         Tour();

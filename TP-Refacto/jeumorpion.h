@@ -12,7 +12,6 @@ class JeuMorpion : public IJeu {
 
 public:
     JeuMorpion(std::shared_ptr<AGrille> grille, std::shared_ptr<AJoueur> j1, std::shared_ptr<AJoueur> j2, std::shared_ptr<IAffichage> modeAffichage) : IJeu(grille, j1, j2, modeAffichage){
-        modeAffichage->AfficherGrille(grille);
         };
     void Tour() override;
     bool AGagne() const override;

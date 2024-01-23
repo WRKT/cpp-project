@@ -20,6 +20,8 @@ void JeuDames::Tour() {
                 Position coupChoisi = joueurCourant->ChoisirCoordonnees(coupsPossibles);
                 if (EstCoupValide(coupChoisi, coupsPossibles)) {
                     DeplacerPiece(pionSelectionne, coupChoisi);
+                    modeAffichage->MettreAJourGrille(grille);
+
                     break;
                 } else {
                     modeAffichage->AfficherErreur("Coup impossible pour le pion choisi");
@@ -216,6 +218,7 @@ bool JeuDames::PeutDeplacer(const Position& depart, const Position& arrivee) con
 }
 
 
+
 bool JeuDames::PeutCapturer(const Position& position, const Direction& direction) const {
     Position adversaire = {position.x + direction.deltaX, position.y + direction.deltaY};
     Position destination = {adversaire.x + direction.deltaX, adversaire.y + direction.deltaY};
@@ -225,18 +228,16 @@ bool JeuDames::PeutCapturer(const Position& position, const Direction& direction
     }
 
     Jeton jetonAdversaire = grille->GetCellule(adversaire.x, adversaire.y);
-    Jeton jetonDestination = grille->GetCellule(destination.x, destination.y);
-
-    bool directionCorrecte = (direction.deltaX == ((joueurCourant == joueur1) ? -1 : 1));
-    return directionCorrecte && EstJetonAdverse(jetonAdversaire) && jetonDestination == Jeton::Vide;
+    return EstJetonAdverse(jetonAdversaire) && grille->ACaseVide(destination.x, destination.y);
 }
+
+
 
 void JeuDames::AjouterCapturesPossibles(const Position& position, std::vector<Position>& coupsPossibles) const {
     Jeton jetonCourant = grille->GetCellule(position.x, position.y);
     const std::vector<Direction> directions = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
 
     if (jetonCourant == Jeton::DameX || jetonCourant == Jeton::DameO) {
-        // Pour une dame, vérifiez les captures possibles dans toutes les directions
         for (const auto& direction : directions) {
             if (PeutCapturerDame(position, direction)) {
                 std::vector<Position> positionsCapture = CalculerPositionsCaptureDame(position, direction);
@@ -246,14 +247,7 @@ void JeuDames::AjouterCapturesPossibles(const Position& position, std::vector<Po
             }
         }
     } else {
-        std::vector<Direction> directionsPion;
-        if (joueurCourant == joueur1) {
-            directionsPion = {{-1, -1}, {-1, 1}};
-        } else {
-            directionsPion = {{1, -1}, {1, 1}};
-        }
-
-        for (const auto& direction : directionsPion) {
+        for (const auto& direction : directions) {
             if (PeutCapturer(position, direction)) {
                 Position positionCapture = {position.x + 2 * direction.deltaX, position.y + 2 * direction.deltaY};
                 coupsPossibles.push_back(positionCapture);
@@ -262,7 +256,6 @@ void JeuDames::AjouterCapturesPossibles(const Position& position, std::vector<Po
     }
 }
 void JeuDames::DeplacerPiece(const Position& depart, const Position& arrivee) {
-    // Déplacer le jeton
     grille->ChangeCellule(arrivee.x, arrivee.y, grille->GetCellule(depart.x, depart.y));
     grille->ChangeCellule(depart.x, depart.y, Jeton::Vide);
 
