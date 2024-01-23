@@ -114,9 +114,12 @@ void JeuGUI::on_JvsOButton_clicked()
 
 void JeuGUI::on_saveButton_clicked()
 {
-    if (jeu != nullptr) {
+    if (jeu != nullptr)
+    {
         jeu->Sauvegarder();
-    } else {
+    }
+    else
+    {
         QMessageBox::warning(this, "Avertissement", "Aucun jeu n'est actuellement en cours.");
     }
 }
@@ -145,6 +148,14 @@ void JeuGUI::on_rejouerButton_clicked()
 
 void JeuGUI::on_chargerButton_clicked()
 {
+    HideBoutonsRejouer();
+    // verifier si un jeu est en cours
+    if (jeu != nullptr)
+    {
+        QMessageBox::warning(this, "Avertissement", "Un jeu est actuellement en cours. Veuillez le terminer avant de charger une partie.");
+        return;
+    }
+
     QString fileName = QFileDialog::getOpenFileName(this,
                                                     tr("Ouvrir fichier de sauvegarde"),
                                                     "",
@@ -175,29 +186,37 @@ void JeuGUI::on_chargerButton_clicked()
             QMessageBox::warning(this, "Erreur", "Le fichier de sauvegarde ne correspond pas au type de jeu choisi.");
             return;
         }
-        else {
+        else
+        {
             QJsonArray joueursArray = jsonObj["Joueurs"].toArray();
             QString nomJoueur1 = joueursArray[0].toObject()["NomJoueur1"].toString();
             QString nomJoueur2 = joueursArray[1].toObject()["NomJoueur2"].toString();
 
-            if (nomJoueur1 == "Ordinateur") {
+            if (nomJoueur1 == "Ordinateur")
+            {
                 joueur1 = JoueurFactory::CreerJoueurOrdinateur(Jeton::X);
-            } else {
+            }
+            else
+            {
                 joueur1 = JoueurFactory::CreerJoueurHumain(nomJoueur1.toStdString(), Jeton::X, *input);
             }
 
-            if (nomJoueur2 == "Ordinateur") {
+            if (nomJoueur2 == "Ordinateur")
+            {
                 joueur2 = JoueurFactory::CreerJoueurOrdinateur(Jeton::O);
-            } else {
+            }
+            else
+            {
                 joueur2 = JoueurFactory::CreerJoueurHumain(nomJoueur2.toStdString(), Jeton::O, *input);
             }
 
             jeu = JeuFactory::CreerJeu(typeDeJeu, joueur1, joueur2, modeAffichage);
-            if (jeu != nullptr) {
+            if (jeu != nullptr)
+            {
                 jeu->Charger(jsonObj["Grille"].toArray(), jsonObj["JoueurCourant"].toString());
                 jeu->Jouer();
+                jeu.reset();
             }
-
         }
     }
 }
