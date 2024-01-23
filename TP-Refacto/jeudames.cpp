@@ -186,9 +186,20 @@ bool JeuDames::PeutCapturerDame(const Position &depart, const Direction &directi
 
 std::vector<Position> JeuDames::PionsJouables()
 {
-    std::vector<Position> pionsJouables;
+    std::vector<Position> pionsJouables = TrouverPionsCapturables();
+
+    if (pionsJouables.empty())
+    {
+        pionsJouables = TrouverPionsDeplacables();
+    }
+
+    return pionsJouables;
+}
+
+std::vector<Position> JeuDames::TrouverPionsCapturables()
+{
+    std::vector<Position> pionsCapturables;
     const std::vector<Direction> toutesDirections = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
-    bool capturable = false;
     std::vector<Jeton> listeJetonsJoueur = joueurCourant->GetListeJeton();
 
     for (int ligne = 0; ligne < grille->getNbLignes(); ++ligne)
@@ -204,40 +215,45 @@ std::vector<Position> JeuDames::PionsJouables()
                     bool capture = (jetonCourant == listeJetonsJoueur[0] ? PeutCapturer(position, direction) : PeutCapturerDame(position, direction));
                     if (capture)
                     {
-                        pionsJouables.push_back(position);
-                        capturable = true;
+                        pionsCapturables.push_back(position);
+                        return pionsCapturables;
+                    }
+                }
+            }
+        }
+    }
+
+    return pionsCapturables;
+}
+
+std::vector<Position> JeuDames::TrouverPionsDeplacables()
+{
+    std::vector<Position> pionsDeplacables;
+    const std::vector<Direction> toutesDirections = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
+    std::vector<Jeton> listeJetonsJoueur = joueurCourant->GetListeJeton();
+
+    for (int ligne = 0; ligne < grille->getNbLignes(); ++ligne)
+    {
+        for (int colonne = 0; colonne < grille->getNbColonnes(); ++colonne)
+        {
+            Jeton jetonCourant = grille->GetCellule(ligne, colonne);
+            if (std::find(listeJetonsJoueur.begin(), listeJetonsJoueur.end(), jetonCourant) != listeJetonsJoueur.end())
+            {
+                Position position{ligne, colonne};
+                for (const Direction &direction : toutesDirections)
+                {
+                    bool deplacement = (jetonCourant == listeJetonsJoueur[0] ? PeutDeplacer(position, {ligne + direction.deltaX, colonne + direction.deltaY}) : PeutDeplacerDame(position));
+                    if (deplacement)
+                    {
+                        pionsDeplacables.push_back(position);
                         break;
                     }
                 }
             }
         }
     }
-    if (!capturable)
-    {
-        for (int ligne = 0; ligne < grille->getNbLignes(); ++ligne)
-        {
-            for (int colonne = 0; colonne < grille->getNbColonnes(); ++colonne)
-            {
-                Jeton jetonCourant = grille->GetCellule(ligne, colonne);
-                if (std::find(listeJetonsJoueur.begin(), listeJetonsJoueur.end(), jetonCourant) != listeJetonsJoueur.end())
-                {
-                    Position position{ligne, colonne};
 
-                    for (const Direction &direction : toutesDirections)
-                    {
-                        bool deplacement = (jetonCourant == listeJetonsJoueur[0] ? PeutDeplacer(position, {ligne + direction.deltaX, colonne + direction.deltaY}) : PeutDeplacerDame(position));
-                        if (deplacement)
-                        {
-                            pionsJouables.push_back(position);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    return pionsJouables;
+    return pionsDeplacables;
 }
 
 bool JeuDames::PeutDeplacerDame(const Position &position) const
@@ -249,34 +265,24 @@ bool JeuDames::PeutDeplacerDame(const Position &position) const
         Position courant = position;
         courant.x += direction.deltaX;
         courant.y += direction.deltaY;
-
-        // Drapeau pour vérifier si au moins une case vide est trouvée dans la direction
         bool caseVideTrouvee = false;
 
         while (grille->EstDansGrille(courant.x, courant.y))
         {
             Jeton jetonCourant = grille->GetCellule(courant.x, courant.y);
-
-            // Si un jeton est trouvé, on ne peut pas se déplacer dans cette direction
             if (jetonCourant != Jeton::Vide)
             {
                 break;
             }
-
-            // Marquer qu'une case vide a été trouvée
             caseVideTrouvee = true;
 
             courant.x += direction.deltaX;
             courant.y += direction.deltaY;
         }
-
-        // Si une case vide a été trouvée dans cette direction, la dame peut se déplacer
         if (caseVideTrouvee) {
             return true;
         }
     }
-
-    // Si aucune direction valide n'est trouvée, retourner false
     return false;
 }
 
@@ -408,7 +414,6 @@ std::vector<Position> JeuDames::CapturesPossiblesDepuisPosition(const Position &
             }
         }
     }
-    // Logique pour les pions normaux
     else
     {
         Position adversaire = {courant.x + direction.deltaX, courant.y + direction.deltaY};

@@ -47,6 +47,9 @@ private:
     std::vector<Position> CalculerPositionsCaptureDame(const Position &positionDame, const Direction &direction) const;
     bool EstJetonAdverse(const Jeton &jeton) const;
     void VerifierPromotionDame(const Position &position);
+    std::vector<Position> TrouverPionsCapturables();
+    std::vector<Position> TrouverPionsDeplacables();
+
 };
 
 #endif // JEUDAMES_H
