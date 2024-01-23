@@ -62,8 +62,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::QuitterApplication()
 {
-    disconnect(accueilWidget.get(), &Accueil::selectionTypeJeu, this, &MainWindow::CreerNouveauJeu);
     accueilWidget.reset();
+    disconnect(accueilWidget.get(), &Accueil::selectionTypeJeu, this, &MainWindow::CreerNouveauJeu);
     jeuWidget.reset();
 
     qDebug() << "Quitting application...";
