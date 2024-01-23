@@ -19,7 +19,7 @@ Accueil::Accueil(QWidget *parent)
     welcomeLabel->setFont(QFont("Segoe UI", 14, QFont::Bold));
     welcomeLabel->setAlignment(Qt::AlignHCenter);
     welcomeLayout->addWidget(welcomeLabel);
-    welcomeLayout->setSpacing (20);
+    welcomeLayout->setSpacing (50);
 
     QLabel *menuLabel = new QLabel("Menu Principal", this);
     menuLabel->setFont(QFont("Segoe UI", 12, QFont::Bold));
@@ -31,7 +31,7 @@ Accueil::Accueil(QWidget *parent)
     choixLabel->setFont(QFont("Segoe UI", 12, QFont::Bold));
     choixLabel->setAlignment(Qt::AlignHCenter);
     welcomeLayout->addWidget(choixLabel);
-    welcomeLayout->setSpacing (20);
+    welcomeLayout->setSpacing (50);
 
     mainLayout->addLayout(welcomeLayout);
 
