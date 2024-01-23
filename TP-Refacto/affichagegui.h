@@ -33,9 +33,10 @@ private:
     QLabel *labelMessage;
     QLabel *labelErreur;
     QVector<QVector<QPushButton*>> boutonsGrille;
-    QString getImage(Jeton jeton);
     std::shared_ptr<AGrille> grilleJeu;
 
+    QString getImage(Jeton jeton);
+    void configurerBouton(QPushButton* bouton, const QString& cheminImage, const QSize& tailleImage, bool estPair);
 };
 
 
