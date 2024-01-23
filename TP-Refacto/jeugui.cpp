@@ -148,7 +148,7 @@ void JeuGUI::on_rejouerBouton_clicked()
 
 void JeuGUI::on_chargerBouton_clicked()
 {
-    HideBoutonsRejouer();
+    CacherBoutonsRejouer();
     // verifier si un jeu est en cours
     if (jeu != nullptr)
     {
