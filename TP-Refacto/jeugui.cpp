@@ -85,6 +85,19 @@ JeuGUI::~JeuGUI()
     delete ui;
 }
 
+void JeuGUI::Reinitialiser() {
+    if (jeu != nullptr) {
+        jeu.reset();
+        joueur1.reset();
+        joueur2.reset();
+
+        CacherBoutonsRejouer();
+        AfficherBoutonsChoixMode();
+        ui->labelMessage->clear();
+        ui->labelErreur->clear();
+    }
+}
+
 void JeuGUI::on_JvsJBouton_clicked()
 {
     VisibiliteBoutonsChoixMode();
@@ -149,11 +162,10 @@ void JeuGUI::on_rejouerBouton_clicked()
 void JeuGUI::on_chargerBouton_clicked()
 {
     CacherBoutonsRejouer();
-    // verifier si un jeu est en cours
     if (jeu != nullptr)
     {
         QMessageBox::warning(this, "Avertissement", "Un jeu est actuellement en cours. Veuillez le terminer avant de charger une partie.");
-        return;
+        Reinitialiser();
     }
 
     QString fileName = QFileDialog::getOpenFileName(this,
@@ -216,6 +228,9 @@ void JeuGUI::on_chargerBouton_clicked()
                 jeu->Charger(jsonObj["Grille"].toArray(), jsonObj["JoueurCourant"].toString());
                 jeu->Jouer();
                 jeu.reset();
+                joueur1.reset();
+                joueur2.reset();
+                ui->labelErreur->clear();
             }
         }
     }
@@ -223,7 +238,8 @@ void JeuGUI::on_chargerBouton_clicked()
 
 void JeuGUI::on_retourMenuBouton_clicked()
 {
-    hide();
+    Reinitialiser();
+    hide(); 
     emit showAccueil();
 }
 

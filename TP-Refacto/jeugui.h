@@ -50,6 +50,8 @@ private:
     void SetupBoutonLayout();
     void SetupBoutonTailleMinimale();
     void SetupBoutonConnections();
+    void Reinitialiser();
+
 
 signals:
     void showAccueil();
