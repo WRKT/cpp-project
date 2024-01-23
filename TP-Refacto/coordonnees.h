@@ -12,6 +12,11 @@ struct Position
     bool operator!=(const Position& autrePosition) const {
         return !(*this == autrePosition);
     }
+
+    bool operator<(const Position& other) const {
+        if (x != other.x) return x < other.x;
+        return y < other.y;
+    }
 };
 
 struct Direction

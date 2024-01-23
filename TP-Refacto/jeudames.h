@@ -7,6 +7,8 @@
 #include "AGrille.h"
 #include "AJoueur.h"
 #include "IAffichage.h"
+#include <set>
+
 class JeuDames : public IJeu
 {
 
@@ -22,7 +24,8 @@ public:
     bool PartieFinie() const override;
     std::vector<Position> CoupsPossibles() override;
     void AfficherResultat() const override;
-    TypesJeu getType() const override { return TypesJeu::Dames;}
+    TypesJeu getType() const override { return TypesJeu::Dames; }
+
 private:
     Position pionSelectionne;
     std::vector<Position> PionsJouables();
@@ -38,7 +41,7 @@ private:
     bool PeutDeplacerDame(const Position &position) const;
     bool PeutCapturerDame(const Position &depart, const Direction &direction) const;
     void EffectuerCapturesMultiples(const Position &position);
-    std::vector<Position> CapturesPossiblesDepuisPosition(const Position &position, const Direction &direction) const;
+    std::vector<Position> CapturesPossiblesDepuisPosition(const Position &position, const Direction &direction, const std::set<Position> &jetonsCaptures) const;
     std::vector<Jeton> GetJetonAdverse() const;
     Jeton DeterminerGagnant() const;
     std::vector<Position> CalculerPositionsCaptureDame(const Position &positionDame, const Direction &direction) const;
