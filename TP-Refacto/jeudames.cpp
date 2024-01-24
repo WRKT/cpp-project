@@ -216,7 +216,7 @@ std::vector<Position> JeuDames::TrouverPionsCapturables()
                     if (capture)
                     {
                         pionsCapturables.push_back(position);
-                        return pionsCapturables;
+                        break;
                     }
                 }
             }
